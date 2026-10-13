@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input, HostListener, SecurityContext, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, HostListener, SecurityContext, EventEmitter, Inject, PLATFORM_ID } from '@angular/core';
 import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
 import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,7 +10,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { NotificationService } from '../services/notification.service';
 import { TokenService } from '../shared/token.service';
 import { GenderCheck } from '../helpers/gender-check';
-import { DatePipe } from '@angular/common';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 import { LoginChecker } from '../helpers/loginChecker';
 import { GlobalConstants } from '../constants/global-constants';
 import { CouponService } from '../services/coupon.service';
@@ -143,7 +143,8 @@ export class BookingComponent implements OnInit {
     private location: Location,
     private sanitizer: DomSanitizer,
     private platformLocation: PlatformLocation,
-    private managebookingService: ManagebookingService
+    private managebookingService: ManagebookingService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     // this.razorpayService
     //   .lazyLoadLibrary('https://checkout.razorpay.com/v1/checkout.js')
@@ -759,7 +760,9 @@ export class BookingComponent implements OnInit {
     if (event.action === 'done') {
       this.razorpay.close();
       this.notify.notify("Time Out", "Error");
-      window.location.href = (this.platformLocation as any).location.origin;
+      if (isPlatformBrowser(this.platformId)) {
+        window.location.href = (this.platformLocation as any).location.origin;
+      }
     }
   }
 
@@ -809,7 +812,9 @@ export class BookingComponent implements OnInit {
       localStorage.setItem('od_razor_id', res.razorpay_payment_id);
 
 
-      window.location.href = "/success";
+      if (isPlatformBrowser(this.platformId)) {
+        window.location.href = "/success";
+      }
 
 
     }
@@ -1125,7 +1130,9 @@ export class BookingComponent implements OnInit {
         localStorage.setItem('od_success_phone', this.passengerData.customerInfo.phone);
         localStorage.setItem('receipt_id', this.MakePaymnetResponse.razorpay_order_id.receipt_id);
 
-        window.location.href = "/success";
+        if (isPlatformBrowser(this.platformId)) {
+          window.location.href = "/success";
+        }
       }
 
     });

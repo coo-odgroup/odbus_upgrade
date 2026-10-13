@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-top-routes',
@@ -7,7 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./top-routes.component.css', '../home.component.css'],
 })
 export class TopRoutesComponent implements OnChanges {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   @Input() popularRoutes: any[] = [];
 
@@ -16,7 +20,11 @@ export class TopRoutesComponent implements OnChanges {
   isMobile = false;
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.isMobile = window.innerWidth <= 768;
+    if (isPlatformBrowser(this.platformId)) {
+      this.isMobile = window.innerWidth <= 768;
+    } else {
+      this.isMobile = false; // Default for SSR
+    }
     if (changes['popularRoutes'] && this.popularRoutes?.length) {
       this.displayedRoutes = this.isMobile
         ? this.popularRoutes.slice(0, 5)

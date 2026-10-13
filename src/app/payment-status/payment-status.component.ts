@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MakepaymentService } from '../services/makepayment.service';
+import { isPlatformBrowser } from '@angular/common';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +11,11 @@ import Swal from 'sweetalert2';
 })
 export class PaymentStatusComponent implements OnInit {
 
-  constructor(private spinner: NgxSpinnerService, private makepaymentService: MakepaymentService) { }
+  constructor(
+    private spinner: NgxSpinnerService,
+    private makepaymentService: MakepaymentService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
 
   // checkPayment(){
@@ -50,7 +55,9 @@ export class PaymentStatusComponent implements OnInit {
       console.log(res.data.phonepe_status)
 
       if (res.data.phonepe_status == "COMPLETED") {
-        window.location.href = "/success";
+        if (isPlatformBrowser(this.platformId)) {
+          window.location.href = "/success";
+        }
         localStorage.removeItem('transaction_id')
         localStorage.getItem('pp_orderId')
       } else if (res.data.phonepe_status == "FAILED") {
@@ -63,7 +70,9 @@ export class PaymentStatusComponent implements OnInit {
           allowOutsideClick: false,
           confirmButtonColor: '#d33'
         }).then(() => {
-          window.location.href = "/";
+          if (isPlatformBrowser(this.platformId)) {
+            window.location.href = "/";
+          }
         });
       } else {
         this.spinner.hide();
@@ -75,7 +84,9 @@ export class PaymentStatusComponent implements OnInit {
           allowOutsideClick: false,
           confirmButtonColor: '#d33'
         }).then(() => {
-          window.location.href = "/";
+          if (isPlatformBrowser(this.platformId)) {
+            window.location.href = "/";
+          }
         });
       }
     });

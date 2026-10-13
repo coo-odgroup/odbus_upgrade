@@ -9,35 +9,21 @@ import { APP_BASE_HREF } from '@angular/common';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { existsSync } from 'fs';
 import 'localstorage-polyfill';
-global['localStorage'] = localStorage;
 
-const domino = require('domino');
-const fs = require('fs');
-const path = require('path');
-// index from browser build!
-const template = fs
-  .readFileSync(path.join('dist/consumerfenew/browser', 'index.html'))
-  .toString();
-// for mock global window by domino
-const win = domino.createWindow(template);
-// mock
-global['window'] = win;
-// not implemented property and functions
-Object.defineProperty(win.document.body.style, 'transform', {
-  value: () => {
-    return {
-      enumerable: true,
-      configurable: true,
-    };
-  },
-  writable: true,
-});
+// Simple localStorage mock for SSR
+if (typeof global !== 'undefined' && !global['localStorage']) {
+  global['localStorage'] = {
+    getItem: () => null,
+    setItem: () => {},
+    removeItem: () => {},
+    clear: () => {},
+    key: () => null,
+    length: 0
+  };
+}
 
-// mock documnet
-global['document'] = win.document;
-// othres mock
+// Global mocks that don't require domino window
 global['CSS'] = null;
-// global['XMLHttpRequest'] = require('xmlhttprequest').XMLHttpRequest;
 global['Prism'] = null;
 
 import axios from 'axios';

@@ -16,7 +16,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": ["ngx-lightbox","rxjs","crypto-js","lodash"],
+            "allowedCommonJsDependencies": ["rxjs","crypto-js","lodash","sweetalert2"],
             "outputPath": "dist/consumerfenew/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -35,7 +35,6 @@
               "src/assets/css/style.css",
               "src/assets/css/customwizard.css",
               "src/assets/css/bootstarp.min.css",
-              "node_modules/ngx-lightbox/lightbox.css",
               "src/assets/css/all.min.css",
               "src/assets/css/font-awesome.min.css",
               "src/assets/css/bootstrap-icons.css",
@@ -188,6 +187,5 @@
         }
       }
     }
-  },
-  "defaultProject": "consumerfenew"
+  }  
 }

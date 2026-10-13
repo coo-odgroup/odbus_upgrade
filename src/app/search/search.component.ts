@@ -37,7 +37,7 @@ import { GlobalConstants } from '../constants/global-constants';
 import { CommonService } from '../services/common.service';
 import * as moment from 'moment';
 import { SeoService } from '../services/seo.service';
-import { Lightbox } from 'ngx-lightbox';
+import { AppLightboxService } from '../services/lightbox.service';
 import { PopularRoutesService } from '../services/popular-routes.service';
 import { Location, DOCUMENT } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -275,7 +275,7 @@ export class SearchComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private Common: CommonService,
     private seo: SeoService,
-    private _lightbox: Lightbox,
+    private _lightbox: AppLightboxService,
     private location: Location,
     private popularRoutesService: PopularRoutesService,
     private deviceService: DeviceDetectorService,

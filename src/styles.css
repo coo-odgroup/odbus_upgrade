@@ -67,3 +67,79 @@ body { margin: 0;}
 
 
 
+/* Lightweight bus photo lightbox used by the search page. */
+.app-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.88);
+  padding: 56px 72px;
+}
+
+.app-lightbox-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.app-lightbox-close,
+.app-lightbox-nav {
+  position: absolute;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.app-lightbox-close {
+  top: 18px;
+  right: 28px;
+  font-size: 42px;
+}
+
+.app-lightbox-nav {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 72px;
+  padding: 8px 18px;
+}
+
+.app-lightbox-prev {
+  left: 18px;
+}
+
+.app-lightbox-next {
+  right: 18px;
+}
+
+.app-lightbox-footer {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 18px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  color: #fff;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .app-lightbox-overlay {
+    padding: 48px 42px;
+  }
+
+  .app-lightbox-nav {
+    font-size: 52px;
+    padding: 6px 10px;
+  }
+
+  .app-lightbox-close {
+    right: 18px;
+  }
+}

@@ -5,7 +5,7 @@ import { OtpRoutingModule } from './otp-routing.module';
 import { OtpComponent } from './otp.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
-import { CountdownModule } from 'ngx-countdown';
+// import { CountdownModule } from 'ngx-countdown';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     NgbAlertModule,
-    CountdownModule,
+    // CountdownModule,
     SharedModule
   ],
    bootstrap: [OtpComponent],

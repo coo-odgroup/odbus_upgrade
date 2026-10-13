@@ -13,7 +13,8 @@ import { SearchComponent } from './search/search.component';
 import { PageErrorComponent } from './page-error/page-error.component';
 import { AppInitializerService } from './services/initializer.service';
 import { BookingComponent } from './booking/booking.component';
-import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+// import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+import { NgWizardConfig, THEME } from 'ng-wizard';
 import { ManageBookingComponent } from './manage-booking/manage-booking.component';
 import { SupportComponent } from './support/support.component';
 import { NewsComponent } from './news/news.component';
@@ -29,12 +30,11 @@ import { MyaccountComponent } from './user/myaccount/myaccount.component';
 // import { UsernavbarComponent } from './user/usernavbar/usernavbar.component';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import { AuthGuard } from './helpers/auth.guard';
-import { CountdownModule } from 'ngx-countdown';
+// import { CountdownModule } from 'ngx-countdown';
 import { AuthModule } from '@auth0/auth0-angular';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { LightboxModule } from 'ngx-lightbox';
 import { FilterPipe } from './filter.pipe';
-import { QRCodeModule } from 'angular2-qrcode';
+// import { QRCodeModule } from 'angular2-qrcode';
 import { PnrdetailComponent } from './pnrdetail/pnrdetail.component';
 import { SuccessComponent } from './success/success.component';
 import { ProfiledeleteComponent } from './profiledelete/profiledelete.component';
@@ -127,13 +127,13 @@ const ngWizardConfig: NgWizardConfig = {
     RouterModule,
     AppRoutingModule,
     NgbModule,
-    NgWizardModule.forRoot(ngWizardConfig),
+    // NgWizardModule.forRoot(ngWizardConfig),
     AutocompleteLibModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     NgbProgressbarModule,
-    CountdownModule ,
+    // CountdownModule ,
     // IvyCarouselModule,
     AuthModule.forRoot({
       domain: 'dev-seofied.us.auth0.com',
@@ -144,8 +144,7 @@ const ngWizardConfig: NgWizardConfig = {
       cacheLocation: 'localstorage' // Use localStorage for token storage
     }),
     ImageCropperModule,
-    LightboxModule,
-    QRCodeModule,
+    // QRCodeModule,
     SharedModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: false,
