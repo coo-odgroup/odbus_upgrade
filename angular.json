@@ -73,8 +73,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "50kb",
-                  "maximumError": "50kb"
+                  "maximumWarning": "100kb",
+                  "maximumError": "100kb"
                 }
               ]
             }
@@ -157,7 +157,7 @@
               "optimization": true
             }
           },
-          "defaultConfiguration": ""
+          "defaultConfiguration": "production"
         },
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",

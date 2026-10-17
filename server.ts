@@ -14,11 +14,11 @@ import 'localstorage-polyfill';
 if (typeof global !== 'undefined' && !global['localStorage']) {
   global['localStorage'] = {
     getItem: () => null,
-    setItem: () => { },
-    removeItem: () => { },
-    clear: () => { },
+    setItem: () => {},
+    removeItem: () => {},
+    clear: () => {},
     key: () => null,
-    length: 0
+    length: 0,
   };
 }
 
@@ -42,9 +42,7 @@ export function app(): express.Express {
   // Add sitemap.xml code here
   server.get('/sitemap.xml', async (req, res) => {
     try {
-      const response = await axios.get(
-        API_URL + '/getSchemaUrls',
-      );
+      const response = await axios.get(API_URL + '/getSchemaUrls');
 
       const routes = response.data.data.routes;
       const operators = response.data.data.operators;
@@ -55,89 +53,124 @@ export function app(): express.Express {
       `;
 
       // Static Pages
-      xml += `
+      xml +=
+        `
         <url>
-          <loc>`+ URL + `</loc>
+          <loc>` +
+        URL +
+        `</loc>
           <changefreq>daily</changefreq>
           <priority>1.0</priority>
         </url>
         <url>
-          <loc>`+ URL + `about-us</loc>
+          <loc>` +
+        URL +
+        `about-us</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `operators</loc>
+          <loc>` +
+        URL +
+        `operators</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `routes</loc>
+          <loc>` +
+        URL +
+        `routes</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `offers</loc>
+          <loc>` +
+        URL +
+        `offers</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `testimonials</loc>
+          <loc>` +
+        URL +
+        `testimonials</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `careers</loc>
+          <loc>` +
+        URL +
+        `careers</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `contact-us</loc>
+          <loc>` +
+        URL +
+        `contact-us</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `faq</loc>
+          <loc>` +
+        URL +
+        `faq</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `terms-conditions</loc>
+          <loc>` +
+        URL +
+        `terms-conditions</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `privacy-policy</loc>
+          <loc>` +
+        URL +
+        `privacy-policy</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `404</loc>
+          <loc>` +
+        URL +
+        `404</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `thank-you</loc>
+          <loc>` +
+        URL +
+        `thank-you</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `signup</loc>
+          <loc>` +
+        URL +
+        `signup</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `login</loc>
+          <loc>` +
+        URL +
+        `login</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `thankyou</loc>
+          <loc>` +
+        URL +
+        `thankyou</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
         <url>
-          <loc>`+ URL + `blog</loc>
+          <loc>` +
+        URL +
+        `blog</loc>
           <changefreq>monthly</changefreq>
           <priority>0.8</priority>
         </url>
@@ -146,7 +179,8 @@ export function app(): express.Express {
       // Dynamic Routes
       routes.forEach((route: any) => {
         const url =
-          URL + `routes/` +
+          URL +
+          `routes/` +
           `${route.source_slug}-` +
           `${route.destination_slug}-bus-services`;
 
@@ -161,9 +195,7 @@ export function app(): express.Express {
 
       // Dynamic Operators
       operators.forEach((operator: any) => {
-        const operatorUrl =
-          URL + `operators/` +
-          `${operator.operator_url}`;
+        const operatorUrl = URL + `operators/` + `${operator.operator_url}`;
 
         xml += `
           <url>
@@ -189,7 +221,7 @@ export function app(): express.Express {
   server.get('/', (req, res, next) => {
     res.setHeader(
       'Cache-Control',
-      'public, max-age=0, s-maxage=60, stale-while-revalidate=30'
+      'public, max-age=0, s-maxage=60, stale-while-revalidate=30',
     );
 
     res.removeHeader('Pragma');
@@ -198,12 +230,16 @@ export function app(): express.Express {
 
     next();
   });
+ 
 
-  // Dynamic pages - do not cache
-  server.use(
-    [
+  function setPageCachePolicy(
+    req: express.Request,
+    res: express.Response,
+  ): void {
+    const path = req.path;
+
+    const privatePrefixes = [
       '/listing',
-      '/routes',
       '/booking',
       '/success',
       '/pnr',
@@ -211,7 +247,6 @@ export function app(): express.Express {
       '/manage-booking',
       '/manage-booking-detail',
       '/profile',
-      '/profile/delete',
       '/my-bookings',
       '/account',
       '/login',
@@ -219,20 +254,10 @@ export function app(): express.Express {
       '/otp',
       '/seat',
       '/passenger',
-      '/payment'
-    ],
-    (req, res, next) => {
-      res.setHeader(
-        'Cache-Control',
-        'private, no-store, no-cache, must-revalidate'
-      );
-      next();
-    }
-  );
+      '/payment',
+    ];
 
-  // Static content pages - cache
-  server.use(
-    [
+    const publicPrefixes = [
       '/about-us',
       '/operators',
       '/offers',
@@ -242,29 +267,49 @@ export function app(): express.Express {
       '/faq',
       '/terms-conditions',
       '/privacy-policy',
-      '/thank-you',
       '/api-reference',
-      '/maintenance',
       '/advantage',
       '/blog',
-      '/sitemap',
-      '/online-bus-tickets'
-    ],
-    (req, res, next) => {
+      '/online-bus-tickets',
+    ];
+
+    const matchesPrefix = (prefix: string) =>
+      path === prefix || path.startsWith(prefix + '/');
+
+    if (privatePrefixes.some(matchesPrefix)) {
       res.setHeader(
         'Cache-Control',
-        'public, max-age=0, s-maxage=3600, stale-while-revalidate=300'
+        'private, no-store, no-cache, must-revalidate',
       );
-      next();
+      return;
     }
-  );
+
+    if (path === '/') {
+      res.setHeader(
+        'Cache-Control',
+        'public, max-age=0, s-maxage=60, stale-while-revalidate=30',
+      );
+      return;
+    }
+
+    if (publicPrefixes.some(matchesPrefix)) {
+      res.setHeader(
+        'Cache-Control',
+        'public, max-age=0, s-maxage=3600, stale-while-revalidate=300',
+      );
+      return;
+    }
+
+    // Unknown and unclassified routes are not publicly cached.
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+  }
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine(
     'html',
     ngExpressEngine({
       bootstrap: AppServerModule,
-      inlineCriticalCss: false,
+      inlineCriticalCss: true,
     }),
   );
 
@@ -289,7 +334,7 @@ export function app(): express.Express {
     if (req.path.startsWith('/operator/')) {
       return res.redirect(
         301,
-        req.originalUrl.replace(/^\/operator/, '/operators')
+        req.originalUrl.replace(/^\/operator/, '/operators'),
       );
     }
 
@@ -314,18 +359,9 @@ export function app(): express.Express {
   );
 
   // All regular routes use the Universal engine
-  server.get('*', (req, res) => {
-    // =========================================
-    // PREVENT SSR HTML PAGE CACHING
-    // =========================================
-    res.setHeader(
-      'Cache-Control',
-      'no-store, no-cache, must-revalidate, proxy-revalidate',
-    );
+  server.get('*', (req: express.Request, res: express.Response) => {   
 
-    res.setHeader('Pragma', 'no-cache');
-    res.setHeader('Expires', '0');
-    res.setHeader('Surrogate-Control', 'no-store');
+     setPageCachePolicy(req, res);
 
     // Optional security headers
     res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -376,8 +412,8 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env.PORT || 4445; // ODBUS NEW TEST
   // const port = process.env.PORT || 4000; // TEST
+  const port = process.env.PORT || 4445; // UPGRADE
   // const port = process.env.PORT || 4444; // LIVE
 
   // Start up the Node server

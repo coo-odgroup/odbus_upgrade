@@ -54,6 +54,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { OnlinebusticketsComponent } from './onlinebustickets/onlinebustickets.component';
 import { MatStepperModule } from '@angular/material/stepper';
+import { NgOptimizedImage } from '@angular/common';
 
 export function appInit(appInitializerService: AppInitializerService) {
   return () => appInitializerService.load();
@@ -117,6 +118,7 @@ export function tokenGetter() {
     NgxSpinnerModule,
     NgbProgressbarModule,
     CountdownModule,
+    NgOptimizedImage,
     // AuthModule.forRoot({
     //   domain: 'dev-seofied.us.auth0.com',
     //   clientId: 'RsznkkMUqmJD0nUXjYv2LS8HPopT4xy1',
