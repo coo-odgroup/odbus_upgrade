@@ -323,7 +323,6 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
     try {
       this.masterSettingRecord = resp;
 
-      this.popular_routes = resp.popularRoutes || [];
       let topOperators = resp.topOperators || {};
       const mapped = Object.keys(topOperators).map((key) => topOperators[key]);
       this.topOperators = mapped || [];
@@ -495,7 +494,9 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
       }
     }
 
-    this.startCountdown();
+    if (isPlatformBrowser(this.platformId)) {
+      this.startCountdown();
+    }
 
     this.searchForm = this._fb.group({
       source: [null],
@@ -586,7 +587,7 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
     // );
 
     const maxDate = new Date(today);
-    maxDate.setDate(today.getDate() + 29);
+    maxDate.setDate(today.getDate() + this.advance_days_show);
 
     for (let d = 1; d <= totalDays; d++) {
       const fullDate = new Date(this.currentYear, this.currentMonth, d);
@@ -1212,6 +1213,7 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
 
   maintenance: any;
   homePopup: any;
+  advance_days_show:any;
 
   getHomeData() {
     const params = {
@@ -1230,31 +1232,38 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
 
         this.maintenance = res.data.maintenance;
         this.homePopup = res.data.website_popup;
+        this.advance_days_show = res?.data?.website_popup?.advance_days_show;
 
-        const popupClosed = localStorage.getItem(
-          'maintenance_notice_dismissed',
-        );
+        if (isPlatformBrowser(this.platformId)) {
+          if (this.advance_days_show != null) {
+            localStorage.setItem('advance_days_show', this.advance_days_show);
+          }
 
-        if (this.maintenance?.maintenance_popup && !popupClosed) {
-          setTimeout(() => {
-            const popup = document.getElementById('maintenancePopup');
+          const popupClosed = localStorage.getItem(
+            'maintenance_notice_dismissed',
+          );
 
-            if (popup) {
-              popup.style.display = 'flex';
-            }
-          }, 5000);
-        }
+          if (this.maintenance?.maintenance_popup && !popupClosed) {
+            setTimeout(() => {
+              const popup = document.getElementById('maintenancePopup');
 
-        // Website Popup
-        const websiteClosed = localStorage.getItem('website_popup_dismissed');
+              if (popup) {
+                popup.style.display = 'flex';
+              }
+            }, 5000);
+          }
 
-        if (this.homePopup && !websiteClosed) {
-          setTimeout(() => {
-            const popup = document.getElementById('websitePopup');
-            if (popup) {
-              popup.style.display = 'flex';
-            }
-          }, 10000);
+          // Website Popup
+          const websiteClosed = localStorage.getItem('website_popup_dismissed');
+
+          if (this.homePopup && !websiteClosed) {
+            setTimeout(() => {
+              const popup = document.getElementById('websitePopup');
+              if (popup) {
+                popup.style.display = 'flex';
+              }
+            }, 10000);
+          }
         }
       }
     });

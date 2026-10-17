@@ -1,4 +1,4 @@
-import { Component, Inject, Optional, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, Optional, PLATFORM_ID, AfterViewInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { SeoService } from './services/seo.service';
@@ -19,13 +19,22 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { interval, Observable, Subscription, of } from 'rxjs';
 import { debounceTime, map, tap, catchError } from 'rxjs/operators';
 import { PopularRoutesService } from 'src/app/services/popular-routes.service';
+import { ExternalScriptService } from './services/external-script.service';
+
+declare global {
+  interface Window {
+    fbq: any;
+    _fbq: any;
+  }
+}
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   authReady: boolean = false;
   isBrowser: boolean = false;
 
@@ -74,29 +83,10 @@ export class AppComponent {
     public router: Router,
     private seoService: SeoService,
     private spinner: NgxSpinnerService,
-    private homeService: PopularRoutesService
+    private homeService: PopularRoutesService,
+    private externalScript: ExternalScriptService
   ) {
     this.isMobile = this.detectMobile();
-    // Only access localStorage in browser
-    // if (isPlatformBrowser(this.platformId)) {
-    //   // this.auth.getToken().subscribe(
-    //   //   res => {
-    //   //     localStorage.setItem('AuthAccessToken', res.data);
-    //   //   }
-    //   // );
-
-    //   const AuthAccessToken = localStorage.getItem('AuthAccessToken');
-
-    //   if (AuthAccessToken) {
-    //     // Nothing to do
-    //   } else {
-    //     this.auth.getToken().subscribe(
-    //       res => {
-    //         localStorage.setItem('AuthAccessToken', res.data);
-    //       }
-    //     );
-    //   }
-    // }
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
@@ -104,79 +94,31 @@ export class AppComponent {
       });
   }
 
-  // ngOnInit() {
-  //   // Only access localStorage in browser
-  //   if (isPlatformBrowser(this.platformId)) {
-  //     const storedData = localStorage.getItem('commonData');
-
-  //     if (storedData) {
-  //       const data = JSON.parse(storedData);
-  //       this.getCommonInfo(data);
-  //     } else {
-  //       if (isPlatformBrowser(this.platformId)) {
-  //         this.isMobile = this.deviceService.isMobile();
-  //       }
-  //       const param = {
-  //         user_id: GlobalConstants.MASTER_SETTING_USER_ID,
-  //         locationName: ""
-  //       };
-
-  //       this.commonService.getCommonData(param).subscribe(
-  //         resp => {
-  //           if (isPlatformBrowser(this.platformId)) {
-  //             localStorage.setItem('commonData', JSON.stringify(resp.data));
-  //           }
-  //           this.getCommonInfo(resp.data);
-  //         },
-  //         error => {
-  //           console.error('Error fetching Data:', error);
-  //         }
-  //       );
-  //     }
-  //   } else {
-  //     // Server-side: fetch data without localStorage
-  //     const param = {
-  //       user_id: GlobalConstants.MASTER_SETTING_USER_ID,
-  //       locationName: ""
-  //     };
-
-  //     this.commonService.getCommonData(param).subscribe(
-  //       resp => {
-  //         this.getCommonInfo(resp.data);
-  //       },
-  //       error => {
-  //         console.error('Error fetching Data:', error);
-  //       }
-  //     );
-  //   }
-  // }
-
   hideLayout(): boolean {
     const url = this.router.url;
 
     return (
-      url.includes('become-an-agent') || url.includes('pnr') || url.includes('payment-status')
+      url.includes('become-an-agent') || url.includes('pnr') || url.includes('payment-status') || url.includes('login')
     );
   }
 
   ngOnInit() {
     // Show loader in browser until initial data is ready
     this.isBrowser = isPlatformBrowser(this.platformId);
-    if (this.isBrowser) {
-      this.spinner.show();
-    }
+    // if (this.isBrowser) {
+    //   this.spinner.show();
+    // }
 
-    // Load PopularInfo first, then continue with schema and common data setup.
-    this.storeLocalStorage().subscribe(() => {
-      this.seoService.getOrganizationSchema().subscribe((res: any) => {
-        this.seoService.addOrganizationSchema(res.organization_schema);
-        this.storage_version = res.storage_version;
-
-        if (isPlatformBrowser(this.platformId)) {
+    // Load browser-only data after startup; SSR should not call protected APIs.
+    if (isPlatformBrowser(this.platformId)) {
+      this.storeLocalStorage().subscribe(() => {
+        this.seoService.getOrganizationSchema().subscribe((res: any) => {
+          this.seoService.addOrganizationSchema(res.organization_schema);
+          this.storage_version = res.storage_version;
           this.checkLocalStorageVersion();
-        }
+        });
       });
-    });
+    }
 
     // this.seoService.addCanonicalUrlFromCurrentUrl();.
 
@@ -235,22 +177,7 @@ export class AppComponent {
 
       this.authReady = true;
 
-      const param = {
-        user_id: GlobalConstants.MASTER_SETTING_USER_ID,
-        locationName: '',
-      };
-
-      this.commonService.getCommonData(param).subscribe(
-        (resp: any) => {
-          this.getCommonInfo(resp.data);
-          this.finishLoading();
-        },
-
-        (error: any) => {
-          console.error('Error fetching Data:', error);
-          this.finishLoading();
-        },
-      );
+      this.finishLoading();
     }
   }
 
@@ -290,10 +217,6 @@ export class AppComponent {
     const currentVersion = localStorage.getItem('storage_version');
 
     if (currentVersion !== STORAGE_VERSION) {
-      // Clear all old local storage
-      // localStorage.clear();
-      // localStorage.removeItem('commonData');
-      // localStorage.removeItem('PopularInfo');
 
       const gclLs = localStorage.getItem('_gcl_ls');
       const authAccessToken = localStorage.getItem('AuthAccessToken');
@@ -375,81 +298,38 @@ export class AppComponent {
 
     // console.log(this.common);
 
-    this.meta_description = this.common.meta_description;
-    this.meta_title = this.common.meta_title;
-    this.meta_keyword = this.common.meta_keyword;
-    this.titleService.setTitle(this.meta_title);
+    // this.meta_description = this.common.meta_description;
+    // this.meta_title = this.common.meta_title;
+    // this.meta_keyword = this.common.meta_keyword;
+    // this.titleService.setTitle(this.meta_title);
 
-    const metaArr = [
-      { name: 'keywords', content: this.meta_keyword },
-      { name: 'description', content: this.meta_description },
-      // { name: 'og:url', content: this.doc.URL },
-      { name: 'og:type', content: 'website' },
-      { name: 'og:title', content: this.meta_title },
-      { name: 'og:description', content: this.meta_description },
-    ];
-
-    if (this.og_image != '' && this.og_image != null) {
-      metaArr.push({ name: 'og:image', content: this.og_image });
-    }
+    const metaArr = [];
 
     if (
-      this.common.google_verification_code != '' &&
-      this.common.google_verification_code != null
-    ) {
-      metaArr.push({
-        name: 'google-site-verification',
-        content: this.common.google_verification_code,
-      });
-    }
-
-    if (
-      this.common.bing_verification_code != '' &&
-      this.common.bing_verification_code != null
+      this.common.bing_verification_code &&
+      this.common.bing_verification_code !== ''
     ) {
       metaArr.push({
         name: 'msvalidate.01',
-        content: this.common.bing_verification_code,
+        content: this.common.bing_verification_code
       });
     }
 
     if (
-      this.common.pintrest_verification_code != '' &&
-      this.common.pintrest_verification_code != null
+      this.common.pintrest_verification_code &&
+      this.common.pintrest_verification_code !== ''
     ) {
       metaArr.push({
         name: 'p:domain_verify',
-        content: this.common.pintrest_verification_code,
+        content: this.common.pintrest_verification_code
       });
     }
 
-    this.metaService.addTags(metaArr);
+    if (metaArr.length) {
+      this.metaService.addTags(metaArr);
+    }
 
-    // Only manipulate DOM in browser
-    // if (isPlatformBrowser(this.platformId)) {
-    //   if (this.common.google_analytics != '' && this.common.google_analytics != null) {
-    //     let chatScript = this.doc.createElement("script");
-    //     chatScript.type = "text/javascript";
-    //     chatScript.async = true;
-    //     chatScript.src = this.common.google_analytics;
-    //     chatScript.id = "google_analytics";
-    //     this.doc.head.appendChild(chatScript);
-    //   }
-
-    //   if (this.common.no_script != '' && this.common.no_script != null) {
-    //     let chatScript = this.doc.createElement("noscript");
-    //     chatScript.innerHTML = this.common.no_script;
-    //     chatScript.id = "noscript";
-    //     this.doc.head.append(chatScript);
-    //   }
-
-    //   if (this.isMobile == false && this.common.seo_script != '' && this.common.seo_script != null) {
-    //     let chatScript = this.doc.createElement("script");
-    //     chatScript.innerHTML = this.common.seo_script;
-    //     chatScript.id = "seo_script";
-    //     this.doc.head.append(chatScript);
-    //   }
-    // }
+    // this.metaService.addTags(metaArr);
   }
 
   popular_routes: any = [];
@@ -514,4 +394,62 @@ export class AppComponent {
 
     return result;
   }
+
+  ngAfterViewInit(): void {
+
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    // setTimeout(() => {
+    //   this.loadGoogleTagManager();
+    // }, 2000);
+
+  }
+
+  private loadGoogleTagManager(): void {
+
+    // Prevent duplicate loading
+    if (document.getElementById('google-tag-manager')) {
+      return;
+    }
+
+    // GTM script
+    const script = document.createElement('script');
+
+    script.id = 'google-tag-manager';
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-PH8XGR9H';
+
+    document.head.appendChild(script);
+
+
+    // GTM noscript fallback
+    const iframe = document.createElement('iframe');
+
+    iframe.src =
+      'https://www.googletagmanager.com/ns.html?id=GTM-PH8XGR9H';
+
+    iframe.height = '0';
+    iframe.width = '0';
+
+    iframe.style.display = 'none';
+    iframe.style.visibility = 'hidden';
+
+    iframe.title = 'Google Tag Manager';
+
+    const noscriptContainer = document.createElement('div');
+
+    noscriptContainer.id = 'google-tag-manager-noscript';
+
+    noscriptContainer.style.display = 'none';
+
+    noscriptContainer.appendChild(iframe);
+
+    document.body.insertBefore(
+      noscriptContainer,
+      document.body.firstChild
+    );
+  }
+
 }

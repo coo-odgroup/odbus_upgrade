@@ -51,7 +51,7 @@
     <!-- Bookibg Step 1 -->
     <form [formGroup]="bookForm1" (ngSubmit)="submitForm1()">
       <div class="mobile-booking-middle">
-        <b style="color: red" *ngIf="notice != ''">{{ notice }}</b>
+        <b style="color: #072c6b" *ngIf="notice != ''">{{ notice }}</b>
 
         <h3 class="mb-1">Contact Information</h3>
         <p class="pt-0 mb-2">
@@ -62,7 +62,7 @@
             <div class="col-12">
               <div class="form-group">
                 <input type="text" class="" [readonly]="isnameReadOnly" formControlName="name"
-                  placeholder="Enter Your Name" />
+                  placeholder="Enter Your Name" (input)="onlyAlphabetsCustomer($event)" />
 
                 <div *ngIf="submitted1 && GetcustomerInfo.controls.name.errors" class="invalid-feedback">
                   <div *ngIf="GetcustomerInfo.controls.name.errors.required">
@@ -118,7 +118,8 @@
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <input type="text" formControlName="passenger_name" class="" placeholder="Passenger Name" />
+                  <input type="text" formControlName="passenger_name" class="" placeholder="Passenger Name"
+                    (input)="onlyAlphabets($event,i,'passenger_name')" />
                   <div *ngIf="
                       submitted1 &&
                       getPassengerFormGroup(i).controls[
@@ -173,7 +174,8 @@
               </div>
               <div class="col-12">
                 <div class="form-group mb-0">
-                  <input type="number" class="" formControlName="passenger_age" placeholder="Passenger Age" />
+                  <input type="number" class="" formControlName="passenger_age" placeholder="Passenger Age" min="1"
+                    step="1" max="99" />
 
                   <div *ngIf="
                       submitted1 &&
@@ -449,24 +451,72 @@
         </div>
         <!-- Passenger Information box end-->
 
-        <h3>Have a Coupon Code ?</h3>
-        <div class="mobile-contact-infbox shadow" *ngIf="autoApplyCouponStatus == false">
+        <!-- =========================================================
+     MOBILE COUPON + OFFERS
+========================================================= -->
+
+        <div class="mobile-coupon-card" *ngIf="autoApplyCouponStatus == false">
+
+          <!-- Coupon Header -->
+          <div class="mobile-coupon-title">
+            <i class="fas fa-tag"></i>
+            <span>Have a Coupon Code ?</span>
+          </div>
+
+
+          <!-- Coupon Input -->
           <form [formGroup]="couponForm" (ngSubmit)="ApplyCoupon()">
-            <div class="row">
-              <div class="col-8">
-                <div class="form-group mb-0">
-                  <input type="text" class="" autocomplete="off" formControlName="coupon_code"
-                    placeholder="Enter Coupon Code" />
+
+            <div class="mobile-coupon-input-row">
+
+              <input type="search" autocomplete="off" formControlName="coupon_code" placeholder="ENTER COUPON CODE"
+                style="text-transform: uppercase;" />
+
+              <button type="submit" [disabled]="!couponForm.valid">
+
+                APPLY
+
+              </button>
+
+            </div>
+
+          </form>
+
+
+          <!-- Scrollable Offers -->
+          <div class="mobile-offers-scroll">
+
+
+            <div class="mobile-offer-card selected-offer" *ngFor="let offercode of couponcode">
+              <div class="mobile-offer-content">
+                <div class="mobile-offer-code">
+                  <strong (click)="openCouponModal(offercode)">
+                    {{ offercode.coupon_code }}
+                  </strong>
+
+                  <i class="fas fa-info-circle" title="Coupon details" (click)="openCouponModal(offercode)"></i>
+
                 </div>
+
+                <p (click)="openCouponModal(offercode)">
+                  {{ offercode.short_desc }}
+                </p>
+
               </div>
 
-              <div class="col-4">
-                <button type="submit" class="btn btn-warning" [disabled]="!couponForm.valid">
-                  APPLY
-                </button>
+              <div class="mobile-offer-radio">
+
+                <input type="radio" nname="couponOffer"
+                  [checked]="couponForm.get('coupon_code')?.value === offercode.coupon_code"
+                  (click)="$event.stopPropagation()" (click)="selectCoupon(offercode.coupon_code)" />
+
               </div>
+
             </div>
-          </form>
+
+
+          </div>
+
         </div>
         <div class="mob-term-priv">
           <!-- customer GST  -->
@@ -575,7 +625,9 @@
               <div class="captcha-container">
                 <label for="captcha-input">What is {{ number1 }} + {{ number2 }}?</label>
                 <div class="captcha-input-group">
-                  <input type="number" id="captcha-input" formControlName="userInput" placeholder="Enter your answer" />
+                  <!-- <input type="number" id="captcha-input" formControlName="userInput" placeholder="Enter your answer" /> -->
+                  <input type="number" id="captcha-input" formControlName="userInput" placeholder="Enter your answer"
+                    (input)="onCaptchaInput()" [class.captcha-invalid]="captchaSubmitted && !captchaValidated" />
                   <button class="btn btn-blue" type="button" (click)="validateCaptcha()">
                     Verify
                   </button>
@@ -680,11 +732,19 @@
 
           <label class="terms mob-term-priv">
             <p>
-              <input formControlName="tnc" #tnc id="tnc" type="checkbox" [checked]="tncStatus"
-                (change)="tncStatusChange(tnc.checked)" />
+              <input formControlName="tnc" #tnc id="tnc" type="checkbox" (change)="tncStatusChange(tnc.checked)" />
+
               &nbsp; I agree that I have read and understood the
-              <a target="_blank" routerLink="/terms-conditions">T&Cs</a> and the
-              <a target="_blank" routerLink="/privacy-policy">Privacy Policy</a>
+
+              <a href="javascript:void(0)" (click)="modalContent('tncContent', 'terms-conditions')">
+                T&Cs
+              </a>
+
+              and the
+
+              <a href="javascript:void(0)" (click)="modalContent('privacyPolicyContent', 'privacy-policy')">
+                Privacy Policy
+              </a>
             </p>
           </label>
 
@@ -793,7 +853,7 @@
                   </tr>
                   <tr>
                     <td>
-                      Journey Date: {{ entdate | date: "EEEE, d MMMM , y" }}
+                      Journey Date: {{ entdate | date: "EEE, d MMM" }}
                     </td>
                   </tr>
                   <tr>
@@ -1216,15 +1276,15 @@
           <countdown #countdown [config]="{ leftTime: Timer, demand: true, format: 'mm:ss' }"
             (event)="handleEvent($event)" style="display: none"></countdown>
 
-          <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
-            <ng-wizard-step [title]="'Passenger Details'" [canEnter]="isValidFunctionReturnsObservable.bind(this)"
-              [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+          <!-- ================= STEPPER (CHANGED) ================= -->
+          <mat-horizontal-stepper #stepper class="booking-stepper" [linear]="false" [animationDuration]="'0'">
+            <mat-step label="Passenger Details">
               <form [formGroup]="bookForm1" (ngSubmit)="submitForm1()">
                 <div class="row passenger pt-25">
                   <div class="col-md-8">
-                    <b style="color: red" *ngIf="notice != ''">{{ notice }}</b>
+                    <b style="color: #072c6b" *ngIf="notice != ''">{{ notice }}</b>
                     <div class="passenger-detail">
-                      <h5>Passenger Details</h5>
+                      <h5> Passenger Details</h5>
                       <hr />
 
                       <div formGroupName="bookingInfo">
@@ -1235,9 +1295,16 @@
                           <div class="row" [formGroupName]="i">
                             <div class="col-md-3">
                               <label>Passenger {{ i + 1 }}</label><br />
-                              <ng-select [items]="genderArr" bindLabel="name" bindValue="value"
+                              <!-- <ng-select [items]="genderArr" bindLabel="name" bindValue="value"
                                 placeholder="Select Gender" formControlName="passenger_gender" [clearable]="false">
-                              </ng-select>
+                              </ng-select> -->
+                              <select class="form-control" formControlName="passenger_gender">
+                                <option [ngValue]="null" disabled>Select Gender</option>
+
+                                <option *ngFor="let gender of genderArr" [ngValue]="gender.value">
+                                  {{ gender.name }}
+                                </option>
+                              </select>
                               <div *ngIf="
                                   submitted1 &&
                                   getPassengerFormGroup(i).controls[
@@ -1262,7 +1329,7 @@
                               <label><span class="grey">Seat No:</span>
                                 {{ get_seatno(item.value.bus_seats_id) }}</label><br />
                               <input type="text" formControlName="passenger_name" class="form-control"
-                                placeholder="Full Name" />
+                                placeholder="Full Name" (input)="onlyAlphabets($event,i,'passenger_name')" />
 
                               <div *ngIf="
                                   submitted1 &&
@@ -1286,7 +1353,7 @@
                             <div class="col-md-3">
                               <label>&nbsp;</label><br />
                               <input type="number" class="form-control" formControlName="passenger_age"
-                                placeholder="Passenger Age" />
+                                placeholder="Passenger Age" min="1" step="1" max="99" />
 
                               <div *ngIf="
                                   submitted1 &&
@@ -1326,7 +1393,7 @@
                           <div class="col-md-4">
                             <label>Name</label><br />
                             <input type="text" class="form-control" [readonly]="isnameReadOnly" formControlName="name"
-                              placeholder="Enter Your Name" />
+                              placeholder="Enter Your Name" (input)="onlyAlphabetsCustomer($event)" />
 
                             <div *ngIf="
                                 submitted1 &&
@@ -1427,7 +1494,7 @@
                           </h6>
 
                           <span class="font">Journey Date</span>
-                          <h5>{{ entdate | date: "EEEE, d MMMM , y" }}</h5>
+                          <h5>{{ entdate | date: "EEE, d MMM" }}</h5>
                         </div>
                       </div>
 
@@ -1462,28 +1529,6 @@
                         ₹ {{ bookingdata.PriceArray.odbus_charges_ownerFare }}
                       </h5>
 
-                      <!-- <div class="row fare-detail">
-
-					   <div class="col-md-8"><h6>Base Fare</h6></div>
-
-					   <div class="col-md-4"><h6><strong>₹ {{ bookingdata.PriceArray.ownerFare }}</strong></h6></div>
-
-
-					   <div class="col-md-8"><h6>Service Charges</h6></div>
-
-					   <div class="col-md-4"><h6><strong>+ ₹ {{ bookingdata.PriceArray.odbusServiceCharges }} </strong></h6></div>
-
-
-					   <div class="col-md-8"><h6>Transaction Fee</h6></div>
-
-					   <div class="col-md-4"><h6><strong>+ ₹ {{ bookingdata.PriceArray.transactionFee }}</strong></h6></div>
-
-			          <div class="col-md-8"><h5>Total</h5></div>
-
-					   <div class="col-md-4"><h5>₹ {{ couponData.totalAmount }}</h5></div>
-
-
-					</div> -->
                       <div class="padding">
                         <div>
                           <button type="submit" class="btn btn-warning proceed">
@@ -1495,333 +1540,705 @@
                   </div>
                 </div>
               </form>
-            </ng-wizard-step>
+            </mat-step>
 
-            <ng-wizard-step [title]="'Review Details'" [canEnter]="isValidFunctionReturnsObservable.bind(this)"
-              [canExit]="isValidFunctionReturnsBoolean.bind(this)">
+            <mat-step label="Review Details">
+
               <form [formGroup]="bookForm2" (ngSubmit)="submitForm2()">
-                <div class="row passenger pt-25">
-                  <div class="col-md-12">
-                    <div class="passenger-detail">
-                      <h5>Journey Details</h5>
-                      <hr />
 
-                      <div class="row">
-                        <div class="col-md-3">
-                          <h5>
-                            <i class="fas fa-map-marker-alt icon-color"></i>
-                            {{ source }}
-                          </h5>
-                          <h6 class="padding-left">
-                            {{ bookingdata.boardingPoint.boardingPoints }} -
-                            {{ bookingdata.boardingPoint.boardingTimes }}
-                          </h6>
-                        </div>
+                <div class="review-details-page">
 
-                        <div class="col-md-3">
-                          <h5>
-                            <i class="fas fa-map-marker-alt icon-color"></i>
-                            {{ destination }}
-                          </h5>
-                          <h6 class="padding-left">
-                            {{ bookingdata.droppingPoint.droppingPoints }} -
-                            {{ bookingdata.droppingPoint.droppingTimes }}
-                          </h6>
-                        </div>
 
-                        <div class="col-md-3">
-                          <h5>
-                            <i class="fas fa-bus-alt icon-color"></i>
-                            {{ busRecord.busName }}
-                          </h5>
-                          <h6 class="padding-left" *ngIf="busRecord.busNumber != ''">
-                            ({{ busRecord.busNumber }})
-                          </h6>
-                        </div>
-                        <div class="col-md-3">
-                          <h5>
-                            <i class="far fa-calendar-alt icon-color"></i>
-                            {{ entdate | date: "EEEE, d MMMM , y" }}
-                          </h5>
-                          <h6 class="padding-left">
-                            {{ passengerFormGroup.length }} Passenger(s)
-                          </h6>
-                        </div>
+                  <div class="review-left-column">
+
+
+                    <div class="review-main-card">
+
+                      <div class="review-heading">
+                        <h5>Journey Details</h5>
                       </div>
+
+                      <div class="review-yellow-line"></div>
+
+
+                      <div class="journey-grid">
+
+
+                        <!-- FROM -->
+
+                        <div class="journey-item">
+
+                          <div class="journey-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                          </div>
+
+                          <div class="journey-content">
+
+                            <span class="journey-small-label">
+                              FROM
+                            </span>
+
+                            <h5>
+                              {{ source }}
+                            </h5>
+
+                            <p>
+                              {{ bookingdata.boardingPoint.boardingPoints }}
+                              -
+                              {{ bookingdata.boardingPoint.boardingTimes }}
+                            </p>
+
+                          </div>
+
+                        </div>
+
+
+                        <!-- TO -->
+
+                        <div class="journey-item">
+
+                          <div class="journey-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                          </div>
+
+                          <div class="journey-content">
+
+                            <span class="journey-small-label">
+                              TO
+                            </span>
+
+                            <h5>
+                              {{ destination }}
+                            </h5>
+
+                            <p>
+                              {{ bookingdata.droppingPoint.droppingPoints }}
+                              -
+                              {{ bookingdata.droppingPoint.droppingTimes }}
+                            </p>
+
+                          </div>
+
+                        </div>
+
+
+                        <!-- BUS -->
+
+                        <div class="journey-item">
+
+                          <div class="journey-icon">
+                            <i class="fas fa-bus"></i>
+                          </div>
+
+                          <div class="journey-content">
+
+                            <span class="journey-small-label">
+                              BUS
+                            </span>
+
+                            <h5>
+                              {{ busRecord.busName }}
+                            </h5>
+
+                            <p *ngIf="busRecord.busNumber != ''">
+                              {{ busRecord.busNumber }}
+                            </p>
+
+                          </div>
+
+                        </div>
+
+
+                        <!-- DATE -->
+
+                        <div class="journey-item">
+
+                          <div class="journey-icon">
+                            <i class="far fa-calendar-alt"></i>
+                          </div>
+
+                          <div class="journey-content">
+
+                            <span class="journey-small-label">
+                              JOURNEY DATE
+                            </span>
+
+                            <h5>
+                              {{ entdate | date: "EEE, d MMM" }}
+                            </h5>
+
+                            <p>
+                              {{ passengerFormGroup.length }}
+                              Passenger(s)
+                            </p>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+
                     </div>
-                  </div>
 
-                  <div class="col-md-12">
-                    <div class="passenger-detail box-padding">
-                      <h5>Passenger Details</h5>
-                      <hr />
 
-                      <div class="row">
-                        <div class="col-md-12">
-                          <table class="tableclass" cellpadding="12">
-                            <thead>
-                              <th>Passenger Name</th>
-                              <th class="pd2">Seats</th>
-                              <th class="pd2">Gender</th>
-                              <th class="pd2">Age</th>
-                            </thead>
-                            <tbody>
-                              <tr *ngFor="
-                                  let dt of passengerData.bookingInfo
-                                    .bookingDetail;
-                                  let i = index
-                                ">
-                                <td align="left">{{ dt.passenger_name }}</td>
-                                <td align="center">
-                                  {{ get_seatno(dt.bus_seats_id) }}
-                                </td>
-                                <td align="center">
+                    <div class="review-main-card">
+
+
+                      <!-- PASSENGER -->
+
+                      <div class="review-heading">
+                        <h5>Passenger Details</h5>
+                      </div>
+
+                      <div class="review-yellow-line"></div>
+
+
+                      <div class="review-table-wrap">
+
+                        <table class="review-passenger-table">
+
+                          <thead>
+
+                            <tr>
+
+                              <th>
+                                Passenger Name
+                              </th>
+
+                              <th>
+                                Seats
+                              </th>
+
+                              <th>
+                                Gender
+                              </th>
+
+                              <th>
+                                Age
+                              </th>
+
+                            </tr>
+
+                          </thead>
+
+                          <tbody>
+
+                            <tr *ngFor="
+                                        let dt of passengerData.bookingInfo.bookingDetail;
+                                        let i = index
+                                    ">
+
+                              <td>
+                                {{ dt.passenger_name }}
+                              </td>
+
+                              <td>
+                                {{ get_seatno(dt.bus_seats_id) }}
+                              </td>
+
+                              <td>
+                                <span class="gender-pill">
                                   {{ dt.passenger_gender }}
-                                </td>
-                                <td align="center">{{ dt.passenger_age }}</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                                </span>
+                              </td>
 
-                          <h5>Contact Details</h5>
-                          <hr />
-                          <!-- <h4 style="color: #bbadad;font-size: 17px;"><hr>Contact Details</h4> -->
+                              <td>
+                                {{ dt.passenger_age }}
+                              </td>
 
-                          <table class="tableclass2" cellpadding="10">
-                            <thead>
-                              <td><strong>Name</strong></td>
-                              <td><strong>Mobile Number</strong></td>
-                              <td><strong>Email Address</strong></td>
-                              <td>&nbsp;</td>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>{{ passengerData.customerInfo.name }}</td>
-                                <td>
-                                  +91 {{ passengerData.customerInfo.phone }}
-                                </td>
-                                <td>
-                                  {{
-                                  passengerData.customerInfo.email
-                                  ? passengerData.customerInfo.email
-                                  : "N/A"
-                                  }}
-                                </td>
-                                <td>&nbsp;</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                            </tr>
 
-                          <p class="roboto">
-                            <img src="../../assets/img/Icon awesome-hashtag.svg" />
-                            will receive booking details in this mobile number &
-                            email address
-                          </p>
+                          </tbody>
+
+                        </table>
+
+                      </div>
+
+
+
+                      <!-- CONTACT -->
+
+                      <div class="review-sub-heading">
+                        <h5>Contact Details</h5>
+                      </div>
+
+                      <div class="review-yellow-line"></div>
+
+
+                      <div class="contact-grid">
+
+
+                        <div class="contact-item">
+
+                          <span>
+                            NAME
+                          </span>
+
+                          <strong>
+                            {{ passengerData.customerInfo.name }}
+                          </strong>
+
                         </div>
+
+
+                        <div class="contact-item">
+
+                          <span>
+                            MOBILE NUMBER
+                          </span>
+
+                          <strong>
+                            +91 {{ passengerData.customerInfo.phone }}
+                          </strong>
+
+                        </div>
+
+
+                        <div class="contact-item">
+
+                          <span>
+                            EMAIL ADDRESS
+                          </span>
+
+                          <strong>
+                            {{
+                            passengerData.customerInfo.email
+                            ? passengerData.customerInfo.email
+                            : "N/A"
+                            }}
+                          </strong>
+
+                        </div>
+
                       </div>
 
-                      <div class="padding" *ngIf="autoApplyCouponStatus == false">
-                        <form [formGroup]="couponForm" (ngSubmit)="ApplyCoupon()">
-                          <h5>Have a Coupon Code ?</h5>
-                          <hr />
-                          <div class="row padding">
-                            <div class="col-md-4">
-                              <input type="text" class="form-control" autocomplete="off" formControlName="coupon_code"
-                                placeholder="Enter Coupon Code" />
 
-                              <!-- <div *ngIf="couponSubmitted && couponForm.controls.coupon_code.errors" class="invalid-feedback">
-						<div *ngIf="couponForm.controls.coupon_code.errors.required">Coupon code is required</div>
+                      <div class="contact-note">
 
-					</div> -->
-                            </div>
-                            <div class="col-md-2">
-                              <button [disabled]="!couponForm.valid" class="btn btn-warning" type="submit">
-                                APPLY
-                              </button>
-                            </div>
-                          </div>
-                        </form>
+                        <i class="fas fa-hashtag"></i>
+
+                        <span>
+                          will receive booking details in this mobile
+                          number &amp; email address
+                        </span>
+
                       </div>
 
-                      <!-- customer GST  -->
+                    </div>
 
-                      <div class="row">
-                        <div class="col-12">
-                          <label class="terms">
-                            <input formControlName="customer_gst_status" #customer_gst_status id="customer_gst_status"
-                              type="checkbox" [checked]="gstStatus" (change)="
+
+                    <div class="review-main-card gst-left-card">
+
+                      <div class="review-heading">
+
+                        <div class="heading-icon">
+                          <i class="fas fa-file-invoice"></i>
+                        </div>
+
+                        <h5>
+                          GST Details
+                        </h5>
+
+                      </div>
+
+                      <div class="review-yellow-line"></div>
+
+
+                      <label class="gst-checkbox">
+
+                        <input formControlName="customer_gst_status" #customer_gst_status id="customer_gst_status"
+                          type="checkbox" [checked]="gstStatus" (change)="
                                 customer_gst_StatusChange(
-                                  customer_gst_status.checked
+                                    customer_gst_status.checked
                                 )
-                              " />
-                            &nbsp;
-                            <span class="mob-gst"><b>I have a GST number (optional)? </b></span></label>
+                            " />
+
+                        <span>
+                          <b>I have a GST number</b>
+                          <small>(Optional)</small>
+                        </span>
+
+                      </label>
+
+
+                      <!-- GST FIELDS -->
+
+                      <div class="gst-fields" *ngIf="gstStatus">
+
+
+                        <div class="gst-field">
+
+                          <label>
+                            GSTIN
+                          </label>
+
+                          <input type="text" class="form-control" formControlName="customer_gst_number"
+                            placeholder="Enter GSTIN" />
+
                         </div>
 
-                        <div class="row col-md-12" *ngIf="gstStatus">
-                          <div class="col-md-3">
-                            <label>GSTIN</label><br />
-                            <input type="text" formControlName="customer_gst_number" class="form-control"
-                              placeholder="GSTIN" />
-                          </div>
-                          <div class="col-md-3">
-                            <label>Business Name</label><br />
-                            <input type="text" formControlName="customer_gst_business_name" class="form-control"
-                              placeholder="Business Name" />
-                          </div>
-                          <div class="col-md-3">
-                            <label>Business Email</label><br />
-                            <input type="text" formControlName="customer_gst_business_email" class="form-control"
-                              placeholder="Business Email" />
-                            <div *ngIf="
-                                submitted2 &&
-                                bookForm2.controls.customer_gst_business_email
-                                  .errors
-                              " class="invalid-feedback">
-                              <div *ngIf="
-                                  bookForm2.controls.customer_gst_business_email
-                                    .errors.email
-                                ">
-                                Email must be a valid email address
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-3">
-                            <label>Business Address</label><br />
-                            <input type="text" formControlName="customer_gst_business_address" class="form-control"
-                              placeholder="Business Address" />
-                          </div>
+
+                        <div class="gst-field">
+
+                          <label>
+                            Business Name
+                          </label>
+
+                          <input type="text" class="form-control" formControlName="customer_gst_business_name"
+                            placeholder="Enter Business Name" />
+
                         </div>
+
+
+                        <div class="gst-field">
+
+                          <label>
+                            Business Email
+                          </label>
+
+                          <input type="email" class="form-control" formControlName="customer_gst_business_email"
+                            placeholder="Enter Business Email" />
+
+                        </div>
+
+
+                        <div class="gst-field">
+
+                          <label>
+                            Business Address
+                          </label>
+
+                          <textarea rows="2" class="form-control" formControlName="customer_gst_business_address"
+                            placeholder="Enter Business Address">
+                            </textarea>
+
+                        </div>
+
                       </div>
+
                     </div>
+
                   </div>
 
-                  <div class="col-md-12">
-                    <div class="passenger-detail box-padding padding">
-                      <div class="row">
-                        <div class="captcha-container">
-                          <label for="captcha-input">What is {{ number1 }} + {{ number2 }}?</label>
-                          <div class="captcha-input-group">
-                            <input type="number" id="captcha-input" formControlName="userInput"
-                              placeholder="Enter your answer" />
-                            <button class="btn btn-blue" type="button" (click)="validateCaptcha()">
-                              Verify
-                            </button>
-                            <button class="btn btn-warning" type="button" (click)="generateCaptcha()">
-                              Refresh
-                            </button>
+
+                  <div class="review-right-column">
+
+
+
+                    <div class="review-side-card offers-card" *ngIf="autoApplyCouponStatus == false">
+
+
+                      <!-- HEADING -->
+
+                      <div class="side-heading">
+
+                        <div class="side-heading-icon">
+                          <i class="fas fa-tag"></i>
+                        </div>
+
+                        <h5>
+                          Offers For You
+                        </h5>
+
+                      </div>
+
+
+                      <div class="side-yellow-line"></div>
+
+
+                      <!-- COUPON INPUT -->
+
+                      <form [formGroup]="couponForm" (ngSubmit)="ApplyCoupon()">
+
+                        <div class="coupon-input-row">
+
+                          <div class="coupon-input-wrap">
+
+                            <i class="fas fa-ticket-alt"></i>
+
+                            <input type="search" autocomplete="off" formControlName="coupon_code"
+                              placeholder="Have a Coupon code?" style="text-transform: uppercase;" />
+
                           </div>
-                          <div *ngIf="!captchaValidated" class="error-message" style="color: red">
-                            {{ errorMessage }}
+
+                          <button type="submit" [disabled]="!couponForm.valid">
+
+                            Apply
+
+                          </button>
+
+                        </div>
+
+                      </form>
+
+
+                      <div class="coupon-offers-box">
+                        <div class="coupon-offer" *ngFor="let offercode of couponcode">
+
+                          <div class="offer-content">
+
+                            <div class="offer-code-row">
+                              <strong (click)="openCouponModal(offercode)">
+                                {{ offercode.coupon_code }}
+                              </strong>
+
+                              <i class="fas fa-info-circle" title="Coupon details"
+                                (click)="openCouponModal(offercode)"></i>
+                            </div>
+
+                            <p (click)="openCouponModal(offercode)">{{ offercode.short_desc }}</p>
+
                           </div>
-                          <div *ngIf="captchaValidated" class="error-message" style="color: green">
-                            Captcha is verified successfully
+
+                          <div class="offer-select">
+                            <input type="radio" name="couponOffer"
+                              [checked]="couponForm.get('coupon_code')?.value === offercode.coupon_code"
+                              (click)="$event.stopPropagation()" (click)="selectCoupon(offercode.coupon_code)" />
                           </div>
+
                         </div>
                       </div>
+
+
                     </div>
-                  </div>
 
-                  <div class="col-md-12">
-                    <div class="passenger-detail box-padding padding">
-                      <div class="row">
-                        <div class="col-md-9 payable">
-                          <p *ngIf="couponData.discount > 0" style="color: green; font-weight: bold">
-                            Coupon code ( {{ autoApplyCouponcode }} ) applied
-                          </p>
 
-                          <div class="row fare-detail">
-                            <div class="col-md-8">
-                              <h6>Base Fare</h6>
-                            </div>
+                    <div class="review-side-card verification-card">
 
-                            <div class="col-md-4">
-                              <h6>
-                                <strong>₹
-                                  {{
-                                  bookingdata.PriceArray
-                                  .odbus_charges_ownerFare
-                                  }}</strong>
-                              </h6>
-                            </div>
 
-                            <div class="col-md-8">
-                              <h6>Customer GST</h6>
-                            </div>
+                      <div class="side-heading">
 
-                            <div class="col-md-4" style="
-                                color: green;
-                                font-weight: bold;
-                                font-style: italic;
-                              ">
-                              <h6>
-                                <strong>+ ₹
-                                  {{
-                                  bookingdata.PriceArray.customerGst
-                                  }}</strong>
-                              </h6>
-                            </div>
-
-                            <!-- <div class="col-md-8"><h6>Transaction Fee</h6></div>
-
-							<div class="col-md-4"><h6><strong>+ ₹ {{ bookingdata.PriceArray.transactionFee }}</strong></h6></div> -->
-
-                            <div class="col-md-8" *ngIf="couponData.discount > 0">
-                              <h6>Coupon Discount</h6>
-                            </div>
-
-                            <div class="col-md-4" *ngIf="couponData.discount > 0" style="
-                                color: green;
-                                font-weight: bold;
-                                font-style: italic;
-                              ">
-                              <h6>
-                                <strong>- ₹ {{ couponData.discount }}</strong>
-                              </h6>
-                            </div>
-
-                            <div class="col-md-8">
-                              <h5>Total</h5>
-                            </div>
-
-                            <div class="col-md-4">
-                              <h5>₹ {{ couponData.payableAmount }}</h5>
-                            </div>
-                          </div>
-
-                          <label class="terms" style="color: #daad23">
-                            <input formControlName="tnc" #tnc id="tnc" type="checkbox" [checked]="tncStatus"
-                              (change)="tncStatusChange(tnc.checked)" />
-                            &nbsp; I agree that I have read
-                            <a target="_blank" routerLink="/terms-conditions">T&Cs</a>
-                            and the
-                            <a target="_blank" routerLink="/privacy-policy">Privacy Policy
-                            </a></label>
-
-                          <div *ngIf="submitted2 && bookForm2.controls.tnc.errors" class="invalid-feedback">
-                            <div *ngIf="bookForm2.controls.tnc.errors.required">
-                              Agree the Terms & Conditions
-                            </div>
-                            <div *ngIf="bookForm2.controls.tnc.errors.checked">
-                              Agree the Terms & Conditions
-                            </div>
-                          </div>
+                        <div class="side-heading-icon">
+                          <i class="fas fa-shield-alt"></i>
                         </div>
 
-                        <div class="col-md-3">
-                          <div class="payment_box">
-                            <!-- make-payment -->
-                            <input type="image" name="submit" alt="Submit" style="cursor: pointer; width: 100%"
-                              src="../../assets/img/makepayment.png" />
-                          </div>
-                        </div>
+                        <h5>
+                          Verification
+                        </h5>
+
                       </div>
+
+
+                      <div class="side-yellow-line"></div>
+
+
+                      <!-- QUESTION + REFRESH SAME ROW -->
+
+                      <div class="captcha-top-row">
+
+                        <span class="captcha-question">
+
+                          What is {{ number1 }} + {{ number2 }}?
+
+                        </span>
+
+                        <button type="button" class="captcha-refresh-top" (click)="generateCaptcha()">
+
+                          <i class="fas fa-sync-alt"></i>
+
+                          Refresh
+
+                        </button>
+
+                      </div>
+
+
+                      <!-- ANSWER + VERIFY -->
+
+                      <div class="captcha-answer-row">
+
+                        <input type="number" id="captcha-input" formControlName="userInput"
+                          placeholder="Enter your answer" (input)="onCaptchaInput()"
+                          [class.captcha-invalid]="captchaSubmitted && !captchaValidated" />
+
+
+                        <button type="button" class="captcha-verify-btn" (click)="validateCaptcha()">
+
+                          Verify
+
+                        </button>
+
+                      </div>
+
+
+                      <!-- ERROR -->
+
+                      <div *ngIf="!captchaValidated" class="captcha-message captcha-error">
+
+                        {{ errorMessage }}
+
+                      </div>
+
+
+                      <!-- SUCCESS -->
+
+                      <div *ngIf="captchaValidated" class="captcha-message captcha-success">
+
+                        <i class="fas fa-check-circle"></i>
+
+                        Captcha is verified successfully
+
+                      </div>
+
                     </div>
+
+
+                    <div class="review-side-card fare-card">
+
+
+                      <div class="side-heading">
+
+                        <div class="side-heading-icon">
+                          <i class="fas fa-receipt"></i>
+                        </div>
+
+                        <h5>
+                          Fare Summary
+                        </h5>
+
+                      </div>
+
+
+                      <div class="side-yellow-line"></div>
+
+
+                      <!-- COUPON APPLIED -->
+
+                      <div class="fare-success" *ngIf="couponData.discount > 0">
+
+                        <i class="fas fa-check-circle"></i>
+
+                        Coupon
+                        <strong>
+                          {{ autoApplyCouponcode }}
+                        </strong>
+                        Applied Successfully
+
+                      </div>
+
+
+                      <!-- BASE FARE -->
+
+                      <div class="fare-row">
+
+                        <span>
+                          Base Fare
+                        </span>
+
+                        <strong>
+                          ₹ {{ bookingdata.PriceArray.odbus_charges_ownerFare }}
+                        </strong>
+
+                      </div>
+
+
+                      <!-- CUSTOMER GST -->
+
+                      <div class="fare-row">
+
+                        <span>
+                          Customer GST
+                        </span>
+
+                        <strong class="gst-price">
+                          + ₹ {{ bookingdata.PriceArray.customerGst }}
+                        </strong>
+
+                      </div>
+
+
+                      <!-- COUPON DISCOUNT -->
+
+                      <div class="fare-row discount-row" *ngIf="couponData.discount > 0">
+
+                        <span>
+                          Coupon Discount
+                        </span>
+
+                        <strong>
+                          - ₹ {{ couponData.discount }}
+                        </strong>
+
+                      </div>
+
+
+                      <div class="fare-divider"></div>
+
+
+                      <!-- TOTAL -->
+
+                      <div class="fare-total">
+
+                        <span>
+                          Total
+                        </span>
+
+                        <strong>
+                          ₹ {{ couponData.payableAmount }}
+                        </strong>
+
+                      </div>
+
+
+                      <!-- TERMS -->
+                      <label class="terms-check">
+
+                        <input formControlName="tnc" #tnc id="tnc" type="checkbox"
+                          (change)="tncStatusChange(tnc.checked)" />
+
+                        <span>
+                          I Agree That I Have Read
+
+                          <a href="javascript:void(0)" (click)="modalContent('tncContent', 'terms-conditions')">
+                            T&amp;Cs
+                          </a>
+
+                          And
+
+                          <a href="javascript:void(0)" (click)="modalContent('privacyPolicyContent', 'privacy-policy')">
+                            The Privacy Policy
+                          </a>
+                        </span>
+
+                      </label>
+
+
+
+                      <!-- PAYMENT -->
+
+                      <button type="submit" class="make-payment-btn">
+
+                        <span class="payment-lock">
+                          <i class="fas fa-lock"></i>
+                        </span>
+
+                        <span class="payment-text">
+
+                          <strong>
+                            MAKE PAYMENT
+                          </strong>
+
+                          <small>
+                            100% Secure &amp; Easy Payment
+                          </small>
+
+                        </span>
+
+                        <i class="fas fa-arrow-right"></i>
+
+                      </button>
+
+                    </div>
+
                   </div>
+
                 </div>
+
               </form>
-            </ng-wizard-step>
-          </ng-wizard>
+
+            </mat-step>
+            </mat-horizontal-stepper>
+            <!-- ================= /STEPPER ================= -->
         </div>
       </div>
     </div>
@@ -1829,3 +2246,107 @@
 </ng-template>
 
 <ng-container *ngIf="isMobile; then Mobile; else Desktop"> </ng-container>
+
+<!-- Terms & Conditions Modal -->
+<div class="terms-modal-backdrop" *ngIf="showTermsModal" (click)="closeTermsModal()">
+  <div class="terms-modal" role="dialog" aria-modal="true" aria-labelledby="termsModalTitle"
+    (click)="$event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="terms-modal-header">
+      <div class="terms-title-wrap">
+        <div class="terms-icon">
+          <i class="fas fa-file-contract"></i>
+        </div>
+
+        <div>
+          <h3 id="termsModalTitle">{{ pageTitle }}</h3>
+        </div>
+      </div>
+
+      <button type="button" class="terms-close-btn" aria-label="Close" (click)="closeTermsModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="terms-modal-body">
+
+      <div class="terms-intro">
+        <div [innerHTML]="pageContent"></div>
+      </div>
+
+      <div class="terms-content">
+
+        <div class="terms-section">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Coupon Details Modal -->
+<div class="terms-modal-backdrop" *ngIf="selectedCoupon" (click)="closeCouponModal()">
+  <div class="terms-modal" role="dialog" aria-modal="true" aria-labelledby="termsModalTitle"
+    (click)="$event.stopPropagation()">
+
+    <!-- Header -->
+    <div class="terms-modal-header">
+      <div class="terms-title-wrap">
+        <div class="terms-icon">
+          <i class="fas fa-ticket-alt"></i>
+        </div>
+
+        <div>
+          <h3 id="termsModalTitle">{{ selectedCoupon.coupon_code }}</h3>
+        </div>
+      </div>
+
+      <button type="button" class="terms-close-btn" aria-label="Close" (click)="closeCouponModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="terms-modal-body">
+
+      <div class="terms-intro">
+        <div [innerHTML]="selectedCoupon.full_desc"></div>
+      </div>
+
+      <div class="terms-content">
+
+        <div class="terms-section">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- <div class="coupon-modal-overlay" *ngIf="selectedCoupon" (click)="closeCouponModal()">
+
+  <div class="coupon-modal" ng-container>
+
+    <div class="coupon-modal-header">
+      <h3>{{ selectedCoupon.coupon_code }}</h3>
+
+      <button type="button" class="close-btn" (click)="closeCouponModal()">
+        &times;
+      </button>
+    </div>
+
+    <div class="coupon-modal-body" innerHtml="{{ selectedCoupon.full_desc }}">
+    </div>
+
+  </div>
+</div> -->

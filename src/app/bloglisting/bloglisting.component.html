@@ -1,3 +1,4 @@
+<h1 style="display: none;">ODBUS Blog: Odisha Travel Guides, Bus Routes & Tourism Tips</h1>
 <ng-container *ngIf="isMobile && !MenuActive">
   <div class="mobile-mybooking-top">
     <div class="row">
@@ -18,6 +19,19 @@
   </div>
   <div class="mobile-breadcrumb-box"></div>
 </ng-container>
+<section class="blog-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="blog-banner-content">
+          <div class="blog-banner-title">{{ blogContent?.page_name }}</div>
+          <p>{{ blogContent?.page_short_desc }}</p>
+          <div innerHTML="{{ blogContent?.page_description }}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <section class="blog-listing">
   <div class="blog-breadcrumb">
     <div class="container">

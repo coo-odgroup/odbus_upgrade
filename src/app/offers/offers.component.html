@@ -1,10 +1,37 @@
 <ng-container *ngIf="!isMobile">
-  <app-search-box></app-search-box>
+  <!-- <app-search-box></app-search-box> -->
 
+
+  <!-- DUSSEHRA FESTIVAL BANNER -->
+  <section class="festival-banner-section">
+    <div class="container">
+
+      <div class="festival-banner">
+
+        <!-- Dussehra Banner Image -->
+        <div class="festival-banner-image"></div>
+
+        <!-- Transparent Overlay -->
+        <div class="festival-banner-overlay"></div>
+
+        <!-- Book Now -->
+        <div class="festival-banner-action">
+          <button class="festival-book-btn" (click)="bookToHome()">
+            BOOK YOUR TICKET NOW
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Offer section -->
   <section class="top-routs offer-sec">
     <span class="line-span">
       <div class="container">
-        <h2>Offers</h2>
+        <h1>Offers</h1>
       </div>
     </span>
     <div class="textimonials-result1">
@@ -22,13 +49,14 @@
           <div class="row">
             <div class="col-md-4" *ngFor="let o of allOffers; let i = index">
               <div class="card">
-                <a (click)="openOffer(i)">
+                <button type="button" class="offer-card-button" (click)="openOffer(i)"
+                  [attr.aria-label]="'View offer ' + (o.occassion || i + 1)">
                   <img *ngIf="
                       o.slider_photo &&
                       o.slider_photo != '' &&
                       o.slider_photo != null
                     " class="card-img-top" [src]="o.slider_photo" alt="{{ o.occassion }}" />
-                </a>
+                </button>
                 <div class="card-block"></div>
               </div>
             </div>
@@ -67,7 +95,10 @@
             <div class="download-bottom">
 
               <a href="#" class="play-btn">
-                <img src="assets/img/app-down.webp" alt="Google Play" />
+                <img src="assets/img/app-down.webp"
+                  srcset="assets/img/app-down-120.png 120w, assets/img/app-down.webp 250w"
+                  sizes="(max-width: 991px) 120px, 193px"
+                  alt="Google Play" />
               </a>
 
               <span class="download-divider"></span>
@@ -102,22 +133,45 @@
   <div class="mobile-mybooking-top">
     <div class="row">
       <div class="col-1 pr-0 pl-2 mob-arrow-left">
-        <a routerLink="/">
+        <a routerLink="/" aria-label="Back to home">
           <i class="fas fa-arrow-left"></i>
         </a>
       </div>
       <div class="col-7 pl-2 pr-2 mob-list-center">
-        <h5>Offers</h5>
+        <h1>Offers</h1>
       </div>
       <div class="col-4 pl-2 pr-2">
         <div class="mobile-logo">
-          <img src="assets/img/mob-img/logo.png" alt="ODBUS Logo" />
+          <img src="assets/img/mob-img/logo-105.png" width="105" height="42" alt="ODBUS Logo" />
         </div>
       </div>
     </div>
   </div>
 
-  <app-search-box-m></app-search-box-m>
+  <!-- <app-search-box-m></app-search-box-m> -->
+
+  <!-- MOBILE DUSSEHRA FESTIVAL BANNER -->
+  <section class="mobile-festival-section">
+
+    <div class="mobile-festival-card">
+
+      <!-- Dussehra image will be added here -->
+      <div class="mobile-festival-image"></div>
+
+      <!-- Overlay -->
+      <div class="mobile-festival-overlay"></div>
+
+      <!-- CTA -->
+      <div class="mobile-festival-cta">
+        <button class="mobile-festival-btn" (click)="bookToHome()">
+          BOOK YOUR TICKET NOW
+        </button>
+      </div>
+
+    </div>
+
+  </section>
+  <!-- End -->
 
   <div class="mobile-offerbox-middle">
     <p class="offer-top-text">
@@ -132,11 +186,12 @@
     <div class="row">
       <div class="col-12" *ngFor="let o of allOffers; let i = index">
         <div class="mobile-offer">
-          <a (click)="openOffer(i)">
+          <button type="button" class="offer-card-button" (click)="openOffer(i)"
+            [attr.aria-label]="'View offer ' + (o.occassion || i + 1)">
             <img *ngIf="
                 o.slider_photo && o.slider_photo != '' && o.slider_photo != null
               " src="{{ o.slider_photo }}" alt="{{ o.occassion }}" />
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -159,7 +214,12 @@
             <p>with the <strong>ODBUS App</strong></p>
 
             <a href="#" class="play-btn">
-              <img src="assets/img/app-down.webp" alt="Google Play">
+              <img src="assets/img/app-down-120.png"
+                srcset="assets/img/app-down-120.png 120w, assets/img/app-down.webp 250w"
+                sizes="120px"
+                width="120"
+                height="36"
+                alt="Google Play">
             </a>
 
           </div>
@@ -167,7 +227,7 @@
           <!-- RIGHT -->
           <div class="mobile-download-image">
 
-            <img src="assets/img/download_mob2.webp" class="mobile-phone" alt="ODBUS Mobile App">
+            <img src="assets/img/download_mob2-170.jpg" width="170" height="133" class="mobile-phone" alt="ODBUS Mobile App">
 
           </div>
 
@@ -179,11 +239,11 @@
 </ng-container>
 
 <ng-container *ngIf="MenuActive">
-<div class="mobile-myaccount-top">
+  <div class="mobile-myaccount-top">
     <div class="row">
       <div class="col-5">
         <div class="mobile-logo">
-          <img src="assets/img/mob-img/logo.png" alt="ODBUS Logo" />
+          <img src="assets/img/mob-img/logo-105.png" width="105" height="42" alt="ODBUS Logo" />
         </div>
       </div>
       <div class="col-7 mob-logintx">
@@ -246,7 +306,7 @@
     <!-- HEADER -->
     <div class="offer-popup-header">
       <h3>OFFER DETAILS</h3>
-      <button class="offer-close-btn" (click)="closeOfferModal()">×</button>
+      <button type="button" class="offer-close-btn" aria-label="Close offer details" (click)="closeOfferModal()">&times;</button>
     </div>
 
     <!-- BODY -->
@@ -292,8 +352,8 @@
 
         <div class="offer-description" [innerHTML]="OfferData?.coupon?.full_desc"></div>
         <button class="copy-btn" (click)="copyCoupon(OfferData?.coupon?.coupon_code)">
-            Copy Coupon
-          </button>
+          Copy Coupon
+        </button>
 
         <!-- <div class="slider-desc" *ngIf="
             OfferData?.slider_description != 'null' &&

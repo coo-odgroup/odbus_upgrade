@@ -126,6 +126,8 @@ export class OffersComponent implements OnInit {
   closeOfferModal() {
     this.showOfferModal = false;
     this.OfferData = null;
+
+    this.router.navigate(['offers']);
   }
 
   getImagePath(slider_img: any) {
@@ -153,5 +155,9 @@ export class OffersComponent implements OnInit {
         console.error('Copy failed:', err);
         this.notify.notify('Failed to copy coupon.', 'Error');
       });
+  }
+
+  bookToHome(){
+    this.router.navigate(['/']);
   }
 }

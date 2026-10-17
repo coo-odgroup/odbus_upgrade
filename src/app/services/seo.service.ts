@@ -76,32 +76,82 @@ export class SeoService {
   //   this.doc.head.appendChild(canonical);
   // }
 
+  // addCanonicalUrl(): void {
+  //   const path = this.router.url.split('?')[0]; // Remove query params
+
+  //   const canonicalUrl = this.BASE_URL.replace(/\/$/, '') + path;
+
+  //   const existing = this.doc.querySelectorAll("link[rel='canonical']");
+  //   existing.forEach(link => link.remove());
+
+  //   const canonical = this.doc.createElement('link');
+  //   canonical.setAttribute('rel', 'canonical');
+  //   canonical.setAttribute('href', canonicalUrl);
+
+  //   this.doc.head.appendChild(canonical);
+  // }
+
   addCanonicalUrl(): void {
-    const path = this.router.url.split('?')[0]; // Remove query params
 
-    const canonicalUrl = this.BASE_URL.replace(/\/$/, '') + path;
+    const currentUrl = this.router.url;
 
-    const existing = this.doc.querySelectorAll("link[rel='canonical']");
-    existing.forEach(link => link.remove());
+    const baseUrl = this.BASE_URL.replace(/\/$/, '');
 
+    const canonicalUrl = baseUrl + currentUrl;
+
+
+    // Remove existing canonical
+    this.doc
+      .querySelectorAll("link[rel='canonical']")
+      .forEach(link => link.remove());
+
+    // Create canonical
     const canonical = this.doc.createElement('link');
+
     canonical.setAttribute('rel', 'canonical');
     canonical.setAttribute('href', canonicalUrl);
 
     this.doc.head.appendChild(canonical);
   }
 
+  // addOgUrl(): void {
+  //   const ogUrl = this.BASE_URL.replace(/\/$/, '') + this.router.url;
+
+  //   this.doc
+  //     .querySelectorAll('meta[property="og:url"], meta[name="og:url"]')
+  //     .forEach((tag) => tag.remove());
+
+  //   this.meta.addTag({
+  //     property: 'og:url',
+  //     content: ogUrl,
+  //   });
+  // }
+
   addOgUrl(): void {
-    const ogUrl = this.BASE_URL.replace(/\/$/, '') + this.router.url;
 
+    const currentUrl = this.router.url;
+
+    const baseUrl = this.BASE_URL.replace(/\/$/, '');
+
+    const ogUrl = baseUrl + currentUrl;
+
+
+    // Remove old OG URL
     this.doc
-      .querySelectorAll('meta[property="og:url"], meta[name="og:url"]')
-      .forEach((tag) => tag.remove());
+      .querySelectorAll(
+        'meta[property="og:url"], meta[name="og:url"]'
+      )
+      .forEach(tag => tag.remove());
 
-    this.meta.addTag({
+    // Add new OG URL
+    this.meta.updateTag({
       property: 'og:url',
-      content: ogUrl,
+      content: ogUrl
     });
+  }
+
+  setPageTitle(title: string): void {
+    this.title.setTitle(title);
   }
 
   shouldLoadSeo(url: string): boolean {
@@ -120,7 +170,13 @@ export class SeoService {
       cleanUrl === '/blog' ||
       cleanUrl === '/privacy-policy' ||
       cleanUrl === '/instant-booking' ||
-      cleanUrl === '/terms-conditions'
+      cleanUrl === '/terms-conditions' ||
+      cleanUrl === '/login' ||
+      cleanUrl === '/faq' ||
+      cleanUrl === '/operators' ||
+      cleanUrl === '/routes' ||
+      cleanUrl === '/offers' ||
+      cleanUrl === '/cancelation-policy'
     ) {
       return true;
     }
@@ -166,7 +222,35 @@ export class SeoService {
     private router: Router,
   ) { }
 
+  // seolist(current_url: string): Observable<any> {
+  //   // Route check
+  //   if (!this.shouldLoadSeo(current_url)) {
+  //     return of(null);
+  //   }
+
+  //   // Cache check
+  //   if (this.seoCache[current_url]) {
+  //     this.setMeta(this.seoCache[current_url]);
+
+  //     return of(this.seoCache[current_url]);
+  //   }
+
+  //   // API Call
+  //   return this.httpClient
+  //     .post<any>(this.apiURL + '/allseolist', { current_url }, this.httpOptions)
+  //     .pipe(
+  //       tap((resp: any) => {
+  //         if (resp.status == 1) {
+  //           this.seoCache[current_url] = resp.data;
+
+  //           this.setMeta(resp.data);
+  //         }
+  //       }),
+  //     );
+  // }
+
   seolist(current_url: string): Observable<any> {
+
     // Route check
     if (!this.shouldLoadSeo(current_url)) {
       return of(null);
@@ -174,22 +258,48 @@ export class SeoService {
 
     // Cache check
     if (this.seoCache[current_url]) {
+
       this.setMeta(this.seoCache[current_url]);
+
+      this.addCanonicalUrl();
+      this.addOgUrl();
 
       return of(this.seoCache[current_url]);
     }
 
     // API Call
     return this.httpClient
-      .post<any>(this.apiURL + '/allseolist', { current_url }, this.httpOptions)
+      .post<any>(
+        this.apiURL + '/allseolist',
+        {
+          current_url: current_url
+        },
+        this.httpOptions
+      )
       .pipe(
+
         tap((resp: any) => {
+
           if (resp.status == 1) {
+
             this.seoCache[current_url] = resp.data;
 
             this.setMeta(resp.data);
+
+            this.addCanonicalUrl();
+            this.addOgUrl();
           }
+
         }),
+
+        catchError((error) => {
+
+          console.error('SEO API ERROR:', error);
+
+          return of(null);
+
+        })
+
       );
   }
 
@@ -202,9 +312,10 @@ export class SeoService {
       content: c?.meta_description || this.metaDescription,
     });
 
+    const keywords = c?.meta_keyword ?? this.metaKeyword ?? '';
     this.meta.updateTag({
       name: 'keywords',
-      content: c?.meta_keyword || this.metaKeyword,
+      content: keywords,
     });
 
     this.meta.updateTag({
@@ -298,6 +409,54 @@ export class SeoService {
         this.httpOptions,
       )
       .pipe(catchError(this.errorHandler));
+  }
+
+  setOperatorMeta(operatorName: string): void {
+    if (!operatorName) {
+      return;
+    }
+
+    operatorName = operatorName
+      .replace(/\s+BUS\s+SERVICE\s*$/i, '')
+      .replace(/\s+BUS\s*$/i, '')
+      .trim();
+
+    operatorName = operatorName
+      .toLowerCase()
+      .replace(/\b\w/g, char => char.toUpperCase());
+
+    const title =
+      `${operatorName} Bus Tickets, Routes And Booking | ODBUS`;
+
+    const description =
+      `Book ${operatorName} bus tickets with ODBUS. View routes, timings, fares, boarding points and seat availability for your journey.`;
+
+    // Page Title
+    this.title.setTitle(title);
+
+    // Meta Description
+    this.meta.updateTag({
+      name: 'description',
+      content: description
+    });
+
+    // Open Graph Title
+    this.meta.updateTag({
+      property: 'og:title',
+      content: title
+    });
+
+    // Open Graph Description
+    this.meta.updateTag({
+      property: 'og:description',
+      content: description
+    });
+
+    // Canonical URL
+    this.addCanonicalUrl();
+
+    // OG URL
+    this.addOgUrl();
   }
 
   errorHandler(error: HttpErrorResponse) {

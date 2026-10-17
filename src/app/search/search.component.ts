@@ -5,6 +5,8 @@ import {
   Inject,
   PLATFORM_ID,
   HostListener,
+  ViewChild,
+  TemplateRef,
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -37,7 +39,7 @@ import { GlobalConstants } from '../constants/global-constants';
 import { CommonService } from '../services/common.service';
 import * as moment from 'moment';
 import { SeoService } from '../services/seo.service';
-import { AppLightboxService } from '../services/lightbox.service';
+import { Lightbox } from 'ngx-lightbox';
 import { PopularRoutesService } from '../services/popular-routes.service';
 import { Location, DOCUMENT } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -46,11 +48,12 @@ import {
   NgbModal,
   NgbActiveModal,
 } from '@ng-bootstrap/ng-bootstrap';
-import { time } from 'console';
+import { Console, time } from 'console';
 import 'lodash';
 import { exit } from 'process';
 import { Meta, Title } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 declare var _: any;
 
@@ -115,13 +118,14 @@ export class SearchComponent implements OnInit {
   journey_date: any;
 
   couponDetail: any = [];
+  Offers: any[] = [];
 
   _albums = [];
   // Function to call when the date changes.
-  onChange = (date?: Date) => {};
+  onChange = (date?: Date) => { };
 
   // Function to call when the date picker is touched
-  onTouched = () => {};
+  onTouched = () => { };
 
   writeValue(value: Date) {
     if (!value) return;
@@ -275,7 +279,7 @@ export class SearchComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private Common: CommonService,
     private seo: SeoService,
-    private _lightbox: AppLightboxService,
+    private _lightbox: Lightbox,
     private location: Location,
     private popularRoutesService: PopularRoutesService,
     private deviceService: DeviceDetectorService,
@@ -287,6 +291,7 @@ export class SearchComponent implements OnInit {
     @Inject(PLATFORM_ID) private platformId: Object,
     @Inject(DOCUMENT) private document: Document,
   ) {
+
     // Only access localStorage in browser
     const allLocData = isPlatformBrowser(this.platformId)
       ? localStorage.getItem('allLoc')
@@ -356,6 +361,8 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  PATHURL = GlobalConstants.PATHURL;
+
   locationList(res: any) {
     // console.log(res);
     if (res.status == 1) {
@@ -368,15 +375,15 @@ export class SearchComponent implements OnInit {
             term === ''
               ? []
               : this.location_list
-                  .filter(
-                    (v) =>
-                      v.name.toLowerCase().indexOf(term.toLowerCase()) > -1 ||
-                      (v.synonym != '' &&
-                        v.synonym != null &&
-                        v.synonym.toLowerCase().indexOf(term.toLowerCase()) >
-                          -1),
-                  )
-                  .slice(0, 10),
+                .filter(
+                  (v) =>
+                    v.name.toLowerCase().indexOf(term.toLowerCase()) > -1 ||
+                    (v.synonym != '' &&
+                      v.synonym != null &&
+                      v.synonym.toLowerCase().indexOf(term.toLowerCase()) >
+                      -1),
+                )
+                .slice(0, 10),
           ),
         );
       this.formatter = (x: { name: string }) => x.name;
@@ -437,9 +444,18 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  // tabChange(val) {
+  //   document.getElementById(val).focus();
+  //   document.getElementById(val).click();
+  // }
+
   tabChange(val) {
-    document.getElementById(val).focus();
-    document.getElementById(val).click();
+    const element = document.getElementById(val);
+
+    if (element) {
+      element.focus();
+      element.click();
+    }
   }
 
   submitSeat() {
@@ -492,11 +508,21 @@ export class SearchComponent implements OnInit {
         droppingPoint: this.seatForm.value.droppingPoint,
       };
 
+      // const returnUrl = this.router.url;
+      // console.log(returnUrl);
+
       if (isPlatformBrowser(this.platformId)) {
         localStorage.setItem('bookingdata', JSON.stringify(bookingdata));
         localStorage.setItem('busRecord', JSON.stringify(this.buslistRecord));
+        // localStorage.setItem('booking_return_url',this.router.url);        
       }
-      this.router.navigate(['booking']);
+
+      // Tracking
+      this.pushInitiateCheckoutEvent();
+
+      this.router.navigate(['booking'], {
+        replaceUrl: false
+      });
     } else {
       if (
         this.seatForm.value.boardingPoint == null ||
@@ -1328,9 +1354,7 @@ export class SearchComponent implements OnInit {
       return false;
     }
 
-    if (
-      source.url === destination.url
-    ) {
+    if (source.url === destination.url) {
       this.notify.notify(
         'Source and Destination cannot be the same !',
         'Error',
@@ -1350,7 +1374,10 @@ export class SearchComponent implements OnInit {
       this.destinationData?.url === destination.url &&
       this.entdate === date
     ) {
-      this.notify.notify('This search already exists. Please modify your search and try again.', 'Error');
+      this.notify.notify(
+        'This search already exists. Please modify your search and try again.',
+        'Error',
+      );
       this.isShown = this.isShown;
       this.spinner.hide();
       return false;
@@ -1371,13 +1398,62 @@ export class SearchComponent implements OnInit {
   }
 
   coupon_detail(i, modal) {
-    this.couponDetail = [];
+    // this.couponDetail = [];
     this.couponDetail = this.buslist[i]['couponDetails'];
     // console.log(this.couponDetail);
     // this.modalService.open(modal);
     this.modalService.open(modal, {
-      size: 'xl'
+      size: 'xl',
     });
+  }
+
+  moveListingCoupon(direction: number): void {
+    const slider = document.getElementById(
+      'listingCouponScroll',
+    ) as HTMLElement;
+
+    if (!slider) {
+      return;
+    }
+
+    const scrollAmount = 255;
+
+    slider.scrollBy({
+      left: direction * scrollAmount,
+      behavior: 'smooth',
+    });
+
+    setTimeout(() => {
+      this.updateListingCouponButtons();
+    }, 400);
+  }
+
+  updateListingCouponButtons(): void {
+    const slider = document.getElementById(
+      'listingCouponScroll',
+    ) as HTMLElement;
+
+    const prevBtn = document.getElementById(
+      'listingCouponPrev',
+    ) as HTMLButtonElement;
+
+    const nextBtn = document.getElementById(
+      'listingCouponNext',
+    ) as HTMLButtonElement;
+
+    if (!slider || !prevBtn || !nextBtn) {
+      return;
+    }
+
+    const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+
+    /* PREVIOUS */
+
+    prevBtn.disabled = slider.scrollLeft <= 5;
+
+    /* NEXT */
+
+    nextBtn.disabled = slider.scrollLeft >= maxScrollLeft - 5;
   }
 
   sort(coulmn: any) {
@@ -1432,6 +1508,79 @@ export class SearchComponent implements OnInit {
 
   bussearching: boolean = false;
 
+  // getOffers(): void {
+  //   const postData = {
+  //     user_id: 1,
+  //     source_id:localStorage.getItem('source_id'),
+  //     destination_id:localStorage.getItem('destination_id'),
+  //   };
+
+  //   this.http.post<any>(GlobalConstants.BASE_URL + '/Listing-Offers', postData).subscribe(
+  //     (res: any) => {
+  //       if (Array.isArray(res)) {
+  //         this.Offers = res;
+  //       } else if (Array.isArray(res.data)) {
+  //         this.Offers = res.data;
+  //       } else {
+  //         this.Offers = [];
+  //       }
+  //     },
+  //     (error) => {
+  //       console.log('Offers API Error:', error);
+  //       this.Offers = [];
+  //     },
+  //   );
+  // }
+
+  getOffers(): void {
+    const postData = {
+      user_id: 1,
+      source_id: localStorage.getItem('source_id'),
+      destination_id: localStorage.getItem('destination_id'),
+    };
+
+    this.http
+      .post<any>(GlobalConstants.BASE_URL + '/Listing-Offers', postData)
+      .subscribe(
+        (res: any) => {
+          if (Array.isArray(res)) {
+            this.Offers = res;
+          } else if (Array.isArray(res.data)) {
+            this.Offers = res.data;
+          } else {
+            this.Offers = [];
+          }
+
+          // Hide spinner only after Offers are loaded
+          this.spinner.hide();
+          this.modalService.dismissAll();
+        },
+        (error) => {
+          console.log('Offers API Error:', error);
+          this.Offers = [];
+
+          // Also hide spinner if Offers API fails
+          this.spinner.hide();
+          this.modalService.dismissAll();
+        },
+      );
+  }
+
+  onOfferClick(index: number): void {
+    const code =
+      this.Offers[index]?.coupon_id === 0
+        ? this.Offers[index]?.unique_id
+        : this.Offers[index]?.coupon?.coupon_code;
+
+    this.goToOffers(code);
+  }
+
+  goToOffers(couponCode: string): void {
+    this.router.navigate(['/offers'], {
+      fragment: couponCode,
+    });
+  }
+
   getbuslist() {
     this.busIds = [];
     this.bussearching = true;
@@ -1452,6 +1601,8 @@ export class SearchComponent implements OnInit {
           localStorage.setItem('destination', this.destinationData.name);
           localStorage.setItem('destination_id', this.destinationData.id);
           localStorage.setItem('entdate', this.entdate);
+          localStorage.setItem('source_url', this.sourceData.url);
+          localStorage.setItem('destination_url', this.destinationData.url);
         }
 
         if (res.data) {
@@ -1491,11 +1642,12 @@ export class SearchComponent implements OnInit {
 
         this.swapdestination = this.destinationData;
         this.swapsource = this.sourceData;
+        this.getOffers();
         this.seoContent();
 
-        this.spinner.hide();
+        // this.spinner.hide();
 
-        this.modalService.dismissAll();
+        // this.modalService.dismissAll();
       });
   }
 
@@ -1893,7 +2045,119 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  showAllAmenity(id: any) {
+  busDetailsCache: { [key: number]: any } = {};
+
+  //bus facilities for mobile
+  loadMobBusDetails(busId: any, type: string, template: any) {
+    // Check cache
+    if (this.busDetailsCache[busId]) {
+      this.openMobileDetails(type, template);
+      return;
+    }
+    // API call
+    this.spinner.show();
+    this.listingService.getBusFacilities(busId).subscribe(
+      (res: any) => {
+        this.spinner.hide();
+
+        if (res.status === '1') {
+          // Save response in cache
+          this.busDetailsCache[busId] = res.data;
+          // Open selected modal
+          this.openMobileDetails(type, template);
+        }
+      },
+      (error: any) => {
+        this.spinner.hide();
+        console.log('API Error:', error);
+      },
+    );
+  }
+
+  openMobileDetails(type: string, template: any) {
+    switch (type) {
+      case 'amenities':
+        this.viewamenity(template);
+
+        break;
+
+      case 'safety':
+        this.viewsafety(template);
+
+        break;
+
+      case 'photos':
+        this.viewphotos(template);
+
+        break;
+
+      case 'reviews':
+        this.viewreview(template);
+
+        break;
+
+      case 'policy':
+        this.viewpolicy(template);
+
+        break;
+    }
+  }
+
+  loadBusDetails(i: any, type: string) {
+    const busId = this.buslist[i].busId;
+
+    // Check if this bus data is already available
+    if (this.busDetailsCache[busId]) {
+      this.showBusDetails(i, type);
+
+      return;
+    }
+    this.spinner.show();
+
+    // First click for this bus
+    console.log('Calling API:', busId);
+
+    this.listingService.getBusFacilities(busId).subscribe((res: any) => {
+      if (res.status === '1') {
+        this.spinner.hide();
+
+        // Store only res.data
+        this.busDetailsCache[busId] = res.data;
+
+        // Open the clicked section
+        this.showBusDetails(i, type);
+      }
+    });
+  }
+
+  showBusDetails(i: any, type: string) {
+    switch (type) {
+      case 'amenities':
+        this.showAllAmenity(i);
+        break;
+
+      case 'safety':
+        this.safety(i);
+        break;
+
+      case 'photos':
+        this.bus_pic(i);
+        break;
+
+      case 'reviews':
+        this.reviews(i);
+        break;
+
+      case 'policy':
+        this.booking_policy(i);
+        break;
+    }
+  }
+
+  showAllAmenity(i: any) {
+    const busId = this.buslist[i].busId;
+    const data = this.busDetailsCache[busId];
+
     this.currentSeatlayoutIndex = false;
 
     this.seatsLayoutRecord.visibility = false;
@@ -1903,9 +2167,19 @@ export class SearchComponent implements OnInit {
     this.busPhotoshow = '';
     this.reviewShow = '';
     this.policyShow = '';
-    this.amenityShow = id;
+    this.amenityShow = i;
 
-    this.checkSeatHTML(id);
+    // Use cached API response
+    this.amenities = data.amenities;
+
+    // Don't call API again
+    // this.checkSeatHTML(i);
+  }
+
+  getBusDetails(i: any): any {
+    const busId = this.buslist[i].busId;
+
+    return this.busDetailsCache[busId] || {};
   }
 
   closeTab(id: any) {
@@ -1964,71 +2238,56 @@ export class SearchComponent implements OnInit {
 
     this.busPhotoshow = id;
 
-    let busRecord = this.buslist[id];
+    const busRecord = this.buslist[id];
+    const busId = busRecord.busId;
 
-    if (busRecord.busPhotos.length > 0) {
-      busRecord.busPhotos.forEach((sf) => {
-        if (sf.bus_image_1 != '' && sf.bus_image_1 != null) {
-          const src = sf.bus_image_1;
-          const caption = '';
-          const thumb = sf.bus_image_1;
-          const album = {
-            src: src,
-            caption: caption,
-            thumb: thumb,
-          };
-          this._albums.push(album);
+    const gallery = this.busDetailsCache[busId]?.gallery || [];
+
+    if (gallery.length > 0) {
+      gallery.forEach((sf: any) => {
+        if (sf.bus_image_1) {
+          this._albums.push({
+            src: sf.bus_image_1,
+            caption: '',
+            thumb: sf.bus_image_1,
+          });
         }
 
-        if (sf.bus_image_2 != '' && sf.bus_image_2 != null) {
-          const src = sf.bus_image_2;
-          const caption = '';
-          const thumb = sf.bus_image_2;
-          const album = {
-            src: src,
-            caption: caption,
-            thumb: thumb,
-          };
-          this._albums.push(album);
+        if (sf.bus_image_2) {
+          this._albums.push({
+            src: sf.bus_image_2,
+            caption: '',
+            thumb: sf.bus_image_2,
+          });
         }
 
-        if (sf.bus_image_3 != '' && sf.bus_image_3 != null) {
-          const src = sf.bus_image_3;
-          const caption = '';
-          const thumb = sf.bus_image_3;
-          const album = {
-            src: src,
-            caption: caption,
-            thumb: thumb,
-          };
-          this._albums.push(album);
+        if (sf.bus_image_3) {
+          this._albums.push({
+            src: sf.bus_image_3,
+            caption: '',
+            thumb: sf.bus_image_3,
+          });
         }
 
-        if (sf.bus_image_4 != '' && sf.bus_image_4 != null) {
-          const src = sf.bus_image_4;
-          const caption = '';
-          const thumb = sf.bus_image_4;
-          const album = {
-            src: src,
-            caption: caption,
-            thumb: thumb,
-          };
-          this._albums.push(album);
+        if (sf.bus_image_4) {
+          this._albums.push({
+            src: sf.bus_image_4,
+            caption: '',
+            thumb: sf.bus_image_4,
+          });
         }
 
-        if (sf.bus_image_5 != '' && sf.bus_image_5 != null) {
-          const src = sf.bus_image_5;
-          const caption = '';
-          const thumb = sf.bus_image_5;
-          const album = {
-            src: src,
-            caption: caption,
-            thumb: thumb,
-          };
-          this._albums.push(album);
+        if (sf.bus_image_5) {
+          this._albums.push({
+            src: sf.bus_image_5,
+            caption: '',
+            thumb: sf.bus_image_5,
+          });
         }
       });
     }
+
+
 
     this.reviewShow = '';
     this.amenityShow = '';
@@ -2442,6 +2701,33 @@ export class SearchComponent implements OnInit {
       });
   }
 
+  // Add by sahil -- for puja offer slider static
+  showStaticSlider: boolean = false;
+  static_sliderImage = "https://provider.odbus.co.in/uploads/slider_photos/17903389602548.webp";
+
+  checkStaticSlider(): void {
+    if (!this.entdate) {
+      this.showStaticSlider = false;
+      return;
+    }
+
+    const parts = this.entdate.split('-');
+    if (parts.length !== 3) {
+      this.showStaticSlider = false;
+      return;
+    }
+
+    // DD-MM-YYYY → YYYY-MM-DD
+    const journeyDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+
+    const startDate = '2026-10-14';
+    const endDate = '2026-10-18';
+
+    this.showStaticSlider =
+      journeyDate >= startDate &&
+      journeyDate <= endDate;
+  }
+
   ngOnInit(): void {
     let currentPath = this.router.url.split('?')[0];
 
@@ -2449,36 +2735,6 @@ export class SearchComponent implements OnInit {
     currentPath = currentPath.replace(/^(route|routes)\//, '');
 
     this.currentUrl = currentPath;
-
-    // ================= SEO =================
-    // this.seo.seoList().subscribe(
-    //   (resp: any) => {
-
-    //     let seoPages: any[] = [];
-
-    //     if (Array.isArray(resp)) {
-    //       seoPages = resp;
-    //     } else if (resp?.data && Array.isArray(resp.data)) {
-    //       seoPages = resp.data;
-    //     }
-
-    //     const seoData = seoPages.find(
-    //       (x: any) => x?.page_url === currentPath
-    //     );
-
-    //     if (seoData) {
-    //       this.applySeo(seoData);
-    //     }
-
-    //     if (isPlatformBrowser(this.platformId)) {
-    //       localStorage.setItem('seoData', JSON.stringify(resp));
-    //     }
-
-    //   },
-    //   error => {
-    //     console.error('Error fetching SEO:', error);
-    //   }
-    // );
 
     // ================= LOCATION OBS =================
     this.locationService.currentsource.subscribe((s: any) => {
@@ -2569,6 +2825,8 @@ export class SearchComponent implements OnInit {
         localStorage.setItem('source_id', this.sourceData.id);
         localStorage.setItem('destination_id', this.destinationData.id);
         localStorage.setItem('entdate', this.entdate);
+        localStorage.setItem('source_url', this.sourceData.url);
+        localStorage.setItem('destination_url', this.destinationData.url);
 
         this.showformattedDate(this.entdate);
 
@@ -2597,7 +2855,10 @@ export class SearchComponent implements OnInit {
           );
         }
 
-       this.getbuslist();
+        // PUSH VIEW_CONTENT
+        this.pushViewContentEvent();
+
+        this.getbuslist();
       }
     }
 
@@ -2622,6 +2883,8 @@ export class SearchComponent implements OnInit {
     }
 
     this.generateCalendar();
+    //Add by Sahil
+    this.checkStaticSlider();
 
     // this.seoContent();
 
@@ -2645,54 +2908,6 @@ export class SearchComponent implements OnInit {
     );
     scripts.forEach((s) => s.remove());
   }
-
-  // applySeo(seodata: any) {
-
-  //   this.title.setTitle(seodata.meta_title || '');
-
-  //   this.meta.updateTag({
-  //     name: 'description',
-  //     content: seodata.meta_description || '',
-  //   });
-
-  //   this.removeOldJsonLd();
-
-  //   const schemas: any[] = [];
-
-  //   if (seodata?.breadcrumb_schema) {
-  //     try {
-  //       const breadcrumb =
-  //         typeof seodata.breadcrumb_schema === 'string'
-  //           ? JSON.parse(seodata.breadcrumb_schema)
-  //           : seodata.breadcrumb_schema;
-
-  //       schemas.push(breadcrumb);
-  //     } catch (e) {
-  //       console.error('Invalid breadcrumb JSON', e);
-  //     }
-  //   }
-
-  //   if (seodata?.faq_schema) {
-  //     try {
-  //       const faq =
-  //         typeof seodata.faq_schema === 'string'
-  //           ? JSON.parse(seodata.faq_schema)
-  //           : seodata.faq_schema;
-
-  //       schemas.push(faq);
-  //     } catch (e) {
-  //       console.error('Invalid FAQ JSON', e);
-  //     }
-  //   }
-
-  //   // ✅ THIS PART WAS MISSING
-  //   schemas.forEach(schema => {
-  //     const script = this.document.createElement('script');
-  //     script.type = 'application/ld+json';
-  //     script.text = JSON.stringify(schema);
-  //     this.document.head.appendChild(script);
-  //   });
-  // }
 
   setCanonical(url: string) {
     let link = document.querySelector(
@@ -2742,6 +2957,8 @@ export class SearchComponent implements OnInit {
       localStorage.setItem('source_id', this.sourceData.id);
       localStorage.setItem('destination_id', this.destinationData.id);
       localStorage.setItem('entdate', this.entdate);
+      localStorage.setItem('source_url', this.sourceData.url);
+      localStorage.setItem('destination_url', this.destinationData.url);
 
       this.showformattedDate(this.entdate);
 
@@ -2781,6 +2998,9 @@ export class SearchComponent implements OnInit {
           },
         );
       }
+
+      // PUSH VIEW_CONTENT
+      this.pushViewContentEvent();
 
       this.getbuslist();
     }
@@ -2934,8 +3154,19 @@ export class SearchComponent implements OnInit {
     this.modalService.open(viewamenity, { windowClass: 'mobile-modalbox' });
   }
 
+  getAmenityImage(amenity: any): string {
+    if (this.isMobile) {
+      return amenity.amenities_image;
+    }
+    return amenity.amenities_image;
+  }
+
   viewsafety(viewsafety: any) {
     this.modalService.open(viewsafety, { windowClass: 'mobile-modalbox' });
+  }
+
+  getSafetyImage(safety: any): string {
+    return this.isMobile ? safety.safety_image : safety.safety_image;
   }
 
   viewphotos(viewphotos: any) {
@@ -3094,7 +3325,10 @@ export class SearchComponent implements OnInit {
     // );
 
     const maxDate = new Date(today);
-    maxDate.setDate(today.getDate() + 29);
+    maxDate.setDate(
+      today.getDate() +
+      parseInt(localStorage.getItem('advance_days_show') || '29'),
+    );
 
     for (let d = 1; d <= totalDays; d++) {
       const fullDate = new Date(this.currentYear, this.currentMonth, d);
@@ -3204,7 +3438,7 @@ export class SearchComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { date: formattedDate },
-      queryParamsHandling: 'merge'
+      queryParamsHandling: 'merge',
     });
   }
 
@@ -3222,4 +3456,54 @@ export class SearchComponent implements OnInit {
     navigator.clipboard.writeText(code);
   }
   // Added by Jagan
+
+  // Desc: dataLayer for Tracking Created On : 25-Sept-2026 By: Chakradhar Sahu
+
+  private viewContentTracked = false;
+
+  private pushViewContentEvent(): void {
+
+    if (this.viewContentTracked) {
+      return;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+
+    const viewContentEvent = {
+      event: 'view_content',
+      content_name: `${this.sourceData.name} to ${this.destinationData.name}`,
+      content_type: 'route',
+    };
+
+    window.dataLayer.push(viewContentEvent);
+
+    this.viewContentTracked = true;
+  }
+
+  // Desc: dataLayer for Tracking Created On : 25-Sept-2026 By: Chakradhar Sahu
+
+  private pushInitiateCheckoutEvent(): void {
+    const totalFare = Number(this.PriceArray?.odbus_charges_ownerFare || 0);
+    const busName = this.buslistRecord?.busName || '';
+
+    if (totalFare <= 0) {
+      return;
+    }
+
+    if (!this.sourceData?.name || !this.destinationData?.name) {
+      return;
+    }
+
+    window.dataLayer = window.dataLayer || [];
+
+    const checkoutEvent = {
+      event: 'initiate_checkout',
+      route: `${this.sourceData.name} to ${this.destinationData.name}`,
+      busName: busName,
+      value: totalFare,
+      currency: 'INR',
+    };
+
+    window.dataLayer.push(checkoutEvent);
+  }
 }

@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input, HostListener, SecurityContext, EventEmitter, Inject, PLATFORM_ID } from '@angular/core';
-import { NgWizardConfig, NgWizardService, StepChangedArgs, StepValidationArgs, STEP_STATE, THEME } from 'ng-wizard';
+import { Component, OnInit, ChangeDetectorRef, Input, HostListener, SecurityContext, EventEmitter, Inject, PLATFORM_ID, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import { ExternalLibraryService } from '../util';
@@ -24,7 +23,9 @@ import { CommonService } from '../services/common.service';
 import { PlatformLocation } from '@angular/common';
 import { EquirectangularReflectionMapping } from 'three';
 import { ManagebookingService } from '../services/managebooking.service';
+import { PagesService } from '../services/pages.service';
 import { load } from '@cashfreepayments/cashfree-js';
+import { MatStepper } from '@angular/material/stepper';
 
 declare let Razorpay: any;
 
@@ -37,22 +38,8 @@ declare let Razorpay: any;
 
 export class BookingComponent implements OnInit {
 
-  stepStates = {
-    normal: STEP_STATE.normal,
-    disabled: STEP_STATE.disabled,
-    error: STEP_STATE.error,
-    hidden: STEP_STATE.hidden
-  };
-
-  config: NgWizardConfig = {
-    selected: 0,
-    theme: THEME.arrows,
-    toolbarSettings: {
-      toolbarExtraButtons: [
-        { text: 'Finish', class: 'btn btn-info', event: () => { alert("Finished!!!"); } }
-      ],
-    }
-  };
+  // Material stepper reference
+  @ViewChild('stepper') stepper!: MatStepper;
 
   genderArr: any = [];
   couponData: Coupon;
@@ -60,7 +47,7 @@ export class BookingComponent implements OnInit {
   currentUrl: any;
   bookingStep2: boolean = false;
   bookingStep3: boolean = false;
-  app_type = "WEB";
+  app_type = 'WEB';
 
   MenuActive: boolean = false;
   qrCode: any = '';
@@ -110,7 +97,6 @@ export class BookingComponent implements OnInit {
   ismailReadOnly: boolean = false;
   isMobile: boolean;
 
-
   total_seat_name: any = [];
   seat_ids: any = [];
   lb_seats: any = [];
@@ -126,8 +112,10 @@ export class BookingComponent implements OnInit {
   masterSettingRecord: any = [];
 
   activeMenu?: string;
-  constructor(private ngWizardService: NgWizardService, private fb: FormBuilder,
-    private router: Router, private bookticketService: BookticketService,
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private bookticketService: BookticketService,
     // private razorpayService: ExternalLibraryService,
     private cd: ChangeDetectorRef,
     private notify: NotificationService,
@@ -144,7 +132,7 @@ export class BookingComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private platformLocation: PlatformLocation,
     private managebookingService: ManagebookingService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private pagesService: PagesService,
   ) {
     // this.razorpayService
     //   .lazyLoadLibrary('https://checkout.razorpay.com/v1/checkout.js')
@@ -159,7 +147,6 @@ export class BookingComponent implements OnInit {
     this.currentUrl = location.path().replace('/', '');
     this.seo.seolist(this.currentUrl);
 
-
     this.session = new LoginChecker();
 
     if (this.session.isLoggedIn()) {
@@ -168,7 +155,6 @@ export class BookingComponent implements OnInit {
       this.customerInfoEmail = this.user.email;
       this.customerInfoPhone = this.user.phone;
     }
-
 
     this.source = localStorage.getItem('source');
     this.destination = localStorage.getItem('destination');
@@ -179,31 +165,30 @@ export class BookingComponent implements OnInit {
     this.source_id = localStorage.getItem('source_id');
     this.destination_id = localStorage.getItem('destination_id');
 
-
     this.genderArr = [
       {
-        'name': 'Male',
-        'value': 'M'
+        name: 'Male',
+        value: 'M',
       },
       {
-        'name': 'Female',
-        'value': 'F'
-      }
+        name: 'Female',
+        value: 'F',
+      },
     ];
 
     this.bookingdata = localStorage.getItem('bookingdata');
     this.busRecord = localStorage.getItem('busRecord');
     this.genderRestrictSeats = localStorage.getItem('genderRestrictSeats');
 
-
-    //console.log(this.busRecord);
-
     if (this.bookingdata == null && this.busRecord == null) {
       this.router.navigate(['/']);
     } else {
       this.bookingdata = JSON.parse(this.bookingdata);
       this.busRecord = JSON.parse(this.busRecord);
-      if (this.busRecord.couponDetails != null && this.busRecord.couponDetails.length > 0) {
+      if (
+        this.busRecord.couponDetails != null &&
+        this.busRecord.couponDetails.length > 0
+      ) {
         // console.log(this.busRecord.couponDetails[0].coupon_code);
         this.autoApplyCouponcode = this.busRecord.couponDetails[0].coupon_code;
       }
@@ -217,8 +202,8 @@ export class BookingComponent implements OnInit {
 
       // console.log(this.bookingdata.boardingPoint);
 
-      let brdTm_arr = this.bookingdata.boardingPoint.boardTime.split(" | ");
-      let drpTm_arr = this.bookingdata.droppingPoint.dropTime.split(" | ");
+      let brdTm_arr = this.bookingdata.boardingPoint.boardTime.split(' | ');
+      let drpTm_arr = this.bookingdata.droppingPoint.dropTime.split(' | ');
 
       // this.bookingdata.boardingPoint=brdTm_arr[0];
       // this.bookingdata.droppingPoint=drpTm_arr[0];
@@ -235,16 +220,11 @@ export class BookingComponent implements OnInit {
       //   this.total_seat_name =this.total_seat_name.concat(this.bookingdata.LowerBerthSeats);
       //   this.lb_seats = this.lb_seats.concat(this.bookingdata.LowerBerthSeats);
       // }
-
-
-
-
-
     }
 
     this.bookForm2 = this.fb.group({
       tnc: [true, Validators.requiredTrue],
-      customer_gst_status: [(this.busRecord.origin == 'MANTIS') ? true : false],
+      customer_gst_status: [this.busRecord.origin == 'MANTIS' ? true : false],
       customer_gst_number: [null],
       customer_gst_business_name: [null],
       customer_gst_business_email: [null, [Validators.email]],
@@ -252,21 +232,28 @@ export class BookingComponent implements OnInit {
       userInput: [null],
     });
 
-
     this.couponData = {
-      "totalAmount": this.bookingdata.PriceArray.totalFare,
-      "discount": 0,
-      "payableAmount": this.bookingdata.PriceArray.totalFare
+      totalAmount: this.bookingdata.PriceArray.totalFare,
+      discount: 0,
+      payableAmount: this.bookingdata.PriceArray.totalFare,
     } as Coupon;
-
 
     this.bookForm3 = this.fb.group({});
 
     this.bookForm1 = this.fb.group({
       customerInfo: this.fb.group({
-        email: [this.customerInfoEmail, [Validators.required, Validators.email]],
-        phone: [this.customerInfoPhone, [Validators.required, Validators.pattern("^[0-9]{10}$")]],
-        name: [this.customerInfoname, [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]],
+        email: [
+          this.customerInfoEmail,
+          [Validators.required, Validators.email],
+        ],
+        phone: [
+          this.customerInfoPhone,
+          [Validators.required, Validators.pattern('^[0-9]{10}$')],
+        ],
+        name: [
+          this.customerInfoname,
+          [Validators.required, Validators.pattern("^[a-zA-Z \-']+")],
+        ],
       }),
 
       bookingInfo: this.fb.group({
@@ -282,7 +269,7 @@ export class BookingComponent implements OnInit {
         boarding_time: [this.busRecord.departureTime],
         dropping_time: [this.busRecord.arrivalTime],
         app_type: [this.app_type],
-        typ_id: ["1"],
+        typ_id: ['1'],
         // total_fare: this.bookingdata.PriceArray.totalFare,
         // specialFare: this.bookingdata.PriceArray.specialFare,
         // addOwnerFare:this.bookingdata.PriceArray.addOwnerFare,
@@ -298,42 +285,36 @@ export class BookingComponent implements OnInit {
         ReferenceNumber: this.busRecord.ReferenceNumber,
         RouteTimeID: this.busRecord.RouteTimeID,
         bookingDetail: this.fb.array([]),
-      })
+      }),
     });
 
-
-
-
-    const bookingInfo = this.bookForm1.controls["bookingInfo"] as FormGroup;
+    const bookingInfo = this.bookForm1.controls['bookingInfo'] as FormGroup;
     const passengerList = bookingInfo.get('bookingDetail') as FormArray;
 
     if (this.bookingdata.Upperberth.length) {
-      this.bookingdata.Upperberth.forEach(u => {
+      this.bookingdata.Upperberth.forEach((u) => {
         let uar = u.split('-');
         this.seat_ids.push(uar[0]);
         this.total_seat_name.push(uar[1]);
 
-        passengerList.push(this.createItem(uar[0], this.busRecord.sleeperPrice));
-
+        passengerList.push(
+          this.createItem(uar[0], this.busRecord.sleeperPrice),
+        );
       });
       //this.seat_ids =this.seat_ids.concat();
-
     }
 
     if (this.bookingdata.Lowerberth.length) {
-
-      this.bookingdata.Lowerberth.forEach(u => {
+      this.bookingdata.Lowerberth.forEach((u) => {
         let lar = u.split('-');
         this.seat_ids.push(lar[0]);
         this.total_seat_name.push(lar[1]);
 
         passengerList.push(this.createItem(lar[0], this.busRecord.seaterPrice));
-
       });
 
       //this.seat_ids =this.seat_ids.concat(this.bookingdata.Lowerberth);
     }
-
 
     //console.log(this.seat_ids);
 
@@ -347,16 +328,13 @@ export class BookingComponent implements OnInit {
     //    passengerList.push(this.createItem(seat,this.busRecord.seaterPrice));
     // }
 
-
     this.couponForm = this.fb.group({
-      coupon_code: [null, Validators.required]
+      coupon_code: [null, Validators.required],
     });
-
   }
 
-
   menu() {
-    this.MenuActive = (this.MenuActive == false) ? true : false;
+    this.MenuActive = this.MenuActive == false ? true : false;
 
     this.activeMenu = '';
   }
@@ -367,21 +345,20 @@ export class BookingComponent implements OnInit {
     this.tncStatus = value;
   }
 
-
   public customer_gst_StatusChange(value: boolean) {
-
     this.gstStatus = value;
-
   }
-
-
-
 
   onlyNumbers(event: any) {
     var e = event;
     var charCode = e.which || e.keyCode;
 
-    if ((charCode >= 48 && charCode <= 57) || (charCode >= 96 && charCode <= 105) || charCode == 8 || charCode == 9)
+    if (
+      (charCode >= 48 && charCode <= 57) ||
+      (charCode >= 96 && charCode <= 105) ||
+      charCode == 8 ||
+      charCode == 9
+    )
       return true;
     return false;
   }
@@ -409,42 +386,48 @@ export class BookingComponent implements OnInit {
 
   showformattedDate(date: any) {
     if (date) {
-
-      let dt = date.split("-");
+      let dt = date.split('-');
       return dt[2] + '-' + dt[1] + '-' + dt[0];
-
     }
-
-
   }
 
   createItem(seat: any, fare: any): FormGroup {
-
     // console.log(this.genderRestrictSeats);
 
     // Validators.pattern("^[1-9]*$"),
 
-    return this.fb.group({
-      bus_seats_id: [seat],
-      passenger_name: [null, [Validators.required, Validators.pattern('^[a-zA-Z \-\']+')]],
-      passenger_gender: [null, Validators.required],
-      passenger_age: [null, [Validators.required,
-      Validators.min(1), Validators.max(100)]],
-      created_by: this.created_by
-    },
+    return this.fb.group(
       {
-        validator: GenderCheck('passenger_gender', 'bus_seats_id', this.genderRestrictSeats)
-      });
+        bus_seats_id: [seat],
+        passenger_name: [
+          null,
+          [Validators.required, Validators.pattern("^[a-zA-Z \-']+")],
+        ],
+        passenger_gender: [null, Validators.required],
+        passenger_age: [
+          null,
+          [Validators.required, Validators.min(1), Validators.max(100)],
+        ],
+        created_by: this.created_by,
+      },
+      {
+        validator: GenderCheck(
+          'passenger_gender',
+          'bus_seats_id',
+          this.genderRestrictSeats,
+        ),
+      },
+    );
   }
 
   get passengerFormGroup() {
-    const bookingInfo = this.bookForm1.controls["bookingInfo"] as FormGroup;
+    const bookingInfo = this.bookForm1.controls['bookingInfo'] as FormGroup;
     const passengerList = bookingInfo.get('bookingDetail') as FormArray;
     return passengerList;
   }
 
   getPassengerFormGroup(index: any): FormGroup {
-    const bookingInfo = this.bookForm1.controls["bookingInfo"] as FormGroup;
+    const bookingInfo = this.bookForm1.controls['bookingInfo'] as FormGroup;
     const passengerList = bookingInfo.get('bookingDetail') as FormArray;
     const formGroup = passengerList.controls[index] as FormGroup;
     return formGroup;
@@ -455,16 +438,44 @@ export class BookingComponent implements OnInit {
   }
 
   get GetcustomerInfo(): FormGroup {
-
     const FormGroup = this.bookForm1.get('customerInfo') as FormGroup;
     //const FormControl = ele.controls[type] as FormControl;
     // console.log(FormGroup);
     return FormGroup;
+  }
 
+  couponcode: any;
+
+  CouponCode() {
+    const params = {
+      bus_id: this.busRecord.busId,
+      date: localStorage.getItem('entdate'),
+    };
+
+    this.couponService.couponcode(params).subscribe((res) => {
+      if (res.status == 1) {
+        this.couponcode = res.data;
+      }
+    });
+  }
+
+  selectCoupon(couponCode: string): void {
+    const currentCoupon = this.couponForm.get('coupon_code')?.value;
+
+    if (currentCoupon === couponCode) {
+      // Unselect coupon
+      this.couponForm
+        .get('coupon_code')
+        ?.setValue('', { emitEvent: true });
+    } else {
+      // Select coupon
+      this.couponForm.patchValue({
+        coupon_code: couponCode
+      });
+    }
   }
 
   ApplyCoupon() {
-
     this.couponSubmitted = true;
 
     if (this.couponForm.invalid) {
@@ -473,20 +484,19 @@ export class BookingComponent implements OnInit {
       this.spinner.show();
 
       const params = {
-        "coupon_code": this.couponForm.value.coupon_code,
-        "bus_id": this.busRecord.busId,
-        "source_id": this.source_id,
-        "destination_id": this.destination_id,
-        "journey_date": this.entdate,
-        "bus_operator_id": this.busRecord.operatorId,
-        "transaction_id": this.bookTicketResponse.transaction_id
+        coupon_code: this.couponForm.value.coupon_code,
+        bus_id: this.busRecord.busId,
+        source_id: this.source_id,
+        destination_id: this.destination_id,
+        journey_date: this.entdate,
+        bus_operator_id: this.busRecord.operatorId,
+        transaction_id: this.bookTicketResponse.transaction_id,
       };
 
       this.couponService.apply(params).subscribe(
-        res => {
+        (res) => {
           this.spinner.hide();
           if (res.status == 1) {
-
             this.autoApplyCouponcode = this.couponForm.value.coupon_code;
             this.couponData = res.data;
 
@@ -501,26 +511,17 @@ export class BookingComponent implements OnInit {
             //  this.couponData.payableAmount = Math.round(this.couponData.payableAmount * 100) / 100;
 
             // }
-
-
           } else {
-            this.notify.notify(res.message, "Error");
+            this.notify.notify(res.message, 'Error');
           }
         },
-        error => {
-
+        (error) => {
           this.spinner.hide();
-          this.notify.notify(error.error.message, "Error");
-
-        }
+          this.notify.notify(error.error.message, 'Error');
+        },
       );
-
-
     }
-
   }
-
-
 
   submitForm1() {
     this.submitted1 = true;
@@ -536,294 +537,304 @@ export class BookingComponent implements OnInit {
       //  return;
 
       this.bookticketService.book(this.passengerData).subscribe(
-        res => {
+        (res) => {
           if (res.status == 1) {
-
-            if (res.data.totalAmount && res.data.discount && res.data.payableAmount) {
-
+            if (
+              res.data.totalAmount &&
+              res.data.discount &&
+              res.data.payableAmount
+            ) {
               this.autoApplyCouponStatus = true;
               this.couponData = {
-                "totalAmount": res.data.totalAmount,
-                "discount": res.data.discount,
-                "payableAmount": res.data.payableAmount
+                totalAmount: res.data.totalAmount,
+                discount: res.data.discount,
+                payableAmount: res.data.payableAmount,
               } as Coupon;
             }
 
             this.bookTicketResponse = res.data;
 
             if (this.isMobile == true) {
-
               this.bookingStep2 = true;
-
             } else {
               this.showNextStep();
             }
-
           }
 
           if (res.status == 0) {
-            this.notify.notify(res.message, "Error");
+            this.notify.notify(res.message, 'Error');
           }
 
           this.spinner.hide();
-
         },
-        error => {
+        (error) => {
           this.spinner.hide();
-          this.notify.notify(error.error.message, "Error");
-        }
+          this.notify.notify(error.error.message, 'Error');
+        },
       );
-
     }
 
+    this.stepper.next();
   }
 
+  removeCoupon(): void {
+
+    const transactionId = this.bookTicketResponse?.transaction_id;
+
+    if (!transactionId) {
+      return;
+    }
+
+    this.spinner.show();
+
+    const params = {
+      transaction_id: transactionId
+    };
+
+    this.couponService.removeCoupon(params).subscribe(
+      (res) => {
+
+        this.spinner.hide();
+
+        if (res.status == 1) {
+
+          // Clear applied coupon
+          this.autoApplyCouponcode = '';
+          this.autoApplyCouponStatus = false;
+
+          // Clear coupon from booking form
+          this.bookForm1
+            .get('bookingInfo.coupon_code')
+            ?.setValue('', { emitEvent: false });
+
+          // Reset coupon data
+          this.couponData = {
+            totalAmount: this.bookingdata.PriceArray.totalFare,
+            discount: 0,
+            payableAmount: this.bookingdata.PriceArray.totalFare
+          } as Coupon;
+
+          // Clear selected coupon
+          this.selectedCoupon = null;
+
+        } else {
+          this.notify.notify(res.message, 'Error');
+        }
+      },
+      (error) => {
+
+        this.spinner.hide();
+
+        this.notify.notify(
+          error?.error?.message || 'Unable to remove coupon',
+          'Error'
+        );
+      }
+    );
+  }
 
   countdown: any;
 
   pp_orderId: any;
 
   submitForm2() {
-
+    this.captchaSubmitted = true;
     this.submitted2 = true;
     if (this.bookForm2.invalid) {
       return;
     } else {
-
       let pass_det = this.bookForm1.value.bookingInfo.bookingDetail;
 
       let gender: any = [];
       pass_det.forEach((e: any) => {
         gender.push(e.passenger_gender);
-
       });
 
       const entdt: any = localStorage.getItem('entdate');
 
       if (this.gstStatus == true) {
-
-        if (this.bookForm2.value.customer_gst_number == '' || this.bookForm2.value.customer_gst_number == null) {
-
-          this.notify.notify("GST No is required", "Error");
+        if (
+          this.bookForm2.value.customer_gst_number == '' ||
+          this.bookForm2.value.customer_gst_number == null
+        ) {
+          this.notify.notify('GST No is required', 'Error');
           return;
-
         }
 
         let g = this.bookForm2.value.customer_gst_number;
 
         if (g != '') {
-
-          let a = 65, b = 55, c = 36;
-          const isValidFormat = (new RegExp('^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}[Z]{1}[A-Z0-9]{1}$')).test(g);
-          const isValidGSTIN = Array.from(g).reduce((i: any, j: any, k: any, g: any) => {
-            var p = (p = (j.charCodeAt(0) < a ? parseInt(j) : j.charCodeAt(0) - b) * (k % 2 + 1)) > c ? 1 + (p - c) : p;
-            return k < 14 ? i + p : j == ((c = (c - (i % c))) < 10 ? c : String.fromCharCode(c + b));
-          }, 0);
+          let a = 65,
+            b = 55,
+            c = 36;
+          const isValidFormat = new RegExp(
+            '^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[A-Z0-9]{1}[Z]{1}[A-Z0-9]{1}$',
+          ).test(g);
+          const isValidGSTIN = Array.from(g).reduce(
+            (i: any, j: any, k: any, g: any) => {
+              var p =
+                (p =
+                  (j.charCodeAt(0) < a ? parseInt(j) : j.charCodeAt(0) - b) *
+                  ((k % 2) + 1)) > c
+                  ? 1 + (p - c)
+                  : p;
+              return k < 14
+                ? i + p
+                : j ==
+                ((c = c - (i % c)) < 10 ? c : String.fromCharCode(c + b));
+            },
+            0,
+          );
           // console.log(`format:${isValidFormat}, num:${isValidGSTIN}`);
 
           if (!isValidFormat) {
-            this.notify.notify("Invalid GSTIN Format", "Error");
+            this.notify.notify('Invalid GSTIN Format', 'Error');
             return;
-
           } else if (!isValidGSTIN) {
-            this.notify.notify("Invalid GSTIN", "Error");
+            this.notify.notify('Invalid GSTIN', 'Error');
             return;
           }
 
-          if (this.bookForm2.value.customer_gst_business_name == '' || this.bookForm2.value.customer_gst_business_name == null) {
-
-            this.notify.notify("Business Name is required", "Error");
+          if (
+            this.bookForm2.value.customer_gst_business_name == '' ||
+            this.bookForm2.value.customer_gst_business_name == null
+          ) {
+            this.notify.notify('Business Name is required', 'Error');
             return;
-
           }
 
-          if (this.bookForm2.value.customer_gst_business_email == '' || this.bookForm2.value.customer_gst_business_email == null) {
-
-            this.notify.notify("Business Email is required", "Error");
+          if (
+            this.bookForm2.value.customer_gst_business_email == '' ||
+            this.bookForm2.value.customer_gst_business_email == null
+          ) {
+            this.notify.notify('Business Email is required', 'Error');
             return;
-
           }
 
-          if (this.bookForm2.value.customer_gst_business_address == '' || this.bookForm2.value.customer_gst_business_address == null) {
-
-            this.notify.notify("Business Address is required", "Error");
+          if (
+            this.bookForm2.value.customer_gst_business_address == '' ||
+            this.bookForm2.value.customer_gst_business_address == null
+          ) {
+            this.notify.notify('Business Address is required', 'Error');
             return;
-
           }
-
         }
       }
 
-
       if (this.captchaValidated == false) {
-        this.notify.notify("Captch is not validated", "Error");
+        this.notify.notify('Captch is not validated', 'Error');
+        this.blankCaptcha();
         return;
       }
+
+      // ADD PAYMENT INFO TRACKING
+      this.pushAddPaymentInfoEvent();
 
       this.spinner.show();
       ///// call to make payment API to get RazorPayment Order ID and Total price
 
       const paymentParam = {
-        "busId": this.busRecord.busId,
-        "sourceId": this.source_id,
-        "destinationId": this.destination_id,
-        "transaction_id": this.bookTicketResponse.transaction_id,
-        "seatIds": this.seat_ids,
-        "entry_date": entdt,
-        "customer_gst_status": true,//this.bookForm2.value.customer_gst_status,
-        "customer_gst_number": this.bookForm2.value.customer_gst_number,
-        "customer_gst_business_name": this.bookForm2.value.customer_gst_business_name,
-        "customer_gst_business_email": this.bookForm2.value.customer_gst_business_email,
-        "customer_gst_business_address": this.bookForm2.value.customer_gst_business_address
-      }
-
-      // console.log(JSON.stringify(paymentParam));
-      //return;
+        busId: this.busRecord.busId,
+        sourceId: this.source_id,
+        destinationId: this.destination_id,
+        transaction_id: this.bookTicketResponse.transaction_id,
+        seatIds: this.seat_ids,
+        entry_date: entdt,
+        customer_gst_status: true, //this.bookForm2.value.customer_gst_status,
+        customer_gst_number: this.bookForm2.value.customer_gst_number,
+        customer_gst_business_name:
+          this.bookForm2.value.customer_gst_business_name,
+        customer_gst_business_email:
+          this.bookForm2.value.customer_gst_business_email,
+        customer_gst_business_address:
+          this.bookForm2.value.customer_gst_business_address,
+      };
 
       // For Razorpay Payment Gateway
 
-      this.makepaymentService.getOrderid(paymentParam).subscribe(
-        res=>{
+      this.makepaymentService.getOrderid(paymentParam).subscribe((res) => {
+        if (res.status == 1) {
+          if (res.data == 'SEAT UN-AVAIL') {
+            this.notify.notify(res.message, 'Error');
+          } else {
+            this.MakePaymnetResponse = res.data;
+            console.log(this.MakePaymnetResponse);
 
-          if(res.status==1){
-            if(res.data=='SEAT UN-AVAIL'){
-              this.notify.notify(res.message,"Error");
-            }else{
-              this.MakePaymnetResponse=res.data;
-             // this.OpenRazorpayModal();
-                this.cashfressRedirect();
-            }
-
-          }else{
-            this.notify.notify(res.message,"Error");
+            // this.OpenRazorpayModal();
+            this.cashfressRedirect();
           }
+        } else {
+          this.notify.notify(res.message, 'Error');
+        }
 
-          this.spinner.hide();
-
+        this.spinner.hide();
       });
-
-
-      // For PhonePe Payment Gateway
-      // this.makepaymentService.getOrderid(paymentParam).subscribe(
-      //   res => {
-
-      //     if (res.status == 1) {
-      //       if (res.data == 'SEAT UN-AVAIL') {
-      //         this.notify.notify(res.message, "Error");
-      //       } else {
-      //         this.MakePaymnetResponse = res.data;
-      //         console.log(this.MakePaymnetResponse);
-      //         localStorage.setItem('od_success_name', this.passengerData.customerInfo.name);
-      //         localStorage.setItem('od_success_email', this.passengerData.customerInfo.email);
-      //         localStorage.setItem('od_success_phone', this.passengerData.customerInfo.phone);
-      //         localStorage.setItem('od_razor_id', this.pp_orderId);
-      //         // console.log(res)
-      //         this.pp_orderId = this.MakePaymnetResponse.pp_resp.original.orderId;
-      //         // console.log(this.MakePaymnetResponse.pp_resp.original.redirectUrl)
-
-      //         const redirectUrl = this.MakePaymnetResponse.pp_resp.original.redirectUrl + '&isChromeWV=true';
-      //         // console.log(redirectUrl);
-
-      //         // Replace history so payment page is removed
-      //         // history.replaceState(null, '', '/');
-      //         localStorage.setItem('payment_in_progress', 'true');
-
-      //         // Redirect to PhonePe
-      //         window.location.replace(redirectUrl);
-      //         localStorage.setItem('transaction_id', this.bookTicketResponse.transaction_id);
-      //         localStorage.setItem('pp_orderId', this.pp_orderId);
-
-
-      //         // localStorage.setItem('phonpedata',res.data);
-      //         // this.OpenRazorpayModal();
-      //         // this.cashfressRedirect();
-      //       }
-
-      //     } else {
-      //       this.notify.notify(res.message, "Error");
-      //     }
-
-      //     this.spinner.hide();
-
-      //   });
-
     }
-
   }
-
-
-
 
   razorpay: any;
 
   handleEvent(event: any) {
     if (event.action === 'done') {
       this.razorpay.close();
-      this.notify.notify("Time Out", "Error");
-      if (isPlatformBrowser(this.platformId)) {
-        window.location.href = (this.platformLocation as any).location.origin;
-      }
+      this.notify.notify('Time Out', 'Error');
+      window.location.href = (this.platformLocation as any).location.origin;
     }
   }
 
-
   public OpenRazorpayModal() {
-
-
     this.spinner.hide();
 
-
     const RAZORPAY_OPTIONS: any = {
-      "key": this.MakePaymnetResponse.key,
-      "amount": this.MakePaymnetResponse.amount,
-      "name": "ODBUS PAYMENT",
-      "order_id": this.MakePaymnetResponse.razorpay_order_id,
-      "description": "",
-      "image": "assets/img/odbus-logo.svg",
-      "prefill": {
-        "name": this.passengerData.customerInfo.name,
-        "email": this.passengerData.customerInfo.email,
-        "contact": '+91' + this.passengerData.customerInfo.phone,
-        "method": ""
+      key: this.MakePaymnetResponse.key,
+      amount: this.MakePaymnetResponse.amount,
+      name: 'ODBUS PAYMENT',
+      order_id: this.MakePaymnetResponse.razorpay_order_id,
+      description: '',
+      image: 'assets/img/odbus-logo.svg',
+      prefill: {
+        name: this.passengerData.customerInfo.name,
+        email: this.passengerData.customerInfo.email,
+        contact: '+91' + this.passengerData.customerInfo.phone,
+        method: '',
       },
-      "modal": {},
-      "theme": {
-        "color": "#d39e00"
-      }
+      modal: {},
+      theme: {
+        color: '#d39e00',
+      },
     };
 
-
     RAZORPAY_OPTIONS['handler'] = this.razorPaySuccessHandler.bind(this);
-    this.razorpay = new Razorpay(RAZORPAY_OPTIONS)
+    this.razorpay = new Razorpay(RAZORPAY_OPTIONS);
     this.razorpay.open();
-
   }
 
   pnr: any;
 
   razorPaySuccessHandler(res: any) {
-
     if (res && res.razorpay_signature && res.razorpay_payment_id) {
+      this.bookticketService.setBookingData({
+        name: this.passengerData.customerInfo.name,
+        email: this.passengerData.customerInfo.email,
+        phone: this.passengerData.customerInfo.phone,
+        receipt_id: this.MakePaymnetResponse.razorpay_order_id.receipt_id,
+        ticket_amount: this.MakePaymnetResponse.amount,
+        pnr: this.bookTicketResponse.pnr,
+      });
 
+      // console.log(this.passengerData);
 
-      localStorage.setItem('od_success_name', this.passengerData.customerInfo.name);
-      localStorage.setItem('od_success_email', this.passengerData.customerInfo.email);
-      localStorage.setItem('od_success_phone', this.passengerData.customerInfo.phone);
-      localStorage.setItem('od_razor_id', res.razorpay_payment_id);
-
-
-      if (isPlatformBrowser(this.platformId)) {
-        window.location.href = "/success";
-      }
-
-
+      window.location.href = '/success';
     }
 
     this.loadingText = 'Loading...';
   }
 
   getBack() {
-    if ((this.bookingStep2 == false && this.bookingStep3 == false) || (this.bookingStep2 == false && this.bookingStep3 == true)) {
+    if (
+      (this.bookingStep2 == false && this.bookingStep3 == false) ||
+      (this.bookingStep2 == false && this.bookingStep3 == true)
+    ) {
       this.router.navigate(['/']);
     }
 
@@ -836,7 +847,11 @@ export class BookingComponent implements OnInit {
     var printButton = document.getElementById('print_btn');
     printButton.style.visibility = 'hidden';
     const printContents = document.getElementById('print-section').innerHTML;
-    const popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    const popupWin = window.open(
+      '',
+      '_blank',
+      'top=0,left=0,height=100%,width=auto',
+    );
     popupWin.document.open();
 
     popupWin.document.write(`
@@ -953,8 +968,7 @@ export class BookingComponent implements OnInit {
                     Helvetica, Arial, sans-serif;
                     color: #333";
                 onload="document.execCommand('print');window.close()">${printContents}</body>
-        </html>`
-    );
+        </html>`);
     printButton.style.visibility = 'visible';
     popupWin.document.close();
   }
@@ -969,7 +983,6 @@ export class BookingComponent implements OnInit {
   notice: any = '';
 
   ngOnInit() {
-
     const paymentFlag = localStorage.getItem('payment_in_progress');
 
     if (paymentFlag) {
@@ -989,17 +1002,17 @@ export class BookingComponent implements OnInit {
       this.customer_gst = this.masterSettingRecord.common.customer_gst;
     } else {
       const param = {
-        user_id: GlobalConstants.MASTER_SETTING_USER_ID
+        user_id: GlobalConstants.MASTER_SETTING_USER_ID,
       };
       this.commonService.getCommonData(param).subscribe(
-        resp => {
+        (resp) => {
           localStorage.setItem('commonDetails', JSON.stringify(resp));
           this.masterSettingRecord = resp.data;
           this.customer_gst = this.masterSettingRecord.common.customer_gst;
         },
-        error => {
+        (error) => {
           console.error('Error fetching Data:', error);
-        }
+        },
       );
     }
 
@@ -1020,10 +1033,9 @@ export class BookingComponent implements OnInit {
 
     this.myDate = this.datePipe.transform(this.myDate, 'dd-MM-yyyy');
 
-
     if (this.myDate == entdt) {
       if (this.busRecord.origin == 'ODBUS') {
-        this.notice = "Cancellation/Refund is not allowed on this Ticket";
+        this.notice = 'Cancellation/Refund is not allowed on this Ticket';
       }
 
       //console.log(this.myDate);
@@ -1038,50 +1050,63 @@ export class BookingComponent implements OnInit {
     //}
     // Push dummy state so back button is trapped
     history.pushState(null, '', location.href);
+
+    this.CouponCode();
+
+    this.couponForm.get('coupon_code')?.valueChanges.subscribe((value: string) => {
+
+      if (!value || value.trim() === '') {
+        this.removeCoupon();
+      }
+
+    });
+  }
+
+  selectedCoupon: any = null;
+
+  openCouponModal(coupon: any): void {
+    this.selectedCoupon = coupon;
+  }
+
+  closeCouponModal(): void {
+    this.selectedCoupon = null;
   }
 
   @HostListener('window:popstate', ['$event'])
   onBrowserBack(event: any) {
     // Always redirect to home
     this.router.navigateByUrl('/');
+    // const returnUrl = localStorage.getItem('booking_return_url');
+
+    // if (returnUrl) {
+    //   this.router.navigateByUrl(returnUrl);
+    // } else {
+    //   this.router.navigate(['/']);
+    // }
   }
 
+  // ---------- Material Stepper controls ----------
+
   showPreviousStep(event?: Event) {
-    this.ngWizardService.previous();
+    this.stepper?.previous();
   }
 
   showNextStep(event?: Event) {
-    this.ngWizardService.next();
-
+    this.stepper?.next();
   }
 
   resetWizard(event?: Event) {
-    this.ngWizardService.reset();
-  }
-
-  setTheme(theme: THEME) {
-    this.ngWizardService.theme(theme);
-  }
-
-  stepChanged(args: StepChangedArgs) {
-    //console.log(args);
+    this.stepper?.reset();
   }
 
   isValidTypeBoolean: boolean = true;
-
-  isValidFunctionReturnsBoolean(args: StepValidationArgs) {
-    return true;
-  }
-
-  isValidFunctionReturnsObservable(args: StepValidationArgs) {
-    return this.tabclick;
-  }
 
   number1: number;
   number2: number;
   captchaResult: number;
   errorMessage: string;
   captchaValidated: boolean = false;
+  captchaSubmitted = false;
 
   generateCaptcha(): void {
     this.number1 = Math.floor(Math.random() * 10) + 1;
@@ -1089,10 +1114,11 @@ export class BookingComponent implements OnInit {
     this.captchaResult = this.number1 + this.number2;
     this.errorMessage = '';
     this.captchaValidated = false;
-    this.bookForm2.patchValue({ 'userInput': null });
+    this.bookForm2.patchValue({ userInput: null });
   }
 
   validateCaptcha(): void {
+    this.captchaSubmitted = true;
     if (this.bookForm2.value.userInput == this.captchaResult) {
       this.errorMessage = '';
       this.captchaValidated = true;
@@ -1101,40 +1127,266 @@ export class BookingComponent implements OnInit {
       this.captchaValidated = false;
       // console.log(this.errorMessage);
     }
-
-
   }
 
-  async cashfressRedirect() {
-    // console.log(this.MakePaymnetResponse);
-    //console.log(this.MakePaymnetResponse.razorpay_order_id.payment_session_id);
-    //console.log(this.MakePaymnetResponse.razorpay_order_id.receipt_id);
-    const cashfree = await load({
-      mode: GlobalConstants.PAYMENT_MODE //production , sandbox
+  blankCaptcha(): void {
+    this.captchaSubmitted = true;
+    this.captchaValidated = false;
+
+    const captchaControl = this.bookForm2.get('userInput');
+
+    captchaControl?.setErrors({
+      captchaRequired: true,
     });
+
+    captchaControl?.markAsTouched();
+
+    this.errorMessage = 'Please enter the captcha answer.';
+  }
+
+  onCaptchaInput(): void {
+    const value = this.bookForm2.get('userInput')?.value;
+
+    if (value === null || value === '') {
+      this.captchaValidated = false;
+      this.captchaSubmitted = true;
+      this.errorMessage = 'Please enter the captcha answer.';
+    }
+  }
+
+  redirectToBusRoute(): void {
+    const journeyDate = localStorage.getItem('entdate');
+    const source_url = localStorage.getItem('source_url');
+    const destination_url = localStorage.getItem('destination_url');
+
+    if (journeyDate) {
+      const dateParts = journeyDate.trim().split('-');
+
+      let formattedDate = journeyDate.trim();
+
+      // Convert YYYY-MM-DD → DD-MM-YYYY
+      if (dateParts.length === 3 && dateParts[0].length === 4) {
+        formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+      }
+
+      const routeUrl = `/routes/${source_url}-${destination_url}-bus-services`;
+      this.router.navigate(
+        [routeUrl],
+        { queryParams: { date: formattedDate }, replaceUrl: true });
+    } else {
+      this.router.navigate(['/'], { replaceUrl: true });
+    }
+  }
+
+  // async cashfressRedirect() {
+  //   // console.log(this.MakePaymnetResponse);
+  //   //console.log(this.MakePaymnetResponse.razorpay_order_id.payment_session_id);
+  //   //console.log(this.MakePaymnetResponse.razorpay_order_id.receipt_id);
+  //   const cashfree = await load({
+  //     mode: GlobalConstants.PAYMENT_MODE //production , sandbox
+  //   });
+  //   const checkOptions = {
+  //     paymentSessionId: this.MakePaymnetResponse.razorpay_order_id.payment_session_id,
+  //     redirectTarget: "_modal" // _blank , _self
+  //   }
+
+  //   cashfree.checkout(checkOptions).then((result) => {
+  //     if (result.error) {
+  //       alert('payment failed');
+  //     }
+  //     if (result.paymentDetails) {
+
+  //       this.spinner.show();
+
+  //       this.bookticketService.setBookingData({
+  //         name: this.passengerData.customerInfo.name,
+  //         email: this.passengerData.customerInfo.email,
+  //         phone: this.passengerData.customerInfo.phone,
+  //         receipt_id: this.MakePaymnetResponse.razorpay_order_id.receipt_id,
+  //         ticket_amount: this.MakePaymnetResponse.amount,
+  //         pnr: this.bookTicketResponse.pnr
+  //       });
+
+  //       this.router.navigate(['/success']);
+
+  //       this.spinner.hide();
+  //     }
+
+  //   });
+  // }
+
+  async cashfressRedirect() {
+    const cashfree = await load({
+      mode: GlobalConstants.PAYMENT_MODE,
+    });
+
     const checkOptions = {
-      paymentSessionId: this.MakePaymnetResponse.razorpay_order_id.payment_session_id,
-      redirectTarget: "_modal" // _blank , _self
+      paymentSessionId:
+        this.MakePaymnetResponse.razorpay_order_id.payment_session_id,
+
+      redirectTarget: '_modal',
+    };
+
+    cashfree
+      .checkout(checkOptions)
+      .then((result) => {
+        // Payment failed
+        if (result.error) {
+          console.log('Cashfree payment error:', result.error);
+
+          this.redirectToBusRoute();
+          return;
+        }
+
+        // Payment successful
+        if (result.paymentDetails) {
+          this.spinner.show();
+
+          this.bookticketService.setBookingData({
+            name: this.passengerData.customerInfo.name,
+            email: this.passengerData.customerInfo.email,
+            phone: this.passengerData.customerInfo.phone,
+            receipt_id: this.MakePaymnetResponse.razorpay_order_id.receipt_id,
+            ticket_amount: this.MakePaymnetResponse.amount,
+            pnr: this.bookTicketResponse.pnr,
+          });
+
+          this.router.navigate(['/success']);
+
+          this.spinner.hide();
+          return;
+        }
+
+        // User closed Cashfree / pressed back
+        this.redirectToBusRoute();
+      })
+      .catch((error) => {
+        console.log('Cashfree checkout closed/error:', error);
+
+        this.redirectToBusRoute();
+      });
+  }
+
+  pageTitle: any;
+  pageContent: any;
+
+  modalContent(loaclStorageKey: string, pageUrl: string) {
+    this.spinner.show();
+
+    const content = localStorage.getItem(loaclStorageKey);
+
+    if (content) {
+      const data = JSON.parse(content);
+      this.aboutContent(data);
+    } else {
+      const param = {
+        user_id: GlobalConstants.MASTER_SETTING_USER_ID,
+        page_url: pageUrl,
+      };
+
+      this.pagesService.PageContent(param).subscribe((res) => {
+        localStorage.setItem(loaclStorageKey, JSON.stringify(res.data));
+        this.aboutContent(res.data);
+      });
     }
 
-    cashfree.checkout(checkOptions).then((result) => {
-      if (result.error) {
-        alert('payment failed');
+    this.openModal();
+
+    this.spinner.hide();
+  }
+
+  aboutContent(res: any) {
+    if (res.length > 0) {
+      this.pageTitle = res[0].page_name;
+      this.pageContent = res[0].page_description;
+    }
+  }
+
+  showTermsModal = false;
+  termsAccepted = false;
+
+  openModal(): void {
+    this.termsAccepted = false;
+    this.showTermsModal = true;
+
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeTermsModal(): void {
+    this.showTermsModal = false;
+    this.termsAccepted = false;
+
+    document.body.style.overflow = '';
+  }
+
+  acceptTerms(): void {
+    if (!this.termsAccepted) {
+      return;
+    }
+
+    this.closeTermsModal();
+
+    // Continue your booking/payment process here
+    console.log('Terms accepted');
+  }
+
+  private pushAddPaymentInfoEvent(): void {
+
+    const stored = localStorage.getItem('bookingdata');
+
+    if (!stored) {
+      console.log('bookingdata not found in localStorage');
+      return;
+    }
+
+    try {
+
+      const storedBookingData = JSON.parse(stored);
+
+      const totalFare = Number(storedBookingData?.PriceArray?.totalFare || 0);
+
+      if (totalFare <= 0) {
+        console.log('Invalid total fare for add_payment_info:', totalFare);
+        return;
       }
-      if (result.paymentDetails) {
 
-        this.spinner.show();
+      window.dataLayer = window.dataLayer || [];
 
-        localStorage.setItem('od_success_name', this.passengerData.customerInfo.name);
-        localStorage.setItem('od_success_email', this.passengerData.customerInfo.email);
-        localStorage.setItem('od_success_phone', this.passengerData.customerInfo.phone);
-        localStorage.setItem('receipt_id', this.MakePaymnetResponse.razorpay_order_id.receipt_id);
+      const paymentInfoEvent = {
+        event: 'add_payment_info',
+        value: totalFare,
+        currency: 'INR',
+      };
 
-        if (isPlatformBrowser(this.platformId)) {
-          window.location.href = "/success";
-        }
-      }
+      window.dataLayer.push(paymentInfoEvent);
 
+    } catch (error) {
+      console.error('Error parsing bookingdata:', error);
+    }
+  }
+
+
+  onlyAlphabets(event: Event, index: number, fieldvalue: any): void {
+    const input = event.target as HTMLInputElement;
+
+    const value = input.value.replace(/[^a-zA-Z ]/g, '');
+
+    input.value = value;
+
+    this.getPassengerFormGroup(index)
+      .get(fieldvalue)
+      ?.setValue(value, { emitEvent: false });
+  }
+
+  onlyAlphabetsCustomer(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    const value = input.value.replace(/[^a-zA-Z ]/g, '');
+
+    input.value = value;
+
+    this.GetcustomerInfo.controls.name.setValue(value, {
+      emitEvent: false
     });
   }
 }

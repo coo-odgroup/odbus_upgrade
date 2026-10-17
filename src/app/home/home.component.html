@@ -2,6 +2,9 @@
   <!-- <section class="hero-banner-v5" style="background-image: url(&quot;assets/img/rainy_season.png&quot;)"> -->
   <section
     class="hero-banner-v5"
+    fetchpriority="high"
+    width="1600" 
+    height="600"
     [style.background-image]="'url(' + homeBanner + ')'"
   >
     <div class="container">
@@ -139,6 +142,7 @@
                     <img
                       src="assets/img/Icon-metro-calendar.svg"
                       class="icon-date"
+                      alt="caleder"
                     />
 
                     <span class="date-placeholder" *ngIf="!selectedDateText">
@@ -372,6 +376,7 @@
                       <img
                         src="assets/img/Icon-metro-calendar.svg"
                         class="icon-date"
+                        alt="calender"
                       />
 
                       <span class="date-placeholder" *ngIf="!selectedDateText">
@@ -578,7 +583,7 @@
   </ng-container>
 
   <!-- APP DOWNLOAD POPUP -->
-  <div class="app-popup-overlay" *ngIf="showAppPopup">
+  <!-- <div class="app-popup-overlay" *ngIf="showAppPopup">
     <div
       class="popup-backdrop"
       (click)="closeAppPopup()"
@@ -619,7 +624,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- APP DOWNLOAD POPUP END -->
 
   <!-- Footer Menu Mobile -->

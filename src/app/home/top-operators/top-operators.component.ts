@@ -1,6 +1,5 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-top-operators',
@@ -9,10 +8,7 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class TopOperatorsComponent implements OnInit {
 
-  constructor(
-    private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) { }
+  constructor(private router: Router) { }
 
   topOperators: any = [];
   displayedOperators: any = [];
@@ -20,9 +16,7 @@ export class TopOperatorsComponent implements OnInit {
   isMobile = false;
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.isMobile = window.innerWidth <= 768;
-    }
+    this.isMobile = window.innerWidth <= 768;
 
     try {
       const data = localStorage.getItem('PopularInfo');

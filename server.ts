@@ -14,9 +14,9 @@ import 'localstorage-polyfill';
 if (typeof global !== 'undefined' && !global['localStorage']) {
   global['localStorage'] = {
     getItem: () => null,
-    setItem: () => {},
-    removeItem: () => {},
-    clear: () => {},
+    setItem: () => { },
+    removeItem: () => { },
+    clear: () => { },
     key: () => null,
     length: 0
   };
@@ -376,7 +376,8 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env.PORT || 4000; // TEST
+  const port = process.env.PORT || 4445; // ODBUS NEW TEST
+  // const port = process.env.PORT || 4000; // TEST
   // const port = process.env.PORT || 4444; // LIVE
 
   // Start up the Node server

@@ -23,6 +23,7 @@ import { CommonContentComponent } from './common-content/common-content.componen
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { OnlinebusticketsComponent } from './onlinebustickets/onlinebustickets.component';
 
+
 const userRoutePaths = [
   'wallet',
   'dashboard',
@@ -47,19 +48,12 @@ export function userRouteMatcher(
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'index.php', redirectTo: '', pathMatch: 'full' },
-  { path: 'index.html', redirectTo: '', pathMatch: 'full' },
-  // { path: 'pnr', component: Page404Component },
-  { path: 'pnr/:id', component: PnrdetailComponent },
-  { path: 'listing', component: SearchComponent },
-  { path: 'success', component: SuccessComponent },
-  { path: 'booking', component: BookingComponent },
+  { path: 'index.html', redirectTo: '', pathMatch: 'full' }, 
   {
     path: 'about-us',
     loadChildren: () =>
       import('./about-us/about-us.module').then((m) => m.AboutUsModule),
-  },
-  { path: 'manage-booking', component: ManageBookingComponent },
-  { path: 'manage-booking-detail', component: ManagebookingdetailsComponent },
+  }, 
   {
     path: 'operators',
     loadChildren: () =>
@@ -74,7 +68,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./routes/routes.module').then((m) => m.RoutesModule),
   },
-  { path: 'offers', component: OffersComponent },
+  {
+    path: 'offers',
+    loadChildren: () =>
+      import('./offers/offers.module').then((m) => m.OffersModule),
+  },
   {
     path: 'testimonials',
     loadChildren: () =>
@@ -113,15 +111,12 @@ export const routes: Routes = [
       import('./refund-policy/refund-policy.module').then(
         (m) => m.RefundPolicyModule,
       ),
+  },  
+  {
+    path: '404',
+    loadChildren: () =>
+      import('./page-error/page-error.module').then((m) => m.PageErrorModule),
   },
-  // {
-  //   path: 'become-an-agent',
-  //   loadChildren: () =>
-  //     import('./join-as-agent/join-as-agent.module').then(
-  //       (m) => m.JoinAsAgentModule,
-  //     ),
-  // },
-  { path: '404', component: PageErrorComponent },
   {
     path: 'thank-you',
     loadChildren: () =>
@@ -180,6 +175,16 @@ export const routes: Routes = [
     path: 'online-bus-tickets',
     component: OnlinebusticketsComponent,
   },
+  {
+    path: 'pnr/:id',
+    loadChildren: () =>
+      import('./pnrdetail/pnrdetail.module').then((m) => m.PnrDetailsModule)    
+  },
+  { path: 'listing', component: SearchComponent },
+  { path: 'success', component: SuccessComponent },
+  { path: 'booking', component: BookingComponent },
+   { path: 'manage-booking', component: ManageBookingComponent },
+  { path: 'manage-booking-detail', component: ManagebookingdetailsComponent },
   // { path: 'payment-failed',component:PaymentFailedComponent},
   { path: '**', component: PageErrorComponent },
 ];

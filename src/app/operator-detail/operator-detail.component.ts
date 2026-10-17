@@ -45,7 +45,7 @@ export class OperatorDetailComponent implements OnInit {
     private Common: CommonService,
     private location: Location,
     private seo: SeoService,
-    private detectService: DeviceDetectorService
+    private detectService: DeviceDetectorService,
   ) {
 
     this.isMobile = this.detectService.isMobile();
@@ -104,35 +104,107 @@ export class OperatorDetailComponent implements OnInit {
 
   itemsPerLoad = 15;
   currentIndex = 15;
-  getdetail() {
+  // getdetail() {
 
-    this.topOperatorsService.OperatorDetail(this.operator_url).subscribe(
-      res => {
+  //   this.topOperatorsService.OperatorDetail(this.operator_url).subscribe(
+  //     res => {
 
-        if (res.status == 1) {
+  //       const operatorData = res.data?.[0];
+  //       // No operator record OR both ticket_price and bus are empty 
+  //       if ( !operatorData || ( (!operatorData.ticket_price || operatorData.ticket_price.length === 0) || (!operatorData.bus || operatorData.bus.length === 0) ) ){ 
+  //         this.router.navigate(['/404']); 
+  //         this.spinner.hide(); return; 
 
-          this.OperatorData = res.data;
+  //       }
+        
 
-          this.routes = this.OperatorData.routes || [];
+  //       if (res.status == 1) {
 
-          // first 20 records
-          this.visibleRoutes = this.routes.slice(0, 15);
+  //         this.OperatorData = res.data;
 
-          this.buses = this.OperatorData.buses;
-          this.popular_routes = this.OperatorData.popularRoutes;
-          this.total_rating = this.OperatorData.total_rating;
+  //         // Set Operator SEO
+  //         const operatorName = this.OperatorData.organisation_name;
+  //         if (operatorName) {
+  //           this.seo.setOperatorMeta(operatorName);
+  //         }
 
-        } else {
+  //         this.routes = this.OperatorData.routes || [];
 
-          this.notify.notify(res.message, "Error");
-          this.router.navigate(['operators']);
+  //         // first 20 records
+  //         this.visibleRoutes = this.routes.slice(0, 15);
 
+  //         this.buses = this.OperatorData.buses;
+  //         this.popular_routes = this.OperatorData.popularRoutes;
+  //         this.total_rating = this.OperatorData.total_rating;
+
+  //       } else {
+
+  //         this.notify.notify(res.message, "Error");
+  //         this.router.navigate(['operators']);
+
+  //       }
+
+  //       this.spinner.hide();
+
+  //     });
+  // }
+
+  
+getdetail() {
+  this.topOperatorsService.OperatorDetail(this.operator_url).subscribe(
+    res => {
+
+      if (res.status == 1) {
+
+        const operatorData = res.data;
+
+        // Redirect to 404 only when BOTH bus and ticket_price are empty
+        if (
+          !operatorData ||
+          (
+            (!operatorData.ticket_price || operatorData.ticket_price.length === 0) &&
+            (!operatorData.buses || operatorData.buses.length === 0)
+          )
+        ) {
+          this.spinner.hide();
+          this.router.navigate(['/404']);
+          return;
         }
 
-        this.spinner.hide();
+        this.OperatorData = operatorData;
 
-      });
-  }
+        // Set Operator SEO
+        const operatorName = this.OperatorData.organisation_name;
+
+        if (operatorName) {
+          this.seo.setOperatorMeta(operatorName);
+        }
+
+        this.routes = this.OperatorData.routes || [];
+
+        // First 15 records
+        this.visibleRoutes = this.routes.slice(0, 15);
+
+        this.buses = this.OperatorData.buses || [];
+        this.popular_routes = this.OperatorData.popularRoutes || [];
+        this.total_rating = this.OperatorData.total_rating;
+
+      } else {
+
+        this.notify.notify(res.message, "Error");
+        this.router.navigate(['/404']);
+      }
+
+      this.spinner.hide();
+
+    },
+    error => {
+      this.spinner.hide();
+      this.router.navigate(['/404']);
+    }
+  );
+}
+
 
   loadMoreRoutes() {
 

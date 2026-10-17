@@ -1,9 +1,9 @@
-import { NgModule,APP_INITIALIZER ,CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,34 +13,27 @@ import { SearchComponent } from './search/search.component';
 import { PageErrorComponent } from './page-error/page-error.component';
 import { AppInitializerService } from './services/initializer.service';
 import { BookingComponent } from './booking/booking.component';
-// import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
-import { NgWizardConfig, THEME } from 'ng-wizard';
 import { ManageBookingComponent } from './manage-booking/manage-booking.component';
 import { SupportComponent } from './support/support.component';
 import { NewsComponent } from './news/news.component';
-import { OffersComponent } from './offers/offers.component';
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { ManagebookingdetailsComponent } from './managebookingdetails/managebookingdetails.component';
-import {ToastrModule} from 'ngx-toastr';
-import { NgbDate, NgbDateParserFormatter, NgbModule,NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
+import { NgbDate, NgbDateParserFormatter, NgbModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomdateformatService } from "./services/customdateformat.service";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AuthInterceptor } from './shared/auth.interceptor';
-import { MyaccountComponent } from './user/myaccount/myaccount.component';
-// import { UsernavbarComponent } from './user/usernavbar/usernavbar.component';
-import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AuthGuard } from './helpers/auth.guard';
-// import { CountdownModule } from 'ngx-countdown';
+import { CountdownModule } from 'ngx-countdown';
 import { AuthModule } from '@auth0/auth0-angular';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { FilterPipe } from './filter.pipe';
-// import { QRCodeModule } from 'angular2-qrcode';
+import { LightboxModule } from 'ngx-lightbox';
+import { QRCodeModule } from 'angularx-qrcode';
 import { PnrdetailComponent } from './pnrdetail/pnrdetail.component';
 import { SuccessComponent } from './success/success.component';
 import { ProfiledeleteComponent } from './profiledelete/profiledelete.component';
-import { environment } from '../environments/environment';
 import { PaymentStatusModule } from './payment-status/payment-status.module';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RecentSearchComponent } from './home/recent-search/recent-search.component';
 import { AdvantageComponent } from './home/advantage/advantage.component';
@@ -53,7 +46,6 @@ import { RouteLinksComponent } from './home/route-links/route-links.component';
 import { TopOperatorsComponent } from './home/top-operators/top-operators.component';
 import { TopRoutesComponent } from './home/top-routes/top-routes.component';
 import { CommonContentComponent } from './common-content/common-content.component';
-import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SearchBoxMComponent } from './search-box-m/search-box-m.component';
 import { MobileAppDownloadComponent } from './home/mobile-app-download/mobile-app-download.component';
@@ -61,6 +53,7 @@ import { SharedModule } from './shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { OnlinebusticketsComponent } from './onlinebustickets/onlinebustickets.component';
+import { MatStepperModule } from '@angular/material/stepper';
 
 export function appInit(appInitializerService: AppInitializerService) {
   return () => appInitializerService.load();
@@ -76,11 +69,6 @@ export function tokenGetter() {
 }
 
 
-
-const ngWizardConfig: NgWizardConfig = {
-  theme: THEME.default
-};
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,15 +76,13 @@ const ngWizardConfig: NgWizardConfig = {
     FooterComponent,
     HomeComponent,
     SearchComponent,
-    PageErrorComponent,
+    // PageErrorComponent,
     BookingComponent,
     ManageBookingComponent,
     SupportComponent,
     NewsComponent,
-    OffersComponent,
     ManagebookingdetailsComponent,
-    // FilterPipe,
-    PnrdetailComponent,
+    // PnrdetailComponent,
     SuccessComponent,
     ProfiledeleteComponent,
     RecentSearchComponent,
@@ -110,15 +96,13 @@ const ngWizardConfig: NgWizardConfig = {
     TopOperatorsComponent,
     TopRoutesComponent,
     CommonContentComponent,
-    // FooterMenuComponent,
     SearchBoxComponent,
     SearchBoxMComponent,
     MobileAppDownloadComponent,
     SitemapComponent,
-    OnlinebusticketsComponent
+    OnlinebusticketsComponent,
   ],
   imports: [
-    // BrowserAnimationsModule,
     NoopAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     NgSelectModule,
@@ -127,25 +111,25 @@ const ngWizardConfig: NgWizardConfig = {
     RouterModule,
     AppRoutingModule,
     NgbModule,
-    // NgWizardModule.forRoot(ngWizardConfig),
     AutocompleteLibModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     NgbProgressbarModule,
-    // CountdownModule ,
-    // IvyCarouselModule,
-    AuthModule.forRoot({
-      domain: 'dev-seofied.us.auth0.com',
-      clientId: 'RsznkkMUqmJD0nUXjYv2LS8HPopT4xy1',
-      httpInterceptor: {
-        allowedList: ['*'] // Allow all requests to be intercepted
-      },
-      cacheLocation: 'localstorage' // Use localStorage for token storage
-    }),
+    CountdownModule,
+    // AuthModule.forRoot({
+    //   domain: 'dev-seofied.us.auth0.com',
+    //   clientId: 'RsznkkMUqmJD0nUXjYv2LS8HPopT4xy1',
+    //   httpInterceptor: {
+    //     allowedList: ['*'] // Allow all requests to be intercepted
+    //   },
+    //   cacheLocation: 'localstorage' // Use localStorage for token storage
+    // }),
     ImageCropperModule,
-    // QRCodeModule,
+    LightboxModule,
+    QRCodeModule,
     SharedModule,
+    MatStepperModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: false,
       // Register the ServiceWorker as soon as the app is stable
@@ -153,7 +137,7 @@ const ngWizardConfig: NgWizardConfig = {
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [AppInitializerService,
     {
       provide: APP_INITIALIZER,
@@ -161,7 +145,7 @@ const ngWizardConfig: NgWizardConfig = {
       multi: true,
       deps: [AppInitializerService]
     },
-    {provide: NgbDateParserFormatter, useClass: CustomdateformatService},
+    { provide: NgbDateParserFormatter, useClass: CustomdateformatService },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

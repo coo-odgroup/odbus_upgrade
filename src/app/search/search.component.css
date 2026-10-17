@@ -10,7 +10,7 @@
   cursor: pointer;
   width: 100%;
   margin-bottom: -2px;
-  border: 1px solid #0000001a;
+  border: 1px solid #00319b47;
   border-bottom: none;
   border-radius: 4px 4px 0 0;
 }
@@ -235,13 +235,14 @@ a {
 
 .sorting-tab-in .col-md-12 {
   padding: 10px 15px;
-  border: 1px solid #0000001A;
+  border: 1px solid #00319b47;
+  border-radius: 5px;
   background: #fff 0% 0% no-repeat padding-box;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .bus-dtl-btm-panel .col-md-12 {
-  background: #072c6b;
+  background: #00319b;
   color: #FFFFFF99;
   padding-top: 6px;
   padding-bottom: 6px;
@@ -317,7 +318,7 @@ section.search-result {
   background: #ffffff; */
   /* padding: 25px 40px !important; */
   border-radius: 0px 0px 5px 5px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   background: #E9EBED;
   border: 2px solid #0000000F;
   margin-top: -4px;
@@ -1356,7 +1357,8 @@ ngb-rating.d-inline-flex {
 .sticky-top4 {
   position: fixed;
   top: 70px;
-  z-index: 999; /* 1018 */
+  z-index: 999;
+  /* 1018 */
 }
 
 /* .sticky-top3 {
@@ -1374,7 +1376,7 @@ ngb-rating.d-inline-flex {
 
 /* Mobile Version Start Bus listing */
 .mobile-list-top {
-  background-color: #efc003;
+  background-color: #ffffff;
   padding: 12px 18px;
   position: fixed;
   z-index: 1200;
@@ -1385,7 +1387,7 @@ ngb-rating.d-inline-flex {
 
 
 .mob-arrow-left i {
-  font-size: 30px;
+  font-size: 25px;
   color: #072c6b;
   margin-top: 10px;
 }
@@ -1416,7 +1418,7 @@ ngb-rating.d-inline-flex {
 
 .mobile-list-top .mob-list-center {
   color: #072c6b;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   text-align: center;
 }
@@ -1428,7 +1430,7 @@ ngb-rating.d-inline-flex {
 
 .mob-list-center .wh10 {
   color: #323232 !important;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .mobile-bus-listing {
@@ -1443,6 +1445,7 @@ ngb-rating.d-inline-flex {
   font-size: 16px;
   color: #072c6b;
   margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .mobile-bus-listing-box {
@@ -1450,7 +1453,7 @@ ngb-rating.d-inline-flex {
   border-radius: 8px;
   padding: 12px 12px 4px 12px;
   border: 1px solid #c1cdd1;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .mobile-bus-listing-box hr {
@@ -1459,7 +1462,7 @@ ngb-rating.d-inline-flex {
 }
 
 .mobile-bus-listing-box .mob-bus-name h5 {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
   text-transform: capitalize;
   margin-bottom: 4px;
@@ -1534,7 +1537,7 @@ ngb-rating.d-inline-flex {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 1px;
-  color: #9a9595;
+  color: #072c6b;
 }
 
 .mob-bus-bot .mob-time {
@@ -1557,7 +1560,7 @@ ngb-rating.d-inline-flex {
 }
 
 .mobile-listing-bottom {
-  background: #efc003;
+  background: #fff;
   box-shadow: 0px -2px 6px 0px rgb(0 0 0 / 60%);
   position: fixed;
   width: 100%;
@@ -1577,7 +1580,7 @@ ngb-rating.d-inline-flex {
 }
 
 .mobile-listing-bottom .mob-more-filter a {
-  color: #efc003;
+  color: #fff;
   margin-top: 12px;
 
 }
@@ -1616,106 +1619,701 @@ ngb-rating.d-inline-flex {
 /* Mobile Version End  */
 
 
-/* Mobile Modify */
+/* =========================================================
+   MOBILE MODIFY SEARCH
+   ========================================================= */
 
-.mobile-white-box {
-  background-color: #ffffff;
-  padding: 0px 22px 20px;
-  border-radius: 5px;
-  margin-top: 18px;
-}
-
-.mobile-white-box .img1 {
-  margin-top: 13px;
-  margin-left: 20px;
-}
-
-.mobile-white-box .img2 {
-  margin-left: 24.5px;
-  height: 60px;
-}
-
-.mobile-white-box .img3 {
-  margin-left: 20px;
-  margin-top: -20px;
-}
-
-.mobile-white-box .img4 {
-  margin-top: 70px;
-}
-
-.mobile-white-box .form-group label {
-  color: #323232;
-}
-
-.mobile-white-box .border-bottom {
-  border-bottom: 1px solid #b1b1b1 !important;
-}
-
-.mobile-white-box .form-group {
-  margin-bottom: 5px;
-}
-
-.mobile-white-box .form-group input {
-  color: #072c6b;
-  font-weight: 600;
+.modify-search-modal {
   width: 100%;
-  padding: 5px 10px;
-  height: 50px;
-  border: 1px solid #dfe3eb;
-  border-radius: 10px;
+  min-height: 100%;
+  background: #eaf4ff;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.modify-search-modal .mob-filterbg {
+  height: 58px;
+  min-height: 58px;
+
+  padding: 0 20px;
+
+  background: #ffffff;
+
+  border: 0;
+  border-bottom: 1px solid #dce3eb;
+
   display: flex;
   align-items: center;
-  background: #fff;
-  cursor: pointer;
-  position: relative;
-  transition: .25s;
+  justify-content: space-between;
+
+  box-sizing: border-box;
 }
 
-.mobile-white-box .form-group input:focus-visible {
-  outline: -webkit-focus-ring-color auto 0px;
-}
+.modify-search-modal .mob-filterbg h4 {
+  margin: 0;
+  padding: 0;
 
-.mobile-mod .bus_search-mod .btn {
-  background: #efc003;
   color: #072c6b;
-  text-transform: uppercase;
-  font-weight: 600;
-  line-height: 34px;
-  width: 100%;
-  height: 46px;
-  font-size: 17px;
-  border: none;
-  border-radius: 5px;
-}
 
-.date_inp input {
-  color: #072c6b;
-  border: none;
-  background-color: #f5f1f1;
-  padding: 5px 10px;
-  border-bottom: 1px solid #b1b1b1 !important;
-  border-radius: 0px;
-}
-
-.date_inp .input-group-text {
-  color: #072c6b;
-  border: none;
-  background-color: #f5f1f1;
-  padding: 5px 10px;
-  border-bottom: 1px solid #b1b1b1 !important;
-  border-radius: 0px;
-}
-
-.mob-filterbg {
-  background: #efc003;
-  padding: 5px 20px;
-  border-radius: unset;
-}
-
-.mob-filterbg h4 {
   font-size: 20px;
-  padding-top: 8px;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+.modify-search-modal .close-mob {
+  width: 36px;
+  height: 36px;
+  font-weight: 500 !important;
+  margin: 0;
+  padding: 0;
+  border-radius: 8px;
+  border: 0;
+  outline: none;
+  background: #072c6b;
+  color: #fff;
+  font-size: 34px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+}
+
+
+/* =========================================================
+   MODAL BODY
+   ========================================================= */
+
+.modify-search-modal>.modal-body {
+  padding: 20px 16px 22px;
+
+  background: #8abaec;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   WHITE FORM CARD
+   ========================================================= */
+
+.modify-search-modal .mobile-white-box {
+  width: 100%;
+
+  margin: 0;
+  padding: 20px 12px 20px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 5px 18px rgba(7, 44, 107, 0.08);
+}
+
+
+/* seat card closed button */
+button.mob-close {
+  padding: 5px 10px !important;
+  display: flex !important;
+  position: relative !important;
+  top: 10px !important;
+  right: 10px !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+  color: #002aff  !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  border: 2px solid #002aff  !important;
+  font-size: 25px !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.modify-search-modal form {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modify-search-modal .modify-form-content {
+  position: relative;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.modify-search-modal .form-group {
+  width: 100%;
+
+  margin: 0 0 14px;
+  padding: 0;
+
+  position: relative;
+
+  box-sizing: border-box;
+}
+
+.modify-search-modal .form-group label {
+  display: block;
+
+  margin: 0 0 7px 1px;
+  padding: 0;
+
+  color: #072c6b;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   TEXT INPUT
+   ========================================================= */
+
+.modify-search-modal .form-group input {
+  display: block;
+
+  width: 100%;
+  height: 48px;
+
+  margin: 0;
+  padding: 0 13px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #d6e0ed;
+  border-radius: 11px;
+
+  color: #072c6b;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.modify-search-modal .form-group input::placeholder {
+  color: #61718a;
+  opacity: 1;
+}
+
+.modify-search-modal .form-group input:focus {
+  border-color: #8fbaff;
+
+  outline: none;
+
+  box-shadow: 0 0 0 2px rgba(7, 44, 107, 0.05);
+}
+
+
+/* =========================================================
+   SWAP BUTTON
+   ========================================================= */
+
+.modify-search-modal .modify-swap-btn {
+  position: absolute;
+
+  /*
+      Between From and To fields
+    */
+  top: 67px;
+  right: 3px;
+
+  width: 36px;
+  height: 36px;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  background: #f4c400;
+
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 20;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.15);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.modify-search-modal .modify-swap-btn:hover {
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+.modify-search-modal .modify-swap-btn:active {
+  transform: scale(0.95);
+}
+
+.modify-search-modal .modify-swap-btn img {
+  width: 18px;
+  height: 18px;
+
+  margin: 0;
+  padding: 0;
+
+  object-fit: contain;
+
+  display: block;
+  transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   DATE SECTION
+   ========================================================= */
+
+.modify-search-modal .date_inp {
+  width: 100%;
+
+  margin: 0 0 18px;
+  padding: 0;
+
+  background: transparent;
+
+  border: 0 !important;
+
+  box-sizing: border-box;
+}
+
+.modify-search-modal .date_inp>p {
+  display: block;
+
+  margin: 0 0 7px 1px;
+  padding: 0;
+
+  color: #072c6b;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  line-height: 1.2;
+}
+
+
+/* =========================================================
+   CUSTOM DATE PICKER
+   ========================================================= */
+
+.modify-search-modal .custom-date-picker {
+  position: relative;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================================================
+   DATE INPUT BOX
+   ========================================================= */
+
+.modify-search-modal .date-input-box {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 12px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #d6e0ed;
+  border-radius: 11px;
+
+  display: flex;
+  align-items: center;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.modify-search-modal .date-input-box:hover {
+  border-color: #8fbaff;
+}
+
+
+/* =========================================================
+   CALENDAR ICON
+   ========================================================= */
+
+.modify-search-modal .icon-date {
+  width: 18px;
+  height: 18px;
+
+  margin: 0 10px 0 0;
+  padding: 0;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   DATE TEXT
+   ========================================================= */
+
+.modify-search-modal .date-placeholder {
+  color: #61718a;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+.modify-search-modal .date-value {
+  color: #072c6b;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  margin-left: 30px;
+}
+
+.location-input {
+  position: relative;
+  width: 100%;
+}
+
+.location-input .location-icon {
+  position: absolute;
+
+  left: 13px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #072c6b;
+
+  font-size: 20px;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+.location-input input {
+  padding-left: 42px !important;
+}
+
+
+/* =========================================================
+   CALENDAR POPUP
+   ========================================================= */
+
+.modify-search-modal .calendar-popup {
+  position: absolute;
+
+  top: calc(100% + 7px);
+
+  width: 100%;
+
+  padding: 10px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #dce4ee;
+  border-radius: 12px;
+
+  z-index: 9999;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.14);
+  height: auto;
+}
+
+
+/* =========================================================
+   CALENDAR HEADER
+   ========================================================= */
+
+.modify-search-modal .calendar-header {
+  width: 100%;
+
+  min-height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #072c6b;
+
+  border-radius: 8px;
+
+  padding: 4px 6px;
+
+  box-sizing: border-box;
+}
+
+.modify-search-modal .month-title {
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  text-align: center;
+}
+
+.modify-search-modal .nav-btn {
+  width: 30px;
+  height: 30px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   WEEK ROW
+   ========================================================= */
+
+.modify-search-modal .week-row {
+  display: grid;
+
+  grid-template-columns: repeat(7, 1fr);
+
+  gap: 2px;
+
+  margin-top: 8px;
+
+  text-align: center;
+}
+
+.modify-search-modal .week-row span {
+  color: #072c6b;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   DAYS
+   ========================================================= */
+
+.modify-search-modal .days-grid {
+  display: grid;
+
+  grid-template-columns: repeat(7, 1fr);
+
+  gap: 3px;
+
+  margin-top: 6px;
+}
+
+.modify-search-modal .day {
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  color: #596b86;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.modify-search-modal .day:hover {
+  background: #eaf4ff;
+}
+
+.modify-search-modal .day.empty {
+  pointer-events: none;
+}
+
+.modify-search-modal .day.disabled {
+  color: #c5ccd7;
+
+  pointer-events: none;
+}
+
+.modify-search-modal .day.today {
+  color: #072c6b;
+
+  font-weight: 700;
+}
+
+.modify-search-modal .day.selected {
+  background: #f4c400;
+
+  color: #072c6b;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   MODIFY SEARCH BUTTON
+   ========================================================= */
+
+.modify-search-modal .mobile-mod {
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+.modify-search-modal .bus_search-mod {
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+.modify-search-modal .bus_search-mod .btn {
+  width: 100%;
+  height: 48px;
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  background: #072c6b;
+  color: #ffffff;
+
+  border: 0;
+  border-radius: 8px;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  line-height: 48px;
+
+  text-align: center;
+
+  text-transform: none !important;
+
+  box-shadow: none;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.modify-search-modal .bus_search-mod .btn:hover {
+  background: #06265c;
+}
+
+.modify-search-modal .bus_search-mod .btn:active {
+  transform: scale(0.98);
+}
+
+.modify-search-modal .bus_search-mod .btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+/* =========================================================
+   REMOVE OLD MOBILE MODIFY ELEMENTS
+   ========================================================= */
+
+.modify-search-modal .img1,
+.modify-search-modal .img2,
+.modify-search-modal .img3,
+.modify-search-modal .img4 {
+  display: none !important;
+}
+
+.modify-search-modal .border-bottom {
+  border-bottom: none !important;
+}
+
+
+/* =========================================================
+   REMOVE OLD DATE STYLING
+   ========================================================= */
+
+.modify-search-modal .date_inp input,
+.modify-search-modal .date_inp .input-group-text {
+  border: none !important;
+  background: transparent !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .modify-search-modal .modal-body {
+    padding: 20px 16px 22px;
+  }
+
+  .modify-search-modal .mobile-white-box {
+    padding: 20px 12px 20px;
+    border-radius: 18px;
+  }
+
 }
 
 
@@ -1726,7 +2324,7 @@ ngb-rating.d-inline-flex {
 
 /* Mobile Version Bus Seat Layout Start */
 
-.close-mob {
+/* .close-mob {
   float: right;
   font-size: 42px !important;
   font-weight: 500 !important;
@@ -1738,10 +2336,10 @@ ngb-rating.d-inline-flex {
   right: 15px !important;
   z-index: 999;
 
-}
+} */
 
 .mobile-buslayout-top {
-  background-color: #efc003;
+  background-color: #dae6ff !important;
   padding: 12px 18px 50px;
   /* position: fixed;
   z-index: 99;
@@ -2409,49 +3007,6 @@ label.mobile-sleeper-gray.mobile-fixsize {
 
 
 
-.mobile-buslayout-top .mob-arrow-left i {
-  font-size: 25px;
-  color: #072c6b;
-  margin-top: 10px;
-}
-
-.mobile-buslayout-top .btn-show-modify {
-  background-color: #072c6b;
-  border-radius: 4px;
-  color: #ffffff !important;
-  height: 35px !important;
-  line-height: 24px;
-  padding: 4px 4px !important;
-  width: 80px !important;
-  float: right;
-  margin-top: 10px;
-}
-
-.mobile-buslayout-top .mob-list-center h5 {
-  color: #072c6b;
-  font-size: 18px;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 4px;
-}
-
-.mobile-buslayout-top .mob-list-center {
-  color: #072c6b;
-  font-size: 17px;
-  font-weight: 600;
-  text-align: center;
-}
-
-.mobile-buslayout-top .mob-list-center i {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.mobile-buslayout-top .mob-list-center .wh10 {
-  color: #323232 !important;
-  font-size: 15px;
-}
-
 .mobile-boarding-middle {
   /* background: #ffffff; */
   margin-left: 24px;
@@ -2817,16 +3372,17 @@ label.mobile-sleeper-gray.mobile-fixsize {
 
 .mobile-filter-middle h4 {
   color: #00286d;
-  font-size: 19px;
+  font-size: 18px;
   background: #ffffff;
-  padding: 8px 15px;
+  padding: 4px 10px 0;
   margin-bottom: 12px;
   margin-top: 10px;
+  font-weight: 600;
 }
 
 .mobile-filter-middle h4 i {
   float: right;
-  color: #d39e00;
+  color: #00286d;
 }
 
 
@@ -2861,7 +3417,7 @@ label.mobile-sleeper-gray.mobile-fixsize {
 .mobile-filter-middle .container-chkbox {
   display: inline-block;
   position: relative;
-  padding-left: 25px;
+  padding-left: 20px;
   margin-bottom: 4px;
   cursor: pointer;
   color: #072c6b;
@@ -2920,7 +3476,7 @@ input[type=radio] {
 
 
 .mobile-filter-bottom {
-  background-color: #efc003;
+  background-color: #ffffff;
   box-shadow: 0px -2px 6px 0px rgb(0 0 0 / 60%);
   text-align: center;
   height: 50px;
@@ -2929,7 +3485,7 @@ input[type=radio] {
 
 .mobile-filter-bottom a {
   font-size: 20px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: #002F80 !important;
   line-height: 28px;
   font-weight: 500;
@@ -3008,10 +3564,11 @@ input[type=radio] {
   background: #fff;
   cursor: pointer;
   width: 100%;
-  margin-bottom: -6px;
-  border: 1px solid #c1cdd1;
+  margin-bottom: -7px;
+  border: 1px solid #00319b47;
   border-bottom: none;
   border-radius: 4px 4px 0 0;
+  padding-top: 3px;
   /* z-index: 9; */
   position: relative;
 }
@@ -3025,6 +3582,11 @@ input[type=radio] {
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
+
+  .deal img,
+  .bus_name img {
+    margin-right: 0;
+  }
 
   .mobile-list-top {
     z-index: 999;
@@ -3047,7 +3609,7 @@ input[type=radio] {
 .date-input-box {
   height: 50px;
   border: 1px solid #dfe3eb;
-  border-radius: 10px 0 0 10px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   background: #fff;
@@ -3278,12 +3840,255 @@ input[type=radio] {
     font-size: 13px;
   }
 
-  .date-input-box{
+  .date-input-box {
     border-radius: 10px;
   }
 
-  .days-grid{
+  .days-grid {
     padding: 10px 10px 16px;
   }
 
+}
+
+
+
+
+/* =========================================================
+   ODBUS LISTING - COUPON CAROUSEL
+   ========================================================= */
+
+.listing-coupon-strip {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0 2px;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   COUPON SCROLL AREA
+   ========================================================= */
+
+.listing-coupon-scroll {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* padding: 5px 0; */
+
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  scroll-snap-type: x proximity;
+}
+
+.listing-coupon-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+
+.info {
+  color: #eb0000;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   COUPON CARD
+   ========================================================= */
+
+.listing-coupon-card {
+  flex: 0 0 240px;
+  width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 11px;
+  /* background: #ffffff; */
+  border: 1px solid #00319b47;
+  cursor: pointer;
+  scroll-snap-align: start;
+  /* box-shadow: 0 2px 7px rgb(143 187 255 / 8%); */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+/* Hover */
+
+.listing-coupon-card:hover {
+  /* transform: translateY(-1px); */
+
+  box-shadow:
+    0 5px 15px rgba(85, 119, 138, 0.414);
+}
+
+
+/* =========================================================
+   COUPON IMAGE
+   ========================================================= */
+
+.listing-coupon-card img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: 11px;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   ARROWS
+   ========================================================= */
+
+.listing-coupon-arrow {
+  position: absolute;
+
+  top: 50%;
+  transform: translateY(-50%);
+
+  z-index: 10;
+
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #ffffff8f;
+
+  color: #0b3270;
+
+  font-size: 20px;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.18);
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.listing-coupon-arrow:hover {
+  background: #0b32708d;
+  color: #ffffff;
+
+  transform: translateY(-50%) scale(1.05);
+}
+
+
+/* Previous */
+
+.listing-coupon-prev {
+  left: 5px;
+}
+
+
+/* Next */
+
+.listing-coupon-next {
+  right: 5px;
+}
+
+
+/* Disabled */
+
+.listing-coupon-arrow:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+.view_btnn {
+  color: #ffffff;
+  line-height: 22px;
+  font-weight: 500;
+  background: #00319b;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  padding: 7px 0;
+  margin-top: 0;
+  position: relative;
+  top: 8px;
+  box-shadow: 3px 3px 6px #00000029;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .listing-coupon-strip {
+    margin: 0;
+    padding: 0;
+  }
+
+  .listing-coupon-scroll {
+    gap: 9px;
+
+    padding: 2px 3px 6px;
+  }
+
+  .listing-coupon-card {
+    flex: 0 0 220px;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 5px;
+  }
+
+  .listing-coupon-card img {
+    border-radius: 9px;
+  }
+
+  .listing-coupon-arrow {
+    width: 32px;
+    height: 32px;
+
+    font-size: 17px;
+  }
+
+  .listing-coupon-prev {
+    left: 3px;
+  }
+
+  .listing-coupon-next {
+    right: 3px;
+  }
+}
+
+.mt10 {
+  margin-top: 10px;
 }
