@@ -3,7 +3,7 @@ ODBUS NEW LOGIN PAGE
 Full Screen Premium Login
 ========================================================= */
 
-    {
+   body{
     display: block;
     width: 100%;
     height: 100%;
@@ -312,7 +312,7 @@ VISUAL BOTTOM
     text-shadow: 0 2px 7px rgba(0, 0, 0, 0.35);
 }
 
-.visual-bottom span()::after {
+.visual-bottom span::after {
     content: "•";
     margin-left: 17px;
     color: #f2c500;
@@ -1367,7 +1367,7 @@ ODBUS LOGIN PAGE - FINAL DESIGN OVERRIDES
     letter-spacing: 2.5px;
 }
 
-.visual-bottom span()::after {
+.visual-bottom span::after {
     margin-left: 13px;
 }
 
@@ -1440,7 +1440,7 @@ transform: translateX(124px);
 }
 
 /* OTP screen spacing and card stability */
-.login-card(.otp-header) {
+.login-card .otp-header {
     min-height: 520px;
 }
 
@@ -1544,12 +1544,12 @@ transform: translateX(124px);
 }
 
 /* Selected Via Email underline */
-.method-switch(button(2).active)::after {
+.method-switch button:nth-child(2).active::after {
     transform: translateX(124px);
 }
 
 @media (max-width: 650px) {
-    .method-switch(button(2).active)::after {
+    .method-switch button:nth-child(2).active::after {
         transform: translateX(90px);
     }
 }
@@ -3417,7 +3417,7 @@ Appended overrides: desktop styles remain untouched.
 OTP MOBILE LAYOUT
 ========================================================= */
 @media (max-width: 767px) {
-    .mobile-login-page(.mobile-otp-header) {
+    .mobile-login-page .mobile-otp-header {
         min-height: 100svh;
         height: auto;
         padding: 6px 10px 14px;
@@ -3528,7 +3528,7 @@ OTP MOBILE LAYOUT
 }
 
 @media (max-width: 360px) {
-    .mobile-login-page(.mobile-otp-header) .mobile-login-card {
+    .mobile-login-page .mobile-otp-header .mobile-login-card {
         padding: 14px 11px 17px;
     }
 

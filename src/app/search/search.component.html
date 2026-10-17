@@ -225,10 +225,9 @@
             <div class="row">
 
 
-                <div class="col-xl-3 col-lg-3 col-md-3">
+                <!-- <div class="col-xl-3 col-lg-3 col-md-3">
                     <div class="sticky-top2">
                         <form [formGroup]="filterForm">
-                            <!-- <p style="opacity: 0">Filters</p> -->
                             <div class="search-result-left">
                                 <h3 class="tit-filtr"><img src="assets/img/Icon-awesome-filter.svg"
                                         alt="Icon-awesome-filter">Filters</h3>
@@ -332,7 +331,156 @@
                             </div>
                         </form>
                     </div>
+                </div> -->
+
+
+                <div class="col-xl-3 col-lg-3 col-md-3">
+                    <div class="sticky-top2">
+                        <form [formGroup]="filterForm">
+
+                            <div class="search-result-left filter-sidebar">
+
+                                <!-- Filter Header -->
+                                <div class="filter-heading">
+                                    <div class="filter-heading-title">
+                                        <img src="assets/img/Icon-awesome-filter.svg" alt="Filter" />
+                                        <span>Filters</span>
+                                    </div>
+                                    <p class="filter-heading-subtitle">
+                                        Refine your search
+                                    </p>
+                                </div>
+
+                                <!-- Filter Accordion -->
+                                <ngb-accordion #acc="ngbAccordion" [destroyOnHide]="false" [closeOthers]="true"
+                                    (panelChange)="panelShadow($event, shadow)" activeIds="price" #shadow>
+
+                                    <!-- Sort By -->
+                                    <ngb-panel title="Sort By" id="price" cardClass="open">
+                                        <ng-template ngbPanelContent>
+                                            <div class="filter-options">
+                                                <label class="container-chkbox">
+                                                    PRICE
+                                                    <input type="checkbox" [value]="1" formControlName="price"
+                                                        (change)="updatePrice($event)" />
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </ng-template>
+                                    </ngb-panel>
+
+                                    <!-- Bus Types -->
+                                    <ngb-panel title="Bus Types" *ngIf="busTypes.length != 0">
+                                        <ng-template ngbPanelContent>
+                                            <div class="filter-options">
+                                                <div *ngFor="let busType of busTypes; let i = index">
+                                                    <label class="container-chkbox">
+                                                        {{ busType.class_name }}
+                                                        <input type="checkbox" [value]="busType.id"
+                                                            (change)="updateBusType($event)" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ngb-panel>
+
+                                    <!-- Seat Types -->
+                                    <ngb-panel title="Seat Types" *ngIf="seatTypes.length != 0">
+                                        <ng-template ngbPanelContent>
+                                            <div class="filter-options">
+                                                <div *ngFor="let seatType of seatTypes; let i = index">
+                                                    <label class="container-chkbox">
+                                                        {{ seatType.name }}
+                                                        <input type="checkbox" [value]="seatType.id"
+                                                            (change)="updateSeatType($event)" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ngb-panel>
+
+                                    <!-- Boarding Points -->
+                                    <ngb-panel title="Boarding Points" *ngIf="boardingPoints.length != 0">
+                                        <ng-template ngbPanelContent>
+                                            <div class="filter-options filter-scroll">
+                                                <div *ngFor="let boardingPointId of boardingPoints; let i = index">
+                                                    <label class="container-chkbox">
+                                                        {{ boardingPointId.boarding_point }}
+                                                        <input type="checkbox" [value]="boardingPointId.id"
+                                                            (change)="updateBoarding($event, 'desktop')" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ngb-panel>
+
+                                    <!-- Dropping Points -->
+                                    <ngb-panel title="Dropping Points" *ngIf="droppingPoints.length != 0">
+                                        <ng-template ngbPanelContent>
+                                            <div class="filter-options filter-scroll">
+                                                <div *ngFor="let dropingingPointId of droppingPoints; let i = index">
+                                                    <label class="container-chkbox">
+                                                        {{ dropingingPointId.boarding_point }}
+                                                        <input type="checkbox" [value]="dropingingPointId.id"
+                                                            (change)="updateDropping($event, 'desktop')" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ngb-panel>
+
+                                    <!-- Operators -->
+                                    <ngb-panel title="Operators" *ngIf="busOperators.length != 0">
+                                        <ng-template ngbPanelContent>
+                                            <div class="filter-options filter-scroll">
+                                                <div *ngFor="let operatorId of busOperators; let i = index">
+                                                    <label class="container-chkbox">
+                                                        {{ operatorId.organisation_name }}
+                                                        <input type="checkbox" [value]="operatorId.id"
+                                                            (change)="updateOperator($event, 'desktop')" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ngb-panel>
+
+                                    <!-- Amenities -->
+                                    <ngb-panel title="Amenities" *ngIf="amenities.length != 0">
+                                        <ng-template ngbPanelContent>
+                                            <div class="filter-options">
+                                                <div *ngFor="let amenityId of amenities; let i = index">
+                                                    <label class="container-chkbox">
+                                                        {{ amenityId.name }}
+                                                        <input type="checkbox" [value]="amenityId.id"
+                                                            (change)="updateAmenity($event, 'desktop')" />
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </ngb-panel>
+
+                                </ngb-accordion>
+
+                                <!-- Reset Button -->
+                                <div class="reset-apply-filter-btn filter-reset-wrap">
+                                    <button type="reset" class="btn btn-info reset filter-reset-btn"
+                                        (click)="resetFilterForm()">
+                                        Reset Filters
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
+
                 <div class="col-xl-9 col-lg-9 col-md-9">
                     <!-- ODBUS LISTING COUPON CAROUSEL -->
                     <div class="listing-coupon-strip" *ngIf="Offers && Offers.length > 0 && totalfound != 0">
@@ -349,8 +497,7 @@
 
                             <!-- STATIC SLIDER -->
                             <div class="listing-coupon-card" *ngIf="showStaticSlider">
-                                <img src="{{ static_sliderImage }}"
-                                    alt="ODBUS Offer" loading="lazy" />
+                                <img src="{{ static_sliderImage }}" alt="ODBUS Offer" loading="lazy" />
                             </div>
 
                             <!-- DYNAMIC SLIDER -->
@@ -1996,7 +2143,8 @@
 
 
         <div class="modal-body modal-body-m0">
-            <button type="button" class="close close-mob mob-close" aria-label="Close" (click)="modal.dismiss('Cross Click')">
+            <button type="button" class="close close-mob mob-close" aria-label="Close"
+                (click)="modal.dismiss('Cross Click')">
                 <span aria-hidden="true">&times;</span>
             </button>
             <form [formGroup]="seatForm" (ngSubmit)="submitSeat()">
