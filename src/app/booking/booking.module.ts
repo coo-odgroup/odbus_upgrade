@@ -1,14 +1,22 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BookingRoutingModule } from './booking-routing.module';
 import { BookingComponent } from './booking.component';
-import { SharedModule } from '../shared/shared.module';
-
 @NgModule({
-  imports: [BrowserModule, FormsModule, SharedModule],
-  bootstrap: [BookingComponent],
   declarations: [
-    // BookingComponent
   ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    BookingRoutingModule    
+  ],
+  exports: [],
+  providers: [],
+  bootstrap: [BookingComponent]
 })
-export class BookingModule {}
+export class BookingModule { }

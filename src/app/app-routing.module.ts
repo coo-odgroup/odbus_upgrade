@@ -48,20 +48,25 @@ export function userRouteMatcher(
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'index.php', redirectTo: '', pathMatch: 'full' },
-  { path: 'index.html', redirectTo: '', pathMatch: 'full' }, 
+  { path: 'index.html', redirectTo: '', pathMatch: 'full' },
   {
     path: 'about-us',
     loadChildren: () =>
       import('./about-us/about-us.module').then((m) => m.AboutUsModule),
-  }, 
+  },
   {
     path: 'operators',
     loadChildren: () =>
       import('./operators/operators.module').then((m) => m.OperatorsModule),
   },
+  // {
+  //   path: 'routes/:slug',
+  //   component: SearchComponent,
+  // },
   {
     path: 'routes/:slug',
-    component: SearchComponent,
+    loadChildren: () =>
+      import('./search/search.module').then((m) => m.SearchModule),
   },
   {
     path: 'routes',
@@ -111,7 +116,7 @@ export const routes: Routes = [
       import('./refund-policy/refund-policy.module').then(
         (m) => m.RefundPolicyModule,
       ),
-  },  
+  },
   {
     path: '404',
     loadChildren: () =>
@@ -178,12 +183,21 @@ export const routes: Routes = [
   {
     path: 'pnr/:id',
     loadChildren: () =>
-      import('./pnrdetail/pnrdetail.module').then((m) => m.PnrDetailsModule)    
+      import('./pnrdetail/pnrdetail.module').then((m) => m.PnrDetailsModule)
   },
-  { path: 'listing', component: SearchComponent },
-  { path: 'success', component: SuccessComponent },
-  { path: 'booking', component: BookingComponent },
-   { path: 'manage-booking', component: ManageBookingComponent },
+  // { path: 'success', component: SuccessComponent },
+  {
+    path: 'success',
+    loadChildren: () =>
+      import('./success/success.module').then((m) => m.SuccessModule),
+  },
+  // { path: 'booking', component: BookingComponent },
+  {
+    path: 'booking',
+    loadChildren: () =>
+      import('./booking/booking.module').then((m) => m.BookingModule),
+  },
+  { path: 'manage-booking', component: ManageBookingComponent },
   { path: 'manage-booking-detail', component: ManagebookingdetailsComponent },
   // { path: 'payment-failed',component:PaymentFailedComponent},
   { path: '**', component: PageErrorComponent },
@@ -203,5 +217,5 @@ export const routes: Routes = [
 export class AppRoutingModule {
   currentUrl: any;
 
-  constructor() {}
+  constructor() { }
 }
