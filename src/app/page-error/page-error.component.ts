@@ -13,9 +13,9 @@ import { Title, Meta } from '@angular/platform-browser';
 })
 export class PageErrorComponent implements OnInit {
   MenuActive: boolean = false;
-  isMobile: boolean;
-  session: LoginChecker;
-  activeMenu: string;
+  isMobile!: boolean;
+  session!: LoginChecker;
+  activeMenu!: string;
 
   constructor(
     private deviceService: DeviceDetectorService,

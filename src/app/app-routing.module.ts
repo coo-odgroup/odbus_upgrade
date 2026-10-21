@@ -7,16 +7,9 @@ import {
 } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PageErrorComponent } from './page-error/page-error.component';
-import { SearchComponent } from './search/search.component';
-import { BookingComponent } from './booking/booking.component';
-import { ManageBookingComponent } from './manage-booking/manage-booking.component';
-import { ManagebookingdetailsComponent } from './managebookingdetails/managebookingdetails.component';
 import { ThankyouComponent } from './thankyou/thankyou.component';
-import { OffersComponent } from './offers/offers.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { PnrdetailComponent } from './pnrdetail/pnrdetail.component';
-import { SuccessComponent } from './success/success.component';
 import { ProfiledeleteComponent } from './profiledelete/profiledelete.component';
 import { PaymentStatusComponent } from './payment-status/payment-status.component';
 import { CommonContentComponent } from './common-content/common-content.component';
@@ -59,10 +52,6 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./operators/operators.module').then((m) => m.OperatorsModule),
   },
-  // {
-  //   path: 'routes/:slug',
-  //   component: SearchComponent,
-  // },
   {
     path: 'routes/:slug',
     loadChildren: () =>
@@ -185,21 +174,16 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pnrdetail/pnrdetail.module').then((m) => m.PnrDetailsModule)
   },
-  // { path: 'success', component: SuccessComponent },
   {
     path: 'success',
     loadChildren: () =>
       import('./success/success.module').then((m) => m.SuccessModule),
   },
-  // { path: 'booking', component: BookingComponent },
   {
     path: 'booking',
     loadChildren: () =>
       import('./booking/booking.module').then((m) => m.BookingModule),
   },
-  { path: 'manage-booking', component: ManageBookingComponent },
-  { path: 'manage-booking-detail', component: ManagebookingdetailsComponent },
-  // { path: 'payment-failed',component:PaymentFailedComponent},
   { path: '**', component: PageErrorComponent },
 ];
 
