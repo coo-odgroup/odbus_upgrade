@@ -161,6 +161,9 @@ export class SearchComponent implements OnInit {
     this.onChange(new Date(value.year, value.month - 1, value.day));
   }
 
+
+
+
   commonData: any;
 
   source: any;
@@ -1306,7 +1309,10 @@ export class SearchComponent implements OnInit {
   }
 
   moreFilter(moreFilter: any) {
-    this.modalService.open(moreFilter, { windowClass: 'mobile-modalbox' });
+    this.modalService.open(moreFilter, {
+      windowClass: 'mobile-modalbox',
+      backdrop: false
+    });
   }
 
   closeFilter() {
@@ -1402,7 +1408,8 @@ export class SearchComponent implements OnInit {
     this.couponDetail = this.buslist[i]['couponDetails'];
     // console.log(this.couponDetail);
     // this.modalService.open(modal);
-    this.modalService.open(modal, {
+    this.modalService.open(modal,{
+      backdrop: false,
       size: 'xl',
     });
   }
@@ -3124,7 +3131,7 @@ export class SearchComponent implements OnInit {
     this.getseatlayout();
     this.getBoardingDroppingPoints();
 
-    this.modalService.open(seat_layout, { windowClass: 'mobile-modalbox' });
+    this.modalService.open(seat_layout, { windowClass: 'mobile-modalbox', backdrop: false });
   }
 
   modify_search(modify: any, event?: Event) {
@@ -3147,11 +3154,11 @@ export class SearchComponent implements OnInit {
 
     // Added by Jagan
 
-    this.modalService.open(modify, { windowClass: 'mobile-modalbox' });
+    this.modalService.open(modify, { windowClass: 'mobile-modalbox', backdrop: false });
   }
 
   viewamenity(viewamenity: any) {
-    this.modalService.open(viewamenity, { windowClass: 'mobile-modalbox' });
+    this.modalService.open(viewamenity, { windowClass: 'mobile-modalbox', backdrop: false });
   }
 
   getAmenityImage(amenity: any): string {
@@ -3162,7 +3169,7 @@ export class SearchComponent implements OnInit {
   }
 
   viewsafety(viewsafety: any) {
-    this.modalService.open(viewsafety, { windowClass: 'mobile-modalbox' });
+    this.modalService.open(viewsafety, { windowClass: 'mobile-modalbox', backdrop: false });
   }
 
   getSafetyImage(safety: any): string {
@@ -3170,15 +3177,15 @@ export class SearchComponent implements OnInit {
   }
 
   viewphotos(viewphotos: any) {
-    this.modalService.open(viewphotos, { windowClass: 'mobile-modalbox' });
+    this.modalService.open(viewphotos, { windowClass: 'mobile-modalbox', backdrop: false });
   }
 
   viewreview(viewreview: any) {
-    this.modalService.open(viewreview, { windowClass: 'mobile-modalbox' });
+    this.modalService.open(viewreview, { windowClass: 'mobile-modalbox', backdrop: false });
   }
 
   viewpolicy(viewpolicy: any) {
-    this.modalService.open(viewpolicy, { windowClass: 'mobile-modalbox' });
+    this.modalService.open(viewpolicy, { windowClass: 'mobile-modalbox', backdrop: false });
   }
 
   setPrevNextDate(entDate: any) {

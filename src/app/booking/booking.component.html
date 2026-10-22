@@ -36,12 +36,12 @@
     <div class="mobile-booking-top">
       <div class="row">
         <div class="col-1 pr-0 pl-2 mob-arrow-left" (click)="getBack()">
-          <i class="fas fa-arrow-left"></i>
+          <i class="fa fa-arrow-left"></i>
         </div>
         <div class="col-9 pl-2 pr-2 mob-list-center">
           <h5>{{ busRecord.busName }}</h5>
           <span class="wh10">{{ source }}</span>
-          <i class="fas fa-long-arrow-alt-right"></i>
+          <i class="fa fa-long-arrow-right"></i>
           <span class="wh10">{{ destination }}</span> <br />
           <span class="wh10">{{ entdate | date: "EEE, d MMMM , y" }}</span>
         </div>
@@ -232,12 +232,12 @@
     <div class="mobile-booking-top">
       <div class="row">
         <div class="col-1 pr-0 pl-2 mob-arrow-left" (click)="getBack()">
-          <i class="fas fa-arrow-left"></i>
+          <i class="fa fa-arrow-left"></i>
         </div>
         <div class="col-9 pl-2 pr-2 mob-list-center">
           <h5>{{ busRecord.busName }}</h5>
           <span class="wh10">{{ source }}</span>
-          <i class="fas fa-long-arrow-alt-right"></i>
+          <i class="fa fa-long-arrow-right"></i>
           <span class="wh10">{{ destination }}</span> <br />
           <span class="wh10">{{ entdate | date: "EEE, d MMMM , y" }}</span>
         </div>
@@ -459,7 +459,7 @@
 
           <!-- Coupon Header -->
           <div class="mobile-coupon-title">
-            <i class="fas fa-tag"></i>
+            <i class="fa fa-tag"></i>
             <span>Have a Coupon Code ?</span>
           </div>
 
@@ -494,7 +494,7 @@
                     {{ offercode.coupon_code }}
                   </strong>
 
-                  <i class="fas fa-info-circle" title="Coupon details" (click)="openCouponModal(offercode)"></i>
+                  <i class="fa fa-info-circle" title="Coupon details" (click)="openCouponModal(offercode)"></i>
 
                 </div>
 
@@ -591,7 +591,7 @@
           <div class="gst-card" *ngIf="gstStatus">
 
             <div class="gst-card-title">
-              <i class="fas fa-file-invoice"></i>
+              <i class="fa fa-file-text"></i>
               GST Invoice Details
             </div>
 
@@ -697,7 +697,7 @@
           <div class="fare-card">
 
             <div class="fare-success" *ngIf="couponData.discount > 0">
-              <i class="fas fa-check-circle"></i>
+              <i class="fa fa-check-circle"></i>
               Coupon <strong>{{ autoApplyCouponcode }}</strong> Applied Successfully
             </div>
 
@@ -774,12 +774,12 @@
     <div class="mobile-booking-top">
       <div class="row">
         <div class="col-1 pr-0 pl-2 mob-arrow-left" (click)="getBack()">
-          <i class="fas fa-arrow-left"></i>
+          <i class="fa fa-arrow-left"></i>
         </div>
         <div class="col-9 pl-2 pr-2 mob-list-center2">
           <h5>Ticket Details</h5>
           <!-- <h5>{{ busRecord.busName }}</h5>
-            <span class="wh10">{{ source }}</span> <i class="fas fa-long-arrow-alt-right"></i> <span class="wh10">{{ destination }}</span> <br/>
+            <span class="wh10">{{ source }}</span> <i class="fa fa-long-arrow-right"></i> <span class="wh10">{{ destination }}</span> <br/>
             <span class="wh10">{{ entdate | date:'EEE, d MMMM , y' }}</span> -->
         </div>
       </div>
@@ -809,11 +809,7 @@
         </div>
       </div>
 
-      <!-- <div class="row" style="margin-top:10px">
-		<div class="col-md-12 print_btn" align="right" [id]="'print_btn'">
-			<button (click)="print();" class="btn btn-warning" style="color: #072c6b;font-weight: bold;">PRINT TICKET</button>
-		</div>
-   </div> -->
+
 
       <div class="passenger-detail mt-3 mb25">
         <div class="od-body">
@@ -1201,37 +1197,57 @@
     </div>
   </div>
 
+
   <div class="mobile-myaccount-middle">
     <ul class="mobile-menu">
       <li>
-        <a routerLink="/manage-booking"><i class="far fa-window-restore"></i> Manage Booking</a>
+        <a routerLink="/manage-booking">
+          <i class="fa fa-window-restore"></i> Manage Booking
+        </a>
       </li>
       <li>
-        <a routerLink="/offers"><i class="fas fa-gifts"></i> Offers</a>
+        <a routerLink="/offers">
+          <i class="fa fa-gift"></i> Offers
+        </a>
       </li>
       <li>
-        <a routerLink="/operators"><i class="fas fa-bus"></i> Operators</a>
+        <a routerLink="/operators">
+          <i class="fa fa-bus"></i> Operators
+        </a>
       </li>
       <li>
-        <a routerLink="/routes"><i class="fas fa-map-marker-alt"></i> Routes</a>
+        <a routerLink="/routes">
+          <i class="fa fa-map-marker"></i> Routes
+        </a>
       </li>
       <li>
-        <a routerLink="/faq"><i class="fas fa-question"></i> FAQ's</a>
+        <a routerLink="/faq">
+          <i class="fa fa-question-circle"></i> FAQ's
+        </a>
       </li>
       <li>
-        <a routerLink="/testimonials"><i class="fa fa-star"></i> Testimonials</a>
+        <a routerLink="/testimonials">
+          <i class="fa fa-star"></i> Testimonials
+        </a>
       </li>
       <li>
-        <a routerLink="/terms-conditions"><i class="fas fa-file-image"></i> Terms & Conditions</a>
+        <a routerLink="/terms-conditions">
+          <i class="fa fa-file-text-o"></i> Terms &amp; Conditions
+        </a>
       </li>
       <li>
-        <a routerLink="/privacy-policy"><i class="far fa-file-powerpoint"></i> Privacy Policy</a>
+        <a routerLink="/privacy-policy">
+          <i class="fa fa-shield"></i> Privacy Policy
+        </a>
       </li>
       <li>
-        <a routerLink="/about-us"><i class="fas fa-info-circle"></i> About Us</a>
+        <a routerLink="/about-us">
+          <i class="fa fa-info-circle"></i> About Us
+        </a>
       </li>
     </ul>
   </div>
+
 </ng-container>
 
 <ng-container *ngIf="isMobile && bookingStep3">
@@ -1569,7 +1585,7 @@
                         <div class="journey-item">
 
                           <div class="journey-icon">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fa fa-map-marker"></i>
                           </div>
 
                           <div class="journey-content">
@@ -1598,7 +1614,7 @@
                         <div class="journey-item">
 
                           <div class="journey-icon">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fa fa-map-marker"></i>
                           </div>
 
                           <div class="journey-content">
@@ -1627,7 +1643,7 @@
                         <div class="journey-item">
 
                           <div class="journey-icon">
-                            <i class="fas fa-bus"></i>
+                            <i class="fa fa-bus"></i>
                           </div>
 
                           <div class="journey-content">
@@ -1654,7 +1670,7 @@
                         <div class="journey-item">
 
                           <div class="journey-icon">
-                            <i class="far fa-calendar-alt"></i>
+                            <i class="fa fa-calendar"></i>
                           </div>
 
                           <div class="journey-content">
@@ -1815,7 +1831,7 @@
 
                       <div class="contact-note">
 
-                        <i class="fas fa-hashtag"></i>
+                        <i class="fa fa-hashtag"></i>
 
                         <span>
                           will receive booking details in this mobile
@@ -1832,7 +1848,7 @@
                       <div class="review-heading">
 
                         <div class="heading-icon">
-                          <i class="fas fa-file-invoice"></i>
+                          <i class="fa fa-file-text"></i>
                         </div>
 
                         <h5>
@@ -1933,7 +1949,7 @@
                       <div class="side-heading">
 
                         <div class="side-heading-icon">
-                          <i class="fas fa-tag"></i>
+                          <i class="fa fa-tag"></i>
                         </div>
 
                         <h5>
@@ -1954,7 +1970,7 @@
 
                           <div class="coupon-input-wrap">
 
-                            <i class="fas fa-ticket-alt"></i>
+                            <i class="fa fa-ticket"></i>
 
                             <input type="search" autocomplete="off" formControlName="coupon_code"
                               placeholder="Have a Coupon code?" style="text-transform: uppercase;" />
@@ -1982,7 +1998,7 @@
                                 {{ offercode.coupon_code }}
                               </strong>
 
-                              <i class="fas fa-info-circle" title="Coupon details"
+                              <i class="fa fa-info-circle" title="Coupon details"
                                 (click)="openCouponModal(offercode)"></i>
                             </div>
 
@@ -2009,7 +2025,7 @@
                       <div class="side-heading">
 
                         <div class="side-heading-icon">
-                          <i class="fas fa-shield-alt"></i>
+                          <i class="fa fa-shield"></i>
                         </div>
 
                         <h5>
@@ -2034,7 +2050,7 @@
 
                         <button type="button" class="captcha-refresh-top" (click)="generateCaptcha()">
 
-                          <i class="fas fa-sync-alt"></i>
+                          <i class="fa fa-refresh"></i>
 
                           Refresh
 
@@ -2074,7 +2090,7 @@
 
                       <div *ngIf="captchaValidated" class="captcha-message captcha-success">
 
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fa fa-check-circle"></i>
 
                         Captcha is verified successfully
 
@@ -2089,7 +2105,7 @@
                       <div class="side-heading">
 
                         <div class="side-heading-icon">
-                          <i class="fas fa-receipt"></i>
+                          <i class="fa fa-file-text-o"></i>
                         </div>
 
                         <h5>
@@ -2106,7 +2122,7 @@
 
                       <div class="fare-success" *ngIf="couponData.discount > 0">
 
-                        <i class="fas fa-check-circle"></i>
+                        <i class="fa fa-check-circle"></i>
 
                         Coupon
                         <strong>
@@ -2209,7 +2225,7 @@
                       <button type="submit" class="make-payment-btn">
 
                         <span class="payment-lock">
-                          <i class="fas fa-lock"></i>
+                          <i class="fa fa-lock"></i>
                         </span>
 
                         <span class="payment-text">
@@ -2224,7 +2240,7 @@
 
                         </span>
 
-                        <i class="fas fa-arrow-right"></i>
+                        <i class="fa fa-arrow-right"></i>
 
                       </button>
 
@@ -2237,8 +2253,8 @@
               </form>
 
             </mat-step>
-            </mat-horizontal-stepper>
-            <!-- ================= /STEPPER ================= -->
+          </mat-horizontal-stepper>
+          <!-- ================= /STEPPER ================= -->
         </div>
       </div>
     </div>
@@ -2256,7 +2272,7 @@
     <div class="terms-modal-header">
       <div class="terms-title-wrap">
         <div class="terms-icon">
-          <i class="fas fa-file-contract"></i>
+          <i class="fa fa-file-contract"></i>
         </div>
 
         <div>
@@ -2265,7 +2281,7 @@
       </div>
 
       <button type="button" class="terms-close-btn" aria-label="Close" (click)="closeTermsModal()">
-        <i class="fas fa-times"></i>
+        <i class="fa fa-times"></i>
       </button>
     </div>
 
@@ -2298,7 +2314,7 @@
     <div class="terms-modal-header">
       <div class="terms-title-wrap">
         <div class="terms-icon">
-          <i class="fas fa-ticket-alt"></i>
+          <i class="fa fa-ticket"></i>
         </div>
 
         <div>
@@ -2307,7 +2323,7 @@
       </div>
 
       <button type="button" class="terms-close-btn" aria-label="Close" (click)="closeCouponModal()">
-        <i class="fas fa-times"></i>
+        <i class="fa fa-times"></i>
       </button>
     </div>
 

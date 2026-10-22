@@ -547,7 +547,7 @@ AUTH SWITCH
 
     color: #64748b;
 
-    font-family: inherit;
+
 
     font-size: 14px;
 
@@ -604,7 +604,7 @@ PHONE / EMAIL SWITCH
 
     color: #66758f;
 
-    font-family: inherit;
+
 
     font-size: 14px;
 
@@ -728,7 +728,7 @@ INPUT
 
     color: #183565;
 
-    font-family: inherit;
+
 
     font-size: 14px;
 
@@ -837,7 +837,7 @@ PRIMARY BUTTON
 
     color: #ffffff;
 
-    font-family: inherit;
+
 
     font-size: 15px;
 
@@ -939,7 +939,7 @@ BOTTOM AUTH
 
     padding: 0;
 
-    font-family: inherit;
+
 
     font-size: inherit;
 
@@ -1033,7 +1033,7 @@ OTP SCREEN
 
     color: #1b4b91;
 
-    font-family: inherit;
+
 
     font-size: 13px;
 
@@ -1153,7 +1153,7 @@ OTP BOXES
 
     color: #143a79;
 
-    font-family: inherit;
+
 
     font-size: 22px;
 
@@ -1208,7 +1208,7 @@ OTP RESEND
 
     color: #1477e9;
 
-    font-family: inherit;
+
 
     font-size: 13px;
 
@@ -1405,7 +1405,7 @@ ODBUS LOGIN PAGE - FINAL DESIGN OVERRIDES
     border: none;
     background: transparent;
     color: #7b8ba3;
-    font-family: inherit;
+
     font-size: 14px;
     font-weight: 650;
     cursor: pointer;
@@ -2482,7 +2482,7 @@ MOBILE ONLY
 
         color: #78879e;
 
-        font-family: inherit;
+    
 
         font-size: 13px;
 
@@ -2591,7 +2591,7 @@ MOBILE ONLY
 
         color: #183565;
 
-        font-family: inherit;
+    
 
         font-size: 13px;
     }
@@ -2652,7 +2652,7 @@ MOBILE ONLY
 
         color: #ffffff;
 
-        font-family: inherit;
+    
 
         font-size: 14px;
 
@@ -2738,7 +2738,7 @@ MOBILE ONLY
 
         color: #1258be;
 
-        font-family: inherit;
+    
 
         font-size: 12px;
 
@@ -2838,7 +2838,7 @@ MOBILE ONLY
 
         color: #174784;
 
-        font-family: inherit;
+    
 
         font-size: 12px;
 
@@ -2954,7 +2954,7 @@ MOBILE ONLY
 
         color: #143a79;
 
-        font-family: inherit;
+    
 
         font-size: 20px;
 
@@ -3006,7 +3006,7 @@ MOBILE ONLY
 
         color: #1477e9;
 
-        font-family: inherit;
+    
 
         font-size: 11px;
 
@@ -3568,7 +3568,7 @@ OTP MOBILE LAYOUT
     background: linear-gradient(125deg, #b67b30, #ffedac, #b77c30, #f9d779);
     box-shadow: 0 5px 16px rgba(94, 20, 25, .13), 0 0 0 1px rgba(255, 225, 155, .25);
     color: var(--puja-cream);
-    font-family: inherit;
+
 }
 
 .puja-premium-inner {

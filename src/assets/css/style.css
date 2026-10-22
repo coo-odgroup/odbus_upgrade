@@ -1,8 +1,8 @@
 /* ROBOTO */
-@import "@fontsource/roboto/300.css";
+/* @import "@fontsource/roboto/300.css";
 @import "@fontsource/roboto/400.css";
 @import "@fontsource/roboto/500.css";
-@import "@fontsource/roboto/700.css";
+@import "@fontsource/roboto/700.css"; */
 
 /* LATO */
 @import "@fontsource/lato/300.css";
@@ -18,7 +18,7 @@
 
 
 body {
-    font-family: "Lato", sans-serif;
+    font-family: "Lato", sans-serif !important;
     color: #072c6b;
     background: #e7eaeb !important;
 }
@@ -363,7 +363,7 @@ section.section-offer {
 }
 
 .section-about-left h3 {
-    font-family: "Roboto", sans-serif;
+    /* font-family: "Roboto", sans-serif; */
     font-size: 45px;
     text-transform: uppercase;
     letter-spacing: 1.15px;
@@ -416,7 +416,7 @@ section.section-offer {
 }
 
 .section-growing-box p {
-    font-family: "Open Sans", sans-serif;
+    /* font-family: "Open Sans", sans-serif; */
     font-size: 17px;
     line-height: 33px;
     color: #072c6b;
@@ -1349,7 +1349,7 @@ ngb-datepicker.dropdown-menu.show {
     padding: 0 20px;
     text-transform: uppercase;
     font-size: 16px;
-    font-family: "robotomedium", sans-serif;
+    /* font-family: "robotomedium", sans-serif; */
 
 }
 

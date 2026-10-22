@@ -1291,11 +1291,11 @@
                                                             </div>
 
                                                             <div class="start-rating f-8 col-7 p-0 pt-44">
-                                                                <i class="fas fa-star text-danger"></i>
-                                                                <i class="fas fa-star text-danger"></i>
-                                                                <i class="fas fa-star text-danger"></i>
-                                                                <i class="fas fa-star text-danger"></i>
-                                                                <i class="fas fa-star text-danger"></i>
+                                                                <i class="fa fa-star text-danger"></i>
+                                                                <i class="fa fa-star text-danger"></i>
+                                                                <i class="fa fa-star text-danger"></i>
+                                                                <i class="fa fa-star text-danger"></i>
+                                                                <i class="fa fa-star text-danger"></i>
                                                             </div>
 
                                                             <div class="col-2"></div>
@@ -1574,7 +1574,7 @@
                                                         <div class="row pol-box">
 
                                                             <div class="col-md-1">
-                                                                <i class="fas fa-child"></i>
+                                                                <i class="fa fa-child"></i>
                                                             </div>
 
                                                             <div class="col-md-11 p-0">
@@ -1595,7 +1595,7 @@
                                                         <div class="row pol-box">
 
                                                             <div class="col-md-1">
-                                                                <i class="fas fa-suitcase-rolling"></i>
+                                                                <i class="fa fa-suitcase-rolling"></i>
                                                             </div>
 
                                                             <div class="col-md-11 p-0">
@@ -1618,7 +1618,7 @@
                                                         <div class="row pol-box">
 
                                                             <div class="col-md-1">
-                                                                <i class="fas fa-paw"></i>
+                                                                <i class="fa fa-paw"></i>
                                                             </div>
 
                                                             <div class="col-md-11 p-0">
@@ -1638,7 +1638,7 @@
                                                         <div class="row pol-box">
 
                                                             <div class="col-md-1">
-                                                                <i class="fas fa-glass-martini-alt"></i>
+                                                                <i class="fa fa-glass"></i>
                                                             </div>
 
                                                             <div class="col-md-11 p-0">
@@ -1660,7 +1660,7 @@
                                                         <div class="row pol-box">
 
                                                             <div class="col-md-1">
-                                                                <i class="fas fa-history"></i>
+                                                                <i class="fa fa-history"></i>
                                                             </div>
 
                                                             <div class="col-md-11 p-0">
@@ -1746,25 +1746,39 @@
 
         <div class="mobile-list-top">
             <div class="row">
-                <div class="col-1 pr-0 pl-2 mob-arrow-left"><a routerLink="/"><i class="fas fa-arrow-left"></i></a>
-                </div>
-                <div class="col-8 pl-2 pr-2 mob-list-center">
-                    <span>{{ sourceData.name }}</span><i class="fas fa-long-arrow-alt-right"></i> <span>{{
-                        destinationData.name
-                        }}</span> <br />
-                    <span class="wh10">
-                        <span *ngIf="prevDate!=''" (click)="search_prev();"><i
-                                class="fas fa-angle-double-left"></i></span>
-                        {{ journey_date | date:'EEE, d MMMM , y' }}
-                        <span *ngIf="nextDate!=''" (click)="search_next();"><i
-                                class="fas fa-angle-double-right"></i></span>
-                    </span>
 
+                <div class="col-1 pr-0 pl-2 mob-arrow-left">
+                    <a routerLink="/">
+                        <i class="fa fa-arrow-left"></i>
+                    </a>
                 </div>
+
+                <div class="col-8 pl-2 pr-2 mob-list-center">
+                    <span>{{ sourceData.name }}</span>
+                    <i class="fa fa-long-arrow-right"></i>
+                    <span>{{ destinationData.name }}</span>
+                    <br />
+
+                    <span class="wh10">
+                        <span *ngIf="prevDate != ''" (click)="search_prev()">
+                            <i class="fa fa-angle-double-left"></i>
+                        </span>
+
+                        {{ journey_date | date:'EEE, d MMMM , y' }}
+
+                        <span *ngIf="nextDate != ''" (click)="search_next()">
+                            <i class="fa fa-angle-double-right"></i>
+                        </span>
+                    </span>
+                </div>
+
                 <div class="col-3 pl2 pr-3 mobile-modify-wrap">
                     <button type="button" (click)="modify_search(modify, $event)"
-                        class="btn btn-show-modify cursor mobile-modify-btn">Modify</button>
+                        class="btn btn-show-modify cursor mobile-modify-btn">
+                        Modify
+                    </button>
                 </div>
+
             </div>
         </div>
 
@@ -1831,8 +1845,8 @@
                         <hr />
                         <div class="row mob-bus-bot">
                             <div class="col-8 mob-bus-time pr-0">
-                                <h5>{{ bus.departureTime }} <span class="mob-hours"><i class="fas fa-caret-left"></i>--
-                                        {{ bus.totalJourneyTime }} --<i class="fas fa-caret-right"></i></span> <span
+                                <h5>{{ bus.departureTime }} <span class="mob-hours"><i class="fa fa-caret-left"></i>--
+                                        {{ bus.totalJourneyTime }} --<i class="fa fa-caret-right"></i></span> <span
                                         class="gray"> {{
                                         bus.arrivalTime }}</span></h5>
                                 <h6>
@@ -1886,7 +1900,7 @@
 
                     <div class="mobile-filter-top">
                         <div class="row">
-                            <div class="col-1 pr-0 pl-2 mob-arrow-left"><i class="fas fa-times"></i></div>
+                            <div class="col-1 pr-0 pl-2 mob-arrow-left"><i class="fa fa-times"></i></div>
                             <div class="col-10 pl-2 pr-2 mob-list-center">
                                 <h5>Filter By</h5>
                             </div>
@@ -2070,7 +2084,7 @@
                 <form [formGroup]="filterForm">
 
                     <div class="mobile-filter-middle">
-                        <h4>Boarding Point <i class="fas fa-chevron-down"></i></h4>
+                        <h4>Boarding Point <i class="fa fa-chevron-down"></i></h4>
 
 
                         <div *ngFor="let boardingPointId of boardingPoints; let i = index">
@@ -2081,7 +2095,7 @@
                             </label>
                         </div>
 
-                        <h4>Dropping Point <i class="fas fa-chevron-down"></i></h4>
+                        <h4>Dropping Point <i class="fa fa-chevron-down"></i></h4>
 
 
                         <div *ngFor="let dropingingPointId of droppingPoints; let i=index; ">
@@ -2094,7 +2108,7 @@
                         </div>
 
 
-                        <h4>Bus Operators <i class="fas fa-chevron-down"></i></h4>
+                        <h4>Bus Operators <i class="fa fa-chevron-down"></i></h4>
 
                         <div *ngFor="let operatorId of busOperators; let i=index;">
 
@@ -2105,7 +2119,7 @@
                             </label>
                         </div>
 
-                        <h4>Amenities <i class="fas fa-chevron-down"></i></h4>
+                        <h4>Amenities <i class="fa fa-chevron-down"></i></h4>
 
                         <div *ngFor="let amenityId of amenities; let i=index; ">
 
@@ -2155,7 +2169,7 @@
 
                             <div class="col-12 pl-2 pr-2 mob-list-center">
                                 <h5>{{buslistRecord.busName}}</h5>
-                                <span>{{ sourceData.name }}</span> <i class="fas fa-long-arrow-alt-right"></i> <span>{{
+                                <span>{{ sourceData.name }}</span> <i class="fa fa-long-arrow-right"></i> <span>{{
                                     destinationData.name }}</span> <br />
                                 <span class="wh10">{{ journey_date | date:'EEEE, d MMMM , y' }}</span>
 
@@ -2455,7 +2469,7 @@
                                         [value]="bp">
                                     <label for="boardingPoint{{i}}"> {{bp.boardTime}}</label>
                                 </li>
-                                <!-- <i class="fas fa-map-marker-alt"></i> -->
+                                <!-- <i class="fa fa-map-marker-alt"></i> -->
                             </ul>
 
                         </div>

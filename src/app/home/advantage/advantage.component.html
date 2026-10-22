@@ -4,7 +4,7 @@
 
     <div class="slider-wrapper">
       <!-- LEFT -->
-      <button type="button" class="slide-btn prev-btn" (click)="moveSlider(-1)" aria-label="Next Slide">
+      <button type="button" class="slide-btn prev-btn" (click)="moveSlider(-1)" aria-label="Previous slides">
         <i class="fa fa-angle-left" aria-hidden="true"></i>
       </button>
 
@@ -15,10 +15,11 @@
           <div class="card-left">
             <h3>Instant Booking</h3>
             <p>Book in seconds. Just 3 steps. Fast. Smooth. Hassle-free.</p>
-            <a [routerLink]="['/advantage', 'instant-booking']" aria-label="Know more about Instant Booking">Know More →</a>
+            <a [routerLink]="['/advantage', 'instant-booking']" aria-label="Know more about Instant Booking">Know More
+              →</a>
           </div>
           <div class="card-right">
-            <img src="assets/img/Instant_booking.webp" width="106" height="159" alt="Instant Booking" loading="lazy" />
+            <img src="assets/img/Instant_booking2.webp" width="106" height="159" alt="Instant Booking" loading="lazy" />
           </div>
         </div>
 
@@ -27,10 +28,10 @@
           <div class="card-left">
             <h3>Assured Seats</h3>
             <p>Seats you can भरोसा on 99.99% seat confirmation</p>
-            <a [routerLink]="['/advantage', 'assured-seats']"  aria-label="Know more about Assured Seats">Know More →</a>
+            <a [routerLink]="['/advantage', 'assured-seats']" aria-label="Know more about Assured Seats">Know More →</a>
           </div>
           <div class="card-right">
-            <img src="assets/img/assured.webp" width="106" height="159" alt="Assured Seats" loading="lazy" />
+            <img src="assets/img/assured2.webp" width="106" height="159" alt="Assured Seats" loading="lazy" />
           </div>
         </div>
 
@@ -39,10 +40,12 @@
           <div class="card-left">
             <h3>Instant Trip Details</h3>
             <p>No waiting. No uncertainty. Get ticket details instantly.</p>
-            <a [routerLink]="['/advantage', 'instant-trip-details']"  aria-label="Know more about Instant Trip Details">Know More →</a>
+            <a [routerLink]="['/advantage', 'instant-trip-details']"
+              aria-label="Know more about Instant Trip Details">Know More →</a>
           </div>
           <div class="card-right">
-            <img src="assets/img/trip_details.webp" width="106" height="159" alt="Instant Trip Details" loading="lazy" />
+            <img src="assets/img/trip_details2.webp" width="106" height="159" alt="Instant Trip Details"
+              loading="lazy" />
           </div>
         </div>
 
@@ -54,7 +57,7 @@
             <a [routerLink]="['/advantage', '24-7-support']" aria-label="Know more about 24x7 Support">Know More →</a>
           </div>
           <div class="card-right">
-            <img src="assets/img/support_247.webp" width="106" height="159" alt="24×7 Support" loading="lazy" />
+            <img src="assets/img/support_247_2.webp" width="106" height="159" alt="24×7 Support" loading="lazy" />
           </div>
         </div>
 
@@ -66,10 +69,11 @@
               Refunds initiated instantly Credited in hours to days <br />
               Quick. Transparent. Reliable.
             </p>
-            <a [routerLink]="['/advantage', 'fast-refunds']"  aria-label="Know more about Odisha's Largest Network">Know More →</a>
+            <a [routerLink]="['/advantage', 'fast-refunds']" aria-label="Know more about Odisha's Largest Network">Know
+              More →</a>
           </div>
           <div class="card-right">
-            <img src="assets/img/wallet.webp" width="106" height="159" loading="lazy" alt="wallet" />
+            <img src="assets/img/wallet2.webp" width="106" height="159" loading="lazy" alt="wallet" />
           </div>
         </div>
 
@@ -84,13 +88,14 @@
             <a [routerLink]="['/advantage', 'odishas-largest-network']">Know More →</a>
           </div>
           <div class="card-right">
-            <img src="assets/img/rout_network.webp" width="106" height="159" alt="Odisha's Largest Network" loading="lazy" />
+            <img src="assets/img/rout_network2.webp" width="106" height="159" alt="Odisha's Largest Network"
+              loading="lazy" />
           </div>
         </div>
       </div>
 
       <!-- RIGHT -->
-      <button type="button" class="slide-btn next-btn" (click)="moveSlider(1)" aria-label="Previous Slide">
+      <button type="button" class="slide-btn next-btn" (click)="moveSlider(1)" aria-label="Next slides">
         <i class="fa fa-angle-right" aria-hidden="true"></i>
       </button>
     </div>
