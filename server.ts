@@ -27,6 +27,15 @@ global['CSS'] = null;
 global['Prism'] = null;
 
 import axios from 'axios';
+
+// Gzip/deflate responses. Skip if nginx/CDN in front already compresses (harmless either way).
+let compression: any = null;
+try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  compression = require('compression');
+} catch (e) {
+  console.warn('compression package not installed - run: npm i compression');
+}
 import { GlobalConstants } from 'src/app/constants/global-constants';
 
 // The Express app is exported so that it can be used by serverless Functions.
@@ -34,6 +43,9 @@ export function app(): express.Express {
   const API_URL = GlobalConstants.BASE_URL;
   const URL = GlobalConstants.URL;
   const server = express();
+  if (compression) {
+    server.use(compression());
+  }
   const distFolder = join(process.cwd(), 'dist/consumerfenew/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html'))
     ? 'index.original.html'
@@ -238,6 +250,9 @@ export function app(): express.Express {
   ): void {
     const path = req.path;
 
+    // The rendered HTML differs for mobile and desktop visitors (User-Agent), so shared caches must not mix them.
+    res.vary('User-Agent');
+
     const privatePrefixes = [
       '/listing',
       '/booking',
@@ -271,6 +286,7 @@ export function app(): express.Express {
       '/advantage',
       '/blog',
       '/online-bus-tickets',
+      '/routes',
     ];
 
     const matchesPrefix = (prefix: string) =>
@@ -341,17 +357,29 @@ export function app(): express.Express {
     next();
   });
 
-  server.get('*', (req, res, next) => {
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-    next();
-  });
-
-  // Serve static files from /browser
+  // Serve static files from /browser.
+  // PAGESPEED FIX: this must run BEFORE any generic 'no-store' header is set, otherwise
+  // express.static skips its own Cache-Control and every JS/CSS/image is re-downloaded.
+  // Hashed build files (main.<hash>.js etc.) are immutable for 1 year; un-hashed files
+  // (index.html, manifest, ngsw, favicon, sitemap/robots) are always revalidated.
   server.get(
     '*.*',
     express.static(distFolder, {
       maxAge: '1y',
       immutable: true,
+      index: false,
+      setHeaders: (res: express.Response, filePath: string) => {
+        const hashed = /\.[0-9a-f]{16,}\.(js|css|woff2?|ttf|eot|svg|png|jpe?g|webp|avif|gif|ico)$/i.test(filePath);
+        if (!hashed) {
+          const isAsset = /[\\/]assets[\\/]/.test(filePath);
+          res.setHeader(
+            'Cache-Control',
+            isAsset
+              ? 'public, max-age=2592000' // 30 days for files under /assets (not content-hashed)
+              : 'public, max-age=0, must-revalidate',
+          );
+        }
+      },
     }),
     (req, res) => {
       res.status(404).send(`Asset not found: ${req.url}`);
@@ -359,7 +387,8 @@ export function app(): express.Express {
   );
 
   // All regular routes use the Universal engine
-  server.get('*', (req: express.Request, res: express.Response) => {   
+  server.get('*', (req: express.Request, res: express.Response) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate'); // default, overridden below
 
      setPageCachePolicy(req, res);
 
@@ -397,7 +426,6 @@ export function app(): express.Express {
             .send('SSR Error: ' + err.message + '\n\nStack: ' + err.stack);
         }
         // Log successful SSR rendering
-        console.log('SSR rendering successful for:', req.url);
 
         if (html.includes('name="page-status" content="404"')) {
           res.status(404);
@@ -413,8 +441,8 @@ export function app(): express.Express {
 
 function run(): void {
   // const port = process.env.PORT || 4000; // TEST
-  // const port = process.env.PORT || 4445; // UPGRADE
-  const port = process.env.PORT || 4444; // LIVE
+  const port = process.env.PORT || 4445; // UPGRADE
+  // const port = process.env.PORT || 4444; // LIVE
 
   // Start up the Node server
   const server = app();

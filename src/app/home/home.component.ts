@@ -35,7 +35,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import { LoginChecker } from '../helpers/loginChecker';
-import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer, DOCUMENT } from '@angular/common';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
 import { HttpClient } from '@angular/common/http';
 
@@ -159,7 +159,7 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
   position = 'bottom-right';
   swapdestination: any;
   swapsource: any;
-  bannerImage = '../../assets/img/new_banner2.jpg';
+  bannerImage = 'assets/img/new_banner2.webp';
   source: any;
   source_id: any;
   destination: any;
@@ -271,6 +271,7 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
     private homeService: PopularRoutesService,
     @Optional() @Inject(REQUEST) private request: any,
     @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(DOCUMENT) private doc: Document,
   ) {
     this.isMobile = this.detectMobile();
     this.session = new LoginChecker();
@@ -365,7 +366,7 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
       ) {
         this.bannerImage = this.masterSettingRecord.banner_image;
       } else {
-        this.bannerImage = '../../assets/img/new_banner2.jpg';
+        this.bannerImage = 'assets/img/new_banner2.webp';
       }
 
       this.master_info = this.masterSettingRecord.common;
@@ -423,7 +424,7 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
     };
 
     this.selectedDate = formatDate(new Date(), 'yyyy-MM-dd', 'en_US');
-    this.bannerImage = '../../assets/img/new_banner2.jpg';
+    this.bannerImage = 'assets/img/new_banner2.webp';
     this.location_list = [];
     this.popular_routes = [];
     this.topOperators = [];
@@ -1160,9 +1161,12 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
   }
 
   private startCountdown(): void {
-    this.countdownSubscription = interval(1000).subscribe(() => {
-      this.updateCountdown();
-    });
+    this.updateCountdown();
+    if (!this.isExpired) {
+      this.countdownSubscription = interval(1000).subscribe(() => {
+        this.updateCountdown();
+      });
+    }
   }
 
   private updateCountdown(): void {
@@ -1205,7 +1209,7 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
   //       if (res.data.banner_image != '' && res.data.banner_image != null) {
   //         this.homeBanner = res.data.banner_image;
   //       } else {
-  //         this.homeBanner = '../../assets/img/new_banner2.jpg';
+  //         this.homeBanner = 'assets/img/new_banner2.webp';
   //       }
   //     }
   //   });
@@ -1228,7 +1232,18 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
 
         this.homeBanner = res?.data?.banner_image
           ? res?.data?.banner_image
-          : '../../assets/img/new_banner2.jpg';
+          : 'assets/img/new_banner2.webp';
+
+        // PAGESPEED: tell the browser about the hero image in <head> (server render only) so it
+        // starts downloading before the body is parsed -> earlier LCP.
+        if (isPlatformServer(this.platformId) && !this.isMobile && this.homeBanner) {
+          const link = this.doc.createElement('link');
+          link.setAttribute('rel', 'preload');
+          link.setAttribute('as', 'image');
+          link.setAttribute('href', this.homeBanner);
+          link.setAttribute('fetchpriority', 'high');
+          this.doc.head.appendChild(link);
+        }
 
         this.maintenance = res.data.maintenance;
         this.homePopup = res.data.website_popup;

@@ -3,6 +3,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { AuthService } from './auth.service';
 import { CommonService } from './common.service';
 import { GlobalConstants } from '../constants/global-constants';
+import { PopularRoutesService } from './popular-routes.service';
 
 /**
  * SPEED FIX (TTFB + first load for new visitors)
@@ -30,17 +31,26 @@ export class AppInitializerService {
   constructor(
     private auth: AuthService,
     private commonService: CommonService,
+    private popularRoutes: PopularRoutesService,
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {}
 
   load(): Promise<boolean> {
     return this.getAuthToken()
       .then(() => this.fetchPopularInfo())
+      .then(() => this.preloadHomeData())
       .then(() => true)
       .catch((err) => {
         console.error('AppInitializer: error during initialization', err);
         return true; // never block bootstrap
       });
+  }
+
+  private preloadHomeData(): Promise<any> {
+    return this.popularRoutes.preloadHomeData().catch((err) => {
+      console.error('AppInitializer: failed to preload home data', err);
+      return null;
+    });
   }
 
   // ---------------- TOKEN ----------------

@@ -8,7 +8,7 @@ import { PopularRoutesService } from 'src/app/services/popular-routes.service';
 @Component({
   selector: 'app-route-links',
   templateUrl: './route-links.component.html',
-  styleUrls: ['./route-links.component.css', '../home.component.css'],
+  styleUrls: ['./route-links.component.css'],
 })
 export class RouteLinksComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();

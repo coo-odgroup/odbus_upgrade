@@ -1,0 +1,931 @@
+
+/* ---- home rules used by this component (auto-extracted from home.component.css) ---- */
+a:hover {
+  text-decoration: none !important;
+}
+
+/* .input-group-prepend {
+  margin-right: 3px !important;
+} */
+
+/* .hero-banner-inner-srchbus .form-control {
+    border-radius:0 0.25rem 0.25rem 0;
+} */
+
+/* Mobile Version Start  */
+
+
+/* .mobile-discount .img-fluid {
+  width: 100%;
+}
+
+
+.mobile-discount h6 {
+  font-weight: 600;
+  color: #072c6b;
+} */
+
+/* New Offer Correction */
+
+/* =========================================================
+   MOBILE OFFERS SECTION
+========================================================= */
+
+/* =========================================================
+   TOP HEADER
+========================================================= */
+
+/* =========================================================
+   OFFER CARD
+========================================================= */
+
+/* =========================================================
+   CAROUSEL FIX
+========================================================= */
+
+.mobile-offers-card ::ng-deep .carousel,
+.mobile-offers-card ::ng-deep .carousel-cells,
+.mobile-offers-card ::ng-deep .carousel-cell {
+  width: 100%;
+  display: block;
+}
+
+/* =========================================================
+   IMAGE RESPONSIVE FIX
+========================================================= */
+
+.mobile-offers-card ::ng-deep .carousel-cell img,
+.mobile-offers-card ::ng-deep img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  object-fit: cover !important;
+  border-radius: 18px;
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE HEIGHTS
+========================================================= */
+
+/* 430px Devices */
+
+
+@media (max-width: 430px) {
+
+  .mobile-offers-card ::ng-deep .carousel-cell img,
+  .mobile-offers-card ::ng-deep img {
+    aspect-ratio: 15 / 7;
+  }
+}
+
+
+
+/* 390px Devices */
+
+@media (max-width: 390px) {
+
+  .mobile-offers-card ::ng-deep .carousel-cell img,
+  .mobile-offers-card ::ng-deep img {
+    aspect-ratio: 15 / 7;
+    border-radius: 16px;
+  }
+}
+
+/* 360px Devices */
+
+@media (max-width: 360px) {
+
+
+  .mobile-offers-card ::ng-deep .carousel-cell img,
+  .mobile-offers-card ::ng-deep img {
+    aspect-ratio: 17 / 8;
+  }
+}
+
+/* New Offer Correction */
+
+/* .mobile-logo img {
+  height: 42px;
+  float: right;
+} */
+
+
+/* Mobile Version End  */
+
+
+
+/* blog section */
+
+/* BLOG CARD DESIGN */
+
+/* BLOG CARD SECTION */
+
+/* IMAGE */
+
+/* TAG */
+
+/* CONTENT */
+
+
+
+/* 🔥 POPUP OVERLAY */
+
+/* BACKDROP */
+
+/* POPUP */
+
+/* HANDLE */
+
+/* TEXT */
+
+/* IMAGE */
+
+/* BUTTON */
+
+/* CLOSE */
+
+/* ANIMATION */
+
+
+/* New hero section */
+/* HERO */
+
+/* TEXT */
+
+/* SEARCH POSITION */
+
+/* BOX */
+
+/* LABEL */
+
+/* REMOVE DEFAULT */
+
+/* GAP CONTROL */
+
+/* ICONS (SEPARATE) */
+
+/* DATE */
+
+/* .date-btns {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+}
+
+.date-btns span {
+  font-size: 11px;
+  padding: 3px 10px;
+  margin-left: 4px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.date-btns span:first-child {
+  border: 1px solid #f0c004;
+  color: #1b2155;
+}
+
+.date-btns span:last-child {
+  border: 1px solid #1b2155;
+  color: #1b2155;
+}
+
+.date-btns span:first-child:hover {
+  background-color: #f0c004;
+  color: #fff;
+}
+
+.date-btns span:last-child:hover {
+  background-color: #1b2155;
+  color: #fff;
+} */
+
+/* SWAP */
+
+/* BUTTON */
+
+/* REMOVE BOOTSTRAP GAP */
+
+
+/* ==========================================
+   MOBILE ONLY
+========================================== */
+
+
+
+@media (max-width: 768px) {
+
+  /* TOP YELLOW AREA */
+
+  /* REMOVE DESKTOP OVERLAP */
+
+  /* WHITE SEARCH BOX */
+
+  /* FIELD */
+
+  /* INPUT */
+
+  /* ICONS */
+
+  /* TO FIELD */
+
+  /* SWAP BUTTON */
+
+  /* DATE SECTION */
+
+  /* SEARCH BUTTON */
+
+  /* REMOVE BOOTSTRAP GAP */
+
+}
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+/* New hero section ended*/
+
+
+/* ================= RECENT SEARCH ================= */
+
+/* TITLE */
+
+/* LEFT LINE */
+
+/* WRAPPER */
+
+/* CARD */
+/* .recent-card {
+  min-width: 240px;
+  background: #f6fcff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #b4cfff;
+  cursor: pointer;
+  transition: 0.4s;
+} 
+
+
+.recent-card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #1b2155;
+}
+
+  */
+
+
+
+/* ICON */
+
+/* TEXT */
+
+
+/* ==================================================
+   TOP OPERATORS
+================================================== */
+
+/* =====================================
+   CARD BASE
+===================================== */
+
+/* TOP LINE */
+
+/* HOVER */
+
+/* FLEX */
+
+/* ICON */
+
+/* TEXT */
+
+/* ROW */
+
+/* BADGE */
+
+/* ==================================================
+   TABLET
+================================================== */
+@media (max-width: 991px) {
+
+  /* HEADER */
+
+  /* GRID */
+
+}
+
+/* ==================================================
+   MOBILE
+================================================== */
+@media (max-width: 767px) {
+
+  /* HEADER SINGLE ROW */
+
+  /* TITLE */
+
+  /* BUTTON */
+
+  /* GRID */
+
+}
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+/* ===============================
+   FAQ FULL CSS
+=================================*/
+
+/* ===============================
+   Tabs
+=================================*/
+
+/* .faq-section .faq-tabs li {
+  margin: 0;
+}
+
+.faq-section .faq-tabs li a {
+  display: block;
+  padding: 10px;
+  color: #000000 !important;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none !important;
+  border: none !important;
+  background: none !important;
+}
+
+.faq-section .faq-tabs li.active a {
+  color: #1b2155 !important;
+  font-weight: 700;
+  border-bottom: 3px solid #f0c92f !important;
+  border-radius: 3px;
+  background: #f5f5f5 !important;
+} */
+
+/* ===============================
+   FAQ Rows
+=================================*/
+
+/* question */
+
+/* answer */
+
+/* active answer */
+
+/* ===============================
+   Icon
+=================================*/
+
+/* rotate on open */
+
+
+/* FAQ SECTION RESPONSIVE - EVERYTHING CENTER */
+
+@media (max-width: 767px) {
+
+  .title-section {
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  /* .faq-section .faq-tabs li {
+    width: auto;
+  }
+
+  .faq-section .faq-tabs li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 42px;
+    padding: 8px 6px;
+    font-size: 12px;
+    line-height: 1.2;
+    border-radius: 22px;
+    background: #fff7db !important;
+    border: 1px solid #d8e0ff !important;
+    color: #1b2155 !important;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .faq-section .faq-tabs li.active a {
+    border-bottom: none !important;
+    background: #1b2155 !important;
+    color: #fff !important;
+    border-radius: 22px;
+  } */
+}
+
+
+
+/* new download section */
+
+/* SECTION */
+
+/* Right Box */
+
+/* CENTER*/
+
+/* LEFT */
+
+/* DOWNLOAD APP FINAL RESPONSIVE */
+
+/* ===============================
+   TABLET
+================================= */
+@media (max-width: 991px) {
+
+  /* TOP IMAGE + QR */
+
+  /* CONTENT FULL WIDTH */
+
+}
+
+/* ===============================
+   MOBILE
+================================= */
+@media (max-width: 767px) {
+
+  /* TOP ROW IMAGE + QR */
+
+  /* IMAGE */
+
+  /* QR */
+
+  /* CONTENT BOTTOM FULL WIDTH */
+
+}
+
+/* ===============================
+   SMALL MOBILE
+================================= */
+
+
+
+/* ODBUS CONTENT SECTION */
+
+/* ===============================
+   ODBUS INFO SECTION
+=================================*/
+
+/* image */
+
+/* content */
+
+/* reverse rows */
+
+/* desktop spacing */
+
+
+/* ODBUS CONTENT SECTION RESPONSIVE */
+
+@media (max-width: 991px) {
+
+  /* .info-content {
+    padding: 0;
+    text-align: center;
+  } */
+}
+
+@media (max-width: 767px) {
+
+  /* ALL IMAGES TOP */
+
+  /* TEXT BELOW */
+  /* .info-content {
+    text-align: center;
+    padding: 0;
+  } */
+}
+
+
+/*  ODBUS CONTENT SECTION  END*/
+
+
+/* =====================================
+   ODBUS ADVANTAGE — Start
+===================================== */
+
+/* Slider wrapper */
+
+/* Horizontal scroll */
+
+/* Cards: 3 visible on desktop */
+
+/* Card content */
+
+/* Card image */
+
+/* ODBUS brand gradients */
+
+/* Text contrast */
+
+/* Navigation arrows */
+
+/* Tablet: 2 cards */
+
+/* Mobile: one swipeable card */
+
+/* Small phones */
+
+/* Respect reduced-motion preference */
+
+/* =====================================
+   ODBUS ADVANTAGE — End
+===================================== */
+
+/* New Poupular Routes Section */
+
+/* CARD */
+.route-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  border: 1px solid #e6e8ef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+
+  transition: all 0.25s ease;
+}
+
+a.btn.btn-warning {
+  background: none !important;
+  border: 1px solid #1b2155 !important;
+  text-transform: uppercase !important;
+  color: #1b2155 !important;
+  padding: 0 20px !important;
+}
+
+a.btn.btn-warning:hover {
+  background: #1b2155 !important;
+  color: #fff !important;
+  border-color: #1b2155 !important;
+}
+
+/* LEFT */
+.route-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ICON */
+.route-icon {
+  width: 16px;
+  flex-shrink: 0;
+}
+
+/* TEXT */
+.route-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  line-height: 1.4;
+}
+
+/* CITY */
+.city {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1b2155;
+  word-break: break-word;
+}
+
+/* EXCHANGE */
+.exchange {
+  font-size: 13px;
+  color: #1b2155;
+  font-weight: 600;
+}
+
+/* BUTTON */
+
+/* BUTTON HOVER */
+
+/* CARD HOVER */
+.route-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  border-color: #dcdff1;
+  background: #ffffff;
+}
+
+/* POPULAR ROUTES MOBILE RESPONSIVE */
+
+/* ===============================
+   TABLET
+================================= */
+@media (max-width: 991px) {
+
+  .top-routs {
+    padding: 40px 0;
+  }
+
+  .top-routs .container:first-child .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    padding: 0 15px;
+  }
+
+  .top-routs .text-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .top-routs .btn-warning,
+  .top-routs .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 110px;
+    height: 40px;
+    padding: 0 16px !important;
+    font-size: 13px;
+    border-radius: 8px;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  /* cards */
+  .top-routs .col-md-4,
+  .top-routs .col-sm-6 {
+    width: 50%;
+    max-width: 50%;
+    flex: 0 0 50%;
+  }
+
+  .route-card {
+    margin-bottom: 15px;
+  }
+
+}
+
+/* ===============================
+   MOBILE
+================================= */
+@media (max-width: 767px) {
+
+  .top-routs {
+    padding: 30px 0;
+  }
+
+  /* heading row single line */
+  .top-routs .container:first-child .row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: nowrap !important;
+    margin-bottom: 18px !important;
+  }
+
+  .top-routs .container:first-child .col-md-6 {
+    width: auto !important;
+    max-width: none !important;
+    flex: unset !important;
+    padding: 0 8px;
+  }
+
+  /* title */
+  .top-routs .title-section,
+  .top-routs h3 {
+    font-size: 18px !important;
+    line-height: 25px !important;
+    margin: 0 !important;
+    white-space: nowrap;
+    text-align: left !important;
+  }
+
+  /* button side */
+  .top-routs .text-right {
+    text-align: right !important;
+    margin-left: auto;
+  }
+
+  .top-routs .btn-warning,
+  .top-routs .btn {
+    height: 38px;
+    padding: 0 14px !important;
+    font-size: 13px !important;
+    border-radius: 6px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+  }
+
+  /* card full width */
+  .top-routs .col-md-4,
+  .top-routs .col-sm-6 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+
+  .route-card {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+
+  .route-left {
+    gap: 8px;
+  }
+
+  .route-icon {
+    width: 15px;
+  }
+
+  .city {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .exchange {
+    font-size: 12px;
+  }
+
+}
+
+/* ===============================
+   SMALL MOBILE
+================================= */
+@media (max-width: 575px) {
+
+  .top-routs {
+    padding: 25px 0;
+  }
+
+  .top-routs .title-section,
+  .top-routs h3 {
+    font-size: 18px !important;
+    line-height: 25px !important;
+  }
+
+  .top-routs .btn-warning,
+  .top-routs .btn {
+    height: 36px;
+    padding: 0 12px !important;
+    font-size: 12px !important;
+  }
+
+  .route-card {
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+
+  /* .city {
+    font-size: 12px;
+  } */
+
+  .exchange {
+    font-size: 11px;
+  }
+
+}
+
+/* New Poupular Routes Section end*/
+
+
+/* ===============================
+   ROUTE / QUICK LINKS SECTION
+=================================*/
+
+/* container */
+
+/* ===============================
+   TABS DESKTOP
+=================================*/
+
+/* .route-tabs li {
+  margin: 0;
+}
+
+.route-tabs li a {
+  display: block;
+  padding: 0 0 14px;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: .25s ease;
+  padding: 10px;
+} */
+
+/* .route-tabs li.active a {
+  color: #1b2155;
+  font-weight: 700;
+  border-bottom: 3px solid #f0c92f;
+  background: #f5f5f5;
+  border-radius: 3px;
+
+} */
+
+/* ===============================
+   TAB CONTENT
+=================================*/
+
+/* ===============================
+   GRID
+=================================*/
+
+/* ===============================
+   LINKS
+=================================*/
+
+/* ==================================================
+   MOBILE RESPONSIVE
+================================================== */
+
+@media (max-width: 767px) {
+
+  /* 4 BUTTON SINGLE ROW */
+
+  /* .route-tabs li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 42px;
+    padding: 8px 6px;
+    font-size: 11px;
+    line-height: 1.2;
+    border-radius: 22px;
+    background: #fff7db;
+    border: 1px solid #d8e0ff !important;
+    color: #1b2155 !important;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .route-tabs li.active a {
+    background: #1b2155 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 22px;
+  } */
+
+  /* GRID 2 COLUMN */
+
+}
+
+
+/* ==========================================
+   CUSTOM DATE PICKER
+========================================== */
+
+/* ===========================
+      POPUP
+=========================== */
+
+/* ===========================
+      HEADER
+=========================== */
+
+/* ===========================
+      WEEK
+=========================== */
+
+/* ===========================
+      DAYS
+=========================== */
+
+/* ===========================
+      MOBILE
+=========================== */
+
+@media (max-width: 768px) {
+
+  /* Calendar popup */
+
+  /* Header */
+
+  /* Week names */
+
+  /* Days */
+
+}
+
+/* ===========================
+   Maintenance Popup
+=========================== */

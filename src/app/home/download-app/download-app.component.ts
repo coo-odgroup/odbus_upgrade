@@ -6,7 +6,7 @@ import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-download-app',
   templateUrl: './download-app.component.html',
-  styleUrls: ['./download-app.component.css', '../home.component.css'],
+  styleUrls: ['./download-app.component.css'],
 })
 export class DownloadAppComponent implements OnInit {
   isMobile: boolean = false;

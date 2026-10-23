@@ -10,7 +10,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-top-routes',
   templateUrl: './top-routes.component.html',
-  styleUrls: ['./top-routes.component.css', '../home.component.css'],
+  styleUrls: ['./top-routes.component.css'],
 })
 export class TopRoutesComponent {
   @Input() popularRoutes: any[] = [];

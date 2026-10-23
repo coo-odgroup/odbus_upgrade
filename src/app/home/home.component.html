@@ -1,13 +1,18 @@
 <ng-template #Desktop>
   <!-- <section class="hero-banner-v5" style="background-image: url(&quot;assets/img/rainy_season.png&quot;)"> -->
-  <section
-    class="hero-banner-v5"
-    fetchpriority="high"
-    width="1600" 
-    height="600"
-    [style.background-image]="'url(' + homeBanner + ')'"
-  >
-    <div class="container">
+  <section class="hero-banner-v5">
+    <!-- PAGESPEED: real <img> so the browser can discover + prioritise it (LCP). Fixed size = no layout shift. -->
+    <img
+      class="hero-bg"
+      [src]="homeBanner || 'assets/img/new_banner2.webp'"
+      width="1900"
+      height="400"
+      fetchpriority="high"
+      decoding="async"
+      alt=""
+      role="presentation"
+    />
+    <div class="container hero-content">
       <div class="row">
         <div class="col-md-6">
           <div class="banner-left">
@@ -772,6 +777,8 @@
         *ngIf="homePopup?.popup_image && homePopup?.popup_image != 'null'"
         [src]="homePopup?.popup_image"
         width="100%"
+        loading="lazy"
+        decoding="async"
         alt="Popup"
       />
 

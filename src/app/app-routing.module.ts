@@ -11,7 +11,7 @@ import { ThankyouComponent } from './thankyou/thankyou.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ProfiledeleteComponent } from './profiledelete/profiledelete.component';
-import { PaymentStatusComponent } from './payment-status/payment-status.component';
+import { IdlePreloadStrategy } from './helpers/idle-preload.strategy';
 import { CommonContentComponent } from './common-content/common-content.component';
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { OnlinebusticketsComponent } from './onlinebustickets/onlinebustickets.component';
@@ -54,6 +54,7 @@ export const routes: Routes = [
   },
   {
     path: 'routes/:slug',
+    data: { preload: true },
     loadChildren: () =>
       import('./search/search.module').then((m) => m.SearchModule),
   },
@@ -123,6 +124,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    data: { preload: true },
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginModule),
   },
@@ -148,10 +150,15 @@ export const routes: Routes = [
   {
     matcher: userRouteMatcher,
     loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
-    canActivate: [AuthGuard],
+    canMatch: [AuthGuard], // checked before the user chunks are downloaded
   },
   { path: 'profile/delete', component: ProfiledeleteComponent },
-  { path: 'payment-status', component: PaymentStatusComponent },
+  {
+    // lazy: this page pulls in sweetalert2, which no other page on first load needs
+    path: 'payment-status',
+    loadChildren: () =>
+      import('./payment-status/payment-status.module').then((m) => m.PaymentStatusModule),
+  },
   {
     path: 'advantage/:slug',
     component: CommonContentComponent,
@@ -181,6 +188,7 @@ export const routes: Routes = [
   },
   {
     path: 'booking',
+    data: { preload: true },
     loadChildren: () =>
       import('./booking/booking.module').then((m) => m.BookingModule),
   },
@@ -193,6 +201,7 @@ export const routes: Routes = [
       onSameUrlNavigation: 'reload',
       scrollPositionRestoration: 'enabled',
       initialNavigation: 'enabledBlocking',
+      preloadingStrategy: IdlePreloadStrategy,
     }),
   ],
   exports: [RouterModule],

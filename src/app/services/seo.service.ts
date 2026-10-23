@@ -1,4 +1,5 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { serverCached } from './server-cache';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -9,7 +10,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Meta, Title } from '@angular/platform-browser';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, isPlatformServer } from '@angular/common';
 import { element } from 'protractor';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -220,6 +221,7 @@ export class SeoService {
     private title: Title,
     private meta: Meta,
     private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object,
   ) { }
 
   // seolist(current_url: string): Observable<any> {
@@ -267,15 +269,16 @@ export class SeoService {
       return of(this.seoCache[current_url]);
     }
 
-    // API Call
-    return this.httpClient
-      .post<any>(
-        this.apiURL + '/allseolist',
-        {
-          current_url: current_url
-        },
-        this.httpOptions
-      )
+    // API Call (on the server the answer is shared in memory for 10 minutes -> faster TTFB)
+    const call = () => this.httpClient.post<any>(
+      this.apiURL + '/allseolist',
+      { current_url: current_url },
+      this.httpOptions
+    );
+    const source$ = isPlatformServer(this.platformId)
+      ? serverCached('seo:' + current_url, 10 * 60_000, call)
+      : call();
+    return source$
       .pipe(
 
         tap((resp: any) => {

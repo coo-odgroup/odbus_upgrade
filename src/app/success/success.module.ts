@@ -1,3 +1,8 @@
+import { RouterModule } from '@angular/router';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { QRCodeModule } from 'angularx-qrcode';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,8 +12,14 @@ import { SuccessRoutingModule } from './success-routing.module';
 import { SuccessComponent } from './success.component';
 @NgModule({
   declarations: [
+    SuccessComponent,
   ],
   imports: [
+    RouterModule,
+    NgSelectModule,
+    AutocompleteLibModule,
+    NgxSpinnerModule,
+    QRCodeModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -17,6 +28,5 @@ import { SuccessComponent } from './success.component';
   ],
   exports: [],
   providers: [],
-  bootstrap: [SuccessComponent]
 })
 export class SuccessModule { }

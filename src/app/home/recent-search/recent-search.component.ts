@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-recent-search',
   templateUrl: './recent-search.component.html',
-  styleUrls: ['./recent-search.component.css', '../home.component.css'],
+  styleUrls: ['./recent-search.component.css'],
 })
 export class RecentSearchComponent implements OnInit {
   // router: any;

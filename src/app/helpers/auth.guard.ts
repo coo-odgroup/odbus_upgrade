@@ -7,6 +7,8 @@ import {
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  CanMatch,
+  UrlTree,
   Router,
   RouterStateSnapshot
 } from "@angular/router";
@@ -20,7 +22,7 @@ import {
   providedIn: 'root'
 })
 
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanMatch {
 
   constructor(
     private router: Router,
@@ -47,5 +49,14 @@ export class AuthGuard implements CanActivate {
     this.router.navigate(['login']);
 
     return false;
+  }
+
+  // PAGESPEED: used with `canMatch` so visitors who are not logged in never download the
+  // (large) user-account chunks; they are sent straight to /login.
+  canMatch(): boolean | UrlTree {
+    if (isPlatformServer(this.platformId)) {
+      return true;
+    }
+    return localStorage.getItem('user') ? true : this.router.createUrlTree(['login']);
   }
 }

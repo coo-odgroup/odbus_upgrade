@@ -13,7 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-growing',
   templateUrl: './growing.component.html',
-  styleUrls: ['./growing.component.css', '../home.component.css']
+  styleUrls: ['./growing.component.css']
 })
 export class GrowingComponent implements OnInit, AfterViewInit {
 

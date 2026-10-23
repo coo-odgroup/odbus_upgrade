@@ -111,13 +111,18 @@ export class AppComponent implements AfterViewInit {
 
     // Load browser-only data after startup; SSR should not call protected APIs.
     if (isPlatformBrowser(this.platformId)) {
-      this.storeLocalStorage().subscribe(() => {
+      // Do not wait for secondary SEO/storage APIs before the first browser paint.
+      // The app initializer already made PopularInfo available; hydrate it locally
+      // and fetch supplemental schema after the initial render.
+      this.storeLocalStorage().subscribe();
+      setTimeout(() => {
         this.seoService.getOrganizationSchema().subscribe((res: any) => {
+          if (!res) return;
           this.seoService.addOrganizationSchema(res.organization_schema);
           this.storage_version = res.storage_version;
           this.checkLocalStorageVersion();
         });
-      });
+      }, 0);
     }
 
     // this.seoService.addCanonicalUrlFromCurrentUrl();.

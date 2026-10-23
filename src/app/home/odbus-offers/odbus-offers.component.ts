@@ -15,7 +15,7 @@ import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-odbus-offers',
   templateUrl: './odbus-offers.component.html',
-  styleUrls: ['./odbus-offers.component.css', '../home.component.css'],
+  styleUrls: ['./odbus-offers.component.css'],
 })
 export class OdbusOffersComponent implements OnInit {
   private apiURL = GlobalConstants.BASE_URL;

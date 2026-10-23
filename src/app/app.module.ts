@@ -1,6 +1,5 @@
 import { NgModule, APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -9,31 +8,18 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { SearchComponent } from './search/search.component';
 import { PageErrorComponent } from './page-error/page-error.component';
 import { AppInitializerService } from './services/initializer.service';
-import { BookingComponent } from './booking/booking.component';
-import { ManageBookingComponent } from './manage-booking/manage-booking.component';
-import { SupportComponent } from './support/support.component';
-import { NewsComponent } from './news/news.component';
-import { AutocompleteLibModule } from 'angular-ng-autocomplete';
-import { ManagebookingdetailsComponent } from './managebookingdetails/managebookingdetails.component';
 import { ToastrModule } from 'ngx-toastr';
-import { NgbDate, NgbDateParserFormatter, NgbModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateParserFormatter, NgbTypeaheadModule, NgbDatepickerModule, NgbDropdownModule, NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomdateformatService } from "./services/customdateformat.service";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { AuthGuard } from './helpers/auth.guard';
-import { CountdownModule } from 'ngx-countdown';
 import { AuthModule } from '@auth0/auth0-angular';
-import { ImageCropperModule } from 'ngx-image-cropper';
-import { LightboxModule } from 'ngx-lightbox';
-import { QRCodeModule } from 'angularx-qrcode';
 import { PnrdetailComponent } from './pnrdetail/pnrdetail.component';
-import { SuccessComponent } from './success/success.component';
 import { ProfiledeleteComponent } from './profiledelete/profiledelete.component';
-import { PaymentStatusModule } from './payment-status/payment-status.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RecentSearchComponent } from './home/recent-search/recent-search.component';
 import { AdvantageComponent } from './home/advantage/advantage.component';
@@ -53,7 +39,6 @@ import { SharedModule } from './shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SitemapComponent } from './sitemap/sitemap.component';
 import { OnlinebusticketsComponent } from './onlinebustickets/onlinebustickets.component';
-import { MatStepperModule } from '@angular/material/stepper';
 import { NgOptimizedImage } from '@angular/common';
 
 export function appInit(appInitializerService: AppInitializerService) {
@@ -76,15 +61,8 @@ export function tokenGetter() {
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    SearchComponent,
     // PageErrorComponent,
-    BookingComponent,
-    ManageBookingComponent,
-    SupportComponent,
-    NewsComponent,
-    ManagebookingdetailsComponent,
     // PnrdetailComponent,
-    SuccessComponent,
     ProfiledeleteComponent,
     RecentSearchComponent,
     AdvantageComponent,
@@ -106,18 +84,17 @@ export function tokenGetter() {
   imports: [
     NoopAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    NgSelectModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
     AppRoutingModule,
-    NgbModule,
-    AutocompleteLibModule,
+    NgbTypeaheadModule,
+    NgbDatepickerModule,
+    NgbDropdownModule,
     HttpClientModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     NgbProgressbarModule,
-    CountdownModule,
     NgOptimizedImage,
     // AuthModule.forRoot({
     //   domain: 'dev-seofied.us.auth0.com',
@@ -127,11 +104,7 @@ export function tokenGetter() {
     //   },
     //   cacheLocation: 'localstorage' // Use localStorage for token storage
     // }),
-    ImageCropperModule,
-    LightboxModule,
-    QRCodeModule,
     SharedModule,
-    MatStepperModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: false,
       // Register the ServiceWorker as soon as the app is stable

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-top-operators',
   templateUrl: './top-operators.component.html',
-  styleUrls: ['./top-operators.component.css', '../home.component.css']
+  styleUrls: ['./top-operators.component.css']
 })
 export class TopOperatorsComponent implements OnInit {
 

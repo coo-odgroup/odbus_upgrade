@@ -1,0 +1,1035 @@
+
+/* ---- home rules used by this component (auto-extracted from home.component.css) ---- */
+a:hover {
+  text-decoration: none !important;
+}
+
+/* .input-group-prepend {
+  margin-right: 3px !important;
+} */
+
+/* .hero-banner-inner-srchbus .form-control {
+    border-radius:0 0.25rem 0.25rem 0;
+} */
+
+/* Mobile Version Start  */
+
+
+/* .mobile-discount .img-fluid {
+  width: 100%;
+}
+
+
+.mobile-discount h6 {
+  font-weight: 600;
+  color: #072c6b;
+} */
+
+/* New Offer Correction */
+
+/* =========================================================
+   MOBILE OFFERS SECTION
+========================================================= */
+
+/* =========================================================
+   TOP HEADER
+========================================================= */
+
+/* =========================================================
+   OFFER CARD
+========================================================= */
+
+/* =========================================================
+   CAROUSEL FIX
+========================================================= */
+
+.mobile-offers-card ::ng-deep .carousel,
+.mobile-offers-card ::ng-deep .carousel-cells,
+.mobile-offers-card ::ng-deep .carousel-cell {
+  width: 100%;
+  display: block;
+}
+
+/* =========================================================
+   IMAGE RESPONSIVE FIX
+========================================================= */
+
+.mobile-offers-card ::ng-deep .carousel-cell img,
+.mobile-offers-card ::ng-deep img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  object-fit: cover !important;
+  border-radius: 18px;
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE HEIGHTS
+========================================================= */
+
+/* 430px Devices */
+
+
+@media (max-width: 430px) {
+
+  .mobile-offers-card ::ng-deep .carousel-cell img,
+  .mobile-offers-card ::ng-deep img {
+    aspect-ratio: 15 / 7;
+  }
+}
+
+
+
+/* 390px Devices */
+
+@media (max-width: 390px) {
+
+  .mobile-offers-card ::ng-deep .carousel-cell img,
+  .mobile-offers-card ::ng-deep img {
+    aspect-ratio: 15 / 7;
+    border-radius: 16px;
+  }
+}
+
+/* 360px Devices */
+
+@media (max-width: 360px) {
+
+
+  .mobile-offers-card ::ng-deep .carousel-cell img,
+  .mobile-offers-card ::ng-deep img {
+    aspect-ratio: 17 / 8;
+  }
+}
+
+/* New Offer Correction */
+
+/* .mobile-logo img {
+  height: 42px;
+  float: right;
+} */
+
+
+/* Mobile Version End  */
+
+
+
+/* blog section */
+
+/* BLOG CARD DESIGN */
+
+/* BLOG CARD SECTION */
+
+/* IMAGE */
+
+/* TAG */
+
+/* CONTENT */
+
+
+
+/* 🔥 POPUP OVERLAY */
+
+/* BACKDROP */
+
+/* POPUP */
+
+/* HANDLE */
+
+/* TEXT */
+
+/* IMAGE */
+
+/* BUTTON */
+
+/* CLOSE */
+
+/* ANIMATION */
+
+
+/* New hero section */
+/* HERO */
+
+/* TEXT */
+
+/* SEARCH POSITION */
+
+/* BOX */
+
+/* LABEL */
+
+/* REMOVE DEFAULT */
+
+/* GAP CONTROL */
+
+/* ICONS (SEPARATE) */
+
+/* DATE */
+
+/* .date-btns {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+}
+
+.date-btns span {
+  font-size: 11px;
+  padding: 3px 10px;
+  margin-left: 4px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.date-btns span:first-child {
+  border: 1px solid #f0c004;
+  color: #1b2155;
+}
+
+.date-btns span:last-child {
+  border: 1px solid #1b2155;
+  color: #1b2155;
+}
+
+.date-btns span:first-child:hover {
+  background-color: #f0c004;
+  color: #fff;
+}
+
+.date-btns span:last-child:hover {
+  background-color: #1b2155;
+  color: #fff;
+} */
+
+/* SWAP */
+
+/* BUTTON */
+
+/* REMOVE BOOTSTRAP GAP */
+
+
+/* ==========================================
+   MOBILE ONLY
+========================================== */
+
+
+
+@media (max-width: 768px) {
+
+  /* TOP YELLOW AREA */
+
+  /* REMOVE DESKTOP OVERLAP */
+
+  /* WHITE SEARCH BOX */
+
+  /* FIELD */
+
+  /* INPUT */
+
+  /* ICONS */
+
+  /* TO FIELD */
+
+  /* SWAP BUTTON */
+
+  /* DATE SECTION */
+
+  /* SEARCH BUTTON */
+
+  /* REMOVE BOOTSTRAP GAP */
+
+}
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+/* New hero section ended*/
+
+
+/* ================= RECENT SEARCH ================= */
+
+/* TITLE */
+
+/* LEFT LINE */
+
+/* WRAPPER */
+
+/* CARD */
+/* .recent-card {
+  min-width: 240px;
+  background: #f6fcff;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #b4cfff;
+  cursor: pointer;
+  transition: 0.4s;
+} 
+
+
+.recent-card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #1b2155;
+}
+
+  */
+
+
+
+/* ICON */
+
+/* TEXT */
+
+
+/* ==================================================
+   TOP OPERATORS
+================================================== */
+
+/* =====================================
+   CARD BASE
+===================================== */
+
+/* TOP LINE */
+
+/* HOVER */
+
+/* FLEX */
+
+/* ICON */
+
+/* TEXT */
+
+/* ROW */
+
+/* BADGE */
+
+/* ==================================================
+   TABLET
+================================================== */
+@media (max-width: 991px) {
+
+  /* HEADER */
+
+  /* GRID */
+
+}
+
+/* ==================================================
+   MOBILE
+================================================== */
+@media (max-width: 767px) {
+
+  /* HEADER SINGLE ROW */
+
+  /* TITLE */
+
+  /* BUTTON */
+
+  /* GRID */
+
+}
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+/* ===============================
+   FAQ FULL CSS
+=================================*/
+
+/* ===============================
+   Tabs
+=================================*/
+
+/* .faq-section .faq-tabs li {
+  margin: 0;
+}
+
+.faq-section .faq-tabs li a {
+  display: block;
+  padding: 10px;
+  color: #000000 !important;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none !important;
+  border: none !important;
+  background: none !important;
+}
+
+.faq-section .faq-tabs li.active a {
+  color: #1b2155 !important;
+  font-weight: 700;
+  border-bottom: 3px solid #f0c92f !important;
+  border-radius: 3px;
+  background: #f5f5f5 !important;
+} */
+
+/* ===============================
+   FAQ Rows
+=================================*/
+
+/* question */
+
+/* answer */
+
+/* active answer */
+
+/* ===============================
+   Icon
+=================================*/
+
+/* rotate on open */
+
+
+/* FAQ SECTION RESPONSIVE - EVERYTHING CENTER */
+
+@media (max-width: 767px) {
+
+  /* .faq-section .faq-tabs li {
+    width: auto;
+  }
+
+  .faq-section .faq-tabs li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 42px;
+    padding: 8px 6px;
+    font-size: 12px;
+    line-height: 1.2;
+    border-radius: 22px;
+    background: #fff7db !important;
+    border: 1px solid #d8e0ff !important;
+    color: #1b2155 !important;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .faq-section .faq-tabs li.active a {
+    border-bottom: none !important;
+    background: #1b2155 !important;
+    color: #fff !important;
+    border-radius: 22px;
+  } */
+}
+
+
+
+/* new download section */
+
+/* SECTION */
+
+/* Right Box */
+
+/* CENTER*/
+
+/* LEFT */
+
+/* DOWNLOAD APP FINAL RESPONSIVE */
+
+/* ===============================
+   TABLET
+================================= */
+@media (max-width: 991px) {
+
+  /* TOP IMAGE + QR */
+
+  /* CONTENT FULL WIDTH */
+
+}
+
+/* ===============================
+   MOBILE
+================================= */
+@media (max-width: 767px) {
+
+  /* TOP ROW IMAGE + QR */
+
+  /* IMAGE */
+
+  /* QR */
+
+  /* CONTENT BOTTOM FULL WIDTH */
+
+}
+
+/* ===============================
+   SMALL MOBILE
+================================= */
+
+
+
+/* ODBUS CONTENT SECTION */
+
+/* ===============================
+   ODBUS INFO SECTION
+=================================*/
+
+/* image */
+
+/* content */
+
+/* reverse rows */
+
+/* desktop spacing */
+
+
+/* ODBUS CONTENT SECTION RESPONSIVE */
+
+@media (max-width: 991px) {
+
+  /* .info-content {
+    padding: 0;
+    text-align: center;
+  } */
+}
+
+@media (max-width: 767px) {
+
+  /* ALL IMAGES TOP */
+
+  /* TEXT BELOW */
+  /* .info-content {
+    text-align: center;
+    padding: 0;
+  } */
+}
+
+
+/*  ODBUS CONTENT SECTION  END*/
+
+
+/* =====================================
+   ODBUS ADVANTAGE — Start
+===================================== */
+
+.whats-new-section {
+  padding: 36px 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.whats-new-section .section-title {
+  margin: 0 0 24px;
+  color: #1b2155;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+
+/* Slider wrapper */
+.slider-wrapper {
+  position: relative;
+  min-width: 0;
+}
+
+/* Horizontal scroll */
+.cards-scroll {
+  display: flex;
+  gap: 20px;
+  padding: 6px 2px 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cards-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cards: 3 visible on desktop */
+.news-card {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 0 calc((100% - 40px) / 3);
+  width: calc((100% - 40px) / 3);
+  min-width: 0;
+  height: 190px;
+  border: 1px solid rgba(27, 33, 85, .10);
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  box-shadow: 0 5px 18px rgba(27, 33, 85, .07);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(27, 33, 85, .13);
+}
+
+/* Card content */
+.card-left {
+  box-sizing: border-box;
+  flex: 1 1 70%;
+  min-width: 0;
+  padding: 20px 8px 20px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.card-left h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.card-left p {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.card-left a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.card-left a:hover {
+  text-decoration: underline;
+}
+
+/* Card image */
+.card-right {
+  box-sizing: border-box;
+  flex: 0 0 30%;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 10px 12px 0;
+}
+
+.card-right img {
+  display: block;
+  width: 100%;
+  max-width: 106px;
+  max-height: 155px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 8px rgba(0, 0, 0, .12));
+}
+
+/* ODBUS brand gradients */
+.news-card.pink {
+  background: linear-gradient(135deg, #0f2b6c, #1b4db3);
+}
+
+.news-card.red {
+  background: linear-gradient(135deg, #f7b500, #ff8c00);
+}
+
+.news-card.blue {
+  background: linear-gradient(135deg, #eaf4ff, #bfdcff);
+}
+
+.news-card.cream {
+  background: linear-gradient(135deg, #fff8e8, #ffe6b0);
+}
+
+.news-card.yellow {
+  background: linear-gradient(135deg, #fff0fb, #e9b9dc);
+}
+
+.news-card.last {
+  background: linear-gradient(135deg, #c8f7ee, #7ad8c4);
+}
+
+/* Text contrast */
+.news-card.pink .card-left h3,
+.news-card.pink .card-left p,
+.news-card.pink .card-left a,
+.news-card.red .card-left h3,
+.news-card.red .card-left p,
+.news-card.red .card-left a {
+  color: #fff;
+}
+
+.news-card.blue .card-left h3,
+.news-card.blue .card-left p,
+.news-card.blue .card-left a,
+.news-card.cream .card-left h3,
+.news-card.cream .card-left p,
+.news-card.cream .card-left a,
+.news-card.yellow .card-left h3,
+.news-card.yellow .card-left p,
+.news-card.yellow .card-left a,
+.news-card.last .card-left h3,
+.news-card.last .card-left p,
+.news-card.last .card-left a {
+  color: #1b2155;
+}
+
+/* Navigation arrows */
+.slide-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid rgba(27, 33, 85, .12);
+  border-radius: 50%;
+  background: #fff;
+  color: #1b2155;
+  font-size: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .12);
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+
+.slide-btn:hover {
+  background: #1b2155;
+  color: #fff;
+}
+
+.prev-btn {
+  left: -16px;
+}
+
+.next-btn {
+  right: -16px;
+}
+
+/* Tablet: 2 cards */
+@media (max-width: 991px) {
+  .whats-new-section {
+    padding: 28px 0;
+  }
+
+  .news-card {
+    flex-basis: calc((100% - 20px) / 2);
+    width: calc((100% - 20px) / 2);
+    height: 185px;
+  }
+
+  .card-left {
+    padding-left: 16px;
+  }
+
+  .card-left h3 {
+    font-size: 17px;
+  }
+
+  .prev-btn {
+    left: -10px;
+  }
+
+  .next-btn {
+    right: -10px;
+  }
+}
+
+/* Mobile: one swipeable card */
+@media (max-width: 767px) {
+  .whats-new-section {
+    padding: 24px 0;
+  }
+
+  .whats-new-section .section-title {
+    margin-bottom: 16px;
+    font-size: 19px;
+    line-height: 1.35;
+  }
+
+  .cards-scroll {
+    gap: 14px;
+    padding: 4px 2px 12px;
+    scroll-padding-inline: 2px;
+  }
+
+  .news-card {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 180px;
+    min-height: 180px;
+    border-radius: 14px;
+  }
+
+  .card-left {
+    padding: 18px 8px 18px 18px;
+  }
+
+  .card-left h3 {
+    font-size: 18px;
+    margin-bottom: 7px;
+  }
+
+  .card-left p {
+    font-size: 13px;
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+
+  .card-left a {
+    font-size: 13px;
+  }
+
+  .card-right {
+    flex-basis: 29%;
+    padding-right: 8px;
+  }
+
+  .card-right img {
+    max-width: 100px;
+    max-height: 145px;
+  }
+
+  .slide-btn {
+    display: none;
+  }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .news-card {
+    height: 170px;
+    min-height: 170px;
+  }
+
+  .card-left {
+    padding-left: 13px;
+  }
+
+  .card-left h3 {
+    font-size: 16px;
+  }
+
+  .card-left p {
+    font-size: 12px;
+  }
+
+  .card-right {
+    flex-basis: 27%;
+  }
+
+  .card-right img {
+    max-height: 130px;
+  }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .cards-scroll {
+    scroll-behavior: auto;
+  }
+
+  .news-card,
+  .slide-btn {
+    transition: none;
+  }
+}
+
+/* =====================================
+   ODBUS ADVANTAGE — End
+===================================== */
+
+/* New Poupular Routes Section */
+
+/* CARD */
+
+/* LEFT */
+
+/* ICON */
+
+/* TEXT */
+
+/* CITY */
+
+/* EXCHANGE */
+
+/* BUTTON */
+
+/* BUTTON HOVER */
+
+/* CARD HOVER */
+
+/* POPULAR ROUTES MOBILE RESPONSIVE */
+
+/* ===============================
+   TABLET
+================================= */
+@media (max-width: 991px) {
+
+  /* cards */
+
+}
+
+/* ===============================
+   MOBILE
+================================= */
+@media (max-width: 767px) {
+
+  /* heading row single line */
+
+  /* title */
+
+  /* button side */
+
+  /* card full width */
+
+}
+
+/* ===============================
+   SMALL MOBILE
+================================= */
+@media (max-width: 575px) {
+
+  /* .city {
+    font-size: 12px;
+  } */
+
+}
+
+/* New Poupular Routes Section end*/
+
+
+/* ===============================
+   ROUTE / QUICK LINKS SECTION
+=================================*/
+
+/* container */
+
+/* ===============================
+   TABS DESKTOP
+=================================*/
+
+/* .route-tabs li {
+  margin: 0;
+}
+
+.route-tabs li a {
+  display: block;
+  padding: 0 0 14px;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: .25s ease;
+  padding: 10px;
+} */
+
+/* .route-tabs li.active a {
+  color: #1b2155;
+  font-weight: 700;
+  border-bottom: 3px solid #f0c92f;
+  background: #f5f5f5;
+  border-radius: 3px;
+
+} */
+
+/* ===============================
+   TAB CONTENT
+=================================*/
+
+/* ===============================
+   GRID
+=================================*/
+
+/* ===============================
+   LINKS
+=================================*/
+
+/* ==================================================
+   MOBILE RESPONSIVE
+================================================== */
+
+@media (max-width: 767px) {
+
+  /* 4 BUTTON SINGLE ROW */
+
+  /* .route-tabs li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 42px;
+    padding: 8px 6px;
+    font-size: 11px;
+    line-height: 1.2;
+    border-radius: 22px;
+    background: #fff7db;
+    border: 1px solid #d8e0ff !important;
+    color: #1b2155 !important;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .route-tabs li.active a {
+    background: #1b2155 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 22px;
+  } */
+
+  /* GRID 2 COLUMN */
+
+}
+
+
+/* ==========================================
+   CUSTOM DATE PICKER
+========================================== */
+
+/* ===========================
+      POPUP
+=========================== */
+
+/* ===========================
+      HEADER
+=========================== */
+
+/* ===========================
+      WEEK
+=========================== */
+
+/* ===========================
+      DAYS
+=========================== */
+
+/* ===========================
+      MOBILE
+=========================== */
+
+@media (max-width: 768px) {
+
+  /* Calendar popup */
+
+  /* Header */
+
+  /* Week names */
+
+  /* Days */
+
+}
+
+/* ===========================
+   Maintenance Popup
+=========================== */
