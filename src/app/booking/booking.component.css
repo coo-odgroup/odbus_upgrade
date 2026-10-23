@@ -3445,6 +3445,7 @@ Journey Details Card
   .terms-intro {
     padding: 11px 12px;
     margin-bottom: 18px;
+    display: block;
   }
 
   .terms-intro p {
