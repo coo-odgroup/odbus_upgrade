@@ -1,176 +1,173 @@
+<!-- DESKTOP FAQ -->
 <ng-container *ngIf="!isMobile">
-  <section class="faq-sec">
-    <span class="line-span"
-      ><div class="container"><h1>Frequently Asked Questions</h1></div></span
-    >
-    <div class="container">
-      <div class="main-tnc">
-        <div class="row">
-          <div class="col-md-12">
-            <ngb-accordion
-              #acc="ngbAccordion"
-              [closeOthers]="true"
-              activeIds="panel0"
-            >
-              <ngb-panel
-                *ngFor="let category of faqs; let i = index"
-                [id]="'panel' + i"
-              >
-                <ng-template ngbPanelTitle>
-                  {{ category.category_name }}
-                </ng-template>
+  <section class="odbus-faq-page">
 
-                <ng-template ngbPanelContent>
-                  <div class="ml30">
-                    <div *ngFor="let faq of category.faqs">
-                      <h3 class="faq-header">
-                        {{ faq.title }}
-                      </h3>
-
-                      <p class="faq-para" [innerHTML]="faq.content"></p>
-                    </div>
-                  </div>
-                </ng-template>
-              </ngb-panel>
-            </ngb-accordion>
-          </div>
-        </div>
+    <div class="odbus-faq-titlebar">
+      <div class="container">
+        <h1>Frequently Asked Questions</h1>
       </div>
     </div>
+
+    <div class="container odbus-faq-container">
+      <div class="odbus-faq-card">
+
+        <ngb-accordion class="odbus-faq-accordion" [closeOthers]="true" activeIds="panel0">
+          <ngb-panel *ngFor="let category of faqs; let i = index" [id]="'panel' + i">
+            <ng-template ngbPanelTitle>
+              <span class="odbus-faq-category-title">
+                <span class="odbus-faq-number">
+                  {{ i + 1 < 10 ? '0' + (i + 1) : i + 1 }} </span>
+                    <span class="odbus-faq-category-name">
+                      {{ category.category_name }}
+                    </span>
+                </span>
+            </ng-template>
+
+            <ng-template ngbPanelContent>
+              <div class="odbus-faq-answers">
+                <article class="odbus-faq-answer" *ngFor="let faq of category.faqs">
+                  <h3>{{ faq.title }}</h3>
+                  <div class="odbus-faq-answer-content" [innerHTML]="faq.content"></div>
+                </article>
+
+                <p class="odbus-faq-empty" *ngIf="!category.faqs || category.faqs.length === 0">
+                  No questions are available in this category yet.
+                </p>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+
+        <div class="odbus-faq-loading" *ngIf="!faqs || faqs.length === 0">
+          Loading frequently asked questions...
+        </div>
+
+      </div>
+
+      <a routerLink="/contact-us" class="odbus-faq-contact">
+        <span class="odbus-faq-contact-icon">i</span>
+        <span class="odbus-faq-contact-text">
+          <strong>Still need assistance?</strong>
+          <small>Our support team can help with your travel queries.</small>
+        </span>
+        <span class="odbus-faq-contact-link">
+          Contact Support <span aria-hidden="true">→</span>
+        </span>
+      </a>
+    </div>
+
   </section>
 </ng-container>
 
+
+<!-- MOBILE FAQ -->
 <ng-container *ngIf="isMobile && !MenuActive">
-  <div class="mobile-mybooking-top">
-    <div class="row">
-      <div class="col-1 pr-0 pl-2 mob-arrow-left">
-        <a routerLink="/">
-          <i class="fa fa-arrow-left"></i>
-        </a>
+  <main class="odbus-faq-mobile">
+
+    <header class="odbus-faq-mobile-header">
+      <a routerLink="/" class="odbus-faq-mobile-back" aria-label="Go home">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </a>
+
+      <h1>Frequently Asked Questions</h1>
+
+      <a routerLink="/" class="odbus-faq-mobile-logo" aria-label="ODBUS home">
+        <img src="assets/img/mob-img/logo.png" alt="ODBUS" />
+      </a>
+    </header>
+
+    <div class="odbus-faq-mobile-content">
+
+      <div class="odbus-faq-mobile-intro">
+        <p>Find answers about bookings, payments and cancellations.</p>
       </div>
-      <div class="col-7 pl-2 pr-2 mob-list-center">
-        <h5>Support</h5>
-      </div>
-      <div class="col-4 pl-2 pr-2">
-        <div class="mobile-logo">
-          <img src="assets/img/mob-img/logo.png" alt="Logo" />
+
+      <div class="odbus-faq-mobile-card">
+
+        <ngb-accordion class="odbus-faq-accordion" [closeOthers]="true" activeIds="mobile-panel0">
+          <ngb-panel *ngFor="let category of faqs; let i = index" [id]="'mobile-panel' + i">
+            <ng-template ngbPanelTitle>
+              <span class="odbus-faq-category-title">
+                <span class="odbus-faq-number">
+                  {{ i + 1 < 10 ? '0' + (i + 1) : i + 1 }} </span>
+                    <span class="odbus-faq-category-name">
+                      {{ category.category_name }}
+                    </span>
+                </span>
+            </ng-template>
+
+            <ng-template ngbPanelContent>
+              <div class="odbus-faq-answers">
+                <article class="odbus-faq-answer" *ngFor="let faq of category.faqs">
+                  <h3>{{ faq.title }}</h3>
+                  <div class="odbus-faq-answer-content" [innerHTML]="faq.content"></div>
+                </article>
+
+                <p class="odbus-faq-empty" *ngIf="!category.faqs || category.faqs.length === 0">
+                  No questions are available in this category yet.
+                </p>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+
+        <div class="odbus-faq-loading" *ngIf="!faqs || faqs.length === 0">
+          Loading frequently asked questions...
         </div>
+
       </div>
+
+      <a routerLink="/contact-us" class="odbus-faq-mobile-contact">
+        <span class="odbus-faq-contact-icon">i</span>
+        <span class="odbus-faq-contact-text">
+          <strong>Need help with your booking?</strong>
+          <small>Contact our support team</small>
+        </span>
+        <span class="odbus-faq-mobile-arrow">→</span>
+      </a>
+
     </div>
-  </div>
-
-  <div class="mobile-support-middle">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h2>Need some help?</h2>
-        <h3>Here is how we can support you?</h3>
-        <a href="/contact-us"><img src="assets/img/raise-ticket.png" alt="Raise Ticket" /></a>
-      </div>
-    </div>
-
-    <div class="row mt-4">
-      <div class="col-12 text-left">
-        <h4>Frequently Asked Questions</h4>
-
-        <div class="row">
-          <div class="col-md-12">
-            <ngb-accordion #acc="ngbAccordion" activeIds="panel0">
-              <ngb-panel
-                *ngFor="let category of faqs; let i = index"
-                [id]="'panel' + i"
-              >
-                <!-- Category Name -->
-                <ng-template ngbPanelTitle>
-                  {{ category.category_name }}
-                </ng-template>
-
-                <!-- FAQs -->
-                <ng-template ngbPanelContent>
-                  <div class="ml30">
-                    <div *ngFor="let faq of category.faqs">
-                      <h3 class="faq-header">
-                        {{ faq.title }}
-                      </h3>
-
-                      <p class="faq-para" [innerHTML]="faq.content"></p>
-                    </div>
-                  </div>
-                </ng-template>
-              </ngb-panel>
-            </ngb-accordion>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </main>
 </ng-container>
 
-<ng-container *ngIf="MenuActive">
-  <div class="mobile-myaccount-top">
-    <div class="row">
-      <div class="col-5">
-        <div class="mobile-logo">
-          <img src="assets/img/mob-img/logo.png" alt="Logo" />
-        </div>
-      </div>
-      <div class="col-7 mob-logintx">
-        <a routerLink="/login" *ngIf="!session.isLoggedIn()">
-          Login / Signup
-        </a>
-        <a routerLink="/dashboard" *ngIf="session.isLoggedIn()"> Dashboard </a>
-      </div>
-    </div>
+
+<!-- EXISTING MOBILE ACCOUNT MENU -->
+<ng-container *ngIf="isMobile && MenuActive">
+  <div class="odbus-faq-account-header">
+    <a routerLink="/" class="odbus-faq-account-logo">
+      <img src="assets/img/mob-img/logo.png" alt="ODBUS" />
+    </a>
+
+    <a routerLink="/login" *ngIf="!session.isLoggedIn()" class="odbus-faq-account-action">
+      Login / Signup
+    </a>
+
+    <a routerLink="/dashboard" *ngIf="session.isLoggedIn()" class="odbus-faq-account-action">
+      Dashboard
+    </a>
   </div>
 
-  <div class="mobile-myaccount-middle">
-    <ul class="mobile-menu">
-      <li>
-        <a routerLink="/manage-booking"
-          ><i class="far fa-window-restore"></i> Manage Booking</a
-        >
-      </li>
-      <li>
-        <a routerLink="/about-us"
-          ><i class="fa fa-info-circle"></i> About Us</a
-        >
-      </li>
-      <li>
-        <a routerLink="/contact-us"
-          ><i class="fa fa-envelope"></i> Contact Us</a
-        >
-      </li>
-      <li>
-        <a routerLink="/offers"><i class="fa fa-gifts"></i> Offers</a>
-      </li>
-      <li>
-        <a routerLink="/operators"><i class="fa fa-bus"></i> Operators</a>
-      </li>
-      <li>
-        <a routerLink="/routes"><i class="fa fa-map-marker-alt"></i> Routes</a>
-      </li>
-      <li>
-        <a routerLink="/testimonials"
-          ><i class="fa fa-star"></i> Testimonials</a
-        >
-      </li>
-      <li>
-        <a routerLink="/terms-conditions"
-          ><i class="fa fa-file-image"></i> Terms & Conditions</a
-        >
-      </li>
-      <li>
-        <a routerLink="/privacy-policy"
-          ><i class="far fa-file-powerpoint"></i> Privacy Policy</a
-        >
-      </li>
+  <nav class="odbus-faq-account-menu">
+    <ul>
+      <li><a routerLink="/manage-booking"><i class="far fa-window-restore"></i> Manage Booking</a></li>
+      <li><a routerLink="/about-us"><i class="fa fa-info-circle"></i> About Us</a></li>
+      <li><a routerLink="/contact-us"><i class="fa fa-envelope"></i> Contact Us</a></li>
+      <li><a routerLink="/offers"><i class="fa fa-gifts"></i> Offers</a></li>
+      <li><a routerLink="/operators"><i class="fa fa-bus"></i> Operators</a></li>
+      <li><a routerLink="/routes"><i class="fa fa-map-marker-alt"></i> Routes</a></li>
+      <li><a routerLink="/testimonials"><i class="fa fa-star"></i> Testimonials</a></li>
+      <li><a routerLink="/terms-conditions"><i class="fa fa-file-image"></i> Terms &amp; Conditions</a></li>
+      <li><a routerLink="/privacy-policy"><i class="far fa-file-powerpoint"></i> Privacy Policy</a></li>
+
       <li *ngIf="session.isLoggedIn()">
-        <a routerLink="/my-reviews"><i class="fa fa-comments"></i>My Review</a>
+        <a routerLink="/my-reviews"><i class="fa fa-comments"></i> My Review</a>
       </li>
+
       <li *ngIf="session.isLoggedIn()">
-        <a (click)="signOut()"><i class="fa fa-sign-out-alt"></i>Logout</a>
+        <a (click)="signOut()"><i class="fa fa-sign-out-alt"></i> Logout</a>
       </li>
     </ul>
-  </div>
+  </nav>
 </ng-container>
 
 <ng-container *ngIf="isMobile">
