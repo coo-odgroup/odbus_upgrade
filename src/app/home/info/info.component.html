@@ -1,18 +1,131 @@
 <section class="odbus-info-section">
   <div class="container">
-    <!-- ROW 1 -->
+
+    <!-- ROW 1: ABOUT ODBUS -->
     <div class="row align-items-center info-row">
-      <!-- IMAGE LEFT 4 -->
+
       <div class="col-md-4">
-        <div class="info-img left-img">
-          <img src="assets/img/smart_bus_ticket.webp"  alt="Book Bus Ticket" loading="lazy" width="320" height="245" fetchpriority="high" decoding="async" />
+        <div class="info-visual visual-about">
+
+          <div class="visual-orbit orbit-about"></div>
+
+          <!-- Floating location pins -->
+          <div class="float-icon location-one">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+          </div>
+
+          <div class="float-icon location-two">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+          </div>
+
+          <div class="float-icon shield-float">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg>
+          </div>
+
+          <!-- Brand label -->
+          <div class="visual-brand">
+            ODBUS
+          </div>
+          <div class="visual-subtitle">
+            Your Journey Partner
+          </div>
+
+          <!-- City background -->
+          <div class="city-silhouette">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+            <span></span><span></span>
+          </div>
+
+          <!-- Road -->
+          <div class="illustration-road">
+            <span></span><span></span><span></span>
+          </div>
+
+          <!-- Bus SVG -->
+          <svg class="hero-bus-svg" viewBox="0 0 340 170" role="img" aria-label="Illustration of an ODBUS bus">
+            <defs>
+              <linearGradient id="aboutBusBody" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="100%" stop-color="#dce8fa" />
+              </linearGradient>
+              <linearGradient id="aboutBusGlass" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#173e78" />
+                <stop offset="100%" stop-color="#071735" />
+              </linearGradient>
+            </defs>
+
+            <ellipse cx="174" cy="145" rx="137" ry="12" fill="#1b2155" opacity=".12" />
+
+            <path d="M42 55 Q43 35 67 31 L245 20
+                     Q267 19 280 39 L308 82
+                     L308 126 Q308 137 294 139
+                     L45 139 Q34 137 34 125 L34 70Z" fill="url(#aboutBusBody)" stroke="#1b2155" stroke-width="3"
+              stroke-linejoin="round" />
+
+            <path d="M55 54 Q57 42 72 40 L235 30
+                     Q251 29 260 43 L281 76 L55 85Z" fill="url(#aboutBusGlass)" />
+
+            <path d="M270 45 L296 81 L284 81 L259 46Z" fill="#4e83c8" />
+
+            <path d="M62 91 L294 88 L294 111
+                     L62 111Z" fill="#1b2155" />
+
+            <path d="M65 117 L294 117 L294 125
+                     L65 125Z" fill="#f0c92f" />
+
+            <text x="151" y="105" font-size="15" font-weight="800" fill="#ffffff" text-anchor="middle">ODBUS</text>
+
+            <path d="M35 83 L53 83 L53 116 L35 116Z" fill="#e7effb" stroke="#1b2155" stroke-width="2" />
+
+            <path d="M300 91 L307 94 L307 108 L300 108Z" fill="#f0c92f" />
+
+            <circle cx="89" cy="137" r="20" fill="#16294c" />
+            <circle cx="89" cy="137" r="10" fill="#b9c7da" />
+            <circle cx="89" cy="137" r="4" fill="#ffffff" />
+
+            <circle cx="260" cy="137" r="20" fill="#16294c" />
+            <circle cx="260" cy="137" r="10" fill="#b9c7da" />
+            <circle cx="260" cy="137" r="4" fill="#ffffff" />
+          </svg>
+
+          <!-- Mobile illustration -->
+          <div class="visual-phone">
+            <div class="phone-speaker"></div>
+            <div class="phone-screen">
+              <div class="phone-logo">O<span>BUS</span></div>
+              <div class="phone-route">
+                <span class="route-dot"></span>
+                <span class="route-line"></span>
+                <span class="route-dot route-dot-end"></span>
+              </div>
+              <div class="phone-route-label">
+                <span>From</span><span>To</span>
+              </div>
+              <div class="phone-book-button"></div>
+            </div>
+          </div>
+
+          <div class="visual-caption">
+            <span class="caption-check">✓</span>
+            Smart Bus Ticket Booking
+          </div>
+
         </div>
       </div>
 
-      <!-- CONTENT RIGHT 8 -->
       <div class="col-md-8">
         <div class="info-content">
-          <h2>ODBUS: Smart Bus Ticket Booking Platform for Odisha & Beyond</h2>
+          <h2>ODBUS: Smart Bus Ticket Booking Platform for Odisha &amp; Beyond</h2>
 
           <p>
             ODBUS is a fast-growing online bus ticket booking platform designed
@@ -36,21 +149,24 @@
           </p>
         </div>
       </div>
+
     </div>
 
-    <!-- ROW 2 -->
+
+    <!-- ROW 2: WHY CHOOSE ODBUS -->
     <div class="row align-items-center info-row reverse-row">
-      <!-- CONTENT LEFT 8 -->
+
       <div class="col-md-8">
         <div class="info-content">
           <h2>Why Choose ODBUS for Bus Booking?</h2>
+
           <p>
             Here’s what makes ODBUS a preferred choice for bus ticket booking:
           </p>
 
           <ul>
             <li>
-              <strong>Easy & Fast Booking</strong> – Book your bus tickets in
+              <strong>Easy &amp; Fast Booking</strong> – Book your bus tickets in
               just a few clicks with a simple and user-friendly interface
               designed for all travellers.
             </li>
@@ -85,24 +201,232 @@
         </div>
       </div>
 
-      <!-- IMAGE RIGHT 4 -->
       <div class="col-md-4">
-        <div class="info-img right-img">
-          <img src="assets/img/why_chouse_odbus.webp"  alt="Why Choose ODBUS" loading="lazy" width="320" height="245" />
+        <div class="info-visual visual-benefits">
+
+          <div class="benefit-orbit"></div>
+
+          <!-- Central bus -->
+          <div class="benefit-center">
+            <div class="benefit-shield">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            </div>
+
+            <svg class="benefit-bus-svg" viewBox="0 0 220 112" role="img" aria-label="ODBUS travel bus">
+              <ellipse cx="112" cy="98" rx="88" ry="7" fill="#1b2155" opacity=".12" />
+              <path d="M20 29 Q20 17 35 15 L166 12
+                       Q178 12 188 25 L204 48 L204 83
+                       Q204 91 194 91 L25 91 Q18 90 18 82 L18 38Z" fill="#f5f8ff" stroke="#1b2155"
+                stroke-width="2.5" />
+              <path d="M30 30 L164 24 L181 45 L30 49Z" fill="#163b72" />
+              <path d="M25 56 L196 54 L196 68 L25 68Z" fill="#1b2155" />
+              <path d="M25 71 L196 71 L196 77 L25 77Z" fill="#f0c92f" />
+              <text x="108" y="65" text-anchor="middle" font-size="11" font-weight="800" fill="#ffffff">ODBUS</text>
+              <circle cx="53" cy="90" r="13" fill="#172746" />
+              <circle cx="53" cy="90" r="6" fill="#c9d5e6" />
+              <circle cx="169" cy="90" r="13" fill="#172746" />
+              <circle cx="169" cy="90" r="6" fill="#c9d5e6" />
+            </svg>
+          </div>
+
+          <!-- Orbiting feature icons -->
+          <div class="benefit-item benefit-top">
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="6" y="2" width="12" height="20" rx="2" />
+                <path d="M9 6h6M10 18h4" />
+                <path d="m9 11 2 2 4-4" />
+              </svg>
+            </span>
+            <span>Easy &amp; Fast<br>Booking</span>
+          </div>
+
+          <div class="benefit-item benefit-upper-right">
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="6" width="18" height="13" rx="2" />
+                <path d="M3 10h18M7 19v2M17 19v2" />
+                <circle cx="8" cy="14" r="1" />
+                <circle cx="16" cy="14" r="1" />
+              </svg>
+            </span>
+            <span>Multiple Bus<br>Options</span>
+          </div>
+
+          <div class="benefit-item benefit-right">
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="10" width="16" height="11" rx="2" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                <circle cx="12" cy="15" r="1.5" />
+              </svg>
+            </span>
+            <span>Secure<br>Payments</span>
+          </div>
+
+          <div class="benefit-item benefit-bottom-right">
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 12a9 9 0 1 1 3 6.7" />
+                <path d="M3 18v-6h6M12 7v5l3 2" />
+              </svg>
+            </span>
+            <span>Customer<br>Support</span>
+          </div>
+
+          <div class="benefit-item benefit-bottom-left">
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="16" rx="2" />
+                <path d="M7 2v6M17 2v6M3 10h18" />
+                <path d="m8 15 3 3 5-5" />
+              </svg>
+            </span>
+            <span>Real-Time<br>Availability</span>
+          </div>
+
+          <div class="benefit-item benefit-left">
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 7h11v10H3zM14 10h4l3 4v3h-7z" />
+                <circle cx="7" cy="19" r="2" />
+                <circle cx="18" cy="19" r="2" />
+              </svg>
+            </span>
+            <span>Best Price<br>Assurance</span>
+          </div>
+
+          <div class="benefit-item benefit-upper-left">
+            <span class="benefit-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+            </span>
+            <span>Wide Route<br>Coverage</span>
+          </div>
+
         </div>
       </div>
+
     </div>
 
-    <!-- ROW 3 -->
+
+    <!-- ROW 3: HOW TO BOOK -->
     <div class="row align-items-center info-row">
-      <!-- IMAGE LEFT -->
+
       <div class="col-md-4">
-        <div class="info-img left-img">
-          <img src="assets/img/how_to_book_bus.webp" alt="How to Book" loading="lazy" width="320" height="245" />
+        <div class="info-visual visual-steps">
+
+          <div class="steps-heading">
+            <span class="steps-heading-icon">✓</span>
+            Easy Online Booking
+          </div>
+
+          <div class="steps-phone">
+            <div class="steps-phone-top"></div>
+
+            <div class="steps-phone-content">
+              <div class="phone-logo">ODBUS</div>
+              <div class="steps-screen-title">Plan your journey</div>
+
+              <div class="screen-input">
+                <span class="mini-location"></span>
+                <span>From city</span>
+              </div>
+
+              <div class="screen-input">
+                <span class="mini-location mini-destination"></span>
+                <span>To city</span>
+              </div>
+
+              <div class="screen-input">
+                <span class="mini-calendar"></span>
+                <span>Journey date</span>
+              </div>
+
+              <div class="screen-search">SEARCH BUSES</div>
+            </div>
+          </div>
+
+          <!-- Booking step timeline -->
+          <div class="booking-step step-one">
+            <span class="step-number">1</span>
+            <span class="step-symbol">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z" />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            </span>
+            <span>Visit Website</span>
+          </div>
+
+          <div class="booking-step step-two">
+            <span class="step-number">2</span>
+            <span class="step-symbol">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+            </span>
+            <span>Select Route</span>
+          </div>
+
+          <div class="booking-step step-three">
+            <span class="step-number">3</span>
+            <span class="step-symbol">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="16" rx="2" />
+                <path d="M7 2v6M17 2v6M3 10h18" />
+              </svg>
+            </span>
+            <span>Choose Date</span>
+          </div>
+
+          <div class="booking-step step-four">
+            <span class="step-number">4</span>
+            <span class="step-symbol">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="6" width="18" height="13" rx="2" />
+                <path d="M3 10h18M7 19v2M17 19v2" />
+              </svg>
+            </span>
+            <span>Choose Bus</span>
+          </div>
+
+          <div class="booking-step step-five">
+            <span class="step-number">5</span>
+            <span class="step-symbol">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
+              </svg>
+            </span>
+            <span>Passenger Details</span>
+          </div>
+
+          <div class="booking-step step-six">
+            <span class="step-number">6</span>
+            <span class="step-symbol">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <path d="M2 10h20" />
+                <path d="m8 14 2 2 5-5" />
+              </svg>
+            </span>
+            <span>Secure Payment</span>
+          </div>
+
+          <div class="steps-bottom-label">
+            <span>●</span> Simple &amp; Secure Booking
+          </div>
+
         </div>
       </div>
 
-      <!-- CONTENT RIGHT -->
       <div class="col-md-8">
         <div class="info-content">
           <h2>How to Book Bus Tickets Online on ODBUS?</h2>
@@ -122,14 +446,16 @@
           </ul>
         </div>
       </div>
+
     </div>
 
-    <!-- ROW 4 -->
+
+    <!-- ROW 4: EXCLUSIVE OFFERS -->
     <div class="row align-items-center info-row reverse-row">
-      <!-- CONTENT LEFT -->
+
       <div class="col-md-8">
         <div class="info-content">
-          <h2>Exclusive Offers & Discounts</h2>
+          <h2>Exclusive Offers &amp; Discounts</h2>
 
           <p>
             ODBUS regularly provides special deals and seasonal offers on bus
@@ -138,7 +464,7 @@
 
           <ul>
             <li>Apply coupon codes during checkout</li>
-            <li>Avail festival & seasonal discounts</li>
+            <li>Avail festival &amp; seasonal discounts</li>
             <li>Access limited-time promotional fares</li>
           </ul>
 
@@ -148,12 +474,72 @@
         </div>
       </div>
 
-      <!-- IMAGE RIGHT -->
       <div class="col-md-4">
-        <div class="info-img right-img">
-          <img src="assets/img/exclusive_offers.webp" alt="Offers" loading="lazy" width="320" height="245" />
+        <div class="info-visual visual-offers">
+
+          <div class="offer-glow"></div>
+
+          <div class="offer-spark spark-one">✦</div>
+          <div class="offer-spark spark-two">✧</div>
+          <div class="offer-spark spark-three">✦</div>
+
+          <!-- Floating discount badge -->
+          <div class="offer-discount">
+            <span class="discount-percent">%</span>
+            <span>Special<br>Offers</span>
+          </div>
+
+          <!-- Coupon ticket -->
+          <div class="coupon-ticket">
+            <div class="coupon-ticket-left">
+              <span class="coupon-small">ODBUS</span>
+              <span class="coupon-main">SAVE MORE</span>
+              <span class="coupon-caption">ON YOUR NEXT TRIP</span>
+            </div>
+
+            <div class="coupon-ticket-right">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4Z" />
+                <path d="M13 8v2M13 14v2" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Gift box -->
+          <div class="gift-box">
+            <div class="gift-lid">
+              <div class="gift-bow gift-bow-left"></div>
+              <div class="gift-bow gift-bow-right"></div>
+            </div>
+            <div class="gift-body">
+              <span class="gift-ribbon"></span>
+              <span class="gift-star">★</span>
+            </div>
+          </div>
+
+          <!-- Decorative voucher -->
+          <div class="voucher-card">
+            <span class="voucher-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </span>
+            <span class="deal">TRAVEL DEALS</span>
+            <strong>EXCLUSIVE</strong>
+          </div>
+
+          <!-- Tiny decorative coins -->
+          <span class="offer-coin coin-one">₹</span>
+          <span class="offer-coin coin-two">%</span>
+
+          <div class="offer-bottom-label">
+            <span>✦</span> More Savings, More Journeys
+          </div>
+
         </div>
       </div>
+
     </div>
+
   </div>
 </section>

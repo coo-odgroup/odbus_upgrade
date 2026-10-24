@@ -803,7 +803,7 @@ a:hover {
   }
 
   .slide-btn {
-    display: none;
+    display: none !important;
   }
 }
 

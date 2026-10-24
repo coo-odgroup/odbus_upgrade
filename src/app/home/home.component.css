@@ -851,24 +851,42 @@ section.section-offer .nav-tabs .nav-item .nav-link {
   align-items: center;
 }
 
-/* HERO IMAGE (real <img>, replaces the CSS background-image) */
-.hero-banner-v5 .hero-bg {
+/* Hero background through HTML img */
+.hero-banner-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  z-index: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
+/* Keep text and badge above the image */
 .hero-banner-v5 .hero-content {
   position: relative;
   z-index: 1;
 }
 
-.hero-banner-v5 .search-overlap {
+.hero-banner-v5 .banner-left {
+  position: relative;
   z-index: 2;
+}
+
+/* Keep search box overlapping the hero */
+.hero-banner-v5 .search-overlap {
+  z-index: 5;
+}
+
+@media (max-width: 767px) {
+  .hero-banner-v5 {
+    height: 400px;
+  }
+
+  .hero-banner-image {
+    object-position: center;
+  }
 }
 
 /* TEXT */
@@ -995,42 +1013,6 @@ section.section-offer .nav-tabs .nav-item .nav-link {
   padding-right: 40px;
 }
 
-/* .date-btns {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-}
-
-.date-btns span {
-  font-size: 11px;
-  padding: 3px 10px;
-  margin-left: 4px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.date-btns span:first-child {
-  border: 1px solid #f0c004;
-  color: #1b2155;
-}
-
-.date-btns span:last-child {
-  border: 1px solid #1b2155;
-  color: #1b2155;
-}
-
-.date-btns span:first-child:hover {
-  background-color: #f0c004;
-  color: #fff;
-}
-
-.date-btns span:last-child:hover {
-  background-color: #1b2155;
-  color: #fff;
-} */
 
 .date-wrapper {
   display: flex;
@@ -2592,195 +2574,7 @@ input {
 
 /* ODBUS CONTENT SECTION */
 
-/* ===============================
-   ODBUS INFO SECTION
-=================================*/
 
-.odbus-info-section {
-  background: #ffffff;
-  /* padding: 70px 0; */
-  padding: 40px 0;
-}
-
-.info-row {
-  margin-bottom: 70px;
-}
-
-.info-row:last-child {
-  margin-bottom: 0;
-}
-
-/* image */
-.info-img {
-  text-align: center;
-}
-
-.info-img img {
-  width: 100%;
-  max-width: 320px;
-}
-
-/* content */
-.info-content {
-  padding: 0 20px;
-}
-
-.info-content h2 {
-  font-size: 22px;
-  font-weight: 900;
-  color: #1b2155;
-  line-height: 1.3;
-  margin-bottom: 22px;
-}
-
-.info-content p {
-  font-size: 14px;
-  font-weight: 500;
-  color: #000000;
-  line-height: 1.8;
-  margin-bottom: 18px;
-}
-
-.info-content ul {
-  padding-left: 22px;
-  margin: 0;
-}
-
-.info-content ul li {
-  font-size: 14px;
-  font-weight: 500;
-  color: #000000;
-  line-height: 1.8;
-  margin-bottom: 8px;
-}
-
-/* reverse rows */
-.reverse-row {
-  display: flex;
-  align-items: center;
-}
-
-/* desktop spacing */
-.left-img {
-  padding-right: 20px;
-}
-
-.right-img {
-  padding-left: 20px;
-}
-
-
-/* ODBUS CONTENT SECTION RESPONSIVE */
-
-@media (max-width: 991px) {
-  .odbus-info-section {
-    padding: 50px 0;
-  }
-
-  .info-row {
-    margin-bottom: 50px;
-  }
-
-  /* .info-content {
-    padding: 0;
-    text-align: center;
-  } */
-
-  .info-content h2 {
-    font-size: 24px;
-    margin-bottom: 18px;
-  }
-
-  .info-content p,
-  .info-content ul li {
-    font-size: 15px;
-    line-height: 1.7;
-  }
-
-  .info-img img {
-    max-width: 240px;
-  }
-}
-
-@media (max-width: 767px) {
-  .odbus-info-section {
-    padding: 40px 0;
-  }
-
-  .info-row,
-  .reverse-row {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 40px;
-  }
-
-  /* ALL IMAGES TOP */
-  .info-img {
-    display: none !important;
-  }
-
-  .info-img img {
-    display: none !important;
-  }
-
-  .left-img,
-  .right-img {
-    display: none !important;
-  }
-
-  /* TEXT BELOW */
-  /* .info-content {
-    text-align: center;
-    padding: 0;
-  } */
-
-  .info-content h2 {
-    font-size: 21px;
-    line-height: 1.35;
-    margin-bottom: 14px;
-  }
-
-  .info-content p {
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 14px;
-  }
-
-  .info-content ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .info-content ul li {
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 8px;
-  }
-}
-
-@media (max-width: 575px) {
-  .odbus-info-section {
-    padding: 30px 0;
-  }
-
-  .info-row {
-    margin-bottom: 30px;
-  }
-
-  .info-img img {
-    display: none;
-  }
-
-  .info-content h2 {
-    font-size: 18px;
-  }
-
-  .info-content p,
-  .info-content ul li {
-    font-size: 13px;
-  }
-}
 
 
 /*  ODBUS CONTENT SECTION  END*/
@@ -3084,7 +2878,7 @@ input {
   }
 
   .slide-btn {
-    display: none;
+    display: none !important;
   }
 }
 

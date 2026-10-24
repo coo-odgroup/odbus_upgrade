@@ -1,873 +1,1347 @@
-
-/* ---- home rules used by this component (auto-extracted from home.component.css) ---- */
-/* .input-group-prepend {
-  margin-right: 3px !important;
-} */
-
-/* .hero-banner-inner-srchbus .form-control {
-    border-radius:0 0.25rem 0.25rem 0;
-} */
-
-/* Mobile Version Start  */
-
-
-/* .mobile-discount .img-fluid {
-  width: 100%;
+/* ODBUS INFO SECTION — shared layout and typography */
+.odbus-info-section {
+  --odbus-blue: #1b2155;
+  --odbus-blue-dark: #102e68;
+  --odbus-blue-light: #eaf1ff;
+  --odbus-yellow: #f0c92f;
+  --odbus-text: #111827;
+  background: #ffffff;
+  padding: 48px 0 36px;
+  overflow: clip;
 }
 
-
-.mobile-discount h6 {
-  font-weight: 600;
-  color: #072c6b;
-} */
-
-/* New Offer Correction */
-
-/* =========================================================
-   MOBILE OFFERS SECTION
-========================================================= */
-
-/* =========================================================
-   TOP HEADER
-========================================================= */
-
-/* =========================================================
-   OFFER CARD
-========================================================= */
-
-/* =========================================================
-   CAROUSEL FIX
-========================================================= */
-
-.mobile-offers-card ::ng-deep .carousel,
-.mobile-offers-card ::ng-deep .carousel-cells,
-.mobile-offers-card ::ng-deep .carousel-cell {
-  width: 100%;
-  display: block;
-}
-
-/* =========================================================
-   IMAGE RESPONSIVE FIX
-========================================================= */
-
-.mobile-offers-card ::ng-deep .carousel-cell img,
-.mobile-offers-card ::ng-deep img {
-  width: 100% !important;
-  height: auto !important;
-  display: block;
-  object-fit: cover !important;
-  border-radius: 18px;
-}
-
-/* =========================================================
-   MOBILE RESPONSIVE HEIGHTS
-========================================================= */
-
-/* 430px Devices */
-
-
-@media (max-width: 430px) {
-
-  .mobile-offers-card ::ng-deep .carousel-cell img,
-  .mobile-offers-card ::ng-deep img {
-    aspect-ratio: 15 / 7;
-  }
-}
-
-
-
-/* 390px Devices */
-
-@media (max-width: 390px) {
-
-  .mobile-offers-card ::ng-deep .carousel-cell img,
-  .mobile-offers-card ::ng-deep img {
-    aspect-ratio: 15 / 7;
-    border-radius: 16px;
-  }
-}
-
-/* 360px Devices */
-
-@media (max-width: 360px) {
-
-
-  .mobile-offers-card ::ng-deep .carousel-cell img,
-  .mobile-offers-card ::ng-deep img {
-    aspect-ratio: 17 / 8;
-  }
-}
-
-/* New Offer Correction */
-
-/* .mobile-logo img {
-  height: 42px;
-  float: right;
-} */
-
-
-/* Mobile Version End  */
-
-
-
-/* blog section */
-
-/* BLOG CARD DESIGN */
-
-/* BLOG CARD SECTION */
-
-/* IMAGE */
-
-/* TAG */
-
-/* CONTENT */
-
-
-
-/* 🔥 POPUP OVERLAY */
-
-/* BACKDROP */
-
-/* POPUP */
-
-/* HANDLE */
-
-/* TEXT */
-
-/* IMAGE */
-
-/* BUTTON */
-
-/* CLOSE */
-
-/* ANIMATION */
-
-
-/* New hero section */
-/* HERO */
-
-/* TEXT */
-
-/* SEARCH POSITION */
-
-/* BOX */
-
-/* LABEL */
-
-/* REMOVE DEFAULT */
-
-/* GAP CONTROL */
-
-/* ICONS (SEPARATE) */
-
-/* DATE */
-
-/* .date-btns {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-}
-
-.date-btns span {
-  font-size: 11px;
-  padding: 3px 10px;
-  margin-left: 4px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.date-btns span:first-child {
-  border: 1px solid #f0c004;
-  color: #1b2155;
-}
-
-.date-btns span:last-child {
-  border: 1px solid #1b2155;
-  color: #1b2155;
-}
-
-.date-btns span:first-child:hover {
-  background-color: #f0c004;
-  color: #fff;
-}
-
-.date-btns span:last-child:hover {
-  background-color: #1b2155;
-  color: #fff;
-} */
-
-/* SWAP */
-
-/* BUTTON */
-
-/* REMOVE BOOTSTRAP GAP */
-
-
-/* ==========================================
-   MOBILE ONLY
-========================================== */
-
-
-
-@media (max-width: 768px) {
-
-  /* TOP YELLOW AREA */
-
-  /* REMOVE DESKTOP OVERLAP */
-
-  /* WHITE SEARCH BOX */
-
-  /* FIELD */
-
-  /* INPUT */
-
-  /* ICONS */
-
-  /* TO FIELD */
-
-  /* SWAP BUTTON */
-
-  /* DATE SECTION */
-
-  /* SEARCH BUTTON */
-
-  /* REMOVE BOOTSTRAP GAP */
-
-}
-
-/* ==========================================
-   SMALL MOBILE
-========================================== */
-
-/* New hero section ended*/
-
-
-/* ================= RECENT SEARCH ================= */
-
-/* TITLE */
-
-/* LEFT LINE */
-
-/* WRAPPER */
-
-/* CARD */
-/* .recent-card {
-  min-width: 240px;
-  background: #f6fcff;
-  border-radius: 12px;
-  padding: 12px 14px;
+.odbus-info-section .info-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  border: 1px solid #b4cfff;
-  cursor: pointer;
-  transition: 0.4s;
-} 
-
-
-.recent-card:hover {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  border: 1px solid #1b2155;
+  margin-bottom: 64px;
 }
 
-  */
-
-
-
-/* ICON */
-
-/* TEXT */
-
-
-/* ==================================================
-   TOP OPERATORS
-================================================== */
-
-/* =====================================
-   CARD BASE
-===================================== */
-
-/* TOP LINE */
-
-/* HOVER */
-
-/* FLEX */
-
-/* ICON */
-
-/* TEXT */
-
-/* ROW */
-
-/* BADGE */
-
-/* ==================================================
-   TABLET
-================================================== */
-@media (max-width: 991px) {
-
-  /* HEADER */
-
-  /* GRID */
-
-}
-
-/* ==================================================
-   MOBILE
-================================================== */
-@media (max-width: 767px) {
-
-  /* HEADER SINGLE ROW */
-
-  /* TITLE */
-
-  /* BUTTON */
-
-  /* GRID */
-
-}
-
-/* ==================================================
-   SMALL MOBILE
-================================================== */
-
-/* ===============================
-   FAQ FULL CSS
-=================================*/
-
-/* ===============================
-   Tabs
-=================================*/
-
-/* .faq-section .faq-tabs li {
-  margin: 0;
-}
-
-.faq-section .faq-tabs li a {
-  display: block;
-  padding: 10px;
-  color: #000000 !important;
-  font-size: 16px;
-  font-weight: 500;
-  text-decoration: none !important;
-  border: none !important;
-  background: none !important;
-}
-
-.faq-section .faq-tabs li.active a {
-  color: #1b2155 !important;
-  font-weight: 700;
-  border-bottom: 3px solid #f0c92f !important;
-  border-radius: 3px;
-  background: #f5f5f5 !important;
-} */
-
-/* ===============================
-   FAQ Rows
-=================================*/
-
-/* question */
-
-/* answer */
-
-/* active answer */
-
-/* ===============================
-   Icon
-=================================*/
-
-/* rotate on open */
-
-
-/* FAQ SECTION RESPONSIVE - EVERYTHING CENTER */
-
-@media (max-width: 767px) {
-
-  /* .faq-section .faq-tabs li {
-    width: auto;
-  }
-
-  .faq-section .faq-tabs li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 42px;
-    padding: 8px 6px;
-    font-size: 12px;
-    line-height: 1.2;
-    border-radius: 22px;
-    background: #fff7db !important;
-    border: 1px solid #d8e0ff !important;
-    color: #1b2155 !important;
-    white-space: normal;
-    word-break: break-word;
-  }
-
-  .faq-section .faq-tabs li.active a {
-    border-bottom: none !important;
-    background: #1b2155 !important;
-    color: #fff !important;
-    border-radius: 22px;
-  } */
-}
-
-
-
-/* new download section */
-
-/* SECTION */
-
-/* Right Box */
-
-/* CENTER*/
-
-/* LEFT */
-
-/* DOWNLOAD APP FINAL RESPONSIVE */
-
-/* ===============================
-   TABLET
-================================= */
-@media (max-width: 991px) {
-
-  /* TOP IMAGE + QR */
-
-  /* CONTENT FULL WIDTH */
-
-}
-
-/* ===============================
-   MOBILE
-================================= */
-@media (max-width: 767px) {
-
-  /* TOP ROW IMAGE + QR */
-
-  /* IMAGE */
-
-  /* QR */
-
-  /* CONTENT BOTTOM FULL WIDTH */
-
-}
-
-/* ===============================
-   SMALL MOBILE
-================================= */
-
-
-
-/* ODBUS CONTENT SECTION */
-
-/* ===============================
-   ODBUS INFO SECTION
-=================================*/
-
-.odbus-info-section {
-  background: #ffffff;
-  /* padding: 70px 0; */
-  padding: 40px 0;
-}
-
-.info-row {
-  margin-bottom: 70px;
-}
-
-.info-row:last-child {
+.odbus-info-section .info-row:last-child {
   margin-bottom: 0;
 }
 
-/* image */
-.info-img {
+.odbus-info-section .info-content {
+  padding: 0 24px;
+}
+
+.odbus-info-section .info-content h2 {
+  font-size: 23px;
+  font-weight: 750;
+  color: var(--odbus-blue);
+  line-height: 1.4;
+  margin: 0 0 18px;
+  letter-spacing: -0.35px;
+}
+
+.odbus-info-section .info-content p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #202536;
+  line-height: 1.85;
+  margin: 0 0 16px;
+}
+
+.odbus-info-section .info-content ul {
+  padding-left: 21px;
+  margin: 0;
+}
+
+.odbus-info-section .info-content ul li {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--odbus-text);
+  line-height: 1.8;
+  margin-bottom: 9px;
+  padding-left: 2px;
+}
+
+.odbus-info-section .info-content strong {
+  font-weight: 700;
+  color: #111b40;
+}
+
+.odbus-info-section .info-visual {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 280px;
+  margin: 0 auto;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.odbus-info-section .info-visual svg {
+  display: block;
+}
+
+.odbus-info-section .info-visual svg path,
+.odbus-info-section .info-visual svg rect,
+.odbus-info-section .info-visual svg circle {
+  vector-effect: non-scaling-stroke;
+}
+
+/* ABOUT ODBUS illustration */
+.odbus-info-section .visual-orbit {
+  position: absolute;
+  width: 224px;
+  height: 224px;
+  border: 1px dashed #c5d5f0;
+  border-radius: 50%;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-color: #cddaf0;
+}
+
+.odbus-info-section .visual-orbit::before,
+.odbus-info-section .visual-orbit::after {
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--odbus-yellow);
+  box-shadow: 0 0 0 4px #fff6ce;
+}
+
+.odbus-info-section .visual-orbit::before {
+  top: 34px;
+  left: 20px;
+}
+
+.odbus-info-section .visual-orbit::after {
+  bottom: 30px;
+  right: 17px;
+}
+
+.odbus-info-section .visual-brand {
+  position: absolute;
+  top: 21px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: -0.8px;
+  color: var(--odbus-blue);
+  z-index: 4;
+  white-space: nowrap;
+}
+
+.odbus-info-section .visual-subtitle {
+  position: absolute;
+  top: 51px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #53617e;
+  font-size: 10px;
+  white-space: nowrap;
+  z-index: 4;
+}
+
+.odbus-info-section .float-icon {
+  position: absolute;
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  border: 1px solid #d9e4f8;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(27, 33, 85, .07);
+  z-index: 5;
+}
+
+.odbus-info-section .float-icon svg {
+  width: 19px;
+  height: 19px;
+  stroke: var(--odbus-blue);
+  stroke-width: 1.7;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.odbus-info-section .location-one {
+  top: 89px;
+  left: 20px;
+}
+
+.odbus-info-section .location-one svg path:first-child,
+.odbus-info-section .location-two svg path:first-child {
+  fill: #fff7d6;
+  stroke: var(--odbus-blue);
+}
+
+.odbus-info-section .location-two {
+  top: 92px;
+  right: 20px;
+}
+
+.odbus-info-section .location-two svg circle {
+  fill: var(--odbus-yellow);
+}
+
+.odbus-info-section .shield-float {
+  top: 73px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.odbus-info-section .shield-float svg path:first-child {
+  fill: #fff5c6;
+}
+
+.odbus-info-section .shield-float svg path:last-child {
+  stroke: #d5a500;
+}
+
+.odbus-info-section .city-silhouette {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 66px;
+  height: 82px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5px;
+  opacity: 0.55;
+  z-index: 0;
+}
+
+.odbus-info-section .city-silhouette span {
+  display: block;
+  width: 19px;
+  height: 45px;
+  background: #e1ebfc;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+}
+
+.odbus-info-section .city-silhouette span:nth-child(2n) {
+  height: 63px;
+  width: 23px;
+}
+
+.odbus-info-section .city-silhouette span:nth-child(3n) {
+  height: 37px;
+}
+
+.odbus-info-section .city-silhouette span:nth-child(4n) {
+  height: 72px;
+  width: 25px;
+}
+
+.odbus-info-section .city-silhouette span::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  width: 4px;
+  height: 4px;
+  background: #9bb8e8;
+  box-shadow: 7px 0 #9bb8e8, 0 9px #9bb8e8, 7px 9px #9bb8e8;
+}
+
+.odbus-info-section .illustration-road {
+  position: absolute;
+  bottom: 27px;
+  left: 8%;
+  width: 84%;
+  height: 43px;
+  background: linear-gradient(180deg, #d7e2f3, #f2f6fd);
+  clip-path: polygon(24% 0, 76% 0, 100% 100%, 0 100%);
+  z-index: 1;
+}
+
+.odbus-info-section .illustration-road span {
+  position: absolute;
+  left: 50%;
+  width: 4px;
+  height: 11px;
+  background: #fff;
+  transform: translateX(-50%);
+}
+
+.odbus-info-section .illustration-road span:nth-child(1) {
+  top: 6px;
+}
+
+.odbus-info-section .illustration-road span:nth-child(2) {
+  top: 21px;
+}
+
+.odbus-info-section .illustration-road span:nth-child(3) {
+  top: 36px;
+}
+
+.odbus-info-section .hero-bus-svg {
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  height: auto;
+  left: 0;
+  bottom: 25px;
+}
+
+.odbus-info-section .visual-phone {
+  position: absolute;
+  right: 13px;
+  bottom: 47px;
+  width: 48px;
+  height: 87px;
+  padding: 5px 3px;
+  background: #ffffff;
+  border: 2px solid var(--odbus-blue);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(27, 33, 85, .14);
+  z-index: 4;
+  transform: scale(0.94);
+  transform-origin: bottom right;
+}
+
+.odbus-info-section .phone-speaker {
+  height: 3px;
+  width: 12px;
+  margin: 0 auto 4px;
+  border-radius: 5px;
+  background: #9aa8c1;
+}
+
+.odbus-info-section .phone-screen {
+  height: 68px;
+  background: #f3f7ff;
+  border-radius: 3px;
+  padding: 4px;
+}
+
+.odbus-info-section .phone-logo {
+  font-size: 8px;
+  font-weight: 900;
+  color: var(--odbus-blue);
   text-align: center;
 }
 
-.info-img img {
-  width: 100%;
-  max-width: 320px;
+.odbus-info-section .phone-logo span {
+  color: #d2a900;
 }
 
-/* content */
-.info-content {
-  padding: 0 20px;
-}
-
-.info-content h2 {
-  font-size: 22px;
-  font-weight: 900;
-  color: #1b2155;
-  line-height: 1.3;
-  margin-bottom: 22px;
-}
-
-.info-content p {
-  font-size: 14px;
-  font-weight: 500;
-  color: #000000;
-  line-height: 1.8;
-  margin-bottom: 18px;
-}
-
-.info-content ul {
-  padding-left: 22px;
-  margin: 0;
-}
-
-.info-content ul li {
-  font-size: 14px;
-  font-weight: 500;
-  color: #000000;
-  line-height: 1.8;
-  margin-bottom: 8px;
-}
-
-/* reverse rows */
-.reverse-row {
+.odbus-info-section .phone-route {
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin: 9px 0 3px;
 }
 
-/* desktop spacing */
-.left-img {
-  padding-right: 20px;
+.odbus-info-section .route-dot {
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--odbus-blue);
+  background: var(--odbus-yellow);
+  border-radius: 50%;
 }
 
-.right-img {
-  padding-left: 20px;
+.odbus-info-section .route-line {
+  width: 15px;
+  height: 1px;
+  border-top: 1px dashed var(--odbus-blue);
 }
 
+.odbus-info-section .route-dot-end {
+  background: #fff;
+}
 
-/* ODBUS CONTENT SECTION RESPONSIVE */
+.odbus-info-section .phone-route-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 5px;
+  color: #52617c;
+}
+
+.odbus-info-section .phone-book-button {
+  height: 9px;
+  margin-top: 8px;
+  background: var(--odbus-yellow);
+  border-radius: 2px;
+}
+
+.odbus-info-section .visual-caption {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90%;
+  padding: 6px 11px;
+  background: #fff;
+  border: 1px solid #e4eaf6;
+  border-radius: 30px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--odbus-blue);
+  box-shadow: 0 3px 12px rgba(27, 33, 85, .05);
+  z-index: 5;
+  white-space: nowrap;
+}
+
+.odbus-info-section .caption-check {
+  color: #148b56;
+  margin-right: 4px;
+}
+
+/* WHY CHOOSE ODBUS illustration */
+.odbus-info-section .visual-benefits {
+  height: 310px !important;
+  max-width: 320px;
+  overflow: visible !important;
+  background: transparent !important;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
+}
+
+.odbus-info-section .benefit-orbit {
+  position: absolute;
+  width: 208px;
+  height: 208px;
+  border: 1px dashed #b9cbe9;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-color: #cbd8ee;
+}
+
+.odbus-info-section .benefit-orbit::before {
+  content: "";
+  position: absolute;
+  inset: 13px;
+  border: 1px solid #e3eaf8;
+  border-radius: 50%;
+  border-color: #e0e8f6;
+}
+
+.odbus-info-section .benefit-center {
+  position: absolute;
+  left: 50%;
+  top: 51%;
+  transform: translate(-50%, -50%);
+  width: 190px;
+  height: 112px;
+  z-index: 2;
+}
+
+.odbus-info-section .benefit-bus-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+}
+
+.odbus-info-section .benefit-shield {
+  position: absolute;
+  top: -17px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 2px solid #e2b900;
+  background: #fff8d7;
+  border-radius: 50%;
+  z-index: 3;
+}
+
+.odbus-info-section .benefit-shield svg {
+  width: 25px;
+  height: 25px;
+  fill: #ffe67b;
+  stroke: var(--odbus-blue);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+.odbus-info-section .benefit-shield svg path:last-child {
+  fill: none;
+  stroke: #13885a;
+}
+
+.odbus-info-section .benefit-item {
+  position: absolute;
+  width: 76px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--odbus-blue);
+  z-index: 4;
+}
+
+.odbus-info-section .benefit-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #cbdaf2;
+  box-shadow: 0 4px 12px rgba(27, 33, 85, 0.055);
+  border-color: #d6e1f2;
+}
+
+.odbus-info-section .benefit-icon svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: var(--odbus-blue);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.odbus-info-section .benefit-top {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.odbus-info-section .benefit-upper-right {
+  top: 35px;
+  right: 0;
+}
+
+.odbus-info-section .benefit-right {
+  top: 132px;
+  right: -2px;
+}
+
+.odbus-info-section .benefit-bottom-right {
+  bottom: 0;
+  right: 32px;
+}
+
+.odbus-info-section .benefit-bottom-left {
+  bottom: 0;
+  left: 32px;
+}
+
+.odbus-info-section .benefit-left {
+  top: 132px;
+  left: -2px;
+}
+
+.odbus-info-section .benefit-upper-left {
+  top: 35px;
+  left: 0;
+}
+
+.odbus-info-section .benefit-upper-left .benefit-icon svg path:first-child {
+  fill: #fff5c7;
+}
+
+/* HOW TO BOOK illustration */
+.odbus-info-section .visual-steps {
+  height: 310px !important;
+  overflow: hidden;
+}
+
+.odbus-info-section .steps-heading {
+  position: absolute;
+  left: 50%;
+  top: 13px;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--odbus-blue);
+  z-index: 5;
+}
+
+.odbus-info-section .steps-heading-icon {
+  display: grid;
+  place-items: center;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--odbus-yellow);
+  color: var(--odbus-blue);
+}
+
+.odbus-info-section .steps-phone {
+  position: absolute;
+  left: 50%;
+  top: 65px;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 178px;
+  border: 4px solid #172c54;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(27, 33, 85, 0.12);
+  padding: 8px 5px;
+  z-index: 2;
+  border-width: 3px;
+}
+
+.odbus-info-section .steps-phone-top {
+  width: 30px;
+  height: 4px;
+  border-radius: 8px;
+  background: #c1cbdc;
+  margin: 0 auto 8px;
+}
+
+.odbus-info-section .steps-phone-content {
+  padding: 4px 2px;
+}
+
+.odbus-info-section .steps-phone .phone-logo {
+  font-size: 14px;
+  letter-spacing: -.5px;
+}
+
+.odbus-info-section .steps-screen-title {
+  margin: 7px 0;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: #384665;
+}
+
+.odbus-info-section .screen-input {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  border: 1px solid #dce5f4;
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 7px;
+  color: #5e6b85;
+  margin-bottom: 5px;
+  background: #fbfcff;
+  padding-inline: 4px;
+}
+
+.odbus-info-section .mini-location {
+  width: 7px;
+  height: 7px;
+  border: 2px solid var(--odbus-blue);
+  border-radius: 50%;
+  position: relative;
+}
+
+.odbus-info-section .mini-destination {
+  border-color: #d4ab00;
+}
+
+.odbus-info-section .mini-calendar {
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--odbus-blue);
+  border-radius: 2px;
+  position: relative;
+}
+
+.odbus-info-section .mini-calendar::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--odbus-blue);
+}
+
+.odbus-info-section .screen-search {
+  margin-top: 7px;
+  padding: 6px 0;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 7px;
+  font-weight: 900;
+  color: var(--odbus-blue);
+  background: var(--odbus-yellow);
+}
+
+.odbus-info-section .booking-step {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 96px;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--odbus-blue);
+  z-index: 3;
+  width: 96px;
+  line-height: 1.3;
+}
+
+.odbus-info-section .step-number {
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--odbus-blue);
+  color: #fff;
+  font-size: 9px;
+  flex: 0 0 17px;
+}
+
+.odbus-info-section .step-symbol {
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #d7e2f5;
+  flex: 0 0 27px;
+}
+
+.odbus-info-section .step-symbol svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: var(--odbus-blue);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.odbus-info-section .step-one {
+  left: 10px;
+  top: 62px;
+}
+
+.odbus-info-section .step-two {
+  left: 8px;
+  top: 126px;
+}
+
+.odbus-info-section .step-three {
+  left: 12px;
+  bottom: 55px;
+}
+
+.odbus-info-section .step-four {
+  right: 8px;
+  top: 62px;
+}
+
+.odbus-info-section .step-five {
+  right: 4px;
+  top: 126px;
+}
+
+.odbus-info-section .step-six {
+  right: 8px;
+  bottom: 55px;
+}
+
+.odbus-info-section .steps-bottom-label {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 700;
+  color: #50617f;
+  white-space: nowrap;
+}
+
+.odbus-info-section .steps-bottom-label span {
+  color: #14975f;
+}
+
+/* EXCLUSIVE OFFERS illustration */
+.odbus-info-section .visual-offers {
+  height: 280px !important;
+  overflow: hidden;
+}
+
+.odbus-info-section .offer-glow {
+  position: absolute;
+  width: 174px;
+  height: 174px;
+  top: 33px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1px dashed #e7cf78;
+  border-color: #ead68b;
+}
+
+.odbus-info-section .offer-spark {
+  position: absolute;
+  color: #e6b500;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+.odbus-info-section .spark-one {
+  top: 35px;
+  left: 35px;
+  font-size: 22px;
+}
+
+.odbus-info-section .spark-two {
+  top: 73px;
+  right: 24px;
+  font-size: 27px;
+}
+
+.odbus-info-section .spark-three {
+  bottom: 55px;
+  left: 29px;
+  font-size: 20px;
+}
+
+.odbus-info-section .offer-discount {
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  width: 62px;
+  height: 62px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--odbus-blue);
+  color: #fff;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  outline: 1px solid #c7d3e9;
+  box-shadow: 0 5px 12px rgba(27, 33, 85, .12);
+  transform: rotate(-7deg);
+  z-index: 4;
+}
+
+.odbus-info-section .discount-percent {
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--odbus-yellow);
+}
+
+.odbus-info-section .offer-discount>span:last-child {
+  margin-top: 3px;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.odbus-info-section .coupon-ticket {
+  position: absolute;
+  left: 50%;
+  top: 78px;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 224px;
+  height: 84px;
+  display: flex;
+  border: 2px dashed #a8b9dc;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(27, 33, 85, 0.08);
+  z-index: 3;
+  border-color: #b5c6e4;
+}
+
+.odbus-info-section .coupon-ticket-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 12px;
+}
+
+.odbus-info-section .coupon-small {
+  color: #64718b;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.odbus-info-section .coupon-main {
+  margin: 3px 0;
+  color: var(--odbus-blue);
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: -.5px;
+}
+
+.odbus-info-section .coupon-caption {
+  color: #737e95;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+}
+
+.odbus-info-section .coupon-ticket-right {
+  width: 44px;
+  display: grid;
+  place-items: center;
+  border-left: 2px dashed #a8b9dc;
+  background: #fff8d9;
+  border-radius: 0 8px 8px 0;
+}
+
+.odbus-info-section .coupon-ticket-right svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #c69c00;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.odbus-info-section .gift-box {
+  position: absolute;
+  width: 84px;
+  height: 82px;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 4;
+}
+
+.odbus-info-section .gift-body {
+  position: absolute;
+  bottom: 0;
+  left: 5px;
+  right: 5px;
+  height: 51px;
+  background: linear-gradient(135deg, #f7d94c, #eab400);
+  border: 2px solid #c89b00;
+  border-radius: 3px 3px 7px 7px;
+  box-shadow: 0 8px 15px rgba(180, 133, 0, .17);
+}
+
+.odbus-info-section .gift-ribbon {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 17px;
+  background: #fff7d5;
+  border-left: 1px solid #e2bd36;
+  border-right: 1px solid #e2bd36;
+}
+
+.odbus-info-section .gift-star {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #d39f00;
+  font-size: 19px;
+  z-index: 2;
+}
+
+.odbus-info-section .gift-lid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 25px;
+  height: 14px;
+  background: #f5d13c;
+  border: 2px solid #c89b00;
+  border-radius: 4px;
+  z-index: 3;
+}
+
+.odbus-info-section .gift-bow {
+  position: absolute;
+  width: 24px;
+  height: 20px;
+  top: -19px;
+  border: 5px solid #e5b100;
+  background: #fff4bc;
+}
+
+.odbus-info-section .gift-bow-left {
+  right: 50%;
+  border-radius: 100% 0 100% 0;
+  transform: rotate(-18deg);
+}
+
+.odbus-info-section .gift-bow-right {
+  left: 50%;
+  border-radius: 0 100% 0 100%;
+  transform: rotate(18deg);
+}
+
+.odbus-info-section .voucher-card {
+  position: absolute;
+  right: 11px;
+  bottom: 43px;
+  width: 68px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border: 1px solid #e3d8a4;
+  border-radius: 7px;
+  background: #fff;
+  box-shadow: 0 5px 12px rgba(27, 33, 85, .08);
+  transform: rotate(5deg);
+  z-index: 3;
+}
+
+.odbus-info-section .voucher-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: #d2a500;
+  fill: none;
+  stroke-width: 1.7;
+}
+
+.odbus-info-section .voucher-card>span:last-child {
+  font-size: 7px;
+  color: #65718b;
+  font-weight: 700;
+}
+
+.odbus-info-section .voucher-card .deal {
+  text-align: center;
+  font-size: small;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #1b2155;
+}
+
+.odbus-info-section .voucher-card strong {
+  font-size: 8px;
+  color: var(--odbus-blue);
+}
+
+.odbus-info-section .offer-coin {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--odbus-blue);
+  background: #ffe789;
+  border: 1px solid #e2bd36;
+  font-size: 12px;
+  font-weight: 900;
+  z-index: 2;
+}
+
+.odbus-info-section .coin-one {
+  bottom: 38px;
+  left: 24px;
+}
+
+.odbus-info-section .coin-two {
+  top: 29px;
+  right: 35px;
+}
+
+.odbus-info-section .offer-bottom-label {
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 95%;
+  color: var(--odbus-blue);
+  font-size: 9px;
+  font-weight: 700;
+  z-index: 5;
+}
+
+.odbus-info-section .offer-bottom-label span {
+  color: #d4a700;
+}
+
+/* RESPONSIVE LAYOUT */
+@media (min-width: 992px) {
+  .odbus-info-section .info-row>.col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+
+  .odbus-info-section .info-row>.col-md-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
+
+  .odbus-info-section .info-content {
+    padding: 0 20px;
+  }
+
+  .odbus-info-section .reverse-row>.col-md-8 {
+    order: 1;
+  }
+
+  .odbus-info-section .reverse-row>.col-md-4 {
+    order: 2;
+  }
+}
 
 @media (max-width: 991px) {
   .odbus-info-section {
-    padding: 50px 0;
+    padding: 35px 0;
   }
 
-  .info-row {
-    margin-bottom: 50px;
+
+  .odbus-info-section .info-content {
+    padding: 0 10px;
   }
 
-  /* .info-content {
-    padding: 0;
-    text-align: center;
-  } */
-
-  .info-content h2 {
-    font-size: 24px;
-    margin-bottom: 18px;
+  .odbus-info-section .info-content h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
   }
 
-  .info-content p,
-  .info-content ul li {
-    font-size: 15px;
-    line-height: 1.7;
+  .odbus-info-section .info-content p,
+  .odbus-info-section .info-content ul li {
+    font-size: 14px;
+    line-height: 1.75;
   }
 
-  .info-img img {
-    max-width: 240px;
+  .odbus-info-section .info-visual {
+    max-width: 310px;
+  }
+
+  .odbus-info-section .visual-benefits {
+    transform: scale(.92);
   }
 }
 
 @media (max-width: 767px) {
   .odbus-info-section {
-    padding: 40px 0;
+    padding: 30px 0 20px;
   }
 
-  .info-row,
-  .reverse-row {
+  .odbus-info-section .info-row,
+  .odbus-info-section .info-row.reverse-row {
     display: flex;
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-bottom: 10px !important;
   }
 
-  /* ALL IMAGES TOP */
-  .info-img {
-    display: none !important;
+  .odbus-info-section .info-row>.col-md-4,
+  .odbus-info-section .info-row>.col-md-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
   }
 
-  .info-img img {
-    display: none !important;
-  }
-
-  .left-img,
-  .right-img {
-    display: none !important;
-  }
-
-  /* TEXT BELOW */
-  /* .info-content {
-    text-align: center;
-    padding: 0;
-  } */
-
-  .info-content h2 {
-    font-size: 21px;
-    line-height: 1.35;
-    margin-bottom: 14px;
-  }
-
-  .info-content p {
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 14px;
-  }
-
-  .info-content ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .info-content ul li {
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 8px;
-  }
-}
-
-@media (max-width: 575px) {
-  .odbus-info-section {
-    padding: 30px 0;
-  }
-
-  .info-row {
-    margin-bottom: 30px;
-  }
-
-  .info-img img {
+  .odbus-info-section .info-row>.col-md-4 {
+    order: 0;
+    margin-bottom: 20px;
     display: none;
   }
 
-  .info-content h2 {
-    font-size: 18px;
+  .odbus-info-section .info-row>.col-md-8 {
+    order: 1;
   }
 
-  .info-content p,
-  .info-content ul li {
-    font-size: 13px;
+  .odbus-info-section .info-content {
+    padding: 0 5px;
+  }
+
+  .odbus-info-section .info-content h2 {
+    font-size: 21px;
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+
+  .odbus-info-section .info-content p,
+  .odbus-info-section .info-content ul li {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .odbus-info-section .info-content ul {
+    padding-left: 20px;
+  }
+
+  .odbus-info-section .info-visual {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .odbus-info-section .visual-benefits {
+    transform: none;
+  }
+
+  .odbus-info-section .visual-steps {
+    max-width: 320px;
   }
 }
 
-
-/*  ODBUS CONTENT SECTION  END*/
-
-
-/* =====================================
-   ODBUS ADVANTAGE — Start
-===================================== */
-
-/* Slider wrapper */
-
-/* Horizontal scroll */
-
-/* Cards: 3 visible on desktop */
-
-/* Card content */
-
-/* Card image */
-
-/* ODBUS brand gradients */
-
-/* Text contrast */
-
-/* Navigation arrows */
-
-/* Tablet: 2 cards */
-
-/* Mobile: one swipeable card */
-
-/* Small phones */
-
-/* Respect reduced-motion preference */
-
-/* =====================================
-   ODBUS ADVANTAGE — End
-===================================== */
-
-/* New Poupular Routes Section */
-
-/* CARD */
-
-/* LEFT */
-
-/* ICON */
-
-/* TEXT */
-
-/* CITY */
-
-/* EXCHANGE */
-
-/* BUTTON */
-
-/* BUTTON HOVER */
-
-/* CARD HOVER */
-
-/* POPULAR ROUTES MOBILE RESPONSIVE */
-
-/* ===============================
-   TABLET
-================================= */
-@media (max-width: 991px) {
-
-  /* cards */
-
-}
-
-/* ===============================
-   MOBILE
-================================= */
-@media (max-width: 767px) {
-
-  /* heading row single line */
-
-  /* title */
-
-  /* button side */
-
-  /* card full width */
-
-}
-
-/* ===============================
-   SMALL MOBILE
-================================= */
-@media (max-width: 575px) {
-
-  /* .city {
-    font-size: 12px;
-  } */
-
-}
-
-/* New Poupular Routes Section end*/
-
-
-/* ===============================
-   ROUTE / QUICK LINKS SECTION
-=================================*/
-
-/* container */
-
-/* ===============================
-   TABS DESKTOP
-=================================*/
-
-/* .route-tabs li {
-  margin: 0;
-}
-
-.route-tabs li a {
-  display: block;
-  padding: 0 0 14px;
-  color: #000000;
-  font-size: 16px;
-  font-weight: 500;
-  text-decoration: none !important;
-  transition: .25s ease;
-  padding: 10px;
-} */
-
-/* .route-tabs li.active a {
-  color: #1b2155;
-  font-weight: 700;
-  border-bottom: 3px solid #f0c92f;
-  background: #f5f5f5;
-  border-radius: 3px;
-
-} */
-
-/* ===============================
-   TAB CONTENT
-=================================*/
-
-/* ===============================
-   GRID
-=================================*/
-
-/* ===============================
-   LINKS
-=================================*/
-
-/* ==================================================
-   MOBILE RESPONSIVE
-================================================== */
-
-@media (max-width: 767px) {
-
-  /* 4 BUTTON SINGLE ROW */
-
-  /* .route-tabs li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 42px;
-    padding: 8px 6px;
-    font-size: 11px;
-    line-height: 1.2;
-    border-radius: 22px;
-    background: #fff7db;
-    border: 1px solid #d8e0ff !important;
-    color: #1b2155 !important;
-    white-space: normal;
-    word-break: break-word;
+@media (max-width: 380px) {
+  .odbus-info-section .info-content h2 {
+    font-size: 19px;
   }
 
-  .route-tabs li.active a {
-    background: #1b2155 !important;
-    color: #fff !important;
-    border: none !important;
-    border-radius: 22px;
-  } */
+  .odbus-info-section .info-visual {
+    max-width: 310px;
+  }
 
-  /* GRID 2 COLUMN */
+  .odbus-info-section .visual-benefits {
+    transform: scale(.93);
+    transform-origin: top center;
+    margin-bottom: -15px;
+  }
 
+  .odbus-info-section .steps-phone {
+    transform: translateX(-50%) scale(.9);
+  }
+
+  .odbus-info-section .booking-step {
+    gap: 3px;
+    font-size: 8px;
+  }
+
+  .odbus-info-section .coupon-ticket {
+    width: 215px;
+  }
+
+  .odbus-info-section .coupon-main {
+    font-size: 16px;
+  }
 }
 
+@media (prefers-reduced-motion: reduce) {
 
-/* ==========================================
-   CUSTOM DATE PICKER
-========================================== */
-
-/* ===========================
-      POPUP
-=========================== */
-
-/* ===========================
-      HEADER
-=========================== */
-
-/* ===========================
-      WEEK
-=========================== */
-
-/* ===========================
-      DAYS
-=========================== */
-
-/* ===========================
-      MOBILE
-=========================== */
-
-@media (max-width: 768px) {
-
-  /* Calendar popup */
-
-  /* Header */
-
-  /* Week names */
-
-  /* Days */
-
+  .odbus-info-section *,
+  .odbus-info-section *::before,
+  .odbus-info-section *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
-/* ===========================
-   Maintenance Popup
-=========================== */
+.odbus-info-section .info-content ul li::marker {
+  color: var(--odbus-blue);
+}
+
+.odbus-info-section .visual-about {
+  height: 280px;
+}
+
+.odbus-info-section .step-one,
+.odbus-info-section .step-two,
+.odbus-info-section .step-three {
+  left: 7px;
+}
+
+.odbus-info-section .step-four,
+.odbus-info-section .step-five,
+.odbus-info-section .step-six {
+  right: 7px;
+}
+
+.odbus-info-section .step-one,
+.odbus-info-section .step-four {
+  top: 68px;
+}
+
+.odbus-info-section .step-two,
+.odbus-info-section .step-five {
+  top: 135px;
+}
+
+.odbus-info-section .step-three,
+.odbus-info-section .step-six {
+  bottom: 48px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .odbus-info-section .info-row {
+    margin-bottom: 48px;
+  }
+
+  .odbus-info-section .info-content {
+    padding: 0 12px;
+  }
+
+  .odbus-info-section .info-content h2 {
+    font-size: 21px;
+  }
+
+  .odbus-info-section .info-visual {
+    max-width: 290px;
+  }
+
+  .odbus-info-section .visual-benefits {
+    transform: scale(0.92);
+    transform-origin: center;
+  }
+
+  .odbus-info-section .booking-step {
+    width: 88px;
+    max-width: 88px;
+    font-size: 8px;
+  }
+
+  .odbus-info-section .step-one,
+  .odbus-info-section .step-two,
+  .odbus-info-section .step-three {
+    left: 3px;
+  }
+
+  .odbus-info-section .step-four,
+  .odbus-info-section .step-five,
+  .odbus-info-section .step-six {
+    right: 3px;
+  }
+}
+
+@media (max-width: 360px) {
+  .odbus-info-section .info-content h2 {
+    font-size: 19px;
+  }
+
+  .odbus-info-section .info-visual {
+    max-width: 290px;
+  }
+
+  .odbus-info-section .booking-step {
+    width: 84px;
+    max-width: 84px;
+    gap: 3px;
+    font-size: 8px;
+  }
+
+  .odbus-info-section .step-one,
+  .odbus-info-section .step-two,
+  .odbus-info-section .step-three {
+    left: 2px;
+  }
+
+  .odbus-info-section .step-four,
+  .odbus-info-section .step-five,
+  .odbus-info-section .step-six {
+    right: 2px;
+  }
+
+  .odbus-info-section .steps-phone {
+    transform: translateX(-50%) scale(0.94);
+    transform-origin: top center;
+  }
+}
