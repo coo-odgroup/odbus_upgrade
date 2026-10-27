@@ -13,6 +13,19 @@
     aspect-ratio: 375 / 280;
 }
 
+.mobile-download-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    z-index: 3;
+    border: 0;
+    background: transparent;
+    color: #132a72;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
 /* =========================================
    BACKGROUND IMAGE
 ========================================= */

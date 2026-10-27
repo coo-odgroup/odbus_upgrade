@@ -40,7 +40,8 @@
   border-radius: 12px;
   padding: 18px;
   /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); */
-  height: 130px;
+  min-height: 130px;
+  height: auto;
   border: 1px solid #e6e8ef !important;
   background: #f5f5f5;
 }
@@ -479,6 +480,18 @@ input {
 =========================== */
 
 @media (max-width: 768px) {
+
+  .search-section {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: auto;
+  }
+
+  .search-box-v5 {
+    min-height: 0;
+    height: auto;
+  }
 
   .date-input-box .fa-angle-down {
     display: none;

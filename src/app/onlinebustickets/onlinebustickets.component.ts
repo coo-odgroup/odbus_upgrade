@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { GlobalConstants } from '../constants/global-constants';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PagesService } from '../services/pages.service';
@@ -13,14 +13,27 @@ export class OnlinebusticketsComponent implements OnInit {
   pageTitle: any;
   pageContent: any;
 
-  isMobile: boolean;
+  isMobile = false;
 
   constructor(
     private spinner: NgxSpinnerService,
     private pagesService: PagesService,
     private detectService: DeviceDetectorService,
   ) {
-    this.isMobile = this.detectService.isMobile();
+    this.updateViewportLayout();
+  }
+
+  @HostListener('window:resize')
+  onViewportResize(): void {
+    this.updateViewportLayout();
+  }
+
+  private updateViewportLayout(): void {
+    // The responsive layout follows the viewport so browser device emulation
+    // and resizes switch immediately without requiring a page reload.
+    this.isMobile = typeof window !== 'undefined'
+      ? window.innerWidth < 768
+      : this.detectService.isMobile();
   }
 
   ngOnInit(): void {

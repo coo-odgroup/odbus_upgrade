@@ -5,6 +5,7 @@ import {
   OnDestroy,
   Inject,
   PLATFORM_ID,
+  HostListener,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginChecker } from '../helpers/loginChecker';
@@ -30,6 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: any = {};
   logo: any = '';
   isMobile: boolean = false;
+  isNarrowViewport = false;
 
   // ✅ TOP BAR CONTROL
   showTopBar: boolean = true;
@@ -51,9 +53,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.isMobile = isPlatformBrowser(this.platformId)
       ? this.deviceService.isMobile()
       : false;
+    this.isNarrowViewport = isPlatformBrowser(this.platformId)
+      ? window.innerWidth <= 768
+      : false;
 
     this.session = new LoginChecker();
     this.updateLogoFromCommonData();
+  }
+
+  @HostListener('window:resize')
+  onViewportResize(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isNarrowViewport = window.innerWidth <= 768;
+    }
   }
 
   updateLogoFromCommonData() {

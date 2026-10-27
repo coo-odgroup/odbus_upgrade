@@ -220,7 +220,8 @@ a:hover {
   border-radius: 12px;
   padding: 18px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-  height: 130px;
+  min-height: 130px;
+  height: auto;
   border: 1px solid #e6e8ef !important;
 }
 

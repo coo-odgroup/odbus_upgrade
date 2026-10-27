@@ -277,7 +277,6 @@
               width="85"
               height="34"
               alt="Mobile Logo"
-              loading="lazy"
             />
           </div>
         </div>
@@ -528,8 +527,9 @@
           <div class="mobile-logo">
             <img
               src="assets/img/mob-img/logo.png"
+              width="85"
+              height="34"
               alt="Mobile Logo"
-              loading="lazy"
             />
           </div>
         </div>
@@ -703,7 +703,7 @@
   <app-odbus-offers></app-odbus-offers>
   <app-advantage></app-advantage>
   <app-top-routes [popularRoutes]="popular_routes"></app-top-routes>
-  <app-mobile-app-download *ngIf="isMobile"></app-mobile-app-download>
+  <app-mobile-app-download *ngIf="isMobile && showMobileAppDownload" (close)="closeMobileAppDownload()"></app-mobile-app-download>
   <app-download-app></app-download-app>
   <app-top-operators></app-top-operators>
   <app-growing></app-growing>
@@ -776,8 +776,10 @@
       <img
         *ngIf="homePopup?.popup_image && homePopup?.popup_image != 'null'"
         [src]="homePopup?.popup_image"
-        width="100%"
+        width="600"
+        height="400"
         alt="Popup"
+        loading="lazy"
       />
 
       <p

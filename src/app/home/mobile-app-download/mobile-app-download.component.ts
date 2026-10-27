@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-mobile-app-download',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mobile-app-download.component.css']
 })
 export class MobileAppDownloadComponent implements OnInit {
+  @Output() close = new EventEmitter<void>();
 
   constructor() { }
 

@@ -41,6 +41,14 @@ a {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
+@media (max-width: 768px) {
+    .top-offer-bar,
+    .header-main,
+    .fix-top {
+        display: none !important;
+    }
+}
+
 /* CONTENT */
 .offer-content {
     display: flex;

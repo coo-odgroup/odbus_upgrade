@@ -92,6 +92,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   showAppPopup: boolean = false; // Flag to control app download popup visibility
+  showMobileAppDownload = true;
   public searchForm: FormGroup;
   public appForm: FormGroup;
 
@@ -100,6 +101,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.showAppPopup = false;
     const expiryTime = new Date().getTime() + 12 * 60 * 60 * 1000;
     localStorage.setItem('appPopupClosedUntil', expiryTime.toString());
+  }
+
+  closeMobileAppDownload() {
+    this.showMobileAppDownload = false;
   }
 
   /* =====================================
@@ -230,7 +235,7 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
 
   private detectMobile(): boolean {
     if (isPlatformBrowser(this.platformId)) {
-      return this.deviceService.isMobile() || window.innerWidth <= 768;
+      return window.innerWidth < 768;
     }
 
     if (isPlatformServer(this.platformId) && this.request) {
@@ -545,6 +550,18 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
     }
     this.generateCalendar();
     this.getHomeData();
+  }
+
+  @HostListener('window:resize')
+  onViewportResize(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    const nextIsMobile = window.innerWidth < 768;
+    if (nextIsMobile !== this.isMobile) {
+      this.isMobile = nextIsMobile;
+    }
   }
 
   toggleCalendar() {

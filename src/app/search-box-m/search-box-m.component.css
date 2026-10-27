@@ -1,6 +1,7 @@
 .mobile-search-box {
     background-color: #efc003;
     padding: 22px;
+    min-height: 0;
 }
 
 .mobile-search-box h3 {
@@ -11,7 +12,10 @@
 }
 
 .mobile-logo img {
+    display: block;
+    width: 85px;
     height: 42px;
+    object-fit: contain;
     float: right;
 }
 
@@ -168,7 +172,8 @@
     }
 
     .mobile-logo img {
-        height: 38px;
+        width: 85px;
+        height: 34px;
         float: right;
         margin-top: 2px;
     }
@@ -189,6 +194,7 @@
         border-radius: 18px;
         padding: 14px;
         height: auto !important;
+        min-height: 0;
         border: none !important;
         box-shadow: 0 10px 22px rgba(0, 0, 0, 0.10);
     }
@@ -429,6 +435,7 @@
     }
 
     .mobile-logo img {
+        width: 85px;
         height: 34px;
     }
 

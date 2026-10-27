@@ -1,6 +1,6 @@
 <ng-template #Desktop>
   <!-- TOP GRADIENT BAR -->
-  <div class="top-offer-bar" *ngIf="showTopBar">
+  <div class="top-offer-bar" *ngIf="showTopBar && !isMobile && !isNarrowViewport">
     <div class="offer-content">
       <span class="offer-text">
         Book Bus Tickets Faster with the ODBUS App
@@ -115,6 +115,6 @@
   <div class="fix-top" [class.with-topbar]="showTopBar"></div>
 </ng-template>
 
-<ng-template #Mobile> </ng-template>
+<ng-template #Mobile></ng-template>
 
-<ng-container *ngIf="isMobile; then Mobile; else Desktop"> </ng-container>
+<ng-container *ngIf="isMobile || isNarrowViewport; then Mobile; else Desktop"></ng-container>
