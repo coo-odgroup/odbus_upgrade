@@ -4,14 +4,10 @@ GENERAL
 
 .bus-ticket-page {
   background: #f5f7fb;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif !important;
 }
 
-/* .container {
-    max-width: 1180px;
-    margin: auto;
-    padding: 0 20px;
-} */
+
 
 /*==================================================
 HEADER
@@ -135,7 +131,7 @@ CONTENT HTML
 
   font-size: 22px;
 
-  font-weight: 800;
+  font-weight: 600;
 
   margin: 0 0 18px;
 }

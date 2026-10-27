@@ -92,11 +92,19 @@
   height: 42px;
   border: none;
   border-radius: 50%;
-  background: #fff;
+  background: #ffffffcb;
   color: #072c6b;
   font-size: 22px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, .15);
   z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.offer-arrow:hover {
+  background: #1b2155;
+  color: #fff;
 }
 
 .offer-prev {
