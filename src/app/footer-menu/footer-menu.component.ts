@@ -16,15 +16,15 @@ export class FooterMenuComponent implements OnInit {
 
   constructor(private modalService: NgbModal, private router: Router) {
     this.session = new LoginChecker();
-
+    
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.activeMenu = false;
+        this.MenuActive = false;
       }
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   menu() {
     this.MenuActive = this.MenuActive == false ? true : false;

@@ -142,7 +142,8 @@
   }
 
   .app-image img {
-    max-width: 230px;
+    max-width: 330px;
+    height: auto;
   }
 
   .qr-card {
@@ -161,6 +162,7 @@
   .qr-img {
     width: 130px;
     margin: 0 auto 10px;
+    height: auto;
   }
 
   .play-btn {
@@ -198,144 +200,6 @@
 @media (max-width: 767px) {
 
   .download-app-new {
-    padding: 28px 0;
+    display: none;
   }
-
-  .download-app-new .row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  /* TOP ROW IMAGE + QR */
-  .download-app-new .col-md-4:nth-child(1),
-  .download-app-new .col-md-4:nth-child(3) {
-    width: 50%;
-    max-width: 50%;
-    flex: 0 0 50%;
-    margin-bottom: 18px;
-  }
-
-  /* IMAGE */
-  .app-image {
-    text-align: center;
-  }
-
-  .app-image img {
-    max-width: 170px;
-    width: 100%;
-    height: auto;
-  }
-
-  /* QR */
-  .qr-card {
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
-    text-align: center;
-  }
-
-  .qr-card h3 {
-    font-size: 18px;
-    line-height: 1.2;
-    margin-bottom: 8px;
-  }
-
-  .qr-img {
-    width: 95px;
-    margin: 0 auto 8px;
-  }
-
-  .play-btn {
-    width: 95px;
-  }
-
-  /* CONTENT BOTTOM FULL WIDTH */
-  .download-app-new .col-md-4:nth-child(2) {
-    width: 100%;
-    max-width: 100%;
-    flex: 0 0 100%;
-    margin-bottom: 0;
-    order: 3;
-  }
-
-  .app-content {
-    max-width: 100%;
-    text-align: center;
-    padding: 0;
-  }
-
-  .app-content h2 {
-    font-size: 22px;
-    line-height: 1.35;
-    margin-bottom: 16px;
-  }
-
-  .app-content ul {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .app-content ul li {
-    justify-content: center;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-
-  .app-content ul li i {
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    font-size: 11px;
-    margin-right: 8px;
-  }
-
-}
-
-/* ===============================
-   SMALL MOBILE
-================================= */
-@media (max-width: 575px) {
-
-  .download-app-new {
-    padding: 24px 0;
-  }
-
-  .app-image img {
-    max-width: 145px;
-  }
-
-  .qr-card h3 {
-    font-size: 16px;
-  }
-
-  .qr-img {
-    width: 82px;
-  }
-
-  .play-btn {
-    width: 88px;
-  }
-
-  .app-content h2 {
-    font-size: 18px;
-  }
-
-  .app-content ul li {
-    font-size: 10px;
-  }
-
-  .app-content ul li i {
-    width: 26px;
-    height: 26px;
-    line-height: 26px;
-    font-size: 10px;
-  }
-
 }

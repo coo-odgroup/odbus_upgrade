@@ -1,54 +1,57 @@
 <div class="mobile-fixed-bottom">
-  <div class="footer-menu row m-0 mobile-bg-danger">
+  <div class="footer-menu mobile-bg-danger">
 
     <!-- HOME -->
-    <div class="col-3 p-0 text-center">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="home">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="home">
+      <span class="footer-icon">
         <i class="fa fa-home"></i>
-        <p class="mb-0 small">Home</p>
-      </a>
-    </div>
+      </span>
+      <span class="footer-label">Home</span>
+    </a>
 
     <!-- BOOKINGS -->
-    <div class="col-3 p-0 text-center">
-      <a routerLink="/dashboard" routerLinkActive="active" class="home">
+    <a routerLink="/dashboard" routerLinkActive="active" class="home">
+      <span class="footer-icon">
         <i class="fa fa-ticket"></i>
-        <p class="mb-0 small">Bookings</p>
-      </a>
-    </div>
+      </span>
+      <span class="footer-label">Bookings</span>
+    </a>
 
-    <!-- LOGIN -->
-    <div class="col-3 p-0 text-center" *ngIf="!session.isLoggedIn()">
-      <a routerLink="/login" routerLinkActive="active" class="home">
+    <!-- LOGIN / ACCOUNT -->
+    <a *ngIf="!session.isLoggedIn()" routerLink="/login" routerLinkActive="active" class="home">
+      <span class="footer-icon">
         <i class="fa fa-user"></i>
-        <p class="mb-0 small">Login</p>
-      </a>
-    </div>
+      </span>
+      <span class="footer-label">Login</span>
+    </a>
 
-    <!-- ACCOUNT -->
-    <div class="col-3 p-0 text-center" *ngIf="session.isLoggedIn()">
-      <a routerLink="/myaccount" routerLinkActive="active" class="home">
+    <a *ngIf="session.isLoggedIn()" routerLink="/myaccount" routerLinkActive="active" class="home">
+      <span class="footer-icon">
         <i class="fa fa-user-circle"></i>
-        <p class="mb-0 small">Account</p>
-      </a>
-    </div>
+      </span>
+      <span class="footer-label">Account</span>
+    </a>
 
     <!-- MENU -->
-    <div class="col-3 p-0 text-center">
-      <span (click)="menu()" (keydown.enter)="menu()" (keydown.space)="menu()" class="home"
-        [ngClass]="{ active: activeMenu }" tabindex="0" role="button">
+    <button type="button" class="home footer-menu-trigger" [ngClass]="{ active: MenuActive }" (click)="menu()"
+      [attr.aria-expanded]="MenuActive" aria-label="Open menu">
+      <span class="footer-icon">
         <i class="fa fa-bars"></i>
-        <p class="mb-0 small">Menu</p>
       </span>
-    </div>
+      <span class="footer-label">Menu</span>
+    </button>
 
   </div>
 </div>
 
-<!-- MOBILE FULL SCREEN MENU -->
-<ng-container *ngIf="MenuActive">
 
-  <div class="mobile-menu-overlay">
+<!-- MOBILE FULL SCREEN MENU -->
+<div
+  class="mobile-menu-overlay"
+  [class.menu-open]="MenuActive"
+  [attr.aria-hidden]="!MenuActive"
+  [attr.inert]="!MenuActive ? '' : null"
+>
 
     <!-- TOP -->
     <div class="mobile-menu-header">
@@ -171,4 +174,3 @@
     </div>
 
   </div>
-</ng-container>
