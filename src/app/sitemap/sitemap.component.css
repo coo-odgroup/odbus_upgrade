@@ -1,82 +1,141 @@
-.sitemap {
-  background-color: #e7eaeb;
-}
+/* =========================================
+   ODBUS SITEMAP - PREMIUM RESPONSIVE
+========================================= */
 
-.line-span {
-  background-color: #efc003;
-  height: 2px;
+:host {
   display: block;
+  min-width: 0;
+}
+
+.sitemap-page-shell {
+  --policy-navy: #072c6b;
+  --policy-blue: #003da5;
+  --policy-yellow: #efc003;
+  --policy-text: #263449;
+  --policy-border: #e4eaf3;
+
+  min-width: 0;
+  background: #f4f7fc;
+  color: var(--policy-text);
+  font-family: inherit;
+}
+
+.policy-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+/* =========================================
+   DESKTOP HEADING
+========================================= */
+
+.policy-desktop-header {
   position: relative;
-  margin-top: 63px;
+  display: block;
+  padding: 28px 0 20px;
 }
 
-.line-span h2 {
-  text-align: center;
-  display: inline-block;
+.policy-desktop-header::before {
+  content: "";
   position: absolute;
-  background: #efc003;
-  /* left: 41%; */
-  top: -26px;
-  color: #072c6b;
-  padding: 10px 20px;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: var(--policy-yellow);
+  transform: translateY(-50%);
+}
+
+.policy-desktop-header .policy-container {
+  position: relative;
+  z-index: 1;
+}
+
+.policy-desktop-header h1 {
+  display: inline-block;
+  max-width: 100%;
+  margin: 0;
+  padding: 10px 18px;
+  background: var(--policy-yellow);
+  color: var(--policy-navy);
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
-.sitemap {
-  background-color: #e7eaeb;
+/* =========================================
+   SITEMAP MAIN
+========================================= */
+
+.sitemap-main {
+  padding: 22px 0 40px;
 }
 
-.sitemap-page {
-  background: #f7f8fc;
-  padding: 50px 0;
+.sitemap-intro {
+  margin: 0 0 25px;
+  color: var(--policy-text);
+  font-size: 15px;
+  line-height: 1.8;
 }
 
-.sitemap-card,
-.sitemap-app-card {
-  background: #fff;
-  border: 1px solid #e5e8f1;
-  border-radius: 10px;
-  padding: 25px;
-  margin-bottom: 25px;
-  transition: all 0.3s ease;
+/* Three responsive columns */
+
+.sitemap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 22px;
 }
 
-.sitemap-card:hover,
-.sitemap-app-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+.sitemap-column {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
 }
 
-.sitemap-services-card {
-  min-height: 822px;
+/* =========================================
+   SITEMAP CARDS
+========================================= */
+
+.sitemap-card {
+  min-width: 0;
+  padding: 24px 22px;
+  background: #ffffff;
+  border: 1px solid var(--policy-border);
+  border-radius: 12px;
+  box-shadow: 0 5px 22px rgba(7, 44, 107, 0.045);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.sitemap-card:hover {
+  box-shadow: 0 8px 24px rgba(7, 44, 107, 0.075);
+  transform: translateY(-2px);
 }
 
 .sitemap-title {
-  margin: 0 0 25px;
-  font-size: 20px;
-  line-height: 28px;
-  font-weight: 600;
-  color: #16255d;
-}
-
-.sitemap-title i {
-  color: rgb(27 33 85);
-  margin-right: 10px;
-}
-
-.sitemap-subtitle {
-  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px;
+  color: var(--policy-navy);
+  font-size: 19px;
   font-weight: 700;
-  color: #666;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 15px;
+  line-height: 1.45;
 }
 
-.sitemap-section {
-  /* margin-bottom: 35px; */
+.sitemap-title>i {
+  flex: 0 0 auto;
+  color: var(--policy-yellow);
+  font-size: 19px;
 }
+
+/* =========================================
+   SITEMAP LINKS
+========================================= */
 
 .sitemap-list {
   list-style: none;
@@ -85,141 +144,374 @@
 }
 
 .sitemap-list li {
-  margin-bottom: 12px;
+  min-width: 0;
+  margin-bottom: 13px;
+}
+
+.sitemap-list li:last-child {
+  margin-bottom: 0;
 }
 
 .sitemap-list li a {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
   color: #25345d;
-  text-decoration: none;
-  transition: all 0.3s ease;
   font-size: 14px;
+  line-height: 1.65;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease;
 }
 
-.sitemap-list li a i {
-  width: 5px;
-  color: #16255d;
-  margin-right: 15px;
+.sitemap-list li a>i {
+  flex: 0 0 16px;
+  width: 16px;
+  margin-top: 4px;
+  color: var(--policy-navy);
+  text-align: center;
+}
+
+.sitemap-list li a span {
+  min-width: 0;
 }
 
 .sitemap-list li a:hover {
-  color: #0d6efd;
-  padding-left: 8px;
+  color: var(--policy-blue);
 }
 
-.view-all-link {
-  font-weight: 600;
-  color: #16255d !important;
+.sitemap-list .view-all-link {
+  align-items: center;
+  margin-top: 5px;
+  color: var(--policy-navy);
+  font-weight: 700;
 }
 
-.view-all-link i {
-  margin-left: 8px;
+.sitemap-list .view-all-link>i {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+  color: var(--policy-yellow);
 }
+
+/* =========================================
+   APP PROMOTION CARD
+========================================= */
 
 .sitemap-app-card {
-  background: linear-gradient(135deg, #17215f, #232d82);
-  color: #fff;
   position: relative;
+  min-width: 0;
+  padding: 25px 22px;
   overflow: hidden;
+  color: #ffffff;
+  background: linear-gradient(135deg, #17215f, #232d82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 5px 22px rgba(7, 44, 107, 0.08);
 }
 
 .app-badge {
   display: inline-block;
-  background: #ffc107;
-  color: #000;
-  font-weight: 600;
-  font-size: 12px;
-  padding: 6px 12px;
-  border-radius: 4px;
   margin-bottom: 15px;
+  padding: 6px 12px;
+  color: #17215f;
+  background: var(--policy-yellow);
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
-.sitemap-app-card h3 {
-  margin-top: 0;
-  margin-bottom: 12px;
-  font-weight: 600;
+.sitemap-app-card h2 {
+  margin: 0 0 12px;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .sitemap-app-card p {
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 20px;
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 14px;
+  line-height: 1.75;
 }
 
 .app-buttons {
-  margin-top: 15px;
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .store-btn {
-  display: inline-block;
-  padding: 10px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #fff;
-  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  padding: 10px 16px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 6px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  height: 60px;
 }
 
 .store-btn:hover {
-  color: #fff;
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.store-btn i {
-  margin-right: 6px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .app-image {
-  position: absolute;
-  right: -10px;
-  bottom: 0;
-  max-width: 140px;
+  display: block;
+  width: 100%;
+  max-width: 135px;
+  height: auto;
+  object-fit: contain;
+  object-position: right bottom;
 }
 
-@media (max-width: 991px) {
-  .sitemap-services-card {
-    min-height: auto;
+/* Hide mobile-only elements on desktop */
+
+.policy-mobile-header,
+.policy-mobile-footer {
+  display: none;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .policy-container {
+    padding-right: 22px;
+    padding-left: 22px;
   }
 
-  .app-image {
+  .sitemap-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .sitemap-column {
+    gap: 20px;
+  }
+
+  .sitemap-card,
+  .sitemap-app-card {
+    padding: 22px 20px;
+  }
+
+  .sitemap-intro {
+    margin-bottom: 22px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+  .policy-container {
+    max-width: 100%;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .policy-desktop-header {
     display: none;
   }
 
-  .sitemap {
-    padding-top: 50px;
+  /* Fixed mobile header */
+
+  .policy-mobile-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+
+    min-height: 64px;
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr) 92px;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 13px;
+
+    background: #ffffff;
+    border-bottom: 1px solid #e5eaf2;
+    box-shadow: 0 3px 12px rgba(7, 44, 107, 0.05);
+  }
+
+  .policy-back {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 30px;
+    height: 38px;
+    color: var(--policy-navy);
+    font-size: 19px;
+    text-decoration: none;
+  }
+
+  .policy-mobile-header h1 {
+    min-width: 0;
+    margin: 0;
+    color: var(--policy-navy);
+    font-size: 15px;
+    font-weight: 750;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .policy-mobile-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .policy-mobile-logo img {
+    display: block;
+    width: 100%;
+    max-width: 92px;
+    max-height: 40px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Content below fixed header */
+
+  .sitemap-main {
+    padding: 82px 0 30px;
+  }
+
+  .sitemap-intro {
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .sitemap-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .sitemap-column {
+    gap: 18px;
+  }
+
+  .sitemap-card {
+    padding: 21px 18px;
+    border-radius: 12px;
+  }
+
+  .sitemap-title {
+    margin-bottom: 17px;
+    font-size: 18px;
+  }
+
+  .sitemap-list li {
+    margin-bottom: 12px;
+  }
+
+  .sitemap-list li a {
+    font-size: 14px;
+  }
+
+  .sitemap-app-card {
+    padding: 23px 19px;
+  }
+
+  .sitemap-app-card h2 {
+    font-size: 21px;
+  }
+
+  .app-image {
+    max-width: 130px;
+  }
+
+  .policy-mobile-footer {
+    display: block;
   }
 }
 
-.mobile-mybooking-top {
-  background-color: #ffffff;
-  padding: 12px 18px 14px;
-  position: fixed;
-  z-index: 99;
-  width: 100%;
-  top: 0;
-  box-shadow: 0 3px 10px #0003;
+/* SMALL MOBILE */
+
+@media (max-width: 360px) {
+  .policy-container {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .policy-mobile-header {
+    grid-template-columns: 26px minmax(0, 1fr) 80px;
+    gap: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .policy-mobile-header h1 {
+    font-size: 14px;
+  }
+
+  .policy-mobile-logo img {
+    max-width: 80px;
+  }
+
+  .sitemap-card {
+    padding: 18px 15px;
+  }
 }
 
-.mobile-mybooking-top .mob-arrow-left i {
-  font-size: 25px;
-  color: #072c6b;
-  margin-top: 10px;
+
+/* Keep sitemap content above the mobile footer */
+.sitemap-page-shell {
+  padding-bottom: 0;
 }
 
-.mobile-mybooking-top .mob-list-center h5 {
-  color: #072c6b;
-  font-size: 20px;
-  font-weight: 800;
-  text-align: left;
-  padding-top: 10px;
-  padding-left: 5px;
-  margin-bottom: 4px;
-
+.sitemap-main {
+  padding-bottom: 30px;
 }
 
-.mobile-logo img {
-  height: 42px;
-  float: right;
+.sitemap-grid,
+.sitemap-card {
+  min-width: 0;
+}
+
+.sitemap-card {
+  height: auto;
+  overflow: visible;
+}
+
+.sitemap-card a {
+  overflow-wrap: anywhere;
+}
+
+/* View All links */
+.sitemap-card .view-all-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 10px 0;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .sitemap-main {
+    padding-bottom: 75px;
+  }
+
+  .sitemap-card {
+    height: auto;
+    margin-bottom: 16px;
+  }
 }

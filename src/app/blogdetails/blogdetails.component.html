@@ -1,122 +1,212 @@
+<h1 class="blog-detail-seo-title">
+  {{ blogDetail?.title }}
+</h1>
 
-<ng-container *ngIf="isMobile && !MenuActive">
-  <div class="mobile-mybooking-top">
-    <div class="row">
-      <div class="col-1 pr-0 pl-2 mob-arrow-left">
-        <a routerLink="/">
-          <i class="fa fa-arrow-left"></i>
-        </a>
-      </div>
-      <div class="col-7 pl-2 pr-2 mob-list-center">
-        <h5>{{ pageTitle }}</h5>
-      </div>
-      <div class="col-4 pl-2 pr-2">
-        <div class="mobile-logo">
-          <img src="assets/img/mob-img/logo.png" loading="lazy" alt="logo" />
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="mobile-breadcrumb-box"></div>
-</ng-container>
-<section class="blog-details">
+<!-- MOBILE HEADER -->
+<header class="blog-detail-mobile-header">
+  <a routerLink="/" class="blog-detail-back" aria-label="Go to home">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  </a>
+
+  <h2>Blog Details</h2>
+
+  <a routerLink="/" class="blog-detail-mobile-logo" aria-label="ODBUS Home">
+    <img src="assets/img/mob-img/logo.png" alt="ODBUS" />
+  </a>
+</header>
+
+<main class="blog-details">
+
   <!-- BREADCRUMB -->
-  <section class="blog-breadcrumb">
-    <div class="container">
+  <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+    <div class="blog-detail-container">
       <div class="breadcrumb-wrap">
-
         <a routerLink="/">Home</a>
-
-        <span>/</span>
-
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
         <a routerLink="/blog">Blog</a>
-
-        <span>/</span>
-
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
         <span class="active-breadcrumb">
           {{ blogDetail?.title }}
         </span>
-
       </div>
     </div>
-  </section>
-  <div class="container">
-    <div class="row">
-      <!-- LEFT CONTENT -->
-      <div class="col-md-9">
+  </nav>
+
+  <div class="blog-detail-container">
+    <div class="blog-detail-layout">
+
+      <!-- MAIN ARTICLE -->
+      <article class="blog-detail-main" *ngIf="blogDetail">
+
         <div class="blog-detail-card">
-          <div class="blog-img">
-            <img [src]="baseurl + blogDetail?.featured_image" class="img-responsive" loading="lazy"
-              alt="{{blogDetail?.title}}">
+
+          <!-- FEATURED IMAGE -->
+          <div class="blog-detail-featured-image">
+            <img [src]="baseurl + blogDetail?.featured_image" [alt]="blogDetail?.title || 'ODBUS travel blog'"
+              loading="lazy" />
+
+            <span class="blog-detail-category" *ngIf="blogDetail?.category_name">
+              {{ blogDetail.category_name }}
+            </span>
           </div>
 
-          <div class="blog-content">
-            <div class="blog-meta-row">
-              <span class="blog-tag-inline">{{ blogDetail?.category_name }}</span>
-              <span class="blog-date"><a [routerLink]="['/blog/author', blogDetail?.author_slug]">
-                  {{ blogDetail?.author }}</a> | {{ blogDetail?.created_at | date:'dd MMM yyyy' }}
+          <!-- ARTICLE CONTENT -->
+          <div class="blog-detail-content">
+
+            <div class="blog-detail-meta">
+              <a class="blog-detail-author" *ngIf="blogDetail?.author_slug"
+                [routerLink]="['/blog/author', blogDetail.author_slug]">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+                {{ blogDetail?.author }}
+              </a>
+
+              <span class="blog-detail-author" *ngIf="!blogDetail?.author_slug && blogDetail?.author">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+                {{ blogDetail?.author }}
               </span>
+
+              <span class="blog-detail-meta-divider" *ngIf="blogDetail?.created_at">
+                ·
+              </span>
+
+              <time *ngIf="blogDetail?.created_at" [attr.datetime]="blogDetail.created_at">
+                <i class="fa fa-calendar-o" aria-hidden="true"></i>
+                {{ blogDetail.created_at | date:'dd MMM yyyy' }}
+              </time>
             </div>
 
-            <h1 class="blog-title">
-              {{blogDetail?.title}}
+            <h1 class="blog-detail-title">
+              {{ blogDetail?.title }}
             </h1>
 
-            <div [innerHTML]="blogDetail?.content" class="blog"></div>
-            <div class="blog-post-tags">
-              <span class="tag-title" *ngIf="blogDetail?.tags != 0">Tags :</span>
-              <a class="post-tag" *ngFor="let tag of blogDetail?.tags">{{ tag?.tag_name }}</a>
+            <div class="blog-article-body" [innerHTML]="blogDetail?.content">
             </div>
+
+            <!-- ARTICLE TAGS -->
+            <div class="blog-post-tags" *ngIf="blogDetail?.tags?.length">
+
+              <span class="blog-post-tags-title">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                Topics:
+              </span>
+
+              <a class="blog-post-tag" *ngFor="let tag of blogDetail.tags" [routerLink]="['/blog/tag', tag.slug]">
+                {{ tag.tag_name }}
+              </a>
+            </div>
+
           </div>
         </div>
-      </div>
 
+      </article>
 
-      <!-- RIGHT SIDEBAR -->
-      <div class="col-md-3 blog-sidebar">
+      <!-- SIDEBAR -->
+      <aside class="blog-detail-sidebar">
 
         <!-- RELATED POSTS -->
-        <div class="sidebar-box" *ngIf="related_blogs != 0">
-          <h4>Related Posts</h4>
+        <section class="blog-detail-sidebar-card" *ngIf="related_blogs?.length">
 
-          <a class="related-post" *ngFor="let relBlog of related_blogs" [routerLink]="['/blog',blogDetail.cat_slug, relBlog.slug]">
+          <div class="blog-detail-sidebar-heading">
+            <span class="blog-sidebar-heading-icon">
+              <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+            </span>
 
-            <img [src]="baseurl + relBlog.thumb_image" loading="lazy" alt="{{ relBlog?.title }}">
             <div>
-              <p class="rp-title">{{ relBlog?.title }}</p>
-              <span class="rp-date">
-                {{ relBlog?.created_at | date:'dd MMM yyyy' }}
-              </span>
+              <h2>Related Posts</h2>
+              <p>More stories for your next journey</p>
             </div>
+          </div>
+
+          <a class="blog-related-post" *ngFor="let relBlog of related_blogs"
+            [routerLink]="['/blog', blogDetail?.cat_slug, relBlog.slug]">
+
+            <img [src]="baseurl + relBlog.thumb_image" [alt]="relBlog?.title || 'Related blog'" loading="lazy" />
+
+            <div class="blog-related-content">
+              <h3>{{ relBlog?.title }}</h3>
+
+              <time *ngIf="relBlog?.created_at">
+                {{ relBlog.created_at | date:'dd MMM yyyy' }}
+              </time>
+            </div>
+
+            <i class="fa fa-angle-right blog-related-arrow" aria-hidden="true"></i>
           </a>
-        </div>
+
+        </section>
 
         <!-- CATEGORIES -->
-        <div class="sidebar-box">
-          <h4>Categories</h4>
-          <ul class="category-list">
+        <section class="blog-detail-sidebar-card">
+
+          <div class="blog-detail-sidebar-heading">
+            <span class="blog-sidebar-heading-icon">
+              <i class="fa fa-th-large" aria-hidden="true"></i>
+            </span>
+
+            <div>
+              <h2>Categories</h2>
+              <p>Explore more travel topics</p>
+            </div>
+          </div>
+
+          <ul class="blog-detail-category-list">
             <li *ngFor="let category of blogcat">
-              <a [routerLink]="['/blog/category', category.slug]"><span>{{ category.category_name }}</span></a>
-              <span class="cat-count">{{ category.total }}</span>
+              <a [routerLink]="['/blog/category', category.slug]">
+                <span>{{ category.category_name }}</span>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </a>
+
+              <span class="blog-detail-category-count">
+                {{ category.total }}
+              </span>
             </li>
           </ul>
-        </div>
 
-        <!-- TAGS -->
-        <div class="sidebar-box" *ngIf="blogDetail?.tags?.length">
-          <h4>Tags</h4>
-          <div class="tag-list">
-            <a *ngFor="let tag of blogDetail?.tags" [routerLink]="['/blog/tag', tag.slug]">
-              <span>{{ tag.tag_name }}</span>
+        </section>
+
+        <!-- TAG CLOUD -->
+        <section class="blog-detail-sidebar-card" *ngIf="blogDetail?.tags?.length">
+
+          <div class="blog-detail-sidebar-heading">
+            <span class="blog-sidebar-heading-icon">
+              <i class="fa fa-tags" aria-hidden="true"></i>
+            </span>
+
+            <div>
+              <h2>Explore Tags</h2>
+              <p>Find articles by topic</p>
+            </div>
+          </div>
+
+          <div class="blog-detail-tag-cloud">
+            <a *ngFor="let tag of blogDetail.tags" [routerLink]="['/blog/tag', tag.slug]">
+              {{ tag.tag_name }}
             </a>
           </div>
-        </div>
 
-      </div>
+        </section>
+
+        <!-- BOOKING PROMO -->
+        <section class="blog-detail-promo">
+          <span class="blog-detail-promo-icon">
+            <i class="fa fa-bus" aria-hidden="true"></i>
+          </span>
+
+          <h2>Ready for your next trip?</h2>
+
+          <p>Discover new destinations and plan your journey across Odisha with ODBUS.</p>
+
+          <a routerLink="/" class="blog-detail-promo-link">
+            Explore bus routes
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </section>
+
+      </aside>
+
     </div>
   </div>
-</section>
+</main>
 
-<ng-container *ngIf="isMobile">
-  <app-footer-menu></app-footer-menu>
-</ng-container>
+<!-- MOBILE BOTTOM NAVIGATION -->
+<app-footer-menu class="blog-detail-mobile-footer"></app-footer-menu>

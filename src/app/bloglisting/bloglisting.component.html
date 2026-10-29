@@ -1,144 +1,201 @@
-<h1 style="display: none;">ODBUS Blog: Odisha Travel Guides, Bus Routes & Tourism Tips</h1>
-<ng-container *ngIf="isMobile && !MenuActive">
-  <div class="mobile-mybooking-top">
-    <div class="row">
-      <div class="col-1 pr-0 pl-2 mob-arrow-left">
-        <a routerLink="/">
-          <i class="fa fa-arrow-left"></i>
-        </a>
-      </div>
-      <div class="col-7 pl-2 pr-2 mob-list-center">
-        <h5>{{ pageTitle }}</h5>
-      </div>
-      <div class="col-4 pl-2 pr-2">
-        <div class="mobile-logo">
-          <img src="assets/img/mob-img/logo.png" loading="lazy" alt="logo" />
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="mobile-breadcrumb-box"></div>
-</ng-container>
-<section class="blog-banner">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="blog-banner-content">
-          <div class="blog-banner-title">{{ blogContent?.page_name }}</div>
-          <p>{{ blogContent?.page_short_desc }}</p>
-          <div innerHTML="{{ blogContent?.page_description }}"></div>
-        </div>
-      </div>
+<h1 class="blog-seo-title">
+  ODBUS Blog: Odisha Travel Guides, Bus Routes & Tourism Tips
+</h1>
+
+<!-- MOBILE HEADER -->
+<header class="blog-mobile-header">
+  <a routerLink="/" class="blog-back-btn" aria-label="Go back home">
+    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+  </a>
+
+  <h2>{{ pageTitle || 'Blog' }}</h2>
+
+  <a routerLink="/" class="blog-mobile-logo" aria-label="ODBUS Home">
+    <img src="assets/img/mob-img/logo.png" alt="ODBUS" />
+  </a>
+</header>
+
+<!-- BLOG HERO -->
+<section class="blog-hero">
+  <div class="blog-hero-inner">
+    <h1>{{ blogContent?.page_name || 'ODBUS Blog' }}</h1>
+
+    <p class="blog-hero-subtitle">
+      {{ blogContent?.page_short_desc ||
+      'Travel guides, bus routes, tourism tips, and booking updates for travelling across Odisha.' }}
+    </p>
+
+    <div class="blog-hero-description" [innerHTML]="blogContent?.page_description">
     </div>
   </div>
 </section>
-<section class="blog-listing">
-  <div class="blog-breadcrumb">
-    <div class="container">
-      <div class="breadcrumb-wrap">
-        <a routerLink="/">Home</a>
 
-        <span>/</span>
+<!-- BLOG LISTING -->
+<main class="blog-listing">
+  <div class="blog-container">
 
-        <span class="active-breadcrumb"> Blog </span>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <!-- LEFT : BLOG CARDS -->
-      <div class="col-md-9">
-        <div class="row blog-cards">
-          <!-- CARD -->
-          <div class="col-md-4" *ngFor="let blog of blogData?.data">
-            <div class="blog-card position-relative">
+    <!-- BREADCRUMB -->
+    <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+      <a routerLink="/">Home</a>
+      <i class="fa fa-angle-right" aria-hidden="true"></i>
+      <span>Blog</span>
+    </nav>
+
+    <div class="blog-layout">
+
+      <!-- MAIN BLOG CONTENT -->
+      <section class="blog-results" aria-label="Blog articles">
+
+        <div class="blog-results-heading">
+          <div>
+            <h2>Explore Our Latest Blogs</h2>
+          </div>
+
+          <span class="blog-results-label" *ngIf="blogData">
+            Page {{ blogData.current_page || 1 }}
+          </span>
+        </div>
+
+        <!-- BLOG CARDS -->
+        <div class="blog-cards" *ngIf="blogData?.data?.length; else emptyBlogs">
+
+          <article class="blog-card" *ngFor="let blog of blogData.data">
+
+            <a [routerLink]="['/blog', blog.blog_cat_slug, blog.slug]" class="blog-card-image-link"
+              [attr.aria-label]="'Read ' + blog.title">
+
               <div class="blog-img">
-                <img [src]="baseurl + blog.thumb_image" class="img-responsive" loading="lazy" alt=" {{ blog.title }}" />
-                <span class="blog-tag">{{ blog.category_name }}</span>
+                <img [src]="baseurl + blog.thumb_image" [alt]="blog.title" loading="lazy" />
+
+                <span class="blog-tag" *ngIf="blog.category_name">
+                  {{ blog.category_name }}
+                </span>
+              </div>
+            </a>
+
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="blog-author" *ngIf="blog.author">
+                  <i class="fa fa-user-o" aria-hidden="true"></i>
+                  {{ blog.author }}
+                </span>
+
+                <span class="blog-meta-separator" *ngIf="blog.author">
+                  ·
+                </span>
+
+                <time *ngIf="blog.created_at" [attr.datetime]="blog.created_at">
+                  {{ blog.created_at | date: 'dd MMM yyyy' }}
+                </time>
               </div>
 
-              <div class="blog-content">
-                <p class="blog-meta">
-                  {{ blog.author }} |
-                  {{ blog.created_at | date: "dd MMM yyyy" }}
-                </p>
-                <h4 class="blog-title">
+              <h3 class="blog-title">
+                <a [routerLink]="['/blog', blog.blog_cat_slug, blog.slug]">
                   {{ blog.title }}
-                </h4>
-              </div>
+                </a>
+              </h3>
 
-              <a [routerLink]="['/blog', blog.blog_cat_slug, blog.slug]" class="stretched-link"></a>
+              <a [routerLink]="['/blog', blog.blog_cat_slug, blog.slug]" class="blog-read-more">
+                Read article
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- EMPTY STATE -->
+        <ng-template #emptyBlogs>
+          <div class="blog-empty-state">
+            <i class="fa fa-book-open" aria-hidden="true"></i>
+            <h3>No blog articles found</h3>
+            <p>Please check back later for more travel stories and guides.</p>
+          </div>
+        </ng-template>
+
+        <!-- PAGINATION -->
+        <nav class="blog-pagination" *ngIf="blogData?.links?.length > 0" aria-label="Blog pagination">
+
+          <button type="button" class="blog-page-btn blog-page-edge" [disabled]="blogData.current_page == 1"
+            (click)="blogData.first_page_url && getList(blogData.first_page_url)">
+            First
+          </button>
+
+          <button type="button" class="blog-page-btn blog-page-arrow" aria-label="Previous page"
+            [disabled]="!blogData.prev_page_url" (click)="blogData.prev_page_url && getList(blogData.prev_page_url)">
+            &laquo;
+          </button>
+
+          <ng-container *ngFor="let link of blogData.links; let i = index">
+            <button type="button" class="blog-page-btn"
+              *ngIf="i !== 0 && i !== blogData.links.length - 1 && link.label !== '...'" [class.active]="link.active"
+              [attr.aria-current]="link.active ? 'page' : null" [disabled]="!link.url"
+              (click)="link.url && getList(link.url)">
+              {{ link.label }}
+            </button>
+          </ng-container>
+
+          <button type="button" class="blog-page-btn blog-page-arrow" aria-label="Next page"
+            [disabled]="!blogData.next_page_url" (click)="blogData.next_page_url && getList(blogData.next_page_url)">
+            &raquo;
+          </button>
+
+          <button type="button" class="blog-page-btn blog-page-edge"
+            [disabled]="blogData.current_page == blogData.last_page"
+            (click)="blogData.last_page_url && getList(blogData.last_page_url)">
+            Last
+          </button>
+
+        </nav>
+
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside class="blog-sidebar" aria-label="Blog categories">
+
+        <div class="blog-sidebar-box">
+          <div class="blog-sidebar-heading">
+            <span class="blog-sidebar-icon">
+              <i class="fa fa-th-large" aria-hidden="true"></i>
+            </span>
+
+            <div>
+              <h2>Categories</h2>
+              <p>Explore topics that interest you</p>
             </div>
           </div>
-        </div>
-        <div class="d-flex justify-content-center mb-5" *ngIf="blogData">
-          <nav class="my-1 pt-3">
-            <ol class="pagination pagination-circle mb-0">
-
-              <!-- First -->
-              <li class="page-item" [class.disabled]="blogData.current_page == 1">
-                <a class="page-link cursor" (click)="blogData.first_page_url && getList(blogData.first_page_url)">
-                  First
-                </a>
-              </li>
-
-              <!-- Previous -->
-              <li class="page-item" [class.disabled]="!blogData.prev_page_url">
-                <a class="page-link cursor" (click)="blogData.prev_page_url && getList(blogData.prev_page_url)">
-                  &laquo;
-                </a>
-              </li>
-
-              <!-- Page Numbers -->
-              <ng-container *ngFor="let link of blogData.links; let i = index">
-                <li class="page-item" *ngIf="i != 0 && i != blogData.links.length - 1" [class.active]="link.active">
-
-                  <a class="page-link cursor" (click)="link.url && getList(link.url)">
-                    {{ link.label }}
-                  </a>
-
-                </li>
-              </ng-container>
-
-              <!-- Next -->
-              <li class="page-item" [class.disabled]="!blogData.next_page_url">
-                <a class="page-link cursor" (click)="blogData.next_page_url && getList(blogData.next_page_url)">
-                  &raquo;
-                </a>
-              </li>
-
-              <!-- Last -->
-              <li class="page-item" [class.disabled]="blogData.current_page == blogData.last_page">
-                <a class="page-link cursor" (click)="blogData.last_page_url && getList(blogData.last_page_url)">
-                  Last
-                </a>
-              </li>
-
-            </ol>
-          </nav>
-        </div>
-      </div>
-
-      <!-- RIGHT SIDEBAR -->
-      <div class="col-md-3">
-        <!-- CATEGORY -->
-        <div class="blog-sidebar-box">
-          <h4>Categories</h4>
 
           <ul class="category-list">
             <li *ngFor="let category of categoryData">
               <a [routerLink]="['/blog/category', category.slug]">
                 <span>{{ category.category_name }}</span>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
               </a>
+
               <span class="cat-count">{{ category.total }}</span>
             </li>
           </ul>
         </div>
-      </div>
+
+        <div class="blog-sidebar-promo">
+          <span class="blog-promo-icon">
+            <i class="fa fa-bus" aria-hidden="true"></i>
+          </span>
+
+          <h3>Your journey starts here</h3>
+          <p>Discover Odisha and plan your next trip with ODBUS.</p>
+
+          <a routerLink="/" class="blog-promo-link">
+            Book your journey
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+
+      </aside>
+
     </div>
   </div>
-</section>
+</main>
 
-<ng-container *ngIf="isMobile">
-  <app-footer-menu></app-footer-menu>
-</ng-container>
+<!-- MOBILE BOTTOM NAVIGATION -->
+<app-footer-menu class="blog-mobile-footer"></app-footer-menu>

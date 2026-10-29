@@ -1,12 +1,12 @@
+
 import { Component, OnInit } from '@angular/core';
 import { PagesService } from '../services/pages.service';
 import { GlobalConstants } from '../constants/global-constants';
 import { SeoService } from '../services/seo.service';
 import { Location } from '@angular/common';
 import { LoginChecker } from '../helpers/loginChecker';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-tnc',
   templateUrl: './tnc.component.html',
@@ -15,29 +15,20 @@ import { Router } from '@angular/router';
 export class TncComponent implements OnInit {
   pageTitle: any;
   pageContent: any;
-  currentUrl: any;
+  currentUrl: string;
 
-  isMobile: boolean;
   session: LoginChecker;
-  MenuActive: boolean = false;
 
   constructor(
     private pagesService: PagesService,
     private seo: SeoService,
     private location: Location,
-    private spinner: NgxSpinnerService,
-    private detectService: DeviceDetectorService,
     private router: Router
   ) {
-    this.isMobile = this.detectService.isMobile();
     this.session = new LoginChecker();
 
-    this.currentUrl = location.path().replace('/', '');
+    this.currentUrl = this.location.path().replace('/', '');
     this.seo.seolist(this.currentUrl);
-  }
-
-  menu() {
-    this.MenuActive = true;
   }
 
   signOut() {
@@ -51,15 +42,13 @@ export class TncComponent implements OnInit {
       page_url: 'terms-conditions',
     };
 
-    this.pagesService.PageContent(param).subscribe(
-      res => {
-        this.tncContent(res.data);
-      }
-    );
+    this.pagesService.PageContent(param).subscribe((res) => {
+      this.tncContent(res.data);
+    });
   }
 
   tncContent(res: any) {
-    if (res.length > 0) {
+    if (res && res.length > 0) {
       this.pageTitle = res[0].page_name;
       this.pageContent = res[0].page_description;
     }

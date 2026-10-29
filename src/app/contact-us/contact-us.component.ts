@@ -1,3 +1,4 @@
+
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,229 +8,77 @@ import { ContactService } from '../services/contact.service';
 import { GlobalConstants } from '../constants/global-constants';
 import { SeoService } from '../services/seo.service';
 import { Location } from '@angular/common';
-import { DeviceDetectorService } from 'ngx-device-detector';
-import { LoginChecker } from '../helpers/loginChecker';
 import { CommonService } from '../services/common.service';
-
 
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
-  styleUrls: ['./contact-us.component.css']
+  styleUrls: ['./contact-us.component.css'],
 })
 export class ContactUsComponent implements OnInit {
-
   contactForm: FormGroup;
   submitted = false;
-  currentUrl: any;
-  isMobile: boolean;
-  MenuActive: boolean = false;
-  session: LoginChecker;
-  activeMenu?: string;
-  @Input() masterSettingRecord;
+  currentUrl: string;
 
-  captchaText: string = '';
-  userCaptcha: string = '';
+  @Input() masterSettingRecord: any;
 
-  constructor(public router: Router,
+  captchaText = '';
+
+  constructor(
+    public router: Router,
     public fb: FormBuilder,
     private contactService: ContactService,
     private notify: NotificationService,
     private spinner: NgxSpinnerService,
     private seo: SeoService,
-    private deviceService: DeviceDetectorService,
     private location: Location,
     private commonService: CommonService,
-
   ) {
-
-    this.isMobile = this.deviceService.isMobile();
-    this.session = new LoginChecker();
-    this.currentUrl = location.path().replace('/', '');
+    this.currentUrl = this.location.path().replace('/', '');
     this.seo.seolist(this.currentUrl);
-
 
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
-      email: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern("^[0-9]{10}$")]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       service: ['', Validators.required],
       message: ['', Validators.required],
       user_id: [GlobalConstants.MASTER_SETTING_USER_ID],
       captcha: ['', Validators.required],
-    })
-
-    // this.contactForm = this.fb.group({
-    //   name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[A-Za-z ]+$/)]],
-
-    //   email: ['',[
-    //       Validators.required,
-    //       Validators.email
-    //     ]
-    //   ],
-
-    //   phone: [
-    //     '',
-    //     [
-    //       Validators.required,
-    //       Validators.pattern(/^[6-9][0-9]{9}$/)
-    //     ]
-    //   ],
-
-    //   service: [
-    //     '',
-    //     Validators.required
-    //   ],
-
-    //   message: [
-    //     '',
-    //     [
-    //       Validators.required,
-    //       Validators.minLength(10),
-    //       Validators.maxLength(500),
-    //       Validators.pattern(/^[^<>]*$/)
-    //     ]
-    //   ],
-
-    //   captcha: [
-    //     '',
-    //     [
-    //       Validators.required,
-    //       Validators.minLength(6),
-    //       Validators.maxLength(6)
-    //     ]
-    //   ],
-
-    //   user_id: [GlobalConstants.MASTER_SETTING_USER_ID]
-    // });
+    });
   }
 
-  menu() {
-    this.MenuActive = (this.MenuActive == false) ? true : false;
-    this.activeMenu = '';
+  ngOnInit(): void {
+    this.masterSettingRecord = this.commonService.commonData;
+    this.generateCaptcha();
   }
 
-  signOut() {
-    this.session.logout();
-    this.router.navigate(['login']);
+  get f() {
+    return this.contactForm.controls;
   }
 
-  ngAfterContentChecked() {
+  onlyNumbers(event: KeyboardEvent): boolean {
+    const e = event as KeyboardEvent & {
+      which?: number;
+      keyCode?: number;
+    };
 
-    //console.log(this.masterSettingRecord.common.office_address_map);
-  }
-  onlyNumbers(event: any) {
-    var e = event;
-    var charCode = e.which || e.keyCode;
+    const charCode = e.which || e.keyCode || 0;
 
-    if ((charCode >= 48 && charCode <= 57) || (charCode >= 96 && charCode <= 105) || charCode == 8 || charCode == 9)
+    if (
+      (charCode >= 48 && charCode <= 57) ||
+      (charCode >= 96 && charCode <= 105) ||
+      [8, 9, 37, 39, 46].includes(charCode) ||
+      e.ctrlKey ||
+      e.metaKey
+    ) {
       return true;
+    }
+
     return false;
   }
 
-  // formSubmit() {
-  //   // alert('Form submitted successfully!');
-  //   console.log(this.contactForm.value);
-
-  //   this.submitted = true;
-
-  //   // stop here if form is invalid
-  //   if (this.contactForm.invalid) {
-  //     return;
-  //   } else {
-  //     this.spinner.show();
-  //     this.contactService.save(this.contactForm.value).subscribe(
-  //       res => {
-  //         this.spinner.hide();
-  //         if (res.status == 1) {
-  //           this.router.navigate(['thankyou']);
-  //         }
-  //         else if (res.status == 0) {
-  //           this.notify.notify(res.message, "Error");
-  //         }
-  //         this.spinner.hide();
-  //       },
-  //       error => {
-  //         this.spinner.hide();
-  //         this.notify.notify(error.error.message, "Error");
-  //       }
-  //     );
-  //   }
-
-  // }
-
-  formSubmit() {
-
-    this.submitted = true;
-
-    // Form validation
-    if (this.contactForm.invalid) {
-      return;
-    }
-
-    // Captcha validation
-    if (!this.contactForm.value.captcha) {
-      this.notify.notify('Please enter captcha', 'Error');
-      return;
-    }
-
-    if (this.contactForm.value.captcha.trim() !== this.captchaText) {
-      this.notify.notify('Invalid captcha', 'Error');
-      this.generateCaptcha();
-      this.contactForm.patchValue({ captcha: '' });
-      return;
-    }
-
-    this.spinner.show();
-
-    this.contactService.save(this.contactForm.value).subscribe(
-      res => {
-
-        this.spinner.hide();
-
-        if (res.status == 1) {
-
-          this.contactForm.reset();
-
-          this.contactForm.patchValue({
-            user_id: GlobalConstants.MASTER_SETTING_USER_ID
-          });
-
-          this.generateCaptcha();
-
-          this.router.navigate(['thankyou']);
-
-        } else {
-
-          this.notify.notify(res.message, 'Error');
-
-        }
-      },
-      error => {
-
-        this.spinner.hide();
-
-        this.notify.notify(
-          error?.error?.message || 'Something went wrong',
-          'Error'
-        );
-
-      }
-    );
-  }
-
-
-  get f() { return this.contactForm.controls; }
-
-  ngOnInit(): void {
-
-    this.generateCaptcha();
-
-    this.masterSettingRecord = this.commonService.commonData;
-    // console.log(this.masterSettingRecord.common.office_address_map);
-  }
-
-  generateCaptcha() {
+  generateCaptcha(): void {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let result = '';
 
@@ -238,15 +87,66 @@ export class ContactUsComponent implements OnInit {
     }
 
     this.captchaText = result;
+
+    // Clear an old captcha entry when a new captcha is generated.
+    this.contactForm.patchValue({ captcha: '' });
   }
 
-  validateCaptcha() {
-    if (this.userCaptcha === this.captchaText) {
-      alert('Captcha matched');
-    } else {
-      alert('Invalid captcha');
-      this.generateCaptcha();
+  formSubmit(): void {
+    this.submitted = true;
+
+    if (this.contactForm.invalid) {
+      this.contactForm.markAllAsTouched();
+      return;
     }
 
+    const enteredCaptcha = String(
+      this.contactForm.value.captcha || '',
+    ).trim().toUpperCase();
+
+    if (!enteredCaptcha) {
+      this.notify.notify('Please enter captcha', 'Error');
+      return;
+    }
+
+    if (enteredCaptcha !== this.captchaText) {
+      this.notify.notify('Invalid captcha', 'Error');
+      this.generateCaptcha();
+      return;
+    }
+
+    this.spinner.show();
+
+    this.contactService.save(this.contactForm.value).subscribe({
+      next: (res) => {
+        this.spinner.hide();
+
+        if (res.status === 1) {
+          this.contactForm.reset({
+            name: '',
+            email: '',
+            phone: '',
+            service: '',
+            message: '',
+            user_id: GlobalConstants.MASTER_SETTING_USER_ID,
+            captcha: '',
+          });
+
+          this.submitted = false;
+          this.generateCaptcha();
+          this.router.navigate(['thankyou']);
+        } else {
+          this.notify.notify(res.message, 'Error');
+        }
+      },
+      error: (error) => {
+        this.spinner.hide();
+
+        this.notify.notify(
+          error?.error?.message || 'Something went wrong',
+          'Error',
+        );
+      },
+    });
   }
 }
