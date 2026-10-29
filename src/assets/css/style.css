@@ -51,7 +51,6 @@ section.header-main {
 
 .menu-cnt ul li a {
     display: inline-block;
-    /* text-transform: uppercase; */
     font-size: 15px;
     line-height: 24px;
     color: #1b2155;
@@ -166,7 +165,7 @@ section.header-main {
 
 .bus_search .btn {
     background: #efc003;
-    color: #072c6b;   
+    color: #072c6b;
     font-weight: 600;
     line-height: 38px;
     width: 100%;
@@ -179,7 +178,7 @@ section.header-main {
 
 .bus_search-mod .btn {
     background: #efc003;
-    color: #072c6b;   
+    color: #072c6b;
     font-weight: 600;
     line-height: 38px;
     width: 100%;
@@ -1304,9 +1303,7 @@ ngb-datepicker-navigation {
     margin-bottom: 40px;
 }
 
-.ng-select span {
-    /* text-transform: uppercase !important; */
-}
+
 
 .lb-dataContainer {
     position: absolute;
@@ -1318,7 +1315,6 @@ ngb-datepicker-navigation {
 .ng-select div,
 .ng-select input,
 .ng-select span {
-    /* text-transform:uppercase !important; */
     font-size: 14px;
 }
 
@@ -1373,9 +1369,6 @@ ngb-datepicker-navigation {
     width: 100%;
 }
 
-/* ngb-modal-window .modal-lg {
-    margin: 0px !important;
-} */
 
 .mobile-modalbox .modal-dialog {
     margin: 0px !important;
@@ -1793,18 +1786,15 @@ ul.op-list {
     }
 
     ul.op-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    list-style: none;
-    padding: 0 !important;
-}
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        list-style: none;
+        padding: 0 !important;
+    }
 }
 
 /* Seo Listing Style Section end */
 
 .blog-detail-card .blog-content img {
-  width: 100%;
+    width: 100%;
 }
-
-
-

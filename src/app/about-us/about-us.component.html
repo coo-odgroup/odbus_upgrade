@@ -1,112 +1,42 @@
-<h1 style="display: none;">About ODBUS – Trusted Online Bus Ticket Booking Platform in Odisha</h1>
-<ng-container *ngIf="!isMobile">
-  <div class="aboutbg">
-    <span class="line-span">
-      <div class="container">
-        <h2>{{ pageTitle }}</h2>
-      </div>
-    </span>
-    <section class="textimonials-result1">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="main-tnc" [innerHTML]="pageContent"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-</ng-container>
+<!-- ODBUS ABOUT US PAGE -->
 
-<ng-container *ngIf="isMobile && !MenuActive">
-  <div class="mobile-mybooking-top">
-    <div class="row">
-      <div class="col-1 pr-0 pl-2 mob-arrow-left">
-        <a routerLink="/">
-          <i class="fa fa-arrow-left"></i>
-        </a>
-      </div>
-      <div class="col-7 pl-2 pr-2 mob-list-center">
-        <h5>{{ pageTitle }}</h5>
-      </div>
-      <div class="col-4 pl-2 pr-2">
-        <div class="mobile-logo">
-          <img src="assets/img/mob-img/logo.png" loading="lazy" alt="logo" />
-        </div>
-      </div>
+<div class="about-page">
+
+  <!-- DESKTOP ABOUT HEADER -->
+  <header class="about-desktop-header">
+    <div class="about-container">
+      <h1>{{ pageTitle || 'About ODBUS' }}</h1>
     </div>
-  </div>
+  </header>
 
-  <div class="mobile-middle-box">
-    <div class="row">
-      <div class="col-12" [innerHTML]="pageContent"></div>
-    </div>
-  </div>
-</ng-container>
+  <!-- MOBILE HEADER - KEEP SAME DESIGN -->
+  <header class="about-mobile-header">
 
-<ng-container *ngIf="isMobile && MenuActive">
-  <div class="mobile-myaccount-top">
-    <div class="row">
-      <div class="col-5">
-        <div class="mobile-logo">
-          <img src="assets/img/mob-img/logo.png" loading="lazy" alt="logo" />
+    <a routerLink="/" class="about-back" aria-label="Back to home">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+    </a>
+
+    <h1>{{ pageTitle || 'About ODBUS' }}</h1>
+
+    <a routerLink="/" class="about-mobile-logo" aria-label="ODBUS home">
+      <img src="assets/img/mob-img/logo.png" alt="ODBUS" width="110" height="42" />
+    </a>
+
+  </header>
+
+  <!-- ABOUT CONTENT -->
+  <main class="about-main">
+    <div class="about-container">
+
+      <article class="about-content-card">
+        <div class="about-content" [innerHTML]="pageContent">
         </div>
-      </div>
-      <div class="col-7 mob-logintx">
-        <a routerLink="/login" *ngIf="!session.isLoggedIn()">
-          Login / Signup
-        </a>
-        <a routerLink="/dashboard" *ngIf="session.isLoggedIn()"> Dashboard </a>
-      </div>
+      </article>
+
     </div>
-  </div>
+  </main>
 
-  <div class="mobile-myaccount-middle">
-    <ul class="mobile-menu">
-      <li>
-        <a routerLink="/manage-booking"
-          ><i class="far fa-window-restore"></i>Manage Booking</a
-        >
-      </li>
-      <li>
-        <a routerLink="/contact-us"><i class="fa fa-gifts"></i>Contact Us</a>
-      </li>
-      <li>
-        <a routerLink="/offers"><i class="fa fa-gifts"></i>Offers</a>
-      </li>
-      <li>
-        <a routerLink="/operators"><i class="fa fa-bus"></i>Operators</a>
-      </li>
-      <li>
-        <a routerLink="/routes"><i class="fa fa-map-marker-alt"></i>Routes</a>
-      </li>
-      <li>
-        <a routerLink="/faq"><i class="fa fa-question"></i>FAQ's</a>
-      </li>
-      <li>
-        <a routerLink="/testimonials"><i class="fa fa-star"></i>Testimonials</a>
-      </li>
-      <li>
-        <a routerLink="/terms-conditions"
-          ><i class="fa fa-file-image"></i>Terms & Conditions</a
-        >
-      </li>
-      <li>
-        <a routerLink="/privacy-policy"
-          ><i class="far fa-file-powerpoint"></i>Privacy Policy</a
-        >
-      </li>
+  <!-- EXISTING MOBILE BOTTOM NAVIGATION -->
+  <app-footer-menu class="about-mobile-footer"></app-footer-menu>
 
-      <li *ngIf="session.isLoggedIn()">
-        <a routerLink="/my-reviews"><i class="fa fa-comments"></i>My Review</a>
-      </li>
-      <li *ngIf="session.isLoggedIn()">
-        <a (click)="signOut()"><i class="fa fa-sign-out-alt"></i>Logout</a>
-      </li>
-    </ul>
-  </div>
-</ng-container>
-
-<ng-container *ngIf="isMobile">
-  <app-footer-menu></app-footer-menu>
-</ng-container>
+</div>

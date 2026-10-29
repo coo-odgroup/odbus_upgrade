@@ -1,285 +1,431 @@
+/* =========================================
+   ODBUS ABOUT US - PREMIUM RESPONSIVE DESIGN
+========================================= */
 
-
-.line-span{
-	background-color: #EFC003;
-    height: 2px;
-    display: block;
-    position: relative;
-    margin-top: 63px;
-}
-.line-span h2 {
-    text-align: center;
-    display: inline-block;
-    position: absolute;
-    background: #EFC003;
-    /* left: 41%; */
-    top: -26px;
-    color: #072C6B;
-    padding: 10px 20px;
-    font-size: 24px;
-    font-weight: 600;
-}
-.line-span h1 {
-    text-align: center;
-    display: inline-block;
-    position: absolute;
-    background: #EFC003;
-    /* left: 41%; */
-    top: -26px;
-    color: #072C6B;
-    padding: 10px 20px;
-    font-size: 24px;
-    font-weight: 600;
-}
-.main-tnc{
-	background-color:#ffffff;
-    border: #000026;
-    margin-top:65px;
-    margin-bottom: 55px;
-    border-radius: 8px;
-    padding: 50px 40px;
-    border: 1px solid #adadad;
+:host {
+  display: block;
+  min-width: 0;
 }
 
-::ng-deep .main-tnc h1 {
-  font-size: 30px !important;
+.about-page {
+  --about-navy: #072c6b;
+  --about-blue: #003da5;
+  --about-yellow: #efc003;
+  --about-text: #263449;
+  --about-border: #e4eaf3;
+
+  min-height: 100vh;
+  background: #f4f7fc;
+  color: var(--about-text);
+  font-family: inherit;
 }
 
-.tnc-result {
-    margin: 50px 0;
-    padding: 0 20px 0 5px;
+.about-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-right: 20px;
+  padding-left: 20px;
+}
 
+/* =========================================
+   DESKTOP HEADING
+   Yellow title box with horizontal accent line
+========================================= */
+
+.about-desktop-header {
+  position: relative;
+  display: block;
+  padding: 28px 0 20px;
+  background: transparent;
+  border: 0;
 }
-.main-tnc-ul-ce{
-	color: #072C6B;
-    font-size: 16px; list-style: none;}
-.main-tnc-ul-ce li{
-    line-height: 24px;
-    margin-bottom: 10px;
+
+/* Horizontal yellow line */
+
+.about-desktop-header::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: var(--about-yellow);
+  transform: translateY(-50%);
 }
-.main-tnc-ul-ce li::before {
-  content: "\2022";
-  color: #EFC003;
-  font-weight: bold;
+
+/* Heading box */
+
+.about-desktop-header .about-container {
+  position: relative;
+  z-index: 1;
+}
+
+.about-desktop-header h1 {
   display: inline-block;
-  width: 1em;
-  margin-left: -1em;
+  position: relative;
+
+  margin: 0;
+  padding: 10px 18px;
+
+  background: var(--about-yellow);
+  color: var(--about-navy);
+
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
-.main-tnc-ul-cr{
-	color: #072C6B;
-    font-size: 16px;
-	margin-left: 20px; list-style: none;}
-.main-tnc-ul-cr li{
-    margin-bottom: 10px; }
-.main-tnc-ul-cr li::before {
-  content: "\25AA";
-  color: #EFC003;
-  font-weight: bold;
+/* =========================================
+   MAIN CONTENT AREA
+========================================= */
+
+.about-main {
+  padding: 22px 0 50px;
+}
+
+.about-main>.about-container {
+  position: relative;
+}
+
+/* Premium white content card */
+
+.about-content-card {
+  min-width: 0;
+  padding: 32px 36px;
+
+  background: #ffffff;
+  border: 1px solid var(--about-border);
+  border-radius: 12px;
+
+  box-shadow: 0 5px 22px rgba(7, 44, 107, 0.045);
+}
+
+/* =========================================
+   DYNAMIC API CONTENT
+========================================= */
+
+:host ::ng-deep .about-content {
+  min-width: 0;
+  color: var(--about-text);
+  font-size: 16px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+:host ::ng-deep .about-content h1,
+:host ::ng-deep .about-content h2,
+:host ::ng-deep .about-content h3,
+:host ::ng-deep .about-content h4,
+:host ::ng-deep .about-content h5 {
+  margin: 24px 0 12px;
+  color: var(--about-navy);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+:host ::ng-deep .about-content h1:first-child,
+:host ::ng-deep .about-content h2:first-child,
+:host ::ng-deep .about-content h3:first-child {
+  margin-top: 0;
+}
+
+:host ::ng-deep .about-content h1 {
+  font-size: 28px;
+}
+
+:host ::ng-deep .about-content h2 {
+  font-size: 24px;
+}
+
+:host ::ng-deep .about-content h3 {
+  font-size: 21px;
+}
+
+:host ::ng-deep .about-content h4 {
+  font-size: 18px;
+}
+
+:host ::ng-deep .about-content h5 {
+  font-size: 16px;
+}
+
+:host ::ng-deep .about-content p {
+  margin: 0 0 18px;
+  color: var(--about-text);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+:host ::ng-deep .about-content a {
+  color: var(--about-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+:host ::ng-deep .about-content ul,
+:host ::ng-deep .about-content ol {
+  margin: 0 0 20px;
+  padding-left: 26px;
+}
+
+:host ::ng-deep .about-content li {
+  margin-bottom: 9px;
+  padding-left: 3px;
+  line-height: 1.75;
+}
+
+:host ::ng-deep .about-content li::marker {
+  color: var(--about-yellow);
+}
+
+:host ::ng-deep .about-content img {
   display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-
-}
-.main-tnc p{font-size: 16px; color: #072C6B;}
-
-.aboutbg{
-    background: #e7eaeb;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
- /* Mobile Version Support Start- */
- .mobile-mybooking-top{
-    background-color: #ffffff;
-    padding:12px 18px 14px;
+:host ::ng-deep .about-content video,
+:host ::ng-deep .about-content iframe {
+  max-width: 100%;
+}
+
+:host ::ng-deep .about-content table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+:host ::ng-deep .about-content th,
+:host ::ng-deep .about-content td {
+  padding: 10px 12px;
+  border: 1px solid var(--about-border);
+  text-align: left;
+}
+
+/* =========================================
+   MOBILE HEADER AND FOOTER DEFAULTS
+========================================= */
+
+.about-mobile-header {
+  display: none;
+}
+
+.about-mobile-footer {
+  display: none;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .about-container {
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .about-desktop-header {
+    padding: 24px 0 18px;
+  }
+
+  .about-desktop-header h1 {
+    font-size: 23px;
+  }
+
+  .about-main {
+    padding-top: 20px;
+  }
+
+  .about-content-card {
+    padding: 28px;
+  }
+}
+
+/* =========================================
+   MOBILE
+   Keep existing header and bottom navigation
+========================================= */
+
+@media (max-width: 767px) {
+  .about-page {
+    min-height: 100vh;
+    background: #f4f7fc;
+  }
+
+  .about-container {
+    max-width: 100%;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  /* Desktop heading stays hidden */
+
+  .about-desktop-header {
+    display: none;
+  }
+
+  /* Existing fixed mobile header */
+
+  .about-mobile-header {
     position: fixed;
-    z-index: 99;
-    width: 100%;
     top: 0;
-    box-shadow: 0 3px 10px #0003;
-  }
-
-  .mobile-mybooking-top .mob-arrow-left i{
-    font-size:25px;
-    color: #072c6b;
-    margin-top:10px;
-  }
-
-  .mobile-mybooking-top .mob-list-center h1{
-    color: #072c6b;
-    font-size:20px;
-    font-weight:800;
-    text-align: left;
-    padding-top:10px;
-    padding-left:5px;
-    margin-bottom: 4px;
-
-  }
-
-  .mobile-mybooking-top .mob-list-center h5{
-    color: #072c6b;
-    font-size:20px;
-    font-weight:800;
-    text-align: left;
-    padding-top:10px;
-    padding-left:5px;
-    margin-bottom: 4px;
-
-  }
-
-  .mobile-logo img{
-    height:42px;
-    float:right;
-  }
-
-
-
-  .mobile-middle-box{
-     margin:88px 20px 30px
-  }
-
-  .mobile-middle-box{
-      background-color: #fff;
-      border-radius: 5px;
-      padding:20px;
-      border: 1px solid #adadad;
-  }
-
-  .mobile-middle-box p{
-     font-size:16.5px;
-     line-height:24px;
-     color: #323232;
-     margin-bottom:12px;
-     font-weight: 500;
-  }
-
-  .mobile-middle-box p a{
-     font-size:16.5px;
-     color: #ff7200;
-     margin-bottom:12px;
-     font-weight: 500;
-  }
-
-  .mobile-middle-box ul{
-     font-size:16.5px;
-     line-height:24px;
-     color: #323232;
-     margin-bottom:12px;
-     font-weight: 500;
-     padding-left: 15px;
-  }
-
-  .mobile-middle-box ol{
-     font-size:16.5px;
-     line-height:24px;
-     color: #323232;
-     margin-bottom:12px;
-     font-weight: 500;
-     padding-left: 15px;
-  }
-
-  .mobile-middle-box ul li{
-     margin-bottom:12px;
-  }
-
-  .mobile-middle-box ol li{
-     margin-bottom:12px;
-  }
-
-
-
-
-
-  .mobile-fixed-bottom {
-    position: fixed;
     right: 0;
-    bottom: 0;
     left: 0;
-    z-index:99999;
-  }
-  .mobile-fixed-bottom .home{
-    color: #323232;
+    z-index: 1000;
+
+    min-height: 64px;
+
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr) 92px;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 13px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5eaf2;
+    box-shadow: 0 3px 12px rgba(7, 44, 107, 0.05);
   }
 
-  .mobile-fixed-bottom .home i{
+  .about-back {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    width: 30px;
+    height: 38px;
+
+    color: var(--about-navy);
+    font-size: 19px;
+    text-decoration: none;
+  }
+
+  .about-mobile-header h1 {
+    min-width: 0;
+    margin: 0;
+
+    color: var(--about-navy);
+    font-size: 15px;
+    font-weight: 750;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .about-mobile-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .about-mobile-logo img {
+    display: block;
+    width: 100%;
+    max-width: 92px;
+    max-height: 40px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Content below fixed header */
+
+  .about-main {
+    padding: 78px 0 20px;
+  }
+
+  .about-main>.about-container {
+    margin-top: 0;
+  }
+
+  /* White card around mobile content */
+
+  .about-content-card {
+    min-width: 0;
+    padding: 22px 16px;
+
+    background: #ffffff;
+    border: 1px solid var(--about-border);
+    border-radius: 12px;
+
+    box-shadow: 0 4px 16px rgba(7, 44, 107, 0.04);
+  }
+
+  :host ::ng-deep .about-content {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  :host ::ng-deep .about-content h1 {
     font-size: 24px;
   }
 
-  .mobile-fixed-bottom .active{
-    color: #efc003;
+  :host ::ng-deep .about-content h2 {
+    font-size: 21px;
   }
 
-  .mobile-fixed-bottom .active p{
-    color: #efc003 !important;
+  :host ::ng-deep .about-content h3 {
+    font-size: 18px;
   }
 
-  .mobile-fixed-bottom .home p{
-    color: #323232;
-    font-size:16px;
-    font-weight: 600;
+  :host ::ng-deep .about-content h4 {
+    font-size: 16px;
   }
 
-  .mobile-bg-danger {
-    background-color: #ffffff!important;
-    padding-top:12px;
-    padding-bottom: 8px;
-    -webkit-box-shadow: 0px -2px 6px 0px rgba(0,0,0,0.6);
-   -moz-box-shadow: 0px -2px 6px 0px rgba(0,0,0,0.6);
-   box-shadow: 0px -2px 6px 0px rgba(0,0,0,0.6);
+  :host ::ng-deep .about-content h5 {
+    font-size: 15px;
   }
 
-  .mob-mtbh{
-    height: 80px;
+  :host ::ng-deep .about-content p {
+    margin-bottom: 15px;
+    font-size: 15px;
+    line-height: 1.8;
   }
 
-  /* Mobile Menu Section */
-
-  .mobile-logo img{
-    height:42px;
-    float:right;
+  :host ::ng-deep .about-content ul,
+  :host ::ng-deep .about-content ol {
+    padding-left: 22px;
   }
 
-  .mobile-myaccount-top .mob-logintx a{
-      float:right;
-      font-size:17px;
-      color: #072c6b;
-      font-weight: 600;
-      padding-top:8px ;
+  :host ::ng-deep .about-content table {
+    font-size: 13px;
   }
 
-  .mobile-myaccount-top{
-    background-color: #efc003;
-    padding:12px 18px 14px;
-    position: fixed;
-    z-index: 99;
-    width: 100%;
-    top: 0;
-    box-shadow: 0 3px 10px #0003;
+  /* Existing mobile bottom navigation */
+
+  .about-mobile-footer {
+    display: block;
+  }
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 360px) {
+  .about-container {
+    padding-right: 10px;
+    padding-left: 10px;
   }
 
-  .mobile-myaccount-middle{
-       margin:88px 20px 60px
-   }
-
-  .mobile-myaccount-middle .mobile-menu {
-    width:100%;
-    list-style-type: none;
-    padding-left: 0px;
+  .about-mobile-header {
+    grid-template-columns: 26px minmax(0, 1fr) 80px;
+    gap: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
   }
 
-  .mobile-myaccount-middle .mobile-menu a {
-      background-color: #fff;
-      display: block;
-      color: #072c6b;
-      padding:8px 18px;
-      text-decoration: none;
-      font-size :17px;
-      font-weight: 600;
-      margin-bottom:10px;
-      border-radius: 4px;
+  .about-mobile-header h1 {
+    font-size: 14px;
   }
 
-  .mobile-myaccount-middle .mobile-menu a i{
-    color: #efc003;
-    margin-right: 8px;
+  .about-mobile-logo img {
+    max-width: 80px;
   }
-  /* Mobile Version Support Start- */
+
+  .about-content-card {
+    padding: 18px 13px;
+  }
+}
