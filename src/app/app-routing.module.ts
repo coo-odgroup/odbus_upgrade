@@ -174,7 +174,8 @@ export const routes: Routes = [
   },
   {
     path: 'online-bus-tickets',
-    component: OnlinebusticketsComponent,
+    loadChildren: () =>
+      import('./onlinebustickets/onlinebustickets.module').then((m) => m.OnlinebusticketsModule),
   },
   {
     path: 'pnr/:id',

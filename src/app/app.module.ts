@@ -32,13 +32,10 @@ import { RouteLinksComponent } from './home/route-links/route-links.component';
 import { TopOperatorsComponent } from './home/top-operators/top-operators.component';
 import { TopRoutesComponent } from './home/top-routes/top-routes.component';
 import { CommonContentComponent } from './common-content/common-content.component';
-import { SearchBoxComponent } from './search-box/search-box.component';
-import { SearchBoxMComponent } from './search-box-m/search-box-m.component';
 import { MobileAppDownloadComponent } from './home/mobile-app-download/mobile-app-download.component';
 import { SharedModule } from './shared/shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SitemapComponent } from './sitemap/sitemap.component';
-import { OnlinebusticketsComponent } from './onlinebustickets/onlinebustickets.component';
 import { NgOptimizedImage } from '@angular/common';
 
 export function appInit(appInitializerService: AppInitializerService) {
@@ -75,11 +72,8 @@ export function tokenGetter() {
     TopOperatorsComponent,
     TopRoutesComponent,
     CommonContentComponent,
-    SearchBoxComponent,
-    SearchBoxMComponent,
     MobileAppDownloadComponent,
     SitemapComponent,
-    OnlinebusticketsComponent,
   ],
   imports: [
     NoopAnimationsModule,

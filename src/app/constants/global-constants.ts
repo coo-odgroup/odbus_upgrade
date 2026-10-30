@@ -13,7 +13,7 @@ export class GlobalConstants {
 
   // Testing ADGLOB
   // public static BASE_URL: any = 'https://odclient.adglob.in/api';
-  // public static URL: any = 'https://odbus.adglob.in/';
+  // public static URL: any = 'https://newodbus.adglob.in/';
   // public static PAYMENT_MODE: any = 'sandbox';
   // public static PATHURL: any = 'https://odapi.adglob.in/uploads/';
 
