@@ -1,6 +1,5 @@
 .reset {
   width: 85px;
-  /* height: 36px; */
   background-color: #072c6b;
   border-color: #072c6b;
 }
@@ -1357,14 +1356,14 @@ ngb-rating.d-inline-flex {
 }
 
 @media (max-width: 768px) {
-    .sticky-top4{
-      display: none;
-    }
+  .sticky-top4 {
+    display: none;
+  }
 
-    .fix-top2{
-      margin-top: 0px;
-      display: none;
-    }
+  .fix-top2 {
+    margin-top: 0px;
+    display: none;
+  }
 }
 
 
@@ -1431,11 +1430,9 @@ ngb-rating.d-inline-flex {
 
 .mobile-bus-listing {
   margin: 25px 15px;
-}
-
-.mobile-bus-listing {
   margin-top: 90px !important;
 }
+
 
 .mobile-bus-listing h3 {
   font-size: 16px;
@@ -2320,27 +2317,11 @@ button.mob-close {
 
 /* Mobile Version Bus Seat Layout Start */
 
-/* .close-mob {
-  float: right;
-  font-size: 42px !important;
-  font-weight: 500 !important;
-  line-height: 1;
-  color: #1c1c1c !important;
-  text-shadow: none !important;
-  opacity: 1 !important;
-  position: relative !important;
-  right: 15px !important;
-  z-index: 999;
 
-} */
 
 .mobile-buslayout-top {
   background-color: #dae6ff !important;
   padding: 12px 18px 50px;
-  /* position: fixed;
-  z-index: 99;
-  width: 100%;
-  top: 0; */
 }
 
 
@@ -2389,7 +2370,6 @@ button.mob-close {
 }
 
 .mobile-buslayout-middle {
-  /* background: #ffffff; */
   margin-left: 24px;
   margin-right: 24px;
   margin-top: -30px;
@@ -3025,17 +3005,6 @@ label.mobile-sleeper-gray.mobile-fixsize {
   color: #cccccc;
 }
 
-.brlt15 {
-  border-top-left-radius: 15px;
-}
-
-.brrt15 {
-  border-top-right-radius: 15px;
-}
-
-.brlb15 {
-  border-bottom-left-radius: 15px;
-}
 
 .brrb15 {
   border-bottom-right-radius: 15px;
@@ -3098,27 +3067,18 @@ label.mobile-sleeper-gray.mobile-fixsize {
 
 
 
-
-
-.mob-mtbh-8 {
-  height: 50px;
-}
-
-
 .mobile-boarding-bottom {
   background-color: #efc003;
   box-shadow: 0px -2px 6px 0px rgb(0 0 0 / 60%);
   text-align: center;
   padding: 12px 15px;
-}
-
-.mobile-boarding-bottom {
   font-size: 20px;
   text-transform: uppercase;
   color: #002F80;
   line-height: 28px;
   font-weight: 600;
 }
+
 
 
 /* Mobile Version Bus Seat Layout End */
@@ -3313,15 +3273,13 @@ label.mobile-sleeper-gray.mobile-fixsize {
   box-shadow: 0px -2px 6px 0px rgb(0 0 0 / 60%);
   text-align: center;
   padding: 12px 15px;
-}
-
-.mobile-booking-bottom {
   font-size: 20px;
   text-transform: uppercase;
   color: #002F80;
   line-height: 28px;
   font-weight: 600;
 }
+
 
 .mob-term-priv p {
   font-size: 14px;
@@ -4079,10 +4037,6 @@ input[type=radio] {
   }
 }
 
-.mt10 {
-  margin-top: 10px;
-}
-
 
 
 
@@ -4324,10 +4278,7 @@ input[type=radio] {
     max-height: 190px;
   }
 
-  .search-result-right{
+  .search-result-right {
     display: none;
   }
 }
-
-
-
