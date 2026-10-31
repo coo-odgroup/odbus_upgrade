@@ -1,70 +1,134 @@
-.heah2 {
-  color: #072C6B;
-  padding: 10px 20px;
-  text-align: center;
-  font-size: 30px;
-  margin-bottom: 0px;
-}
-
-.main-tnc {
-  /*background-color:#F8F8F8;*/
-  margin-top: 45px;
-  margin-bottom: 58px;
-}
-
-.heder-line {
+:host {
   display: block;
-  width: 70px;
-  height: 4px;
-  background-color: #ffcc01;
-  margin: 0 auto;
+  color: #263449;
 }
 
-.main-tnc-ul-cr {
-  color: #072C6B;
-  font-size: 16px;
-  margin-left: 20px;
-  list-style: none;
-  padding-left: 13px;
-  margin-top: 17px;
+/* =========================
+   SEARCH COMPONENT SWITCH
+========================= */
+
+.offers-desktop-search {
+  display: block;
 }
 
-.main-tnc-ul-cr li {
-  margin-bottom: 10px;
+.offers-mobile-search {
+  display: none;
 }
 
-.main-tnc-ul-cr li::before {
-  content: "\25AA";
-  color: #EFC003;
-  font-weight: bold;
+/* =========================
+   MOBILE HEADER
+========================= */
+
+.offers-mobile-header {
+  display: none;
+}
+
+/* =========================
+   OFFERS PAGE
+========================= */
+
+.offers-page {
+  background: #f4f7fc;
+}
+
+.offers-desktop-title {
+  padding-top: 1px;
+}
+
+.offers-title-line {
+  position: relative;
+  display: block;
+  height: 2px;
+  margin-top: 63px;
+  background: #efc003;
+}
+
+.offers-title-line h1 {
+  position: absolute;
+  top: -26px;
   display: inline-block;
-  width: 1em;
-  margin-left: -1em;
-}
-
-.card-block .card-title {
-  font-size: 18px;
+  padding: 9px 19px;
+  margin: 0;
+  background: #efc003;
+  color: #072c6b;
+  font-size: 24px;
   font-weight: 700;
-  color: #0e204b;
-  margin-bottom: 6px;
 }
 
-.btn-offer {
-  color: #fff;
-  background-color: #0e204b;
-  border-color: #0e204b;
+.offers-content-area {
+  padding: 42px 0 30px;
+  background: #f4f7fc;
 }
 
-.offer-sec {
-  padding: 20px !important;
-  background: #f8fafc !important;
+.offers-content-card {
+  padding: 32px 38px;
+  border: 1px solid #e3e9f2;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 5px 20px rgba(7, 44, 107, 0.045);
 }
 
-.card {
-  margin-bottom: 20px;
-  border: 1px solid rgb(179, 201, 255) !important;
-  border-radius: 8px;
-  box-shadow: 0 8px 8px rgb(127 127 127 / 25%), 0 4px 12px rgba(7, 44, 107, 0.08);
+/* =========================
+   INTRO TEXT
+========================= */
+
+.offer-top-text {
+  padding: 8px 15px;
+  margin: 0 0 26px;
+  border-radius: 10px;
+  background: #fff4c9;
+  color: #1b2155;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.offer-top-text a {
+  color: #0872d9;
+  text-decoration: none;
+}
+
+.offer-top-text a:hover {
+  text-decoration: underline;
+}
+
+.offer-top-text span {
+  color: #0042db;
+  font-weight: 750;
+}
+
+/* =========================
+   OFFERS GRID
+========================= */
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 26px;
+}
+
+.offer-grid-item {
+  min-width: 0;
+}
+
+.offer-card {
+  overflow: hidden;
+  border: 1px solid #b3c9ff;
+  border-radius: 9px;
+  background: #fff;
+  box-shadow:
+    0 5px 10px rgba(127, 127, 127, 0.18),
+    0 4px 12px rgba(7, 44, 107, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 18px rgba(7, 44, 107, 0.13);
 }
 
 .offer-card-button {
@@ -74,609 +138,326 @@
   border: 0;
   background: transparent;
   cursor: pointer;
-  text-align: inherit;
+  text-align: left;
 }
 
 .offer-card-button:focus-visible {
   outline: 3px solid #efc003;
-  outline-offset: 3px;
+  outline-offset: -3px;
 }
 
-.main-tnc {
-  background-color: #ffffff;
-  border: #000026;
-  margin-top: 45px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  padding: 40px 40px;
-  border: 1px solid #adadad;
-}
-
-.offer-sec {
-  background: #e7eaeb;
-}
-
-.line-span {
-  background-color: #EFC003;
-  height: 2px;
+.offer-card-button img {
   display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 21 / 10;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* =========================
+   DOWNLOAD APP SECTION
+========================= */
+
+.offers-download-section {
+  padding: 20px 0 50px;
+  background: #f8fafc;
+}
+
+.download-app-box {
   position: relative;
-  margin-top: 63px;
-  /* margin-top: 0 !important; */    /*if add banner then remove this margin-top: 63px; and add margin-top: 0 !important;*/
+  overflow: hidden;
+  border-radius: 22px;
+  padding: 40px;
+  background: linear-gradient(135deg, #072c6b 0%, #0e4ea6 100%);
+  color: #fff;
+  box-shadow: 0 18px 45px rgba(7, 44, 107, 0.18);
 }
 
-.line-span h2 {
-  text-align: center;
-  display: inline-block;
+.download-app-box::before {
   position: absolute;
-  background: #EFC003;
-  /* left: 41%; */
-  top: -26px;
-  color: #072C6B;
-  padding: 10px 20px;
-  font-size: 24px;
-  font-weight: 600;
+  top: -120px;
+  right: -140px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  content: "";
+  pointer-events: none;
 }
 
-.line-span h1 {
-  text-align: center;
-  display: inline-block;
+.download-app-box::after {
   position: absolute;
-  background: #EFC003;
-  /* left: 41%; */
-  top: -26px;
-  color: #072C6B;
+  bottom: -120px;
+  left: -120px;
+  width: 420px;
+  height: 420px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.offers-desktop-app {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: center;
+  gap: 20px;
+}
+
+.download-app-left,
+.download-app-right {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.download-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 10px 20px;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-section.top-routs {
-  padding: 2px 0 !important;
-  margin-top: 140px !important;
-} /*if add banner then comment section.top-routs*/
-
-/* Mobile Version Support Start- */
-.mobile-mybooking-top {
-  background-color: #ffffff;
-  padding: 12px 18px 14px;
-  position: fixed;
-  z-index: 99;
-  width: 100%;
-  top: 0;
-  box-shadow: 0 3px 10px #0003;
-}
-
-.mobile-mybooking-top .mob-arrow-left i {
-  font-size: 25px;
+  margin-bottom: 25px;
+  border-radius: 40px;
+  background: #efc003;
   color: #072c6b;
-  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
 }
 
-.mobile-mybooking-top .mob-list-center h5 {
-  color: #072c6b;
-  font-size: 20px;
-  font-weight: 800;
-  text-align: left;
-  padding-top: 10px;
-  padding-left: 5px;
-  margin-bottom: 4px;
-
-}
-
-.mobile-mybooking-top .mob-list-center h1 {
-  color: #072c6b;
-  font-size: 20px;
-  font-weight: 800;
-  text-align: left;
-  padding-top: 10px;
-  padding-left: 5px;
-  margin-bottom: 4px;
-
-}
-
-.mobile-logo img {
-  height: 42px;
-  float: right;
-}
-
-
-
-.mobile-offerbox-middle {
-  /* margin: 88px 20px 60px */
-}
-
-.mobile-offerbox-middle {
-  background-color: #fff;
-  border-radius: 5px;
-  margin: 10px;
-  padding: 10px;
-}
-
-
-.mobile-offerbox-middle .mobile-offer {
-  margin-bottom: 10px;
-}
-
-.mobile-offerbox-middle .mobile-offer img {
-  width: 100%;
-  border: 1px solid #ced4da;
-  border-radius: 10px;
-}
-
-.mobile-offerbox-middle .mobile-offer h5 {
+.download-tag i {
   font-size: 16px;
-  text-align: center;
-  color: #072c6b;
-  font-weight: 600;
 }
 
-.mobile-fixed-bottom {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 99999;
+.download-app-box h2 {
+  max-width: 650px;
+  margin: 0 0 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.15;
 }
 
-.mobile-fixed-bottom .home {
-  color: #323232;
-}
-
-.mobile-fixed-bottom .home i {
-  font-size: 24px;
-}
-
-.mobile-fixed-bottom .active {
+.download-app-box h2 span {
   color: #efc003;
 }
 
-.mobile-fixed-bottom .active p {
-  color: #efc003 !important;
+/* APP FEATURES */
+
+.app-features {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
-.mobile-fixed-bottom .home p {
-  color: #323232;
-  font-size: 16px;
+.app-features li {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 13px;
   font-weight: 600;
 }
 
-.mobile-bg-danger {
-  background-color: #ffffff !important;
-  padding-top: 12px;
-  padding-bottom: 8px;
-  -webkit-box-shadow: 0px -2px 6px 0px rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: 0px -2px 6px 0px rgba(0, 0, 0, 0.6);
-  box-shadow: 0px -2px 6px 0px rgba(0, 0, 0, 0.6);
+.app-features li:not(:last-child)::after {
+  width: 1px;
+  height: 18px;
+  margin-left: 18px;
+  background: rgba(255, 255, 255, 0.25);
+  content: "";
 }
 
-.mob-mtbh {
-  height: 80px;
+.app-features i {
+  margin-right: 8px;
+  color: #efc003;
+  font-size: 14px;
 }
 
-/* Mobile Menu Section */
+/* DOWNLOAD BUTTONS */
 
-.mobile-logo img {
+.download-bottom {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.play-btn {
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+}
+
+.play-btn img {
+  display: block;
+  height: 58px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.play-btn:hover img {
+  transform: translateY(-4px);
+}
+
+.download-divider {
+  width: 1px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.scan-box {
+  text-align: center;
+}
+
+.scan-box img {
+  display: block;
+  width: 95px;
+  margin: auto;
+}
+
+.scan-box small {
+  display: block;
+  margin-top: 8px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* DESKTOP APP IMAGE */
+
+.app-preview {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktop-mobile-phone {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 355px;
+  max-width: 100%;
+  height: auto;
+  animation: offersFloatPhone 4s ease-in-out infinite;
+}
+
+@keyframes offersFloatPhone {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* MOBILE APP BANNER HIDDEN ON DESKTOP */
+
+.offers-mobile-app {
+  display: none;
+}
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+.offers-mobile-menu {
+  display: none;
+}
+
+.mobile-myaccount-top {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  width: 100%;
+  padding: 12px 18px 14px;
+  background: #efc003;
+  box-shadow: 0 3px 10px #0003;
+}
+
+.mobile-myaccount-top .mobile-logo img {
+  float: left;
   height: 42px;
-  float: right;
 }
 
 .mobile-myaccount-top .mob-logintx a {
   float: right;
-  font-size: 17px;
-  color: #072c6b;
-  font-weight: 600;
   padding-top: 8px;
-}
-
-.mobile-myaccount-top {
-  background-color: #efc003;
-  padding: 12px 18px 14px;
-  position: fixed;
-  z-index: 99;
-  width: 100%;
-  top: 0;
-  box-shadow: 0 3px 10px #0003;
+  color: #072c6b;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .mobile-myaccount-middle {
-  margin: 88px 20px 60px
+  margin: 88px 20px 60px;
 }
 
 .mobile-myaccount-middle .mobile-menu {
   width: 100%;
-  list-style-type: none;
-  padding-left: 0px;
+  padding-left: 0;
+  list-style: none;
 }
 
 .mobile-myaccount-middle .mobile-menu a {
-  background-color: #fff;
   display: block;
-  color: #072c6b;
-  padding: 8px 18px;
-  text-decoration: none;
-  font-size: 17px;
-  font-weight: 600;
+  padding: 10px 18px;
   margin-bottom: 10px;
-  border-radius: 4px;
+  border-radius: 6px;
+  background: #fff;
+  color: #072c6b;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .mobile-myaccount-middle .mobile-menu a i {
-  color: #efc003;
   margin-right: 8px;
+  color: #efc003;
 }
 
-
-
-/* HERO */
-.hero-banner-v5 {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.search-section {
-  background: #fff;
-  padding: 4px 0;
-  position: fixed;
-  top: 75px;
-  left: 0;
-  width: 100%;
-  z-index: 999;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  border-bottom: 1px solid #eee;
-}
-
-/* TEXT */
-.banner-left h1 {
-  color: #fff;
-  font-size: 36px;
-  font-weight: 800;
-}
-
-/* SEARCH POSITION */
-.search-overlap {
-  /* position: absolute;
-  bottom: -60px;
-  left: 0;
-  right: 0; */
-  position: relative;
-  margin: 12px auto;
-}
-
-/* BOX */
-.search-box-v5 {
-  /* background: #fff; */
-  border-radius: 12px;
-  padding: 18px;
-  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); */
-  height: 130px;
-  border: 1px solid #e6e8ef !important;
-}
-
-/* LABEL */
-.field label {
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  display: block;
-  color: #1b2155;
-}
-
-/* REMOVE DEFAULT */
-.field {
-  padding: 0;
-}
-
-/* GAP CONTROL */
-.from-field {
-  padding-right: 10px;
-}
-
-.to-field {
-  padding: 0 10px 0 5px;
-}
-
-.to-field .input-box {
-  padding-right: 10px !important;
-}
-
-.date-field {
-  padding: 0 5px;
-}
-
-.from-field .input-box {
-  padding-right: 10px !important;
-}
-
-.input-box {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.clear-icon {
-  position: absolute;
-  right: 30px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 13px;
-  color: #999;
-  cursor: pointer;
-}
-
-.date-field input {
-  border-radius: 8px 0 0 8px;
-}
-
-.form-control {
-  height: 50px;
-  width: 100%;
-  border-radius: 8px;
-  border: 1px solid #e6e8ef;
-  padding-left: 42px;
-  padding-right: 42px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-}
-
-.to-field img.icon-to {
-  margin-left: 8px;
-}
-
-.to-field input {
-  padding-left: 50px;
-}
-
-/* ICONS (SEPARATE) */
-.icon-from {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-}
-
-.icon-to {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-}
-
-.icon-date {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-}
-
-/* DATE */
-.date-box {
-  position: relative;
-}
-
-.date-box .form-control {
-  padding-right: 40px;
-}
-
-/* .date-btns {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-}
-
-.date-btns span {
-  font-size: 11px;
-  padding: 3px 10px;
-  margin-left: 4px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.date-btns span:first-child {
-  border: 1px solid #f0c004;
-  color: #1b2155;
-}
-
-.date-btns span:last-child {
-  border: 1px solid #1b2155;
-  color: #1b2155;
-}
-
-.date-btns span:first-child:hover {
-  background-color: #f0c004;
-  color: #fff;
-}
-
-.date-btns span:last-child:hover {
-  background-color: #1b2155;
-  color: #fff;
-} */
-
-.date-wrapper {
-  display: flex;
-  gap: 1px;
-  align-items: center;
-}
-
-.date-box {
-  flex: 1;
-  position: relative;
-}
-
-.quick-date-today {
-  min-width: 90px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  background: #ddd;
-
-  color: #1b2155;
-  transition: 0.3s ease;
-}
-
-.quick-date-today:hover {
-  background: #f0c004;
-  color: #fff;
-}
-
-.quick-date-tomorrow {
-  min-width: 90px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  background: #ddd;
-  color: #1b2155;
-  transition: 0.3s ease;
-}
-
-.quick-date-tomorrow:hover {
-  background: #1b2155;
-  color: #fff;
-}
-
-/* SWAP */
-.swap-center {
-  position: absolute;
-  left: -21px;
-  top: 67%;
-  transform: translateY(-50%);
-  background: #f0c004;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 12;
-  cursor: pointer;
-}
-
-.swap-center img {
-  width: 22px;
-}
-
-/* BUTTON */
-.search-btn-wrap {
-  display: flex;
-  align-items: flex-end;
-}
-
-.search-btn-v5 {
-  height: 50px;
-  width: 100%;
-  background: #f0c004;
-  color: #072c6b;
-  font-weight: 700;
-  border-radius: 0 8px 8px 0;
-  border: none;
-  margin-left: 1px;
-}
-
-.search-btn-v5:hover {
-  background: #072c6b;
-  color: #fff;
-}
-
-/* REMOVE BOOTSTRAP GAP */
-.row.no-gutters>[class*="col-"] {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-input {
-  background-color: #fff !important;
-}
-
-
-/* PUT SEARCH SECTION ON TOP */
-
-/* .search-overlap {
-  position: relative !important;
-  bottom: auto !important;
-  top: 0 !important;
-  left: 0;
-  right: 0;
-  margin: 25px auto 30px;
-  z-index: 9;
-}
-
-.search-box-v5 {
-  height: auto !important;
-  min-height: 130px;
-}
-
-.top-routs.offer-sec {
-  padding-top: 0 !important;
-} */
-
-/* New hero section ended*/
-
-
-/* OFFER MODAL FULL DESIGN */
-
-
-/* ============================= */
-/* 🔥 MODAL BACKDROP + POSITION  */
-/* ============================= */
+/* =========================
+   OFFER MODAL
+========================= */
 
 .custom-offer-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   z-index: 999999;
-
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
 .custom-offer-overlay {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(3px);
 }
 
-/* ============================= */
-/* 📦 MODAL WRAPPER (YOUR DESIGN) */
-/* ============================= */
-
 .offer-popup-wrap {
-  width: 100%;
-  max-width: 1080px;
-  margin: auto;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, .18);
-
   position: relative;
   z-index: 2;
-
-  animation: popupFade 0.25s ease;
+  width: 100%;
+  max-width: 1080px;
+  max-height: 90vh;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+  animation: offerPopupFade 0.25s ease;
 }
 
-/* animation */
-@keyframes popupFade {
+@keyframes offerPopupFade {
   from {
     transform: translateY(20px) scale(0.95);
     opacity: 0;
@@ -688,17 +469,13 @@ input {
   }
 }
 
-/* ============================= */
-/* HEADER */
-/* ============================= */
-
 .offer-popup-header {
-  height: 60px;
-  background: #1b2155;
   display: flex;
+  height: 60px;
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
+  background: #1b2155;
 }
 
 .offer-popup-header h3 {
@@ -709,17 +486,14 @@ input {
 }
 
 .offer-close-btn {
-  border: none;
-  background: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: #fff;
   font-size: 34px;
   line-height: 1;
   cursor: pointer;
 }
-
-/* ============================= */
-/* BODY */
-/* ============================= */
 
 .offer-popup-body {
   display: flex;
@@ -727,84 +501,11 @@ input {
   padding: 26px 24px 28px;
 }
 
-/* ============================= */
-/* LEFT */
-/* ============================= */
-
-.offer-left-side {
-  width: 25%;
-}
-
-.offer-info-card {
-  background: #f7f8fc;
-  border: 1px solid #e5e7f0;
-  border-radius: 12px;
-  padding: 18px;
-}
-
-.offer-row {
-  padding: 0 0 16px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid #ececec;
-}
-
-.offer-row:last-of-type {
-  margin-bottom: 0;
-}
-
-.offer-row span {
-  display: block;
-  color: #8a8a8a;
-  font-size: 13px;
-  margin-bottom: 6px;
-}
-
-.offer-row strong {
-  color: #222;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.copy-btn {
-  width: 100%;
-  height: 46px;
-  border: none;
-  border-radius: 8px;
-  background: #f0c004;
-  color: #1b2155;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: 0.3s;
-}
-
-.copy-btn:hover {
-  background: #1b2155;
-  color: #fff;
-}
-
-.offer-type-line {
-  margin-top: 22px;
-  font-size: 15px;
-  color: #333;
-}
-
-/* ============================= */
-/* RIGHT */
-/* ============================= */
-
 .offer-right-side {
   width: 100%;
-  max-height: 500px;
-  overflow-y: scroll;
-}
-
-.offer-right-side h4 {
-  margin: 0 0 14px;
-  color: #f0b400;
-  font-size: 15px;
-  font-weight: 700;
+  max-height: calc(90vh - 120px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .offer-description {
@@ -817,356 +518,210 @@ input {
   margin: 0 0 10px;
 }
 
-.slider-desc {
-  margin-top: 15px;
-  font-size: 14px;
-  color: #555;
+.offer-description img {
+  max-width: 100%;
+  height: auto;
 }
 
+.offer-description table {
+  max-width: 100%;
+}
 
+.copy-btn {
+  width: 100%;
+  height: 46px;
+  margin-top: 15px;
+  border: 0;
+  border-radius: 8px;
+  background: #f0c004;
+  color: #1b2155;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
 
-/* ============================= */
-/* MOBILE */
-/* ============================= */
+.copy-btn:hover {
+  background: #1b2155;
+  color: #fff;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+.offers-mobile-footer {
+  display: none;
+}
 
 @media (max-width: 767px) {
 
-  /* BODY STACK */
-  .offer-popup-body {
+  ::ng-deep .mobile-search-box .row.hid {
+    display: none !important;
+  }
+
+
+  ::ng-deep .search-box-v5.mt-5 {
+    margin-top: 0 !important;
+  }
+
+  /* SWITCH SEARCH COMPONENTS */
+
+  .offers-desktop-search {
+    display: none;
+  }
+
+  .offers-mobile-search {
+    display: block;
+    padding-top: 65px;
+  }
+
+  /* MOBILE HEADER */
+
+  .offers-mobile-header {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 9px;
+    min-height: 65px;
+    padding: 10px 15px;
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+  }
+
+  .offers-back-button {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    color: #072c6b;
+    font-size: 22px;
+    text-decoration: none;
+  }
+
+  .offers-mobile-header h1 {
+    margin: 0;
+    color: #072c6b;
+    font-size: 20px;
+    font-weight: 800;
+  }
+
+  .offers-mobile-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .offers-mobile-logo img {
+    display: block;
+    width: auto;
+    max-width: 105px;
+    height: 42px;
+    object-fit: contain;
+  }
+
+  /* OFFERS AREA */
+
+  .offers-page {
+    padding-top: 0;
+    background: #e9ecef;
+  }
+
+  .offers-desktop-title {
+    display: none;
+  }
+
+  .offers-content-area {
+    padding: 10px 0 20px;
+    background: #e9ecef;
+  }
+
+  .offers-content-area>.container {
+    padding: 0;
+  }
+
+  .offers-content-card {
     padding: 10px;
+    margin: 0 10px;
+    border: 0;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  /* INTRO */
+
+  .offer-top-text {
+    padding: 7px 8px;
+    margin-bottom: 16px;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.7;
+  }
+
+  /* COMMON GRID: ONE COLUMN ON MOBILE */
+
+  .offers-grid {
+    grid-template-columns: minmax(0, 1fr);
     gap: 10px;
   }
 
-  /* FULL WIDTH BOTH */
-  .offer-left-side,
-  .offer-right-side {
-    width: 100%;
-  }
-
-  /* REMOVE SIDE GAP ISSUE */
-  .offer-left-side {
-    max-width: 100%;
-  }
-
-  /* 🔥 CARD FIX + 2 COLUMN */
-  .offer-info-card {
-    width: 100%;
-    padding: 12px;
+  .offer-card {
     border-radius: 10px;
-
-    display: grid;
-    /* ✅ NEW */
-    grid-template-columns: 1fr 1fr;
-    /* ✅ 2 column */
-    gap: 8px;
+    box-shadow: none;
   }
 
-  /* ROW COMPACT */
-  .offer-row {
-    padding: 6px 4px;
-    margin-bottom: 0;
-    border-bottom: none;
-    /* cleaner */
+  .offer-card:hover {
+    transform: none;
   }
 
-  .offer-row span {
-    font-size: 11px;
+  .offer-card-button img {
+    aspect-ratio: auto;
+    object-fit: contain;
   }
 
-  .offer-row strong {
-    font-size: 13px;
+  /* APP DOWNLOAD SECTION */
+
+  .offers-download-section {
+    padding: 0 0 20px;
+    background: #e9ecef;
   }
 
-  /* 🔥 BUTTON FULL WIDTH */
-  .copy-btn {
-    height: 36px;
-    font-size: 13px;
-    grid-column: span 2;
-    /* ✅ full row */
+  .offers-download-section>.container {
+    padding: 0;
   }
 
-  /* HEADER */
-  .offer-popup-header {
-    height: 45px;
-    padding: 0 12px;
+  .offers-desktop-app {
+    display: none;
   }
 
-  .offer-popup-header h3 {
-    font-size: 15px;
-  }
-
-  .offer-close-btn {
-    font-size: 24px;
-  }
-
-  /* OFFER TYPE */
-  .offer-type-line {
-    font-size: 12px;
-    margin-top: 6px;
-  }
-
-  /* DESCRIPTION */
-  .offer-right-side h4 {
-    font-size: 12px;
-    margin-bottom: 6px;
-  }
-
-  .offer-description {
-    font-size: 12px;
-    line-height: 1.4;
-  }
-
-  /* REMOVE EXTRA SPACE ISSUE */
-  .offer-popup-wrap {
-    max-height: 95vh;
-    overflow: hidden;
-    width: 90%;
-  }
-
-}
-
-
-.offer-top-text {
-  font-size: 18px;
-  line-height: 1.8;
-  color: #1b2155;
-  font-weight: 500;
-  margin-bottom: 28px;
-  letter-spacing: 0.2px;
-  text-align: center;
-  background: #fff4c9;
-  border-radius: 10px;
-  padding: 5px 10px;
-}
-
-.offer-top-text span {
-  color: #0042db;
-  font-weight: 700;
-}
-
-/* MOBILE */
-
-@media(max-width:768px) {
-
-  .offer-top-text {
-    font-size: 10px;
-    line-height: 1.7;
-    margin-bottom: 20px;
-    font-weight: 600;
-  }
-
-}
-
-
-/*==========================
-DOWNLOAD APP
-==========================*/
-
-.download-app-section {
-  padding: 20px 0 90px;
-  background: #f8fafc;
-}
-
-.download-app-box {
-  position: relative;
-  overflow: hidden;
-  border-radius: 22px;
-  padding: 40px;
-  color: #fff;
-  background: linear-gradient(135deg, #072C6B 0%, #0E4EA6 100%);
-  box-shadow: 0 18px 45px rgba(7, 44, 107, .18);
-}
-
-.download-app-box::before {
-  content: "";
-  position: absolute;
-  right: -140px;
-  top: -120px;
-  width: 380px;
-  height: 380px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .05);
-}
-
-.download-app-box::after {
-  content: "";
-  position: absolute;
-  left: -120px;
-  bottom: -120px;
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, .05);
-}
-
-.download-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #efc003;
-  color: #072C6B;
-  padding: 10px 20px;
-  border-radius: 40px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 25px;
-}
-
-.download-tag i {
-  font-size: 16px;
-}
-
-.download-app-box h2 {
-  color: #fff;
-  font-size: 40px;
-  font-weight: 800;
-  line-height: 1.15;
-  margin-bottom: 35px;
-  max-width: 650px;
-}
-
-.download-app-box h2 span {
-  color: #efc003;
-}
-
-/* FEATURES */
-
-.app-features {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 18px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.app-features li {
-  display: flex;
-  align-items: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: #fff;
-}
-
-.app-features li:not(:last-child)::after {
-  content: "";
-  width: 1px;
-  height: 18px;
-  background: rgba(255, 255, 255, .25);
-  margin-left: 18px;
-}
-
-.app-features i {
-  color: #efc003;
-  margin-right: 8px;
-  font-size: 14px;
-}
-
-/* DOWNLOAD AREA */
-
-.download-bottom {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.play-btn img {
-  height: 58px;
-  transition: .3s;
-}
-
-.play-btn:hover img {
-  transform: translateY(-4px);
-}
-
-.download-divider {
-  width: 1px;
-  height: 70px;
-  background: rgba(255, 255, 255, .20);
-}
-
-/* QR */
-
-.scan-box {
-  text-align: center;
-}
-
-.scan-box img {
-  width: 95px;
-  display: block;
-  margin: auto;
-}
-
-.scan-box small {
-  display: block;
-  margin-top: 8px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-/* RIGHT */
-
-.app-preview {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-.mobile-phone {
-  width: 355px;
-  max-width: 100%;
-  animation: floatPhone 4s ease-in-out infinite;
-  position: relative;
-  z-index: 2;
-}
-
-@keyframes floatPhone {
-
-  0% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-
-}
-
-/* MOBILE */
-
-@media (max-width:991px) {
-
-  .download-app-box {
-    padding: 18px;
-    border-radius: 16px;
-  }
-
-  .mobile-download-wrap {
+  .offers-mobile-app {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 5px;
+    min-height: 190px;
+    padding: 18px;
+    margin: 0 14px;
+    border-radius: 16px;
   }
 
   .mobile-download-content {
+    position: relative;
+    z-index: 2;
     width: 52%;
+    min-width: 0;
   }
 
   .mobile-download-content h2 {
-    font-size: 22px;
-    line-height: 1.2;
-    color: #fff;
     margin: 0;
+    color: #fff;
+    font-size: 22px;
     font-weight: 700;
+    line-height: 1.2;
   }
 
   .mobile-download-content h2 span {
@@ -1183,740 +738,144 @@ DOWNLOAD APP
     color: #efc003;
   }
 
-  .play-btn img {
+  .mobile-download-content .play-btn img {
+    width: 120px;
+    max-width: 100%;
     height: 36px;
+    object-fit: contain;
   }
 
   .mobile-download-image {
+    position: relative;
+    z-index: 2;
+    display: flex;
     width: 48%;
-    text-align: right;
+    align-items: center;
+    justify-content: flex-end;
   }
 
-  .mobile-phone {
+  .mobile-download-image img {
+    display: block;
     width: 170px;
-    max-width: none;
-    margin-right: -8px;
+    max-width: 125%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* MOBILE MENU */
+
+  .offers-mobile-menu {
+    display: block;
+    min-height: 100vh;
+    padding-top: 65px;
+    background: #f4f7fc;
+  }
+
+  /* BOTTOM NAVIGATION */
+
+  .offers-mobile-footer {
+    display: block;
+  }
+
+  /* MODAL */
+
+  .custom-offer-modal {
+    padding: 12px;
+  }
+
+  .offer-popup-wrap {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: 10px;
+  }
+
+  .offer-popup-header {
+    height: 46px;
+    padding: 0 13px;
+  }
+
+  .offer-popup-header h3 {
+    font-size: 15px;
+  }
+
+  .offer-close-btn {
+    font-size: 26px;
+  }
+
+  .offer-popup-body {
+    display: block;
+    padding: 12px;
+  }
+
+  .offer-right-side {
+    max-height: calc(92vh - 80px);
+  }
+
+  .offer-description {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .copy-btn {
+    height: 40px;
+    font-size: 13px;
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+  .offers-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .offers-content-card {
+    padding: 25px;
+  }
+
+  .download-app-box {
+    padding: 25px;
+  }
+
+  .download-app-box h2 {
+    font-size: 30px;
+  }
+
+  .desktop-mobile-phone {
+    width: 260px;
+  }
+}
+
+/* =========================
+   ACCESSIBILITY
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .offer-card,
+  .play-btn img,
+  .copy-btn {
+    transition: none;
+  }
+
+  .desktop-mobile-phone {
     animation: none;
   }
 
-  .download-tag,
-  .app-features,
-  .scan-box,
-  .download-divider {
-    display: none !important;
-  }
-
-}
-
-
-
-
-/* =========================================
-   PREMIUM FESTIVAL BANNER
-========================================= */
-
-.festival-banner-section {
-  width: 100%;
-  padding: 24px 0 58px;
-
-  /* Clean page background */
-  background: #f4f7fb;
-}
-
-
-/* =========================================
-   MAIN BANNER
-========================================= */
-
-.festival-banner {
-  position: relative;
-
-  width: 100%;
-  height: 255px;
-
-  overflow: visible;
-
-  border-radius: 18px;
-
-  border: 1px solid #efc003;
-
-  background: transparent;
-
-  box-shadow:
-    0 16px 40px rgba(7, 44, 107, 0.16),
-    0 4px 12px rgba(7, 44, 107, 0.08);
-
-  isolation: isolate;
-}
-
-
-/* =========================================
-   IMAGE AREA
-========================================= */
-
-.festival-banner-image {
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  background-image: url('/assets/img/offer_banner-compressed.jpg');
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  /*
-    Keep image inside rounded banner.
-  */
-  border-radius: 18px;
-
-  overflow: hidden;
-
-  z-index: 1;
-}
-
-
-/* =========================================
-   IMAGE OVERLAY
-========================================= */
-
-.festival-banner-overlay {
-  position: absolute;
-
-  inset: 0;
-
-  background: transparent;
-
-  border-radius: 18px;
-
-  z-index: 2;
-
-  pointer-events: none;
-}
-
-
-/* =========================================
-   REMOVE OLD DECORATIVE EFFECTS
-========================================= */
-
-.festival-banner::before,
-.festival-banner::after {
-  display: none;
-}
-
-
-/* =========================================
-   BOOK YOUR TICKET NOW
-   OUTSIDE THE BANNER
-========================================= */
-
-.festival-banner-action {
-  position: absolute;
-
-  left: 50%;
-
-  /*
-    Negative value moves button outside
-    the bottom edge of the banner.
-  */
-  bottom: -27px;
-
-  transform: translateX(-50%);
-
-  z-index: 20;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
-/* =========================================
-   BOOK BUTTON
-========================================= */
-
-.festival-book-btn {
-  min-width: 235px;
-
-  height: 54px;
-
-  padding: 0 32px;
-
-  border: none;
-
-  border-radius: 9px;
-  border: 1px solid white;
-  background: linear-gradient(90deg, #f9ad05 0%, #8f3915 100%);
-  color: #ffffff;
-
-  font-size: 15px;
-
-  font-weight: 800;
-
-  letter-spacing: 0.2px;
-
-  white-space: nowrap;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 8px 22px rgba(7, 44, 107, 0.25);
-
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-
-/* =========================================
-   BUTTON HOVER
-========================================= */
-
-.festival-book-btn:hover {
-  background: linear-gradient(90deg, #c9a455 0%, #bc3939 100%);
-  color: #ffffff;
-
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 10px 26px rgba(7, 44, 107, 0.28);
-}
-
-
-/* =========================================
-   BOOK YOUR TICKET NOW
-   FLOAT + RADIAL WAVE EFFECT
-========================================= */
-
-.festival-banner-action {
-  position: absolute;
-
-  left: 50%;
-  bottom: -70px;
-
-  transform: translateX(-50%);
-
-  z-index: 20;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* Required for wave effect */
-  isolation: isolate;
-}
-
-
-/* =========================================
-   RADIAL PULSE WAVE
-========================================= */
-
-.festival-banner-action::before,
-.festival-banner-action::after {
-  content: "";
-
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  width: 100%;
-  height: 100%;
-
-  border-radius: 12px;
-
-  background: rgba(3, 113, 239, 0.32);
-
-  transform: translate(-50%, -50%) scale(1);
-
-  z-index: -1;
-
-  pointer-events: none;
-
-  animation: festivalButtonWave 2.4s ease-out infinite;
-}
-
-
-.festival-banner-action::after {
-  animation-delay: 1.2s;
-}
-
-
-/* =========================================
-   RADIAL WAVE ANIMATION
-========================================= */
-
-@keyframes festivalButtonWave {
-
-  0% {
-    opacity: 0.45;
-
-    transform:
-      translate(-50%, -50%) scale(1);
-  }
-
-  70% {
-    opacity: 0;
-
-    transform:
-      translate(-50%, -50%) scale(1.55);
-  }
-
-  100% {
-    opacity: 0;
-
-    transform:
-      translate(-50%, -50%) scale(1.7);
-  }
-
-}
-
-
-/* =========================================
-   BOOK BUTTON
-========================================= */
-
-.festival-book-btn {
-  position: relative;
-
-  min-width: 235px;
-
-  height: 54px;
-
-  padding: 0 32px;
-
-  border: 1px solid rgba(255, 255, 255, 0.85);
-
-  border-radius: 9px;
-
-  background: #032651;
-
-  color: #ffffff;
-
-  font-size: 15px;
-
-  font-weight: 800;
-
-  letter-spacing: 0.2px;
-
-  white-space: nowrap;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 8px 22px rgba(7, 44, 107, 0.25);
-
-  animation: festivalButtonFloat 3s ease-in-out infinite;
-
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
-
-  z-index: 2;
-}
-
-
-/* =========================================
-   SUBTLE FLOAT EFFECT
-========================================= */
-
-@keyframes festivalButtonFloat {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-4px);
-  }
-
-}
-
-
-/* =========================================
-   PREMIUM SHINE
-========================================= */
-
-.festival-book-btn::before {
-  content: "";
-
-  position: absolute;
-
-  top: 0;
-  left: -80%;
-
-  width: 45%;
-  height: 100%;
-
-  background:
-    linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.35),
-      transparent);
-
-  transform: skewX(-20deg);
-
-  animation: festivalButtonShine 4s ease-in-out infinite;
-
-  pointer-events: none;
-}
-
-
-@keyframes festivalButtonShine {
-
-  0% {
-    left: -80%;
-  }
-
-  35% {
-    left: 130%;
-  }
-
-  100% {
-    left: 130%;
-  }
-
-}
-
-
-/* =========================================
-   HOVER
-========================================= */
-
-.festival-book-btn:hover {
-  background: #05438e;
-
-  color: #ffffff;
-
-  transform: translateY(-5px);
-
-  box-shadow:
-    0 12px 30px rgba(7, 44, 107, 0.32);
-}
-
-
-/* =========================================
-   TABLET
-========================================= */
-
-@media (max-width: 991px) {
-
-  .festival-banner-section {
-    padding: 20px 0 55px;
-  }
-
-  .festival-banner {
-    height: 220px;
-
-    border-radius: 15px;
-  }
-
-  .festival-banner-image,
-  .festival-banner-overlay {
-    border-radius: 15px;
-  }
-
-  .festival-banner-action {
-    bottom: -25px;
-  }
-
-  .festival-book-btn {
-    min-width: 220px;
-
-    height: 50px;
-
-    padding: 0 26px;
-
-    font-size: 14px;
-
-    border-radius: 8px;
-  }
-
-}
-
-
-/* =========================================
-   MOBILE
-   TEMPORARY VERSION
-   Separate mobile design will be done later.
-========================================= */
-
-@media (max-width: 767px) {
-
-  .festival-banner-section {
-    padding: 12px 0 48px;
-  }
-
-  .festival-banner {
-    height: 145px;
-
-    border-radius: 12px;
-
-    box-shadow:
-      0 10px 25px rgba(7, 44, 107, 0.14);
-  }
-
-  .festival-banner-image,
-  .festival-banner-overlay {
-    border-radius: 12px;
-  }
-
-  .festival-banner-action {
-    bottom: -20px;
-  }
-
-  .festival-book-btn {
-    min-width: 175px;
-
-    height: 40px;
-
-    padding: 0 16px;
-
-    font-size: 11px;
-
-    border-radius: 7px;
-  }
-
-}
-
-
-/* =========================================
-   MOBILE DUSSEHRA FESTIVAL SECTION
-========================================= */
-
-.mobile-festival-section {
-  width: 100%;
-
-  padding: 14px 15px 48px;
-
-  background: #f4f7fb;
-
-  box-sizing: border-box;
-
-  margin-top: 70px;
-}
-
-
-/* =========================================
-   MAIN MOBILE CARD
-========================================= */
-
-.mobile-festival-card {
-  position: relative;
-
-  width: 100%;
-
-  /*
-    Responsive ratio.
-    Height automatically adjusts according
-    to mobile screen width.
-  */
-  aspect-ratio: 717 / 792;
-
-  min-height: 0;
-
-  border-radius: 16px;
-
-  overflow: visible;
-
-  background:
-    linear-gradient(135deg,
-      #fff8eb 0%,
-      #f9ead3 50%,
-      #fff6e4 100%);
-
-  border: 1px solid #efc003;
-
-  box-shadow:
-    0 8px 24px rgba(7, 44, 107, 0.14);
-
-  isolation: isolate;
-}
-
-
-/* =========================================
-   IMAGE AREA
-========================================= */
-
-.mobile-festival-image {
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  background-image:
-    url('/assets/img/offer_banner_mob-compressed.jpg');
-
-  background-size: cover;
-
-  background-position: center;
-
-  background-repeat: no-repeat;
-
-  border-radius: 16px;
-
-  overflow: hidden;
-
-  z-index: 1;
-}
-
-
-/* =========================================
-   IMAGE OVERLAY
-========================================= */
-
-.mobile-festival-overlay {
-  position: absolute;
-
-  inset: 0;
-
-  border-radius: 16px;
-
-  background: transparent;
-
-  z-index: 2;
-
-  pointer-events: none;
-}
-
-
-/* =========================================
-   BOOK BUTTON
-========================================= */
-
-.mobile-festival-cta {
-  position: absolute;
-
-  left: 50%;
-
-  /*
-    Button position scales with banner height.
-  */
-  bottom: -22px;
-
-  transform: translateX(-50%);
-
-  z-index: 20;
-
-  width: max-content;
-
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-}
-
-
-/* =========================================
-   BOOK BUTTON
-========================================= */
-
-.mobile-festival-btn {
-  /*
-    Responsive width instead of fixed width.
-  */
-  width: min(190px, 58vw);
-
-  min-width: 165px;
-
-  height: clamp(40px, 11vw, 46px);
-
-  padding:
-    0 clamp(12px, 4vw, 20px);
-
-  border: 1px solid #ffffff;
-
-  border-radius: 8px;
-
-  background: #0c3064;
-
-  color: #ffffff;
-
-  font-size: clamp(10px, 2.8vw, 12px);
-
-  font-weight: 800;
-
-  letter-spacing: 0.2px;
-
-  white-space: nowrap;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 7px 18px rgba(0, 0, 0, 0.22);
-
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-
-/* =========================================
-   BUTTON PRESS
-========================================= */
-
-.mobile-festival-btn:active {
-  transform: translateY(2px);
-
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.18);
-}
-
-
-/* =========================================
-   VERY SMALL DEVICES
-========================================= */
-
-@media (max-width: 340px) {
-
-  .mobile-festival-section {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .mobile-festival-card {
-    border-radius: 14px;
-  }
-
-  .mobile-festival-btn {
-    min-width: 150px;
-
-    width: 55vw;
-
-    font-size: 9px;
+  .offer-popup-wrap {
+    animation: none;
   }
 }
 
+/* DESKTOP: Keep Offers content below fixed search section */
+@media (min-width: 768px) {
 
-/* =========================================
-   LARGER MOBILE DEVICES
-========================================= */
-
-@media (min-width: 400px) and (max-width: 767px) {
-
-  .mobile-festival-section {
-    padding-left: 16px;
-    padding-right: 16px;
+  .offers-page {
+    padding-top: 150px;
   }
 
-  .mobile-festival-card {
-    border-radius: 17px;
-  }
-
-  .mobile-festival-btn {
-    width: 195px;
-
-    height: 46px;
-
-    font-size: 12px;
-  }
 }

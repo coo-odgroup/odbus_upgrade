@@ -1,14 +1,13 @@
+
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Location } from '@angular/common';
+
 import { OfferService } from '../services/offer.service';
 import { GlobalConstants } from '../constants/global-constants';
 import { SeoService } from '../services/seo.service';
-import { Location } from '@angular/common';
 import { LoginChecker } from '../helpers/loginChecker';
-import { DeviceDetectorService } from 'ngx-device-detector';
-import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../services/notification.service';
 
 @Component({
@@ -17,49 +16,49 @@ import { NotificationService } from '../services/notification.service';
   styleUrls: ['./offers.component.css'],
 })
 export class OffersComponent implements OnInit {
+
   allOffers: any[] = [];
+
   url_path = '';
   currentUrl: any;
 
-  isMobile: boolean;
   session: LoginChecker;
-  MenuActive: boolean = false;
-  OfferData: any = null;
-  activeMenu: string = '';
 
-  //  CUSTOM MODAL STATE
-  showOfferModal: boolean = false;
+  MenuActive = false;
+  OfferData: any = null;
+
+  showOfferModal = false;
   fragmentValue: string | null = null;
 
   constructor(
     private spinner: NgxSpinnerService,
     private offerService: OfferService,
     private router: Router,
-    private sanitizer: DomSanitizer,
     private seo: SeoService,
     private location: Location,
-    private detectService: DeviceDetectorService,
     private route: ActivatedRoute,
     private notify: NotificationService,
   ) {
-    this.isMobile = this.detectService.isMobile();
     this.session = new LoginChecker();
-    this.currentUrl = location.path().replace('/', '');
+
+    this.currentUrl = this.location.path().replace('/', '');
     this.seo.seolist(this.currentUrl);
   }
 
   ngOnInit(): void {
-    // Subscribe only once
+
+    // URL fragment subscription
     this.route.fragment.subscribe((fragment) => {
       this.fragmentValue = fragment;
       this.checkAndOpenOffer();
     });
 
-    // Load offers
+    // Load offers from API
     this.loadOffers();
   }
 
-  checkAndOpenOffer() {
+  checkAndOpenOffer(): void {
+
     if (!this.fragmentValue || !this.allOffers?.length) {
       return;
     }
@@ -75,7 +74,8 @@ export class OffersComponent implements OnInit {
     }
   }
 
-  loadOffers() {
+  loadOffers(): void {
+
     this.spinner.show();
 
     const param = {
@@ -83,8 +83,10 @@ export class OffersComponent implements OnInit {
     };
 
     this.offerService.Offers(param).subscribe(
-      (res) => {
+      (res: any) => {
+
         if (res.status == 1 && res.data) {
+
           this.allOffers = res.data;
 
           localStorage.setItem(
@@ -92,54 +94,57 @@ export class OffersComponent implements OnInit {
             JSON.stringify(res.data)
           );
 
-          // Check fragment after offers loaded
+          // Check URL fragment after offers are loaded
           this.checkAndOpenOffer();
         }
 
         this.spinner.hide();
       },
-      (err) => {
+      (err: any) => {
+
         console.error('Offer API error:', err);
+
         this.spinner.hide();
       }
     );
   }
 
-  menu() {
+  menu(): void {
     this.MenuActive = true;
-    this.activeMenu = 'active';
   }
 
-  signOut() {
+  signOut(): void {
     this.session.logout();
     this.router.navigate(['login']);
   }
 
-  openOffer(i: number) {
-    if (!this.allOffers || !this.allOffers[i]) return;
+  openOffer(index: number): void {
 
-    this.OfferData = this.allOffers[i];
+    if (!this.allOffers || !this.allOffers[index]) {
+      return;
+    }
 
+    this.OfferData = this.allOffers[index];
     this.showOfferModal = true;
   }
 
-  closeOfferModal() {
+  closeOfferModal(): void {
+
     this.showOfferModal = false;
     this.OfferData = null;
 
     this.router.navigate(['offers']);
   }
 
-  getImagePath(slider_img: any) {
-    if (!slider_img) return '';
-    let objectURL = 'data:image/*;base64,' + slider_img;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-  }
+  copyCoupon(code: string): void {
 
-  copyCoupon(code: string) {
-    // if (!code) return;
     if (!code) {
-      this.notify.notify('No coupon code available to copy.', 'Error');
+
+      this.notify.notify(
+        'No coupon code available to copy.',
+        'Error'
+      );
+
       this.closeOfferModal();
       return;
     }
@@ -147,17 +152,25 @@ export class OffersComponent implements OnInit {
     navigator.clipboard
       .writeText(code)
       .then(() => {
+
         this.router.navigate(['offers']);
-        this.notify.notify('Coupon copied!', 'Success');
+
+        this.notify.notify(
+          'Coupon copied!',
+          'Success'
+        );
+
         this.closeOfferModal();
       })
       .catch((err) => {
+
         console.error('Copy failed:', err);
-        this.notify.notify('Failed to copy coupon.', 'Error');
+
+        this.notify.notify(
+          'Failed to copy coupon.',
+          'Error'
+        );
       });
   }
 
-  bookToHome(){
-    this.router.navigate(['/']);
-  }
 }

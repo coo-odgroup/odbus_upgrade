@@ -1,354 +1,295 @@
-<ng-container *ngIf="!isMobile">
+<!-- DESKTOP SEARCH -->
+<div class="offers-desktop-search" *ngIf="!MenuActive">
   <app-search-box></app-search-box>
+</div>
 
+<!-- MOBILE HEADER -->
+<header class="offers-mobile-header" *ngIf="!MenuActive">
+  <a routerLink="/" class="offers-back-button" aria-label="Back to home">
+    <i class="fa fa-arrow-left"></i>
+  </a>
 
-  <!-- DUSSEHRA FESTIVAL BANNER -->
-  <!-- <section class="festival-banner-section">
-    <div class="container">
+  <h1>Offers</h1>
 
-      <div class="festival-banner">
-        <div class="festival-banner-image"></div>
-        <div class="festival-banner-overlay"></div>
-        <div class="festival-banner-action">
-          <button class="festival-book-btn" (click)="bookToHome()">
-            BOOK YOUR TICKET NOW
-          </button>
-        </div>
-      </div>
+  <a routerLink="/" class="offers-mobile-logo" aria-label="ODBUS Home">
+    <img src="assets/img/mob-img/logo-105.png" width="105" height="42" alt="ODBUS Logo" />
+  </a>
+</header>
 
-    </div>
-  </section> -->
+<!-- MOBILE SEARCH -->
+<div class="offers-mobile-search" *ngIf="!MenuActive">
+  <app-search-box-m></app-search-box-m>
+</div>
 
+<!-- OFFERS SECTION -->
+<section class="offers-page" *ngIf="!MenuActive">
 
-  <!-- Offer section -->
-  <section class="top-routs offer-sec">
-    <span class="line-span">
+  <!-- DESKTOP TITLE -->
+  <div class="offers-desktop-title">
+    <span class="offers-title-line">
       <div class="container">
         <h1>Offers</h1>
       </div>
     </span>
-    <div class="textimonials-result1">
-      <div class="container">
-        <div class="main-tnc">
-          <p class="offer-top-text">
-            Find the best <a routerLink="/online-bus-tickets">online bus ticket</a> offers across Odisha on
-            <span>ODBUS</span>.
+  </div>
 
-            <br />
-
-            Book faster, save more, and travel smarter with exclusive discounts
-            and coupon codes on every journey.
-          </p>
-          <div class="row">
-            <div class="col-md-4" *ngFor="let o of allOffers; let i = index">
-              <div class="card">
-                <button type="button" class="offer-card-button" (click)="openOffer(i)"
-                  [attr.aria-label]="'View offer ' + (o.occassion || i + 1)">
-                  <img *ngIf="
-                      o.slider_photo &&
-                      o.slider_photo != '' &&
-                      o.slider_photo != null
-                    " class="card-img-top" [src]="o.slider_photo" alt="{{ o.occassion }}" />
-                </button>
-                <div class="card-block"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="download-app-section">
+  <div class="offers-content-area">
     <div class="container">
-      <div class="download-app-box">
-        <div class="row align-items-center">
 
-          <!-- LEFT -->
-          <div class="col-lg-7 col-md-7">
+      <div class="offers-content-card">
 
-            <span class="download-tag">
-              <i class="fa fa-mobile-alt"></i>
-              ODBUS MOBILE APP
-            </span>
+        <!-- INTRO TEXT -->
+        <p class="offer-top-text">
+          Find the best
+          <a routerLink="/online-bus-tickets">online bus ticket</a>
+          offers across Odisha on
+          <span>ODBUS</span>.
+          <br />
+          Book faster, save more, and travel smarter with exclusive discounts
+          and coupon codes on every journey.
+        </p>
 
-            <h2>
-              Book Bus Tickets Faster with the
-              <span>ODBUS App</span>
-            </h2>
+        <!-- COMMON OFFERS GRID -->
+        <div class="offers-grid">
 
-            <!-- Features -->
-            <ul class="app-features">
-              <li><i class="fa fa-check-circle"></i> Fast Booking</li>
-              <li><i class="fa fa-check-circle"></i> Reliable Seats</li>
-              <li><i class="fa fa-check-circle"></i> Zero Stress</li>
-            </ul>
+          <div class="offer-grid-item" *ngFor="let o of allOffers; let i = index">
 
-            <!-- Download Buttons -->
-            <div class="download-bottom">
+            <div class="offer-card">
 
-              <a href="#" class="play-btn">
-                <img src="assets/img/app-down.webp"
-                  srcset="assets/img/app-down-120.png 120w, assets/img/app-down.webp 250w"
-                  sizes="(max-width: 991px) 120px, 193px"
-                  alt="Google Play" />
-              </a>
+              <button type="button" class="offer-card-button" (click)="openOffer(i)"
+                [attr.aria-label]="'View offer ' + (o.occassion || i + 1)">
 
-              <span class="download-divider"></span>
+                <img *ngIf="o.slider_photo" [src]="o.slider_photo" [alt]="o.occassion || 'ODBUS offer'"
+                  loading="lazy" />
 
-              <div class="scan-box">
-                <img src="assets/img/white_qr-code.webp" alt="QR Code" />
-                <small>Scan to Download</small>
-              </div>
-
-            </div>
-
-          </div>
-
-          <!-- RIGHT -->
-          <div class="col-lg-5 col-md-5">
-
-            <div class="app-preview">
-
-              <img src="assets/img/download_mob2.webp" class="mobile-phone" alt="ODBUS Mobile App" />
+              </button>
 
             </div>
 
           </div>
 
         </div>
+
       </div>
     </div>
-  </section>
-</ng-container>
+  </div>
+</section>
 
-<ng-container *ngIf="isMobile && !MenuActive">
-  <div class="mobile-mybooking-top">
-    <div class="row">
-      <div class="col-1 pr-0 pl-2 mob-arrow-left">
-        <a routerLink="/" aria-label="Back to home">
-          <i class="fa fa-arrow-left"></i>
+<!-- APP DOWNLOAD SECTION -->
+<section class="offers-download-section" *ngIf="!MenuActive">
+
+  <div class="container">
+
+    <!-- DESKTOP APP BANNER -->
+    <div class="download-app-box offers-desktop-app">
+
+      <div class="download-app-left">
+
+        <span class="download-tag">
+          <i class="fa fa-mobile-alt"></i>
+          ODBUS MOBILE APP
+        </span>
+
+        <h2>
+          Book Bus Tickets Faster with the
+          <span>ODBUS App</span>
+        </h2>
+
+        <ul class="app-features">
+          <li><i class="fa fa-check-circle"></i> Fast Booking</li>
+          <li><i class="fa fa-check-circle"></i> Reliable Seats</li>
+          <li><i class="fa fa-check-circle"></i> Zero Stress</li>
+        </ul>
+
+        <div class="download-bottom">
+
+          <a href="#" class="play-btn">
+            <img src="assets/img/app-down.webp" srcset="assets/img/app-down-120.png 120w, assets/img/app-down.webp 250w"
+              sizes="(max-width: 991px) 120px, 193px" alt="Get it on Google Play" />
+          </a>
+
+          <span class="download-divider"></span>
+
+          <div class="scan-box">
+            <img src="assets/img/white_qr-code.webp" alt="Scan QR code to download ODBUS app" />
+            <small>Scan to Download</small>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="download-app-right">
+        <div class="app-preview">
+          <img src="assets/img/download_mob2.webp" class="desktop-mobile-phone" alt="ODBUS Mobile App" />
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MOBILE APP BANNER -->
+    <div class="download-app-box offers-mobile-app">
+
+      <div class="mobile-download-content">
+
+        <h2>
+          Book Bus Tickets
+          <br />
+          <span>Faster</span>
+        </h2>
+
+        <p>with the <strong>ODBUS App</strong></p>
+
+        <a href="#" class="play-btn">
+          <img src="assets/img/app-down-120.png"
+            srcset="assets/img/app-down-120.png 120w, assets/img/app-down.webp 250w" sizes="120px" width="120"
+            height="36" alt="Get it on Google Play" />
         </a>
+
       </div>
-      <div class="col-7 pl-2 pr-2 mob-list-center">
-        <h1>Offers</h1>
+
+      <div class="mobile-download-image">
+        <img src="assets/img/download_mob2.webp" width="170" height="133" alt="ODBUS Mobile App" />
       </div>
-      <div class="col-4 pl-2 pr-2">
-        <div class="mobile-logo">
-          <img src="assets/img/mob-img/logo-105.png" width="105" height="42" alt="ODBUS Logo" />
-        </div>
-      </div>
+
     </div>
+
   </div>
+</section>
 
-  <app-search-box-m></app-search-box-m>
+<!-- MOBILE MENU -->
+<section class="offers-mobile-menu" *ngIf="MenuActive">
 
-  <!-- MOBILE DUSSEHRA FESTIVAL BANNER -->
-  <!-- <section class="mobile-festival-section">
-
-    <div class="mobile-festival-card">
-      <div class="mobile-festival-image"></div>
-      <div class="mobile-festival-overlay"></div>
-      <div class="mobile-festival-cta">
-        <button class="mobile-festival-btn" (click)="bookToHome()">
-          BOOK YOUR TICKET NOW
-        </button>
-      </div>
-
-    </div>
-
-  </section> -->
-  <!-- End -->
-
-  <div class="mobile-offerbox-middle">
-    <p class="offer-top-text">
-      Find the best <a routerLink="/online-bus-tickets">online bus ticket</a> offers across Odisha on
-      <span>ODBUS</span>.
-
-      <br />
-
-      Book faster, save more, and travel smarter with exclusive discounts and
-      coupon codes on every journey.
-    </p>
-    <div class="row">
-      <div class="col-12" *ngFor="let o of allOffers; let i = index">
-        <div class="mobile-offer">
-          <button type="button" class="offer-card-button" (click)="openOffer(i)"
-            [attr.aria-label]="'View offer ' + (o.occassion || i + 1)">
-            <img *ngIf="
-                o.slider_photo && o.slider_photo != '' && o.slider_photo != null
-              " src="{{ o.slider_photo }}" alt="{{ o.occassion }}" />
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <section class="download-app-section">
-    <div class="container">
-      <div class="download-app-box">
-
-        <div class="mobile-download-wrap">
-
-          <!-- LEFT -->
-          <div class="mobile-download-content">
-
-            <h2>
-              Book Bus Tickets
-              <br>
-              <span>Faster</span>
-            </h2>
-
-            <p>with the <strong>ODBUS App</strong></p>
-
-            <a href="#" class="play-btn">
-              <img src="assets/img/app-down-120.png"
-                srcset="assets/img/app-down-120.png 120w, assets/img/app-down.webp 250w"
-                sizes="120px"
-                width="120"
-                height="36"
-                alt="Google Play">
-            </a>
-
-          </div>
-
-          <!-- RIGHT -->
-          <div class="mobile-download-image">
-
-            <img src="assets/img/download_mob2.webp" width="170" height="133" class="mobile-phone" alt="ODBUS Mobile App">
-
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-  </section>
-</ng-container>
-
-<ng-container *ngIf="MenuActive">
   <div class="mobile-myaccount-top">
     <div class="row">
+
       <div class="col-5">
         <div class="mobile-logo">
           <img src="assets/img/mob-img/logo-105.png" width="105" height="42" alt="ODBUS Logo" />
         </div>
       </div>
+
       <div class="col-7 mob-logintx">
         <a routerLink="/login" *ngIf="!session.isLoggedIn()">
           Login / Signup
         </a>
-        <a routerLink="/dashboard" *ngIf="session.isLoggedIn()"> Dashboard </a>
+
+        <a routerLink="/dashboard" *ngIf="session.isLoggedIn()">
+          Dashboard
+        </a>
       </div>
+
     </div>
   </div>
 
   <div class="mobile-myaccount-middle">
+
     <ul class="mobile-menu">
+
       <li>
-        <a routerLink="/manage-booking"><i class="far fa-window-restore"></i> Manage Booking</a>
+        <a routerLink="/manage-booking">
+          <i class="far fa-window-restore"></i> Manage Booking
+        </a>
       </li>
+
       <li>
-        <a routerLink="/operators"><i class="fa fa-bus"></i> Operators</a>
+        <a routerLink="/operators">
+          <i class="fa fa-bus"></i> Operators
+        </a>
       </li>
+
       <li>
-        <a routerLink="/routes"><i class="fa fa-map-marker-alt"></i> Routes</a>
+        <a routerLink="/routes">
+          <i class="fa fa-map-marker-alt"></i> Routes
+        </a>
       </li>
+
       <li>
-        <a routerLink="/faq"><i class="fa fa-question"></i> FAQ's</a>
+        <a routerLink="/faq">
+          <i class="fa fa-question"></i> FAQ's
+        </a>
       </li>
+
       <li>
-        <a routerLink="/testimonials"><i class="fa fa-star"></i> Testimonials</a>
+        <a routerLink="/testimonials">
+          <i class="fa fa-star"></i> Testimonials
+        </a>
       </li>
+
       <li>
-        <a routerLink="/terms-conditions"><i class="fa fa-file-image"></i> Terms & Conditions</a>
+        <a routerLink="/terms-conditions">
+          <i class="fa fa-file-image"></i> Terms & Conditions
+        </a>
       </li>
+
       <li>
-        <a routerLink="/privacy-policy"><i class="far fa-file-powerpoint"></i> Privacy Policy</a>
+        <a routerLink="/privacy-policy">
+          <i class="far fa-file-powerpoint"></i> Privacy Policy
+        </a>
       </li>
+
       <li>
-        <a routerLink="/about-us"><i class="fa fa-info-circle"></i> About Us</a>
+        <a routerLink="/about-us">
+          <i class="fa fa-info-circle"></i> About Us
+        </a>
       </li>
+
       <li *ngIf="session.isLoggedIn()">
-        <a routerLink="/my-reviews"><i class="fa fa-comments"></i>My Review</a>
+        <a routerLink="/my-reviews">
+          <i class="fa fa-comments"></i> My Review
+        </a>
       </li>
+
       <li *ngIf="session.isLoggedIn()">
-        <a (click)="signOut()"><i class="fa fa-sign-out-alt"></i>Logout</a>
+        <a (click)="signOut()">
+          <i class="fa fa-sign-out-alt"></i> Logout
+        </a>
       </li>
+
     </ul>
+
   </div>
-</ng-container>
 
-<ng-container *ngIf="isMobile">
-  <app-footer-menu></app-footer-menu>
-</ng-container>
+</section>
 
-<!-- CUSTOM OFFER MODAL (NO BOOTSTRAP PROPERTIES) -->
+<!-- MOBILE BOTTOM NAVIGATION -->
+<app-footer-menu class="offers-mobile-footer"></app-footer-menu>
 
 <!-- CUSTOM OFFER MODAL -->
 <div class="custom-offer-modal" *ngIf="showOfferModal">
-  <!-- OVERLAY -->
-  <div class="custom-offer-overlay" (click)="closeOfferModal()" (keydown.enter)="closeOfferModal()"
-    (keydown.space)="closeOfferModal()"></div>
-  <div class="offer-popup-wrap">
-    <!-- HEADER -->
+
+  <div class="custom-offer-overlay" (click)="closeOfferModal()">
+  </div>
+
+  <div class="offer-popup-wrap" role="dialog" aria-modal="true" aria-labelledby="offer-popup-title">
+
+    <!-- MODAL HEADER -->
     <div class="offer-popup-header">
-      <h3>OFFER DETAILS</h3>
-      <button type="button" class="offer-close-btn" aria-label="Close offer details" (click)="closeOfferModal()">&times;</button>
+
+      <h3 id="offer-popup-title">OFFER DETAILS</h3>
+
+      <button type="button" class="offer-close-btn" aria-label="Close offer details" (click)="closeOfferModal()">
+        &times;
+      </button>
+
     </div>
 
-    <!-- BODY -->
+    <!-- MODAL BODY -->
     <div class="offer-popup-body">
-      <!-- LEFT -->
-      <!-- <div class="offer-left-side" *ngIf="OfferData?.coupon">
-        <div class="offer-info-card">
-          <div class="offer-row">
-            <span>Coupon Code</span>
-            <strong>{{ OfferData.coupon.coupon_code }}</strong>
-          </div>
 
-          <div class="offer-row">
-            <span>Applicable On</span>
-            <strong *ngIf="OfferData.coupon.valid_by == 2">Booking Date</strong>
-            <strong *ngIf="OfferData.coupon.valid_by == 1">Journey Date</strong>
-          </div>
-
-          <div class="offer-row">
-            <span>Discount</span>
-            <strong *ngIf="OfferData.coupon.type == 2">Rs {{ OfferData.coupon.amount }}/-</strong>
-            <strong *ngIf="OfferData.coupon.type == 1">{{ OfferData.coupon.percentage }}%</strong>
-          </div>
-
-          <div class="offer-row">
-            <span>Valid Till</span>
-            <strong>{{ OfferData.coupon.to_date }}</strong>
-          </div>
-
-          <button class="copy-btn" (click)="copyCoupon(OfferData.coupon.coupon_code)">
-            Copy Coupon
-          </button>
-        </div>
-
-        <div class="offer-type-line">
-          <strong>Offer Type :</strong> {{ OfferData.occassion }}
-        </div>
-      </div> -->
-
-      <!-- RIGHT -->
       <div class="offer-right-side">
-        <!-- <h4>COUPON DESCRIPTION</h4> -->
 
-        <div class="offer-description" [innerHTML]="OfferData?.coupon?.full_desc"></div>
-        <button class="copy-btn" (click)="copyCoupon(OfferData?.coupon?.coupon_code)">
+        <div class="offer-description" [innerHTML]="OfferData?.coupon?.full_desc">
+        </div>
+
+        <button type="button" class="copy-btn" (click)="copyCoupon(OfferData?.coupon?.coupon_code)">
           Copy Coupon
         </button>
 
-        <!-- <div class="slider-desc" *ngIf="
-            OfferData?.slider_description != 'null' &&
-            OfferData?.slider_description !== ''
-          ">
-          {{ OfferData.slider_description }}
-        </div> -->
       </div>
+
     </div>
+
   </div>
+
 </div>
