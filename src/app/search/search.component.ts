@@ -79,6 +79,18 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  // Automatically switch between mobile and desktop view
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const mobileView = window.innerWidth <= 768;
+
+      if (this.isMobile !== mobileView) {
+        this.isMobile = mobileView;
+      }
+    }
+  }
+
   // =======================
   // CUSTOM CALENDAR
   // =======================
@@ -313,8 +325,9 @@ export class SearchComponent implements OnInit {
     }
 
     // Only detect device in browser, default to false (desktop) for SSR
+    // Detect current screen size
     this.isMobile = isPlatformBrowser(this.platformId)
-      ? this.deviceService.isMobile()
+      ? window.innerWidth <= 768
       : false;
 
     this.currentUrl = location.path().replace('/', '');

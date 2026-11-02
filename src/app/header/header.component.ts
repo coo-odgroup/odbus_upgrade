@@ -50,9 +50,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private deviceService: DeviceDetectorService,
     @Inject(PLATFORM_ID) private platformId: Object,
   ) {
-    this.isMobile = isPlatformBrowser(this.platformId)
-      ? this.deviceService.isMobile()
-      : false;
+    // this.isMobile = isPlatformBrowser(this.platformId)
+    //   ? this.deviceService.isMobile()
+    //   : false;
     this.isNarrowViewport = isPlatformBrowser(this.platformId)
       ? window.innerWidth <= 768
       : false;

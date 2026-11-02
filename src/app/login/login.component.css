@@ -1440,9 +1440,9 @@ transform: translateX(124px);
 }
 
 /* OTP screen spacing and card stability */
-.login-card .otp-header {
+/* .login-card .otp-header {
     min-height: 520px;
-}
+} */
 
 .otp-header {
     margin-top: 22px;
@@ -3355,7 +3355,7 @@ Appended overrides: desktop styles remain untouched.
     .mobile-login-page:has(.mobile-terms-checkbox),
     .mobile-login-page:has(.mobile-otp-header) {
         height: auto;
-        min-height: 100svh;
+        /* min-height: 100svh; */
         overflow-y: auto;
     }
 
@@ -3418,7 +3418,7 @@ OTP MOBILE LAYOUT
 ========================================================= */
 @media (max-width: 767px) {
     .mobile-login-page .mobile-otp-header {
-        min-height: 100svh;
+        /* min-height: 100svh; */
         height: auto;
         padding: 6px 10px 14px;
         gap: 8px;
