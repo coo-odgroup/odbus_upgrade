@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,11 +9,19 @@ import { Router } from '@angular/router';
 })
 export class RecentSearchComponent implements OnInit {
   // router: any;
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object,
+  ) {}
 
   recentSearches: any[] = [];
 
   ngOnInit(): void {
+    // The component is rendered during SSR, where localStorage is unavailable.
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const storedSearches = localStorage.getItem('recentSearches');
 
     if (storedSearches) {

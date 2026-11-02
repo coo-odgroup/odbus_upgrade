@@ -655,3 +655,7 @@
     justify-content: center;
   }
 }
+
+/* PAGESPEED: reserve space so the accordion appearing does not push the footer (CLS). */
+.odbus-faq-card { min-height: 520px; }
+.odbus-faq-mobile-card { min-height: 480px; }

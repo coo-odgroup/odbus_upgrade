@@ -500,9 +500,8 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
       }
     }
 
-    if (isPlatformBrowser(this.platformId)) {
-      this.startCountdown();
-    }
+    // PAGESPEED: the countdown fields are not used by any template; a 1-second interval would
+    // run change detection for the whole app every second. startCountdown() is kept for later use.
 
     this.searchForm = this._fb.group({
       source: [null],
@@ -1214,6 +1213,10 @@ ADVANTAGE CARD SLIDER WORKING BUTTONS
   }
 
   homeBanner = '';
+
+  get heroBackground(): string {
+    return 'url("' + (this.homeBanner || 'assets/img/new_banner2.webp') + '")';
+  }
 
   // getHomeData() {
   //   const param = {

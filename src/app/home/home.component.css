@@ -159,6 +159,8 @@ a:hover {
   position: relative;
   display: flex;
   align-items: center;
+  /* Keep the hero image in this section's stacking context. */
+  isolation: isolate;
 }
 
 /* Hero background through HTML img */
@@ -169,7 +171,7 @@ a:hover {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
 }
 

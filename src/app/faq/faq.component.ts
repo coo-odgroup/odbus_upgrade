@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, TransferState, makeStateKey } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+import { of } from 'rxjs';
+import { serverCached } from '../services/server-cache';
 import { SeoService } from '../services/seo.service';
 import { Location } from '@angular/common';
 import { PagesService } from '../services/pages.service';
@@ -38,7 +41,9 @@ export class FaqComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private detectService: DeviceDetectorService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private transferState: TransferState,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isMobile = this.detectService.isMobile();
     this.session = new LoginChecker();
@@ -74,16 +79,35 @@ export class FaqComponent implements OnInit {
   // }
   // Jagan
 
-  private fetchFaqs(): void {
-    this.spinner.show();
-   const payload = {};
+  trackByIndex(index: number): number {
+    return index;
+  }
 
-    this.http.post(this.apiurl + '/getfaqs', payload).subscribe((res: any) => {
-      this.faqs = res.data;
-      // Save for future use
-      this.openIndex = this.faqs.map(() => 0);
-      this.spinner.hide();
+  // PAGESPEED: FAQs are rendered on the server and handed to the browser through TransferState,
+  // so the browser does not call /getfaqs again and the page never flashes "Loading..." (layout shift).
+  private fetchFaqs(): void {
+    const key = makeStateKey<any[]>('odbus-faqs');
+    if (this.transferState.hasKey(key)) {
+      this.faqs = this.transferState.get(key, []);
+      this.transferState.remove(key);
+      return;
+    }
+
+    const call = () => this.http.post<any>(this.apiurl + '/getfaqs', {});
+    const request$ = isPlatformServer(this.platformId)
+      ? serverCached('faqs-page', 10 * 60_000, call)
+      : call();
+
+    request$.subscribe({
+      next: (res: any) => {
+        this.faqs = (res && res.data) || [];
+        if (isPlatformServer(this.platformId)) {
+          this.transferState.set(key, this.faqs);
+        }
+      },
+      error: () => {
+        this.faqs = [];
+      },
     });
-    
   }
 }

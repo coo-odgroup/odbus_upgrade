@@ -1,16 +1,8 @@
 <ng-template #Desktop>
   <!-- <section class="hero-banner-v5" style="background-image: url(&quot;assets/img/rainy_season.png&quot;)"> -->
-  <section class="hero-banner-v5">
- <img
-    class="hero-banner-image"
-    [src]="homeBanner"
-    alt="ODBUS bus travelling through a scenic landscape"
-    width="1900"
-    height="400"
-    fetchpriority="high"
-    decoding="async"
-  />
-
+  <!-- PAGESPEED: hero as CSS background (the only form PageSpeed reported an LCP for on this site);
+       the image is preloaded from <head> on the server, so it still starts downloading early. -->
+  <section class="hero-banner-v5" [style.background-image]="heroBackground">
   <div class="container hero-content">
     <div class="row">
       <div class="col-md-6">

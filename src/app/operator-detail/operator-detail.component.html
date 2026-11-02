@@ -3,219 +3,193 @@ DESKTOP VIEW
 ===================================================== -->
 
 <ng-container *ngIf="!isMobile && visibleRoutes?.length > 0">
-
   <section class="operator-top-section">
-
     <div class="container">
-
       <!-- TOP LAYOUT -->
       <div class="top-layout">
-
         <!-- LEFT CARD -->
         <div class="operator-left-card">
-
           <div class="operator-header-box">
-
             <h1>{{ OperatorData.organisation_name }}</h1>
 
             <p>
               {{ OperatorData.operator_info }}
             </p>
-
           </div>
 
           <!-- STATS -->
           <div class="stats-grid">
-
             <div class="stat-card">
-
               <div class="stat-icon">
-                <img src="../../assets/img/Group 632.svg" alt="Group">
+                <img src="../../assets/img/Group 632.svg" alt="Group" width="35" height="35" fetchpriority="high"  />
               </div>
 
               <h4>{{ routes.length }}</h4>
 
               <span>Routes</span>
-
             </div>
 
             <div class="stat-card">
-
               <div class="stat-icon">
-                <img src="../../assets/img/Group 633.svg" alt="Group">
+                <img src="../../assets/img/Group 633.svg" alt="Group" width="35" height="35" fetchpriority="high"/>
               </div>
 
               <h4>{{ buses.length }}</h4>
 
               <span>Buses</span>
-
             </div>
 
             <div class="stat-card">
-
               <div class="stat-icon">
-                <img src="../../assets/img/ratings.svg" alt="Group">
+                <img
+                  src="../../assets/img/ratings.svg"
+                  alt="Group"
+                  width="35"
+                  height="35" fetchpriority="high"
+                />
               </div>
 
               <h4>{{ OperatorData.total_rating }}</h4>
 
               <span>Ratings</span>
-
             </div>
 
             <div class="stat-card">
-
               <div class="stat-icon">
-                <img src="../../assets/img/Group 635.svg" alt="Group">
+                <img
+                  src="../../assets/img/Group 635.svg"
+                  alt="Group"
+                  width="35"
+                  height="35" fetchpriority="high"
+                />
               </div>
 
               <h4>24/7</h4>
 
               <span>Support</span>
-
             </div>
-
           </div>
-
         </div>
 
         <!-- RIGHT CARD -->
         <div class="operator-right-card">
-
           <div class="operator-header-box">
-
             <h2>Amenities</h2>
 
-            <p>
-              Facilities available during journey
-            </p>
-
+            <p>Facilities available during journey</p>
           </div>
 
           <div class="amenities-grid">
-
             <div class="amenity-card" *ngFor="let am of OperatorData.amenities">
-
               <div class="amenity-icon">
-
-                <img *ngIf="
+                <img
+                  *ngIf="
                     am.amenities &&
                     am.amenities.amenities_image != '' &&
                     am.amenities.amenities_image != null
-                  " src="{{ am.amenities.amenities_image }}" alt="Amenities">
+                  "
+                  src="{{ am.amenities.amenities_image }}"
+                  alt="Amenities"
+                  width="30"
+                  height="30"
+                />
 
-                <img *ngIf="
+                <img
+                  *ngIf="
                     am.amenities &&
                     (am.amenities.amenities_image == '' ||
                       am.amenities.amenities_image == null)
-                  " src="../../../assets/img/noImage.png" alt="Amenities">
-
+                  "
+                  src="../../../assets/img/noImage.png"
+                  alt="Amenities"
+                  width="30"
+                  height="30" fetchpriority="high"
+                />
               </div>
 
               <span>{{ am.amenities.name }}</span>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </div>
-
   </section>
 
   <!-- ROUTES -->
   <section class="routes-section">
-
     <div class="container">
-
-      <div class="section-heading">
-        Popular Routes
-      </div>
+      <div class="section-heading">Popular Routes</div>
 
       <div class="desktop-routes-grid">
-
         <!-- CARD -->
         <div class="desktop-route-card" *ngFor="let t of visibleRoutes">
-
           <!-- TOP -->
           <div class="desktop-route-top">
-
             <!-- FROM -->
             <div class="desktop-route-col">
-
               <span>From</span>
 
               <h4>
                 {{ t.sourceName }}
               </h4>
-
             </div>
 
             <!-- ARROW -->
             <div class="desktop-route-arrow-wrap">
-
               <div class="desktop-route-arrow">
                 <i class="fa fa-arrow-right"></i>
               </div>
-
             </div>
 
             <!-- TO -->
             <div class="desktop-route-col">
-
               <span>To</span>
 
               <h4>
                 {{ t.destinationName }}
               </h4>
-
             </div>
 
             <!-- TIME -->
             <div class="desktop-route-time">
-
               <span>Dept.</span>
 
               <h5>
                 {{ t.depTime }}
               </h5>
-
             </div>
-
           </div>
 
           <!-- LINE -->
           <div class="desktop-route-divider"></div>
 
           <!-- BUTTON -->
-          <button class="desktop-book-btn" (click)="popularSearch(t.sourceUrl, t.destinationUrl)">
+          <button
+            class="desktop-book-btn"
+            (click)="popularSearch(t.sourceUrl, t.destinationUrl)"
+          >
             Book Now
           </button>
 
-          <input type="hidden" [(ngModel)]="dtconfig.minDate" name="todayDate" id="todayDate" ngbDatepicker
-            (click)="d.toggle()" #d="ngbDatepicker" />
-
+          <input
+            type="hidden"
+            [(ngModel)]="dtconfig.minDate"
+            name="todayDate"
+            id="todayDate"
+            ngbDatepicker
+            (click)="d.toggle()"
+            #d="ngbDatepicker"
+          />
         </div>
-
       </div>
 
       <div *ngIf="hasMoreRoutes()" class="text-center mt-5">
-
         <button class="border-btn bh" (click)="loadMoreRoutes()">
-
           Load More
-
         </button>
-
       </div>
-
     </div>
-
   </section>
-
 </ng-container>
 
 <!-- =====================================================
@@ -223,117 +197,89 @@ MOBILE VIEW
 ===================================================== -->
 
 <ng-container *ngIf="isMobile && !MenuActive && visibleRoutes?.length > 0">
-
   <!-- MOBILE HEADER -->
   <div class="mobile-top-header">
-
     <div class="row align-items-center">
-
       <!-- LEFT -->
       <div class="col-7">
-
         <div class="mobile-head-left">
-
           <a routerLink="/operators">
             <i class="fa fa-arrow-left"></i>
           </a>
 
-          <h5>
-            Operators Details
-          </h5>
-
+          <h5>Operators Details</h5>
         </div>
-
       </div>
 
       <!-- RIGHT -->
       <div class="col-5">
-
         <div class="mobile-logo-box">
-          <img src="assets/img/mob-img/logo.png" alt="Logo">
+          <img src="assets/img/mob-img/logo.png" alt="Logo" width="95" height="38" fetchpriority="high"/>
         </div>
-
       </div>
-
     </div>
-
   </div>
 
   <!-- MOBILE BODY -->
   <section class="mobile-main-section">
-
     <!-- =====================================================
     BUS CARD
     ===================================================== -->
 
     <div class="mobile-bus-card">
-
       <!-- TITLE -->
       <div class="mobile-bus-name">
-
         <h2>
           {{ OperatorData.organisation_name }}
         </h2>
-
       </div>
 
       <!-- STATS -->
       <div class="mobile-stats-grid">
-
         <!-- ROUTES -->
         <div class="mobile-stat-card">
-
           <div class="mobile-stat-icon">
-            <img src="assets/img/mob-img/Group 632.svg" alt="Group">
+            <img src="assets/img/mob-img/Group 632.svg" alt="Group" width="35" height="35" fetchpriority="high" />
           </div>
 
           <h4>{{ routes.length }}</h4>
 
           <span>Routes</span>
-
         </div>
 
         <!-- BUSES -->
         <div class="mobile-stat-card">
-
           <div class="mobile-stat-icon">
-            <img src="assets/img/mob-img/Group 633.svg" alt="Group">
+            <img src="assets/img/mob-img/Group 633.svg" alt="Group"  width="35" height="35" fetchpriority="high"/>
           </div>
 
           <h4>{{ buses.length }}</h4>
 
           <span>Buses</span>
-
         </div>
 
         <!-- RATINGS -->
         <div class="mobile-stat-card">
-
           <div class="mobile-stat-icon">
-            <img src="assets/img/mob-img/ratings.svg" alt="Group">
+            <img src="assets/img/mob-img/ratings.svg" alt="Group" width="35" height="35" fetchpriority="high"/>
           </div>
 
           <h4>{{ OperatorData.total_rating }}</h4>
 
           <span>Ratings</span>
-
         </div>
 
         <!-- SUPPORT -->
         <div class="mobile-stat-card">
-
           <div class="mobile-stat-icon">
-            <img src="assets/img/mob-img/Group 635.svg" alt="Group">
+            <img src="assets/img/mob-img/Group 635.svg" alt="Group" width="35" height="35" fetchpriority="high"/>
           </div>
 
           <h4>24/7</h4>
 
           <span>Support</span>
-
         </div>
-
       </div>
-
     </div>
 
     <!-- =====================================================
@@ -341,11 +287,8 @@ MOBILE VIEW
     ===================================================== -->
 
     <div class="mobile-amenities-main">
-
       <!-- TITLE -->
-      <div class="mobile-section-heading">
-        Amenities
-      </div>
+      <div class="mobile-section-heading">Amenities</div>
 
       <!-- SUBTITLE -->
       <div class="mobile-amenities-subtitle">
@@ -354,56 +297,59 @@ MOBILE VIEW
 
       <!-- GRID -->
       <div class="mobile-amenities-grid">
-
         <!-- CARD -->
-        <div class="mobile-amenity-card" *ngFor="let am of OperatorData.amenities">
-
+        <div
+          class="mobile-amenity-card"
+          *ngFor="let am of OperatorData.amenities"
+        >
           <!-- ICON BOX -->
           <div class="mobile-amenity-icon">
-
             <!-- IMAGE -->
-            <img *ngIf="
-            am.amenities &&
-            am.amenities.amenities_image != '' &&
-            am.amenities.amenities_image != null
-          " src="{{ am.amenities.amenities_image }}" alt="Amenities">
+            <img
+              *ngIf="
+                am.amenities &&
+                am.amenities.amenities_image != '' &&
+                am.amenities.amenities_image != null
+              "
+              src="{{ am.amenities.amenities_image }}"
+              alt="Amenities"
+              width="30"
+              height="30" fetchpriority="high"
+            />
 
             <!-- FALLBACK -->
-            <img *ngIf="
-            am.amenities &&
-            (am.amenities.amenities_image == '' ||
-              am.amenities.amenities_image == null)
-          " src="../../../assets/img/noImage.png" alt="Amenities">
-
+            <img
+              *ngIf="
+                am.amenities &&
+                (am.amenities.amenities_image == '' ||
+                  am.amenities.amenities_image == null)
+              "
+              src="../../../assets/img/noImage.png"
+              alt="Amenities"
+              width="30"
+              height="30" fetchpriority="high"
+            />
           </div>
 
           <!-- NAME -->
           <span>
             {{ am.amenities.name }}
           </span>
-
         </div>
-
       </div>
-
     </div>
 
     <!-- =====================================================
     POPULAR ROUTES
     ===================================================== -->
 
-    <div class="mobile-section-heading">
-      Popular Routes
-    </div>
+    <div class="mobile-section-heading">Popular Routes</div>
 
     <div class="mobile-routes-grid">
-
       <!-- CARD -->
       <div class="mobile-route-card" *ngFor="let t of visibleRoutes">
-
         <!-- TOP -->
         <div class="mobile-route-top">
-
           <!-- FROM -->
           <div class="mobile-route-col">
             <span>From</span>
@@ -437,36 +383,37 @@ MOBILE VIEW
               {{ t.depTime }}
             </h5>
           </div>
-
         </div>
 
         <!-- LINE -->
         <div class="mobile-route-divider"></div>
 
         <!-- BUTTON -->
-        <button class="mobile-book-btn" (click)="popularSearch(t.sourceUrl, t.destinationUrl)">
+        <button
+          class="mobile-book-btn"
+          (click)="popularSearch(t.sourceUrl, t.destinationUrl)"
+        >
           Book Now
         </button>
 
-        <input type="hidden" [(ngModel)]="dtconfig.minDate" name="todayDate" id="todayDate" ngbDatepicker
-          (click)="d.toggle()" #d="ngbDatepicker" />
-
+        <input
+          type="hidden"
+          [(ngModel)]="dtconfig.minDate"
+          name="todayDate"
+          id="todayDate"
+          ngbDatepicker
+          (click)="d.toggle()"
+          #d="ngbDatepicker"
+        />
       </div>
 
       <div *ngIf="hasMoreRoutes()" class="text-center mt-1">
-
         <button class="border-btn bh" (click)="loadMoreRoutes()">
-
           Load More
-
         </button>
-
       </div>
-
     </div>
-
   </section>
-
 </ng-container>
 
 <!-- FOOTER -->

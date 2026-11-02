@@ -12,7 +12,7 @@
       <div class="odbus-faq-card">
 
         <ngb-accordion class="odbus-faq-accordion" [closeOthers]="true" activeIds="panel0">
-          <ngb-panel *ngFor="let category of faqs; let i = index" [id]="'panel' + i">
+          <ngb-panel *ngFor="let category of faqs; let i = index; trackBy: trackByIndex" [id]="'panel' + i">
             <ng-template ngbPanelTitle>
               <span class="odbus-faq-category-title">
                 <span class="odbus-faq-number">
@@ -72,7 +72,7 @@
       <h1>Frequently Asked Questions</h1>
 
       <a routerLink="/" class="odbus-faq-mobile-logo" aria-label="ODBUS home">
-        <img src="assets/img/mob-img/logo.png" alt="ODBUS" />
+        <img src="assets/img/mob-img/logo.png" alt="ODBUS" width="85" height="34" />
       </a>
     </header>
 
@@ -85,7 +85,7 @@
       <div class="odbus-faq-mobile-card">
 
         <ngb-accordion class="odbus-faq-accordion" [closeOthers]="true" activeIds="mobile-panel0">
-          <ngb-panel *ngFor="let category of faqs; let i = index" [id]="'mobile-panel' + i">
+          <ngb-panel *ngFor="let category of faqs; let i = index; trackBy: trackByIndex" [id]="'mobile-panel' + i">
             <ng-template ngbPanelTitle>
               <span class="odbus-faq-category-title">
                 <span class="odbus-faq-number">
@@ -135,7 +135,7 @@
 <ng-container *ngIf="isMobile && MenuActive">
   <div class="odbus-faq-account-header">
     <a routerLink="/" class="odbus-faq-account-logo">
-      <img src="assets/img/mob-img/logo.png" alt="ODBUS" />
+      <img src="assets/img/mob-img/logo.png" alt="ODBUS" width="85" height="34" />
     </a>
 
     <a routerLink="/login" *ngIf="!session.isLoggedIn()" class="odbus-faq-account-action">
