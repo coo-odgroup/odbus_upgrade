@@ -25,11 +25,15 @@
 .imp_links_list a {
     position: relative;
     font-size: 12px;
-    font-weight: 500;
-    color: #434343;
+    font-weight: 700;
+    color: #1b2155;
     text-decoration: none;
     transition: 0.3s ease;
     line-height: 1.5;
+    background: #efc0035e;
+    padding: 2px 12px;
+    box-shadow: 3px 3px #dfdfdf;
+    border-radius: 3px;
 }
 
 
@@ -53,7 +57,7 @@
 
 @media (max-width: 768px) {
 
-    .footer{
+    .footer {
         display: none;
     }
 

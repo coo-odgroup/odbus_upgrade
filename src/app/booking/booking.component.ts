@@ -38,6 +38,10 @@ declare let Razorpay: any;
 
 export class BookingComponent implements OnInit {
 
+  showMobileFareBreakdown: boolean = false;
+
+  showFareBreakdown: boolean = false;
+
   // Material stepper reference
   @ViewChild('stepper') stepper!: MatStepper;
 

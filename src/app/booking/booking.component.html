@@ -696,36 +696,70 @@
 
           <div class="fare-card">
 
-            <div class="fare-success" *ngIf="couponData.discount > 0">
-              <i class="fa fa-check-circle"></i>
-              Coupon <strong>{{ autoApplyCouponcode }}</strong> Applied Successfully
-            </div>
+            <!-- TOTAL - ALWAYS VISIBLE -->
+            <div class="fare-row fare-total mobile-fare-toggle"
+              (click)="showMobileFareBreakdown = !showMobileFareBreakdown">
 
-            <div class="fare-row">
-              <span>Base Fare</span>
-              <strong>₹ {{ bookingdata.PriceArray.odbus_charges_ownerFare }}</strong>
-            </div>
-
-            <div class="fare-row" *ngIf="couponData.discount > 0">
-              <span>Coupon Discount</span>
-              <strong class="fare-discount">
-                - ₹ {{ couponData.discount }}
-              </strong>
-            </div>
-
-            <div class="fare-row">
-              <span>Customer GST</span>
-              <strong class="fare-gst">
-                + ₹ {{ bookingdata.PriceArray.customerGst }}
-              </strong>
-            </div>
-            <div class="fare-divider"></div>
-
-            <div class="fare-row fare-total">
               <span>Total</span>
-              <strong>
-                ₹ {{ couponData.payableAmount }}
-              </strong>
+
+              <div class="mobile-fare-right">
+                <strong>
+                  ₹ {{ couponData.payableAmount }}
+                </strong>
+
+                <i class="fa" [ngClass]="showMobileFareBreakdown
+         ? 'fa-chevron-up'
+         : 'fa-chevron-down'">
+                </i>
+              </div>
+
+            </div>
+
+
+            <!-- FARE BREAKDOWN -->
+            <div class="mobile-fare-breakdown" *ngIf="showMobileFareBreakdown">
+
+              <!-- COUPON SUCCESS -->
+              <div class="fare-success" *ngIf="couponData.discount > 0">
+
+                <i class="fa fa-check-circle"></i>
+                Coupon <strong>{{ autoApplyCouponcode }}</strong>
+                Applied Successfully
+
+              </div>
+
+
+              <!-- BASE FARE -->
+              <div class="fare-row">
+                <span>Base Fare</span>
+
+                <strong>
+                  ₹ {{ bookingdata.PriceArray.odbus_charges_ownerFare }}
+                </strong>
+              </div>
+
+
+              <!-- COUPON DISCOUNT -->
+              <div class="fare-row" *ngIf="couponData.discount > 0">
+
+                <span>Coupon Discount</span>
+
+                <strong class="fare-discount">
+                  - ₹ {{ couponData.discount }}
+                </strong>
+
+              </div>
+
+
+              <!-- CUSTOMER GST -->
+              <div class="fare-row">
+                <span>GST</span>
+
+                <strong class="fare-gst">
+                  + ₹ {{ bookingdata.PriceArray.customerGst }}
+                </strong>
+              </div>
+
             </div>
 
           </div>
@@ -2120,78 +2154,54 @@
 
                       <!-- COUPON APPLIED -->
 
-                      <div class="fare-success" *ngIf="couponData.discount > 0">
+                      <!-- FARE BREAKDOWN TOGGLE -->
+                      <div class="fare-total fare-total-toggle" (click)="showFareBreakdown = !showFareBreakdown">
 
-                        <i class="fa fa-check-circle"></i>
+                        <span>Total</span>
 
-                        Coupon
-                        <strong>
-                          {{ autoApplyCouponcode }}
-                        </strong>
-                        Applied Successfully
+                        <div class="fare-total-right">
+                          <strong>
+                            ₹ {{ couponData.payableAmount }}
+                          </strong>
 
-                      </div>
-
-
-                      <!-- BASE FARE -->
-
-                      <div class="fare-row">
-
-                        <span>
-                          Base Fare
-                        </span>
-
-                        <strong>
-                          ₹ {{ bookingdata.PriceArray.odbus_charges_ownerFare }}
-                        </strong>
+                          <i class="fa" [ngClass]="showFareBreakdown ? 'fa-chevron-up' : 'fa-chevron-down'">
+                          </i>
+                        </div>
 
                       </div>
 
 
-                      <!-- CUSTOMER GST -->
+                      <!-- FARE BREAKDOWN -->
+                      <div class="fare-breakdown" *ngIf="showFareBreakdown">
 
-                      <div class="fare-row">
-
-                        <span>
-                          Customer GST
-                        </span>
-
-                        <strong class="gst-price">
-                          + ₹ {{ bookingdata.PriceArray.customerGst }}
-                        </strong>
-
-                      </div>
+                        <!-- BASE FARE -->
+                        <div class="fare-row">
+                          <span>Base Fare</span>
+                          <strong>
+                            ₹ {{ bookingdata.PriceArray.odbus_charges_ownerFare }}
+                          </strong>
+                        </div>
 
 
-                      <!-- COUPON DISCOUNT -->
-
-                      <div class="fare-row discount-row" *ngIf="couponData.discount > 0">
-
-                        <span>
-                          Coupon Discount
-                        </span>
-
-                        <strong>
-                          - ₹ {{ couponData.discount }}
-                        </strong>
-
-                      </div>
+                        <!-- CUSTOMER GST -->
+                        <div class="fare-row">
+                          <span>GST</span>
+                          <strong class="gst-price">
+                            + ₹ {{ bookingdata.PriceArray.customerGst }}
+                          </strong>
+                        </div>
 
 
-                      <div class="fare-divider"></div>
+                        <!-- COUPON DISCOUNT -->
+                        <div class="fare-row discount-row" *ngIf="couponData.discount > 0">
 
+                          <span>Coupon Discount</span>
 
-                      <!-- TOTAL -->
+                          <strong>
+                            - ₹ {{ couponData.discount }}
+                          </strong>
 
-                      <div class="fare-total">
-
-                        <span>
-                          Total
-                        </span>
-
-                        <strong>
-                          ₹ {{ couponData.payableAmount }}
-                        </strong>
+                        </div>
 
                       </div>
 

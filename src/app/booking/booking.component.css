@@ -329,6 +329,8 @@ input[type="radio"]:checked {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+  align-items: center;
+  justify-content: center;
 }
 
 .od-logo {
@@ -432,6 +434,8 @@ input[type="radio"]:checked {
   font-size: 25px;
   color: #ffffff;
   margin-top: 10px;
+  position: relative;
+  left: -32px;
 }
 
 .mobile-booking-top .mob-arrow-right i {
@@ -3496,4 +3500,85 @@ Journey Details Card
   to {
     transform: translateY(0);
   }
+}
+
+
+/* Fare Summary Dropdown */
+
+.fare-total-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 14px 0;
+  margin-top: 0;
+  user-select: none;
+}
+
+.fare-total-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fare-total-right i {
+  font-size: 14px;
+  color: #072c6b;
+  transition: transform 0.2s ease;
+}
+
+.fare-breakdown {
+  border-top: 1px dashed #d9dee7;
+  padding-top: 5px;
+  animation: fareSlide 0.2s ease;
+}
+
+@keyframes fareSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Mobile Fare Dropdown */
+
+.mobile-fare-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin: 0;
+  padding: 10px 0;
+  user-select: none;
+}
+
+.mobile-fare-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-fare-right i {
+  font-size: 13px;
+  color: #072c6b;
+}
+
+.mobile-fare-breakdown {
+  border-top: 1px dashed #d9dee7;
+  padding-top: 8px;
+  animation: fareSlide 0.2s ease;
+}
+
+.mobile-fare-breakdown .fare-success {
+  margin-bottom: 10px;
+}
+
+.mobile-fare-breakdown .fare-row {
+  padding: 8px 0;
 }
