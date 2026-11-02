@@ -7,6 +7,7 @@ import {
   PLATFORM_ID,
   Injector,
   AfterContentChecked,
+  HostListener,
 } from '@angular/core';
 import { GlobalConstants } from '../constants/global-constants';
 import { LoginChecker } from '../helpers/loginChecker';
@@ -32,6 +33,16 @@ import { filter } from 'rxjs/operators';
   providers: [DatePipe, NgbActiveModal],
 })
 export class FooterComponent implements OnInit, OnDestroy, AfterContentChecked {
+  @HostListener('window:resize')
+  onWindowResize(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const mobileView = window.innerWidth <= 768;
+
+      if (this.isMobile !== mobileView) {
+        this.isMobile = mobileView;
+      }
+    }
+  }
   url_path = '';
   @Input() session: LoginChecker;
   isMobile: boolean = false; // Default safe value for SSR
@@ -123,24 +134,32 @@ export class FooterComponent implements OnInit, OnDestroy, AfterContentChecked {
     this.updateCommonData();
 
     // Determine isMobile only on browser to avoid server instantiation
+    // if (isPlatformBrowser(this.platformId)) {
+    //   try {
+    //     // Lazy-get DeviceDetectorService only in browser
+    //     const deviceService = this.injector.get(DeviceDetectorService);
+    //     if (deviceService && typeof deviceService.isMobile === 'function') {
+    //       this.isMobile = !!deviceService.isMobile();
+    //     } else {
+    //       // fallback: user-agent check
+    //       this.isMobile = /Mobi|Android/i.test(navigator?.userAgent || '');
+    //     }
+    //   } catch (e) {
+    //     // Fallback if DeviceDetectorService is unavailable
+    //     this.isMobile = /Mobi|Android/i.test(
+    //       (typeof navigator !== 'undefined' && navigator.userAgent) || '',
+    //     );
+    //   }
+    // } else {
+    //   // On server leave isMobile default (false)
+    //   this.isMobile = false;
+    // }
+
+
+    // Detect mobile or desktop based on browser width
     if (isPlatformBrowser(this.platformId)) {
-      try {
-        // Lazy-get DeviceDetectorService only in browser
-        const deviceService = this.injector.get(DeviceDetectorService);
-        if (deviceService && typeof deviceService.isMobile === 'function') {
-          this.isMobile = !!deviceService.isMobile();
-        } else {
-          // fallback: user-agent check
-          this.isMobile = /Mobi|Android/i.test(navigator?.userAgent || '');
-        }
-      } catch (e) {
-        // Fallback if DeviceDetectorService is unavailable
-        this.isMobile = /Mobi|Android/i.test(
-          (typeof navigator !== 'undefined' && navigator.userAgent) || '',
-        );
-      }
+      this.isMobile = window.innerWidth <= 768;
     } else {
-      // On server leave isMobile default (false)
       this.isMobile = false;
     }
 
