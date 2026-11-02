@@ -408,9 +408,21 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  open(index: number): void {
-    // open lightbox
-    this._lightbox.open(this._albums, index);
+  openPhoto(imageUrl: string): void {
+
+    if (!this._albums || this._albums.length === 0) {
+      console.warn('No images available in lightbox');
+      return;
+    }
+
+    const index = this._albums.findIndex(
+      (img: any) => img.src === imageUrl
+    );
+
+    if (index !== -1) {
+      this._lightbox.open(this._albums, index);
+    }
+
   }
 
   close(): void {

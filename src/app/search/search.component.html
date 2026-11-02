@@ -1212,32 +1212,31 @@
                                                 <div *ngFor="let sf of busDetailsCache[bus.busId].gallery">
 
                                                     <div class="flex-fill de-angu-bus" *ngIf="sf.bus_image_1">
-
-                                                        <img [src]="sf.bus_image_1" (click)="open(0)" />
-
+                                                        <img [src]="sf.bus_image_1"
+                                                            (click)="openPhoto(sf.bus_image_1)" />
                                                     </div>
 
                                                     <div class="flex-fill de-angu-bus" *ngIf="sf.bus_image_2">
 
-                                                        <img [src]="sf.bus_image_2" (click)="open(1)" />
+                                                        <img [src]="sf.bus_image_2" (click)="openPhoto(sf.bus_image_2)" />
 
                                                     </div>
 
                                                     <div class="flex-fill de-angu-bus" *ngIf="sf.bus_image_3">
 
-                                                        <img [src]="sf.bus_image_3" (click)="open(2)" />
+                                                        <img [src]="sf.bus_image_3" (click)="openPhoto(sf.bus_image_3)" />
 
                                                     </div>
 
                                                     <div class="flex-fill de-angu-bus" *ngIf="sf.bus_image_4">
 
-                                                        <img [src]="sf.bus_image_4" (click)="open(3)" />
+                                                        <img [src]="sf.bus_image_4" (click)="openPhoto(sf.bus_image_4)" />
 
                                                     </div>
 
                                                     <div class="flex-fill de-angu-bus" *ngIf="sf.bus_image_5">
 
-                                                        <img [src]="sf.bus_image_5" (click)="open(4)" />
+                                                        <img [src]="sf.bus_image_5" (click)="openPhoto(sf.bus_image_5)" />
 
                                                     </div>
 
