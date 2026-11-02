@@ -161,6 +161,7 @@ a:hover {
   align-items: center;
   /* Keep the hero image in this section's stacking context. */
   isolation: isolate;
+  z-index: 20;
 }
 
 /* Hero background through HTML img */
