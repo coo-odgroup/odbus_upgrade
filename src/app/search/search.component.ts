@@ -2100,29 +2100,78 @@ export class SearchComponent implements OnInit {
 
   //bus facilities for mobile
   loadMobBusDetails(busId: any, type: string, template: any) {
-    // Check cache
+
+    // Set active bus ID for mobile modal
+    this.busId = busId;
+
+    // Check cache first
     if (this.busDetailsCache[busId]) {
+
+      if (type === 'photos') {
+        this.prepareMobilePhotoAlbum(busId);
+      }
+
       this.openMobileDetails(type, template);
       return;
     }
+
     // API call
     this.spinner.show();
+
     this.listingService.getBusFacilities(busId).subscribe(
       (res: any) => {
+
         this.spinner.hide();
 
         if (res.status === '1') {
-          // Save response in cache
+
           this.busDetailsCache[busId] = res.data;
-          // Open selected modal
+
+          if (type === 'photos') {
+            this.prepareMobilePhotoAlbum(busId);
+          }
+
           this.openMobileDetails(type, template);
         }
       },
       (error: any) => {
         this.spinner.hide();
         console.log('API Error:', error);
-      },
+      }
     );
+  }
+
+  prepareMobilePhotoAlbum(busId: any): void {
+
+    this._albums = [];
+
+    const gallery = this.busDetailsCache[busId]?.gallery || [];
+
+    gallery.forEach((photo: any) => {
+
+      const imageFields = [
+        'bus_image_1',
+        'bus_image_2',
+        'bus_image_3',
+        'bus_image_4',
+        'bus_image_5'
+      ];
+
+      imageFields.forEach((field: string) => {
+
+        const imageUrl = photo[field];
+
+        if (imageUrl) {
+          this._albums.push({
+            src: imageUrl,
+            caption: '',
+            thumb: imageUrl
+          });
+        }
+
+      });
+
+    });
   }
 
   openMobileDetails(type: string, template: any) {

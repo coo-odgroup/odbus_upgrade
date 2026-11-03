@@ -3504,6 +3504,8 @@ input[type=radio] {
 .mobile-amenities-middle .mob-photo {
   width: 100%;
   height: 100px;
+  cursor: pointer;
+  object-fit: cover;
 }
 
 .new-deal-mob {
@@ -4281,4 +4283,18 @@ input[type=radio] {
   .search-result-right {
     display: none;
   }
+}
+
+
+
+::ng-deep a.lb-close {
+position: absolute;
+    right: -10px;
+    color: #ffffff;
+    border-radius: 50%;
+    line-height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 20;
+    top: 20px;
 }
