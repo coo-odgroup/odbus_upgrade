@@ -58,6 +58,9 @@ export function app(): express.Express {
 
       const routes = response.data.data.routes;
       const operators = response.data.data.operators;
+      const blogCategories = response.data.data.blogCategories;
+      const authors = response.data.data.authors;
+      const blogs = response.data.data.blogs;
 
       let xml = `<?xml version="1.0" encoding="UTF-8"?>`;
       xml += `
@@ -218,6 +221,45 @@ export function app(): express.Express {
         `;
       });
 
+      // Dynamic Blogs
+      blogs.forEach((blogs: any) => {
+        const blogUrl = URL + `blog/` + `${blogs.slug_url}`;
+
+        xml += `
+          <url>
+            <loc>${blogUrl}</loc>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+          </url>
+        `;
+      });
+
+      // Dynamic Categories
+      blogCategories.forEach((blogCategories: any) => {
+        const categoryUrl = URL + `blog/category/` + `${blogCategories.slug}`;
+
+        xml += `
+          <url>
+            <loc>${categoryUrl}</loc>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+          </url>
+        `;
+      });
+
+      // Dynamic Authors
+      authors.forEach((authors: any) => {
+        const authorUrl = URL + `blog/author/` + `${authors.author_slug}`;
+
+        xml += `
+          <url>
+            <loc>${authorUrl}</loc>
+            <changefreq>daily</changefreq>
+            <priority>0.8</priority>
+          </url>
+        `;
+      });
+
       xml += `</urlset>`;
 
       res.setHeader('Content-Type', 'application/xml');
@@ -242,7 +284,6 @@ export function app(): express.Express {
 
     next();
   });
- 
 
   function setPageCachePolicy(
     req: express.Request,
@@ -369,7 +410,10 @@ export function app(): express.Express {
       immutable: true,
       index: false,
       setHeaders: (res: express.Response, filePath: string) => {
-        const hashed = /\.[0-9a-f]{16,}\.(js|css|woff2?|ttf|eot|svg|png|jpe?g|webp|avif|gif|ico)$/i.test(filePath);
+        const hashed =
+          /\.[0-9a-f]{16,}\.(js|css|woff2?|ttf|eot|svg|png|jpe?g|webp|avif|gif|ico)$/i.test(
+            filePath,
+          );
         if (!hashed) {
           const isAsset = /[\\/]assets[\\/]/.test(filePath);
           res.setHeader(
@@ -386,11 +430,32 @@ export function app(): express.Express {
     },
   );
 
+    server.get('/c1', (req, res) => {
+    return res.redirect(
+      302,
+      'https://www.odbus.in/?utm_source=sms&utm_medium=crm&utm_campaign=cart_abandon_auto&utm_content=sms_1'
+    );
+  });
+
+  server.get('/c2', (req, res) => {
+    return res.redirect(
+      302,
+      'https://www.odbus.in/?utm_source=sms&utm_medium=crm&utm_campaign=cart_abandon_auto&utm_content=sms_2'
+    );
+  });
+
+  server.get('/cw', (req, res) => {
+    return res.redirect(
+      302,
+      'https://www.odbus.in/?utm_source=whatsapp&utm_medium=crm&utm_campaign=cart_abandon_auto&utm_content=wa_1'
+    );
+});
+
   // All regular routes use the Universal engine
   server.get('*', (req: express.Request, res: express.Response) => {
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate'); // default, overridden below
 
-     setPageCachePolicy(req, res);
+    setPageCachePolicy(req, res);
 
     // Optional security headers
     res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -441,8 +506,8 @@ export function app(): express.Express {
 
 function run(): void {
   // const port = process.env.PORT || 4000; // TEST
-  // const port = process.env.PORT || 4445; // UPGRADE
-  const port = process.env.PORT || 4444; // LIVE
+  const port = process.env.PORT || 4445; // UPGRADE
+  // const port = process.env.PORT || 4444; // LIVE
 
   // Start up the Node server
   const server = app();
