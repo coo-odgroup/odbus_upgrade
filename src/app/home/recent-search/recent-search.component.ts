@@ -24,6 +24,8 @@ export class RecentSearchComponent implements OnInit {
 
     const storedSearches = localStorage.getItem('recentSearches');
 
+    console.log('Stored Searches:', storedSearches);
+
     if (storedSearches) {
       this.recentSearches = JSON.parse(storedSearches);
     }
@@ -52,14 +54,51 @@ export class RecentSearchComponent implements OnInit {
     return date;
   }
 
-  openRecent(item:any) {
+  // openRecent(item: any) {
+  //   this.router.navigate(
+  //     ['/routes', `${item.source}-${item.destination}-bus-services`],
+  //     {
+  //       queryParams: {
+  //         date: this.getValidDate(item.date),
+  //       },
+  //     },
+  //   );
+  // }
+
+  openRecent(item: any): void {
+    const validDate = this.getValidDate(item.date);
+
+    // If date is expired, update only the matching history record
+    if (validDate !== item.date) {
+      let history = JSON.parse(localStorage.getItem('recentSearches') || '[]');
+
+      const existingIndex = history.findIndex(
+        (record: any) =>
+          record.source === item.source &&
+          record.destination === item.destination,
+      );
+
+      if (existingIndex !== -1) {
+        history[existingIndex] = {
+          ...history[existingIndex],
+          date: validDate,
+          url: `routes/${item.source}-${item.destination}-bus-services?date=${validDate}`,
+        };
+
+        localStorage.setItem('recentSearches', JSON.stringify(history));
+
+        this.recentSearches = history;
+      }
+    }
+
+    // Navigate using the valid date
     this.router.navigate(
-        ['/routes', `${item.source}-${item.destination}-bus-services`],
-        {
-            queryParams: {
-                date: this.getValidDate(item.date)
-            }
-        }
+      ['/routes', `${item.source}-${item.destination}-bus-services`],
+      {
+        queryParams: {
+          date: validDate,
+        },
+      },
     );
-}
+  }
 }
