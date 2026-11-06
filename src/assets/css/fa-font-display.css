@@ -1,0 +1,12 @@
+/* PAGESPEED: Font Awesome 4.7 ships without font-display, so icons/text stay invisible until the
+   font downloads. This repeats the original @font-face (same files, same family) and only adds
+   font-display: swap. It must stay AFTER font-awesome.min.css in angular.json "styles". */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../../../node_modules/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'),
+       url('../../../node_modules/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'),
+       url('../../../node_modules/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

@@ -10,7 +10,7 @@
                             <li><img class="icn-wh" src="assets/img/Icon-metro-location-white.svg" alt="source">{{
                                 sourceData.name }}
                             </li>
-                            <li><img src="assets/img/long-arw-white.svg" alt="arraow"></li>
+                            <li><img src="assets/img/long-arw-white.svg" alt="arraow" width="31" height="12"></li>
                             <li><img class="icn-wh" src="assets/img/Icon-metro-location-white.svg" alt="destination">{{
                                 destinationData.name }}</li>
                             <li *ngIf="prevDate!=''" (click)="searchPrev();"> <i class="fa fa-angle-left"></i> </li>
@@ -525,7 +525,7 @@
                                             <a class="srt-by-opert cursor" (click)="sort('busName')">Bus Name
                                                 <img class="pllygn-up" src="assets/img/Polygon-icon-2.png"
                                                     *ngIf="columnName=='busName' && arrowStatus=='up'" alt="up">
-                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png"
+                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png" width="12" height="7"
                                                     *ngIf="columnName=='busName' && arrowStatus=='down'" alt="down">
                                             </a>
                                         </li>
@@ -534,7 +534,7 @@
                                             <a class="srt-by-dept cursor" (click)="sort('departureTime')">Departure
                                                 <img class="pllygn-up" src="assets/img/Polygon-icon-2.png"
                                                     *ngIf="columnName=='departureTime' && arrowStatus=='up'" alt="up">
-                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png"
+                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png" width="12" height="7"
                                                     *ngIf="columnName=='departureTime' && arrowStatus=='down'"
                                                     alt="down">
 
@@ -546,7 +546,7 @@
                                                 <img class="pllygn-up" src="assets/img/Polygon-icon-2.png"
                                                     *ngIf="columnName=='totalJourneyTime' && arrowStatus=='up'"
                                                     alt="up">
-                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png"
+                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png" width="12" height="7"
                                                     *ngIf="columnName=='totalJourneyTime' && arrowStatus=='down'"
                                                     alt="down">
                                             </a>
@@ -556,7 +556,7 @@
                                             <a class="srt-by-arival cursor" (click)="sort('arrivalTime')">Arrival
                                                 <img class="pllygn-up" src="assets/img/Polygon-icon-2.png"
                                                     *ngIf="columnName=='arrivalTime' && arrowStatus=='up'" alt="up">
-                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png"
+                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png" width="12" height="7"
                                                     *ngIf="columnName=='arrivalTime' && arrowStatus=='down'" alt="down">
                                             </a>
                                         </li>
@@ -565,7 +565,7 @@
                                             <a class="srt-by-seats cursor" (click)="sort('totalSeats')">Seats
                                                 <img class="pllygn-up" src="assets/img/Polygon-icon-2.png"
                                                     *ngIf="columnName=='totalSeats' && arrowStatus=='up'" alt="up">
-                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png"
+                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png" width="12" height="7"
                                                     *ngIf="columnName=='totalSeats' && arrowStatus=='down'" alt="down">
                                             </a>
                                         </li>
@@ -575,7 +575,7 @@
                                                 <img class="pllygn-up" src="assets/img/Polygon-icon-2.png"
                                                     *ngIf="columnName=='startingFromPrice' && arrowStatus=='up'"
                                                     alt="up">
-                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png"
+                                                <img class="pllygn-dn" src="assets/img/Polygon-icon.png" width="12" height="7"
                                                     *ngIf="columnName=='startingFromPrice' && arrowStatus=='down'"
                                                     alt="down">
                                             </a>
@@ -650,7 +650,7 @@
                                                 <div class="col-md-12 pt-3 pb-1 bck-white bck-white-one"
                                                     *ngIf="bus.origin=='ODBUS'">
                                                     <div class="icon-assured">
-                                                        <img src="assets/img/icon-assured.png" alt="icon-assured">
+                                                        <img src="assets/img/icon-assured.png" alt="icon-assured" width="109" height="32">
                                                     </div>
                                                 </div>
                                             </div>
@@ -658,7 +658,7 @@
                                                 <div class="col-md-12 bck-white bck-white-two">
                                                     <ul class="bs-srch-dt-dtl">
                                                         <li class="p-2 flex-fill tx-left">
-                                                            <h4>{{ bus.busName }}<br>
+                                                            <h4 aria-level="3">{{ bus.busName }}<br>
                                                                 <span *ngIf="bus.busNumber!=''">{{ bus.busNumber
                                                                     }}</span>
                                                             </h4>
@@ -1751,8 +1751,8 @@
             <div class="row">
 
                 <div class="col-1 pr-0 pl-2 mob-arrow-left">
-                    <a routerLink="/">
-                        <i class="fa fa-arrow-left"></i>
+                    <a routerLink="/" aria-label="Back to home">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
                     </a>
                 </div>
 
@@ -1837,7 +1837,7 @@
 
                             </div>
                             <div class="col-4 mob-bus-rating" *ngIf="bus.origin=='ODBUS'">
-                                <img src="../../assets/img/mob-img/icon-assured.webp" alt="assured bus icon" />
+                                <img src="../../assets/img/mob-img/icon-assured.webp" alt="assured bus icon" width="85" height="25" />
 
                             </div>
 
@@ -1975,12 +1975,12 @@
                                         <div class="home"
                                             [ngStyle]="{'background-color': acFilter ? '#072c6b' : '#fff'}">
                                             <i *ngIf="!acFilter">
-                                                <img src="../../assets/img/mob-img/ac.png" [value]="busType.id"
+                                                <img src="../../assets/img/mob-img/ac.png" alt="AC filter" width="32" height="32" [value]="busType.id"
                                                     (click)="FilterMobile($event,'bus_type','AC');" />
                                             </i>
 
                                             <i *ngIf="acFilter">
-                                                <img src="../../assets/img/mob-img/ac-white.webp" [value]="busType.id"
+                                                <img src="../../assets/img/mob-img/ac-white.webp" alt="AC filter" width="32" height="32" [value]="busType.id"
                                                     (click)="FilterMobile($event,'bus_type','AC');" />
                                             </i>
                                             <p class="mb-0 small" [ngStyle]="{'color': acFilter ? '#fff' : '#000'}">
@@ -1998,11 +1998,11 @@
                                         <div class="home"
                                             [ngStyle]="{'background-color': nonacFilter ? '#072c6b' : '#fff'}">
                                             <i *ngIf="!nonacFilter">
-                                                <img src="../../assets/img/mob-img/sun.png" [value]="busType.id"
+                                                <img src="../../assets/img/mob-img/sun.png" alt="Non-AC filter" width="32" height="32" [value]="busType.id"
                                                     (click)="FilterMobile($event,'bus_type','NONAC');" />
                                             </i>
                                             <i *ngIf="nonacFilter">
-                                                <img src="../../assets/img/mob-img/sun-white.webp" [value]="busType.id"
+                                                <img src="../../assets/img/mob-img/sun-white.webp" alt="Non-AC filter" width="32" height="32" [value]="busType.id"
                                                     (click)="FilterMobile($event,'bus_type','NONAC');" />
                                             </i>
                                             <p class="mb-0 small" [ngStyle]="{'color': nonacFilter ? '#fff' : '#000'}">
@@ -2020,11 +2020,11 @@
                                         <div class="home"
                                             [ngStyle]="{'background-color': seaterFilter ? '#072c6b' : '#fff'}">
                                             <i *ngIf="!seaterFilter">
-                                                <img src="../../assets/img/mob-img/safety-seat.png"
+                                                <img src="../../assets/img/mob-img/safety-seat.png" alt="Seater filter" width="32" height="32"
                                                     [value]="seatType.id" (click)="FilterMobile($event,'seat_type');" />
                                             </i>
                                             <i *ngIf="seaterFilter">
-                                                <img src="../../assets/img/mob-img/safety-seat-white.webp"
+                                                <img src="../../assets/img/mob-img/safety-seat-white.webp" alt="Seater filter" width="32" height="32"
                                                     [value]="seatType.id" (click)="FilterMobile($event,'seat_type');" />
                                             </i>
                                             <p class="mb-0 small" [ngStyle]="{'color': seaterFilter ? '#fff' : '#000'}">
@@ -2042,11 +2042,11 @@
                                         <div class="home"
                                             [ngStyle]="{'background-color': sleeperFilter ? '#072c6b' : '#fff'}">
                                             <i *ngIf="!sleeperFilter">
-                                                <img src="../../assets/img/mob-img/bed.png" [value]="seatType.id"
+                                                <img src="../../assets/img/mob-img/bed.png" alt="Sleeper filter" width="32" height="32" [value]="seatType.id"
                                                     (click)="FilterMobile($event,'seat_type');" />
                                             </i>
                                             <i *ngIf="sleeperFilter">
-                                                <img src="../../assets/img/mob-img/bed-white.webp" [value]="seatType.id"
+                                                <img src="../../assets/img/mob-img/bed-white.webp" alt="Sleeper filter" width="32" height="32" [value]="seatType.id"
                                                     (click)="FilterMobile($event,'seat_type');" />
                                             </i>
                                             <p class="mb-0 small"

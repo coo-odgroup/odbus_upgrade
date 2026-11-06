@@ -82,8 +82,6 @@ LEFT CONTENT
 .visual-content {
     position: relative;
 
-    z-index: 5;
-
     width: 100%;
     height: 100%;
 
@@ -154,11 +152,6 @@ TOP CONTENT
 }
 
 .yellow-line {
-    width: 68px;
-    height: 5px;
-
-    margin:
-        24px 0 18px;
 
     border-radius: 20px;
 
@@ -173,10 +166,6 @@ TOP CONTENT
     margin: 0;
 
     color: #16366e;
-
-    font-size: 17px;
-
-    line-height: 1.65;
 
     font-weight: 500;
 
@@ -230,9 +219,6 @@ FEATURES
 .visual-features {
     display: flex;
     align-items: center;
-    gap: 25px;
-    max-width: 650px;
-    padding: 14px 0;
 }
 
 .visual-feature {
@@ -240,15 +226,11 @@ FEATURES
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    min-width: 100px;
     text-align: center;
     color: #082e70;
 }
 
 .feature-icon {
-    width: 58px;
-    height: 58px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -259,11 +241,6 @@ FEATURES
     box-shadow: 0 8px 22px rgba(0, 65, 130, 0.10);
     backdrop-filter: blur(8px);
 
-}
-
-.feature-icon svg {
-    width: 29px;
-    height: 29px;
 }
 
 .trusted-icon {
@@ -277,7 +254,6 @@ FEATURES
 .fare-icon {
     background: rgba(255, 239, 193, 0.92);
     color: #e2a900;
-    font-size: 27px;
     font-weight: 800;
 }
 
@@ -287,14 +263,12 @@ FEATURES
 }
 
 .visual-feature span {
-    font-size: 13px;
     line-height: 1.25;
     font-weight: 700;
 }
 
 .feature-divider {
     width: 1px;
-    height: 63px;
     background: rgba(8, 46, 112, 0.18);
 }
 
@@ -304,17 +278,13 @@ VISUAL BOTTOM
 
 .visual-bottom {
     display: flex;
-    gap: 17px;
     color: #ffffff;
-    font-size: 11px;
     font-weight: 800;
-    letter-spacing: 3px;
     text-shadow: 0 2px 7px rgba(0, 0, 0, 0.35);
 }
 
 .visual-bottom span::after {
     content: "•";
-    margin-left: 17px;
     color: #f2c500;
 }
 
@@ -358,7 +328,6 @@ LOGIN CARD
 ========================================================= */
 
 .login-card {
-    position: relative;
     z-index: 5;
     width: 100%;
     max-width: 660px;
@@ -573,47 +542,6 @@ AUTH SWITCH
 
 }
 
-/* =========================================================
-PHONE / EMAIL SWITCH
-========================================================= */
-
-.method-switch {
-    display: flex;
-
-    align-items: center;
-
-    gap: 35px;
-
-    margin:
-        27px 0 18px;
-
-}
-
-.method-switch button {
-    display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    border: none;
-
-    background: transparent;
-
-    padding: 0;
-
-    color: #66758f;
-
-
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-}
-
 .switch-dot {
     width: 19px;
     height: 19px;
@@ -625,10 +553,6 @@ PHONE / EMAIL SWITCH
 
     position: relative;
 
-}
-
-.method-switch button.active {
-    color: #113d84;
 }
 
 .method-switch button.active .switch-dot {
@@ -676,9 +600,6 @@ INPUT
 
     border:
         1px solid #d8e4f3;
-
-    background:
-        #f8fbff;
 
     transition:
         border-color .25s ease,
@@ -849,9 +770,6 @@ PRIMARY BUTTON
 
     overflow: hidden;
 
-    box-shadow:
-        0 13px 25px rgba(18, 91, 190, 0.23);
-
     transition:
         transform .25s ease,
         box-shadow .25s ease;
@@ -921,8 +839,6 @@ BOTTOM AUTH
     justify-content: center;
 
     gap: 6px;
-
-    margin-top: 23px;
 
     color: #596980;
 
@@ -1053,8 +969,6 @@ OTP SCREEN
 .otp-header {
     text-align: center;
 
-    margin-top: 28px;
-
 }
 
 .otp-icon {
@@ -1130,15 +1044,9 @@ OTP BOXES
 
     justify-content: center;
 
-    gap: 12px;
-
-    margin-top: 28px;
-
 }
 
 .otp-boxes input {
-    width: 54px;
-    height: 61px;
 
     text-align: center;
 
@@ -1148,8 +1056,6 @@ OTP BOXES
     border-radius: 13px;
 
     outline: none;
-
-    background: #f8fbff;
 
     color: #143a79;
 
@@ -1299,16 +1205,6 @@ ODBUS LOGIN PAGE - FINAL DESIGN OVERRIDES
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    background: linear-gradient(180deg,
-            rgba(255, 255, 255, .82) 0%,
-            rgba(255, 255, 255, .58) 7%,
-            rgba(255, 255, 255, .24) 18%,
-            rgba(255, 255, 255, 0) 38%,
-            rgba(255, 255, 255, 0) 100%);
-}
-
-.visual-content {
-    z-index: 5;
 }
 
 .visual-copy p {
@@ -1413,16 +1309,6 @@ ODBUS LOGIN PAGE - FINAL DESIGN OVERRIDES
 
 .method-switch button.active {
     color: #103d82;
-}
-
-/* Position underline under the selected method /
-.method-switch button(2).active~ {
-transform: translateX(124px);
-}
-
-/* Signup has three clean fields */
-.signup-input {
-    margin-top: 11px;
 }
 
 .signup-input {
@@ -2347,13 +2233,9 @@ MOBILE ONLY
     .mobile-login-page {
         display: flex;
         flex-direction: column;
-
-        width: 100%;
         min-height: 100svh;
 
         padding: 14px 10px 22px;
-
-        box-sizing: border-box;
 
         background:
             radial-gradient(circle at 100% 0%,
@@ -2365,7 +2247,6 @@ MOBILE ONLY
                 #ffffff 100%);
 
         align-items: center;
-        justify-content: flex-start;
 
         overflow-x: hidden;
     }
@@ -2375,22 +2256,12 @@ MOBILE ONLY
 ===================================================== */
 
     .mobile-login-card {
-        width: 100%;
-        max-width: 460px;
 
         box-sizing: border-box;
-
-        padding: 27px 18px 20px;
-
-        border-radius: 24px;
 
         background: rgba(255, 255, 255, .97);
 
         border: 1px solid rgb(20, 120, 233);
-
-        box-shadow:
-            0 18px 50px rgba(21, 67, 118, .13),
-            0 3px 12px rgba(21, 67, 118, .05);
 
         animation:
             mobileCardIn .55s cubic-bezier(.22, 1, .36, 1) both;
@@ -2425,11 +2296,8 @@ MOBILE ONLY
         color: #102d69;
 
         font-size: 29px;
-        line-height: 1.05;
 
         font-weight: 800;
-
-        letter-spacing: -1.1px;
         font-family: "Open Sans", sans-serif;
     }
 
@@ -2445,10 +2313,6 @@ MOBILE ONLY
         margin: 12px 0 0;
 
         color: #697991;
-
-        font-size: 12px;
-
-        line-height: 1.6;
     }
 
     /* =====================================================
@@ -2461,10 +2325,6 @@ MOBILE ONLY
         display: flex;
 
         width: 100%;
-
-        margin-top: 25px;
-
-        padding-bottom: 11px;
 
         border-bottom: 1px solid #dce6f2;
     }
@@ -2481,10 +2341,6 @@ MOBILE ONLY
         background: transparent;
 
         color: #78879e;
-
-    
-
-        font-size: 13px;
 
         font-weight: 700;
 
@@ -2503,10 +2359,8 @@ MOBILE ONLY
         position: absolute;
 
         left: 0;
-        bottom: -12px;
 
         width: 64px;
-        height: 3px;
 
         border-radius: 10px;
 
@@ -2527,9 +2381,6 @@ MOBILE ONLY
         align-items: center;
 
         width: 100%;
-        height: 54px;
-
-        margin-top: 14px;
 
         padding: 0 15px;
 
@@ -2537,8 +2388,6 @@ MOBILE ONLY
 
         border:
             1px solid #d7e3f2;
-
-        border-radius: 13px;
 
         background: #f8fbff;
 
@@ -2630,9 +2479,6 @@ MOBILE ONLY
         position: relative;
 
         width: 100%;
-        height: 54px;
-
-        margin-top: 17px;
 
         display: flex;
 
@@ -2642,8 +2488,6 @@ MOBILE ONLY
         gap: 13px;
 
         border: none;
-
-        border-radius: 13px;
 
         background:
             linear-gradient(135deg,
@@ -2661,9 +2505,6 @@ MOBILE ONLY
         cursor: pointer;
 
         overflow: hidden;
-
-        box-shadow:
-            0 12px 25px rgba(18, 91, 190, .22);
 
         transition:
             transform .2s ease,
@@ -2722,11 +2563,7 @@ MOBILE ONLY
 
         gap: 5px;
 
-        margin-top: 20px;
-
         color: #63728b;
-
-        font-size: 12px;
     }
 
     .mobile-auth-bottom button {
@@ -3239,7 +3076,6 @@ MOBILE
 
     .mobile-login-version {
         display: block;
-        width: 100%;
     }
 
 }

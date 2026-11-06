@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import {  BehaviorSubject, Observable, ReplaySubject, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize, shareReplay } from 'rxjs/operators';
 import{ GlobalConstants } from '../constants/global-constants';
 
 @Injectable({
@@ -47,11 +47,21 @@ export class LocationdataService {
 
   
 
+  // Share one in-flight request per search value so parallel callers don't hit the API twice
+  private locationInflight = new Map<string, Observable<any>>();
+
   all(val :any=''): Observable<any> {
-    return this.httpClient.get<any>(this.apiURL + '/getLocation?locationName=' + val,  this.httpOptions)
+    const key = String(val);
+    const existing = this.locationInflight.get(key);
+    if (existing) { return existing; }
+    const req$ = this.httpClient.get<any>(this.apiURL + '/getLocation?locationName=' + val,  this.httpOptions)
     .pipe(
-      catchError(this.errorHandler)
-    )
+      catchError(this.errorHandler),
+      finalize(() => this.locationInflight.delete(key)),
+      shareReplay({ bufferSize: 1, refCount: true })
+    );
+    this.locationInflight.set(key, req$);
+    return req$;
   }
 
   errorHandler(error:HttpErrorResponse) {

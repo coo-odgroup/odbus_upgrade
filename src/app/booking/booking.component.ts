@@ -24,7 +24,8 @@ import { PlatformLocation } from '@angular/common';
 import { EquirectangularReflectionMapping } from 'three';
 import { ManagebookingService } from '../services/managebooking.service';
 import { PagesService } from '../services/pages.service';
-import { load } from '@cashfreepayments/cashfree-js';
+// PAGESPEED: Cashfree is imported on demand (ngOnInit prefetch + cashfressRedirect). A top-level import makes the
+// package inject cashfree.js as soon as this chunk loads, i.e. on the search page via idle preloading.
 import { MatStepper } from '@angular/material/stepper';
 
 declare let Razorpay: any;
@@ -859,6 +860,9 @@ export class BookingComponent implements OnInit {
   notice: any = '';
 
   ngOnInit() {
+    // Start loading the Cashfree SDK now (booking page only) so the pay button is instant.
+    import('@cashfreepayments/cashfree-js').catch(() => {});
+
     const paymentFlag = localStorage.getItem('payment_in_progress');
 
     if (paymentFlag) {
@@ -1092,6 +1096,7 @@ export class BookingComponent implements OnInit {
   // }
 
   async cashfressRedirect() {
+    const { load } = await import('@cashfreepayments/cashfree-js');
     const cashfree = await load({
       mode: GlobalConstants.PAYMENT_MODE,
     });

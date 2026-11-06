@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders,HttpErrorResponse  } from '@angular/common/http';
    
 import {  BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize, shareReplay } from 'rxjs/operators';
 
 
 import{ GlobalConstants } from '../constants/global-constants';
@@ -56,11 +56,21 @@ export class CommonService {
     )
   }
 
+  // PAGESPEED: several components may ask for PopularInfo at the same moment; share one request.
+  private popularInfoInflight: { [key: string]: Observable<any> } = {};
+
   PopularInfo(post): Observable<any> {
-    return this.httpClient.post<any>(this.apiURL + '/PopularInfo', JSON.stringify(post), this.httpOptions)
-    .pipe(
-      catchError(this.errorHandler)
-    )
+    const key = JSON.stringify(post);
+    if (!this.popularInfoInflight[key]) {
+      this.popularInfoInflight[key] = this.httpClient
+        .post<any>(this.apiURL + '/PopularInfo', JSON.stringify(post), this.httpOptions)
+        .pipe(
+          catchError(this.errorHandler),
+          finalize(() => { delete this.popularInfoInflight[key]; }),
+          shareReplay({ bufferSize: 1, refCount: true })
+        );
+    }
+    return this.popularInfoInflight[key];
   }
 
   getPathUrls(): Observable<any> {

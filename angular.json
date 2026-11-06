@@ -39,6 +39,7 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/font-awesome/css/font-awesome.min.css",
+              "src/assets/css/fa-font-display.css",
               "./node_modules/ngx-lightbox/lightbox.css"
             ],
             "scripts": [],

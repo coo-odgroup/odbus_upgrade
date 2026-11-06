@@ -1583,7 +1583,8 @@ ngb-rating.d-inline-flex {
   color: #323232;
   padding-top: 12px;
   padding-bottom: 2px;
-  height: 32px;
+  height: auto;
+  width: 18px !important;
 
 }
 
@@ -1835,11 +1836,7 @@ button.mob-close {
 
 .modify-search-modal .modify-swap-btn {
   position: absolute;
-
-  /*
-      Between From and To fields
-    */
-  top: 67px;
+  top: 70px;
   right: 3px;
 
   width: 36px;
@@ -4081,7 +4078,7 @@ input[type=radio] {
 
 .filter-sidebar .filter-heading-subtitle {
   margin: 5px 0 0;
-  color: #778399;
+  color: #5b6678;
   font-size: 12px;
 }
 
@@ -4286,7 +4283,7 @@ input[type=radio] {
 }
 
 
-
+/* For mobile verion aminity view bus photo */
 ::ng-deep a.lb-close {
 position: absolute;
     right: -10px;

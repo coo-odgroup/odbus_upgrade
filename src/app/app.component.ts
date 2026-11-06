@@ -204,6 +204,8 @@ export class AppComponent implements AfterViewInit {
       tap((resp: any) => {
         const data = resp && resp.data ? resp.data : resp;
         this.setPopularInfoData(data);
+        // let components that started earlier (search boxes) pick the data up
+        this.commonService.setPopularInfo(data);
 
         if (isPlatformBrowser(this.platformId)) {
           localStorage.setItem('PopularInfo', JSON.stringify(data));

@@ -36,6 +36,19 @@ export class AppInitializerService {
   ) {}
 
   load(): Promise<boolean> {
+    // PAGESPEED: bus search pages (/routes/...) only need the token to start. PopularInfo is fetched by
+    // AppComponent right after start and the search boxes update when it arrives, so the whole app is not
+    // held back for it. Every other page keeps the original behaviour (the sitemap, home etc. read it early).
+    if (isPlatformBrowser(this.platformId) && window.location.pathname.startsWith('/routes/')) {
+      return this.getAuthToken()
+        .then(() => this.useStoredPopularInfo())
+        .then(() => true)
+        .catch((err) => {
+          console.error('AppInitializer: error during initialization', err);
+          return true; // never block bootstrap
+        });
+    }
+
     return this.getAuthToken()
       .then(() => this.fetchPopularInfo())
       .then(() => this.preloadHomeData())
@@ -92,6 +105,17 @@ export class AppInitializerService {
         },
       );
     });
+  }
+
+  // Returning visitors: hand over the saved copy immediately (no network wait).
+  private useStoredPopularInfo(): Promise<boolean> {
+    const stored = localStorage.getItem('PopularInfo');
+    if (stored) {
+      try {
+        this.commonService.setPopularInfo(JSON.parse(stored));
+      } catch (e) {}
+    }
+    return Promise.resolve(true);
   }
 
   // ---------------- POPULAR INFO ----------------

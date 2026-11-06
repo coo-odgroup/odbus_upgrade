@@ -1,266 +1,99 @@
-<ng-container *ngIf="!isMobile">
-  <section class="opertbg top-routs">
-    <span class="line-span">
-      <div class="container">
-        <h1>All Routes</h1>
-      </div>
-    </span>
-    <div class="textimonials-result1">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="main-tnc">
-              <div class="row">
-                <div class="col-md-8"></div>
-                <div class="form-group col-md-4" align="right">
-                  <input
-                    class="form-control"
-                    type="search"
-                    [(ngModel)]="searchText"
-                    (ngModelChange)="searchRoutes()"
-                    placeholder="Search Route"
-                  />
-                </div>
-              </div>
-
-              <ul
-                *ngIf="
-                  (all_routes | filter: searchText).length > 0;
-                  else noResults
-                "
-              >
-                <input
-                  type="hidden"
-                  [(ngModel)]="dtconfig.minDate"
-                  name="todayDate"
-                  id="todayDate"
-                  ngbDatepicker
-                  (click)="d.toggle()"
-                  #d="ngbDatepicker"
-                />
-
-                <li *ngFor="let p of all_routes">
-                  <div class="route-card">
-                    <a
-                      class="route-link"
-                      (click)="popularSearch(p.source_slug, p.destination_slug)"
-                    >
-                      <div class="route-left">
-                        <img
-                          class="popl-routs-icon1"
-                          src="assets/img/Icon-metro-location.svg"
-                          alt="Source Location"
-                          loading="lazy"
-                        />
-
-                        <div class="route-info">
-                          <span class="route-text">{{ p.source_name }}</span>
-
-                          <img
-                            class="popl-routs-icon2"
-                            src="assets/img/Group 1.png"
-                            alt="Direction"
-                            loading="lazy"
-                          />
-
-                          <span class="route-text">{{
-                            p.destination_name
-                          }}</span>
-                        </div>
-                      </div>
-
-                      <button class="book-btn">Book Now</button>
-                    </a>
-                  </div>
-                </li>
-              </ul>
-
-              <div class="text-center">
-                <button
-                  *ngIf="hasMore && !loading && !searchText"
-                  (click)="allRoutes(searchText)"
-                  class="border-btn bh"
-                >
-                  Load More
-                </button>
-
-                <div *ngIf="loading && page_no > 1" class="text-center">
-                  Loading...
-                </div>
-
-                <div *ngIf="!hasMore && !searchText" class="text-center">
-                  No more records
-                </div>
-              </div>
-            </div>
-
-            <ng-template #noResults>
-              <p *ngIf="searchText" class="text-center">
-                No results found for "{{ searchText }}".
-              </p>
-            </ng-template>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</ng-container>
-
-<ng-container *ngIf="isMobile && !MenuActive">
-  <div class="mobile-mybooking-top">
-    <div class="row">
-      <div class="col-1 pr-0 pl-2 mob-arrow-left">        
-        <a routerLink="javascript:void(0)" (click)="goBack()">
-          <i class="fa fa-arrow-left"></i>
-        </a>
-      </div>
-      <div class="col-7 pl-2 pr-2 mob-list-center">
-        <h1>Popular Routes</h1>
-      </div>
-      <div class="col-4 pl-2 pr-2">
-        <div class="mobile-logo">
-          <img
-            src="assets/img/mob-img/logo.png"
-            alt="Mobile Logo"
-            loading="lazy"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="mobile-search-box">
-    <input
-      type="search"
-      class="mobile-route-search"
-      [(ngModel)]="searchText"
-      placeholder="Search Route"
-      (ngModelChange)="searchRoutes()"
-    />
-  </div>
-
-  <div
-    class="mobile-routes-middle"
-    *ngIf="all_routes.length > 0; else noResults"
-  >
-    <div
-      class="mobile-routes-box"
-      *ngFor="let p of all_routes"
-      (click)="popularSearch(p.source_slug, p.destination_slug)"
-      (keydown.enter)="popularSearch(p.source_slug, p.destination_slug)"
-      (keydown.space)="popularSearch(p.source_slug, p.destination_slug)"
-    >
-      <input
-        type="hidden"
-        [(ngModel)]="dtconfig.minDate"
-        name="todayDate"
-        id="todayDate2"
-        ngbDatepicker
-        (click)="d.toggle()"
-        #d="ngbDatepicker"
+<section class="opertbg top-routs routes-page">
+  <div class="line-span">
+    <div class="container routes-heading">
+      <a
+        href="javascript:void(0)"
+        class="routes-back"
+        aria-label="Go back"
+        (click)="goBack()"
+      >
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </a>
+      <h1>
+        <span class="title-desktop">All Routes</span>
+        <span class="title-mobile">Popular Routes</span>
+      </h1>
+      <img
+        class="routes-logo"
+        src="assets/img/mob-img/logo.png"
+        width="105"
+        height="42"
+        loading="lazy"
+        alt="ODBUS"
       />
-      <div class="mobile-route-row">
-        <div class="mobile-route-left">
-          <img
-            class="mobile-location-icon"
-            src="assets/img/Icon-metro-location.svg"
-            alt=""
-          />
+    </div>
+  </div>
 
-          <div class="mobile-route-name">
-            {{ p.source_name }}
-            <span>→</span>
-            {{ p.destination_name }}
-          </div>
+  <div class="textimonials-result1">
+    <div class="container">
+      <div class="main-tnc">
+        <div class="routes-search">
+          <input
+            class="form-control"
+            type="search"
+            [(ngModel)]="searchText"
+            (ngModelChange)="searchRoutes()"
+            placeholder="Search Route"
+            aria-label="Search Route"
+          />
+        </div>
+
+        <ul class="routes-list" *ngIf="all_routes.length > 0; else noResults">
+          <li *ngFor="let p of all_routes">
+            <a
+              class="route-card"
+              [routerLink]="[
+                '/routes',
+                p.source_slug + '-' + p.destination_slug + '-bus-services'
+              ]"
+            >
+              <img
+                class="route-pin"
+                src="assets/img/Icon-metro-location.svg"
+                width="18"
+                height="18"
+                loading="lazy"
+                alt=""
+              />
+              <span class="route-info">
+                <span class="route-text">{{ p.source_name }}</span>
+                <img
+                  class="route-arrow-img"
+                  src="assets/img/Group 1.png"
+                  width="20"
+                  height="10"
+                  loading="lazy"
+                  alt=""
+                />
+                <span class="route-arrow" aria-hidden="true">→</span>
+                <span class="route-text">{{ p.destination_name }}</span>
+              </span>
+              <span class="book-btn">Book Now</span>
+            </a>
+          </li>
+        </ul>
+
+        <ng-template #noResults>
+          <p *ngIf="searchText && !loading" class="text-center">
+            No results found for "{{ searchText }}".
+          </p>
+        </ng-template>
+
+        <div class="text-center routes-more">
+          <button
+            *ngIf="hasMore && !loading && !searchText"
+            type="button"
+            (click)="allRoutes(searchText)"
+            class="border-btn bh"
+          >
+            Load More
+          </button>
+          <div *ngIf="loading && page_no > 1">Loading...</div>
+          <div *ngIf="!hasMore && !searchText">No more records</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div *ngFor="let route of routeList">
-    {{ route.source_name }} ⇄ {{ route.destination_name }}
-  </div>
-
-  <button
-    *ngIf="hasMore && !loading && !searchText"
-    (click)="allRoutes(searchText)"
-    class="border-btn bh mb-3"
-  >
-    Load More
-  </button>
-
-  <div *ngIf="loading && page_no > 1" class="text-center">Loading...</div>
-  <div *ngIf="!hasMore && !searchText" class="text-center">No more records</div>
-</ng-container>
-
-<ng-container *ngIf="isMobile && MenuActive">
-  <div class="mobile-myaccount-top">
-    <div class="row">
-      <div class="col-5">
-        <div class="mobile-logo">
-          <img
-            src="assets/img/mob-img/logo.png"
-            alt="Mobile Logo"
-            loading="lazy"
-          />
-        </div>
-      </div>
-      <div class="col-7 mob-logintx">
-        <a routerLink="/login" *ngIf="!session.isLoggedIn()">
-          Login / Signup
-        </a>
-        <a routerLink="/dashboard" *ngIf="session.isLoggedIn()"> Dashboard </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="mobile-myaccount-middle">
-    <ul class="mobile-menu">
-      <li>
-        <a routerLink="/manage-booking"
-          ><i class="far fa-window-restore"></i>Manage Booking</a
-        >
-      </li>
-      <li>
-        <a routerLink="/contact-us"
-          ><i class="fa fa-envelope"></i> Contact Us</a
-        >
-      </li>
-      <li>
-        <a routerLink="/offers"><i class="fa fa-gifts"></i>Offers</a>
-      </li>
-      <li>
-        <a routerLink="/operators"><i class="fa fa-bus"></i>Operators</a>
-      </li>
-      <li>
-        <a routerLink="/faq"><i class="fa fa-question"></i>FAQ's</a>
-      </li>
-      <li>
-        <a routerLink="/testimonials"><i class="fa fa-star"></i>Testimonials</a>
-      </li>
-      <li>
-        <a routerLink="/terms-conditions"
-          ><i class="fa fa-file-image"></i>Terms & Conditions</a
-        >
-      </li>
-      <li>
-        <a routerLink="/privacy-policy"
-          ><i class="far fa-file-powerpoint"></i>Privacy Policy</a
-        >
-      </li>
-      <li>
-        <a routerLink="/about-us"><i class="fa fa-info-circle"></i>About Us</a>
-      </li>
-      <li *ngIf="session.isLoggedIn()">
-        <a routerLink="/my-reviews"><i class="fa fa-comments"></i>My Review</a>
-      </li>
-      <li *ngIf="session.isLoggedIn()">
-        <a (click)="signOut()"><i class="fa fa-sign-out-alt"></i>Logout</a>
-      </li>
-    </ul>
-  </div>
-</ng-container>
-
-<ng-container *ngIf="isMobile">
-  <app-footer-menu></app-footer-menu>
-</ng-container>
+  <app-footer-menu class="routes-footer-menu"></app-footer-menu>
+</section>

@@ -8,7 +8,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
+import { debounceTime, filter as rxFilter, map, take } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 import { CommonService } from '../services/common.service';
 import { TemplateRef, ViewChild } from '@angular/core';
@@ -101,6 +101,18 @@ export class SearchBoxComponent implements OnInit {
 
     if (popularInfo) {
       this.location_list = popularInfo.locationName || [];
+    }
+
+    // The app no longer waits for PopularInfo on bus search pages: fill the list when it arrives.
+    if (!popularInfo) {
+      this.commonService.popularInfo$
+        .pipe(
+          rxFilter((info: any) => !!info && !!info.locationName),
+          take(1),
+        )
+        .subscribe((info: any) => {
+          this.location_list = info.locationName;
+        });
     }
 
     this.search = (text$: Observable<string>) =>
