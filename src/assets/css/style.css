@@ -1743,3 +1743,6 @@ ul.op-list {
         padding: 0 !important;
     }
 }
+
+ngb-modal-backdrop.modal-backdrop { z-index: 1190 !important; }
+ngb-modal-window.modal { z-index: 1200 !important; }
