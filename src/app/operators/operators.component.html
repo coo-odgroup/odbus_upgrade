@@ -37,8 +37,7 @@
           <ul *ngIf="allOperators && allOperators.data.length > 0; else noResults">
             <li *ngFor="let t of allOperators.data">
               <a
-                href="javascript:void(0);"
-                (click)="operator_detail(t.operator_url)"
+                [routerLink]="t.operator_url ? ['/operators', t.operator_url] : null"
               >
                 <img
                   class="top-operators-img"

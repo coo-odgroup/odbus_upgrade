@@ -3582,3 +3582,47 @@ Journey Details Card
 .mobile-fare-breakdown .fare-row {
   padding: 8px 0;
 }
+
+/* ===== Booking stepper (Angular Material theme is not loaded, so style it here) ===== */
+.booking-stepper { background: transparent; display: block; }
+:host ::ng-deep .booking-stepper .mat-horizontal-stepper-header-container {
+  display: flex; align-items: center; margin: 0 0 6px; padding: 0;
+}
+:host ::ng-deep .booking-stepper .mat-step-header {
+  display: flex; align-items: center; gap: 10px; padding: 0 12px 0 0;
+  background: transparent; border: 0; outline: 0; cursor: default; font: inherit;
+}
+:host ::ng-deep .booking-stepper .mat-step-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%; flex: 0 0 28px;
+  background: #c9d3e3; color: #fff; font-size: 14px; font-weight: 700;
+}
+:host ::ng-deep .booking-stepper .mat-step-icon-selected,
+:host ::ng-deep .booking-stepper .mat-step-icon-state-edit { background: #0b5ed7; }
+:host ::ng-deep .booking-stepper .mat-step-icon-content { display: inline-flex; line-height: 1; }
+:host ::ng-deep .booking-stepper .mat-step-label {
+  font-size: 15px; font-weight: 600; color: #6b7a90; white-space: nowrap;
+}
+:host ::ng-deep .booking-stepper .mat-step-label-selected { color: #072c6b; }
+:host ::ng-deep .booking-stepper .mat-stepper-horizontal-line {
+  flex: 1 1 auto; min-width: 24px; height: 0; border-top: 1px solid #c9d3e3; margin: 0 12px 0 0;
+}
+/* screen-reader-only text such as "Editable" must never be visible */
+:host ::ng-deep .booking-stepper .cdk-visually-hidden {
+  border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden;
+  padding: 0; position: absolute; width: 1px; white-space: nowrap; outline: 0;
+}
+:host ::ng-deep .booking-stepper .mat-horizontal-content-container { overflow: visible; padding: 0; }
+:host ::ng-deep .booking-stepper .mat-horizontal-stepper-content[aria-expanded="false"] { display: none; }
+
+/* Notice above the passenger card: give it room */
+.passenger .col-md-8 > b { display: block; margin: 0 0 10px; line-height: 1.4; }
+
+/* Desktop: the global .row rule centers columns vertically, which pushed the form card down.
+   Align this step's columns to the top (mobile keeps its own layout). */
+@media (min-width: 769px) {
+  .row.passenger {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+}

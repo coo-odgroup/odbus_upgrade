@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { TopOperatorsService } from '../services/top-operators.service';
 import { SeoService } from '../services/seo.service';
@@ -20,7 +19,6 @@ export class OperatorsComponent {
   constructor(
     private spinner: NgxSpinnerService,
     private topOperatorsService: TopOperatorsService,
-    private router: Router,
     private seo: SeoService,
     location: Location,
   ) {
@@ -28,12 +26,6 @@ export class OperatorsComponent {
 
     this.currentUrl = location.path().replace('/', '');
     this.seo.seolist(this.currentUrl);
-  }
-
-  operator_detail(url: any) {
-    if (url != '') {
-      this.router.navigate(['operators/' + url]);
-    }
   }
 
   getList(url: any = '', filter: any = '') {

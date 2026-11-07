@@ -4295,3 +4295,13 @@ position: absolute;
     z-index: 20;
     top: 20px;
 }
+
+/* Keep the results area open while buses load so the footer stays below the fold
+   (prevents a large layout shift when the list arrives) */
+.bus-searching {
+  min-height: 100vh;
+}
+
+.bus-nobus {
+  min-height: 70vh;
+}

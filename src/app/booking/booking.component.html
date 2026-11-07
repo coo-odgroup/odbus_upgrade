@@ -1328,6 +1328,9 @@
 
           <!-- ================= STEPPER (CHANGED) ================= -->
           <mat-horizontal-stepper #stepper class="booking-stepper" [linear]="false" [animationDuration]="'0'">
+            <!-- Material icon font is not loaded: show plain numbers instead of icon names -->
+            <ng-template matStepperIcon="edit" let-index="index">{{ index + 1 }}</ng-template>
+            <ng-template matStepperIcon="done" let-index="index">{{ index + 1 }}</ng-template>
             <mat-step label="Passenger Details">
               <form [formGroup]="bookForm1" (ngSubmit)="submitForm1()">
                 <div class="row passenger pt-25">
